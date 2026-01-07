@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-furnace-500" />
-                <span>contact@nanfang-tech.com</span>
+                <span>contact@ecoreheating.com</span>
               </li>
               <li className="leading-relaxed">
                 Jiangsu Province,<br />
