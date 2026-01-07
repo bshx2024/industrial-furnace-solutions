@@ -26,9 +26,10 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
+          poster="/hero-bg.png"
           className="absolute inset-0 w-full h-full object-cover engine-bg-animate opacity-60"
         >
-          <source src="https://i.imgur.com/rFyDGi8.mp4" type="video/mp4" />
+          <source src="/hero-bg_x264.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 engine-shimmer-animate bg-gradient-to-t from-furnace-950 via-transparent to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-industrial-950 via-industrial-950/60 to-transparent"></div>
