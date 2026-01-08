@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import { FileText, Send, CheckCircle, HelpCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const ContactForm: React.FC = () => {
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState('submitting');
-    // Simulate API call
-    setTimeout(() => {
-      setFormState('success');
-    }, 1500);
+
+    // EmailJS Integration
+    // Replace these with your actual IDs from EmailJS Dashboard
+    // EmailJS Integration using environment variables
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.currentTarget, PUBLIC_KEY)
+      .then(() => {
+        setFormState('success');
+      })
+      .catch((error) => {
+        console.error('FAILED...', error);
+        alert("Submission failed. Please try again or contact us directly via email.");
+        setFormState('idle');
+      });
   };
 
   return (
@@ -80,18 +94,24 @@ const ContactForm: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Name</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Name <span className="text-furnace-500">*</span>
+                    </label>
                     <input
                       required
                       type="text"
+                      name="user_name"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                       placeholder="Your full name"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Role</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Role <span className="text-furnace-500">*</span>
+                    </label>
                     <select
                       required
+                      name="user_role"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all bg-white"
                     >
                       <option value="">Select your role...</option>
@@ -105,19 +125,25 @@ const ContactForm: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Company</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Company <span className="text-furnace-500">*</span>
+                    </label>
                     <input
                       required
                       type="text"
+                      name="user_company"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                       placeholder="Steel mill / Group name"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Country / Region</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Country / Region <span className="text-furnace-500">*</span>
+                    </label>
                     <input
                       required
                       type="text"
+                      name="user_region"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                       placeholder="e.g. China, Vietnam, Brazil..."
                     />
@@ -126,18 +152,50 @@ const ContactForm: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Annual Production (Mt/year)</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Work Email <span className="text-furnace-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="email"
+                      name="user_email"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
+                      placeholder="name@company.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2 text-gray-400">
+                      Phone / WhatsApp (Optional)
+                    </label>
+                    <input
+                      type="tel"
+                      name="user_phone"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
+                      placeholder="+86..."
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Annual Production <span className="text-furnace-500">*</span>
+                    </label>
                     <input
                       required
                       type="text"
+                      name="user_production"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                       placeholder="e.g. 2.5"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Furnace Type</label>
+                    <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">
+                      Furnace Type <span className="text-furnace-500">*</span>
+                    </label>
                     <select
                       required
+                      name="user_furnace_type"
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all bg-white"
                     >
                       <option value="">Select type...</option>
@@ -150,9 +208,12 @@ const ContactForm: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2">Message</label>
+                  <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2 text-gray-400">
+                    Message (Optional)
+                  </label>
                   <textarea
                     rows={3}
+                    name="message"
                     className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                     placeholder="Specific challenges or process details..."
                   ></textarea>
