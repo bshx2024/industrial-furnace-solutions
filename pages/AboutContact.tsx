@@ -96,10 +96,7 @@ const AboutContact: React.FC = () => {
                             <h5 className="text-xs font-black uppercase tracking-widest text-industrial-950 mb-2">Email Inquiry</h5>
                             <p className="text-gray-500 text-sm">contact@ecoreheating.com</p>
                         </div>
-                        <div>
-                            <h5 className="text-xs font-black uppercase tracking-widest text-industrial-950 mb-2">Global Support</h5>
-                            <p className="text-gray-500 text-sm">+86 (510) 555-0123</p>
-                        </div>
+
                     </div>
                 </div>
             </section>

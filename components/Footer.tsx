@@ -48,10 +48,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Contact</h4>
             <ul className="space-y-4 text-sm">
-              <li className="flex items-center gap-3">
-                <Phone size={16} className="text-furnace-500" />
-                <span>+86 (510) 555-0123</span>
-              </li>
+
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-furnace-500" />
                 <span>contact@ecoreheating.com</span>
