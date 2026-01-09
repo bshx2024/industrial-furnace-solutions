@@ -33,7 +33,7 @@ const SocialProof: React.FC = () => {
               <div>
                 <h4 className="text-xl font-bold mb-2">Jinnan Steel Demonstration Project</h4>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Project launched at Jinnan Steel Group as a ‘green, low-carbon demonstration and high-efficiency resource utilization benchmark’.
+                  Project launched at JINNAN STEEL GROUP as a ‘green, low-carbon demonstration and high-efficiency resource utilization benchmark’.
                 </p>
               </div>
             </div>

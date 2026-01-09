@@ -21,9 +21,9 @@ const AboutContact: React.FC = () => {
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div>
                             <span className="text-furnace-600 font-black tracking-widest uppercase text-xs mb-4 block">Our Company</span>
-                            <h2 className="text-3xl font-heading font-bold text-industrial-900 mb-8">Jiangsu Nanfang Technology</h2>
+                            <h2 className="text-3xl font-heading font-bold text-industrial-900 mb-8">SOUTH ENERGY SAVING</h2>
                             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                Jiangsu Nanfang Technology is a premier technology provider focusing on <span className="text-industrial-950 font-bold">full-fiber furnace roofs</span>, <span className="text-industrial-950 font-bold">intelligent reheating systems</span>, and <span className="text-industrial-950 font-bold">non-ceramic functional coatings</span> for industrial energy saving.
+                                SOUTH ENERGY SAVING is a premier technology provider focusing on <span className="text-industrial-950 font-bold">full-fiber furnace roofs</span>, <span className="text-industrial-950 font-bold">intelligent reheating systems</span>, and <span className="text-industrial-950 font-bold">non-ceramic functional coatings</span> for industrial energy saving.
                             </p>
                             <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 mb-8 flex items-center gap-6">
                                 <div className="bg-furnace-600 p-4 rounded-xl text-white">
@@ -44,7 +44,7 @@ const AboutContact: React.FC = () => {
                                 <div>
                                     <h3 className="text-xl font-bold text-industrial-900 mb-2">Strategic Partnership</h3>
                                     <p className="text-gray-500 leading-relaxed">
-                                        Working in strategic partnership with <span className="text-industrial-950 font-bold">Dongming Green Energy</span> to provide robust capital support and integrated energy service capabilities for large-scale steel groups.
+                                        Working in strategic partnership with <span className="text-industrial-950 font-bold">DONGMING GREEN ENERGY</span> to provide robust capital support and integrated energy service capabilities for large-scale steel groups.
                                     </p>
                                 </div>
                             </div>

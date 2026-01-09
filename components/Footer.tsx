@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               <div className="bg-furnace-600 p-2 rounded group-hover:bg-furnace-500 transition-colors">
                 <Flame size={20} fill="currentColor" />
               </div>
-              <span className="font-heading font-bold text-xl uppercase tracking-wider">Nanfang Tech</span>
+              <span className="font-heading font-bold text-xl uppercase tracking-wider">EcoReheating</span>
             </Link>
             <p className="text-sm mb-6 leading-relaxed">
               Leading the transition to extreme energy efficiency in the steel industry through T80-listed thermal engineering and AI optimization.
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-industrial-800 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
-          <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Jiangsu Nanfang Technology. Strategic partner: Dongming Green Energy.</p>
+          <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} ECOREHEATING. Strategic partner: DONGMING GREEN ENERGY.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>
             <a href="#" className="hover:text-white transition-colors">Terms</a>

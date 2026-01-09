@@ -11,7 +11,7 @@ const CaseStudies: React.FC = () => {
                 </div>
                 <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
                     <span className="text-furnace-500 font-black tracking-widest uppercase text-xs mb-4 block">Selected Success Story</span>
-                    <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Energy Steward Project at Jinnan Steel Group</h1>
+                    <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Energy Steward Project at JINNAN STEEL GROUP</h1>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Domestic pioneering energy steward model launch as a green, low-carbon demonstration and resource utilization benchmark.
                     </p>
@@ -26,12 +26,12 @@ const CaseStudies: React.FC = () => {
                             <div>
                                 <h2 className="text-3xl font-heading font-bold text-industrial-900 mb-6 underline decoration-furnace-500 underline-offset-8">Plant & Process</h2>
                                 <p className="text-gray-600 text-lg leading-relaxed">
-                                    Jinnan Steel Group (Shanxi, China) is an integrated steel producer with a complete steel rolling process. The project focuses on the <span className="text-industrial-950 font-bold">Reheating furnace and 5th caster soaking pit</span> in their steel rolling process.
+                                    JINNAN STEEL GROUP (Shanxi, China) is an integrated steel producer with a complete steel rolling process. The project focuses on the <span className="text-industrial-950 font-bold">Reheating furnace and 5th caster soaking pit</span> in their steel rolling process.
                                 </p>
                             </div>
 
                             <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 italic text-gray-500 border-l-4 border-l-furnace-600">
-                                "Jointly implemented by Jiangsu Nanfang Technology, Dongming Green Energy, and Jinnan Steel Group to build a green, low-carbon demonstration project."
+                                "Jointly implemented by SOUTH ENERGY SAVING, DONGMING GREEN ENERGY, and JINNAN STEEL GROUP to build a green, low-carbon demonstration project."
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

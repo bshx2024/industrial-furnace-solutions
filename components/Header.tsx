@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-heading font-bold text-xl uppercase tracking-wider leading-none text-white">
-              Thermo<span className="text-furnace-500">Tech</span>
+              Eco<span className="text-furnace-500">Reheating</span>
             </span>
             <span className={`text-[10px] tracking-widest uppercase ${isScrolled ? 'text-gray-400' : 'text-gray-300'}`}>
               Industrial Solutions
