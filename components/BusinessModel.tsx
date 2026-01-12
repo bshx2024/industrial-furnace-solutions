@@ -22,23 +22,26 @@ const BusinessModel: React.FC = () => {
                     <div className="lg:w-1/3">
                         <span className="text-furnace-600 font-black tracking-widest uppercase text-xs mb-4 block">Our Model</span>
                         <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-8 leading-tight">
-                            The Zero-Risk "Energy Steward" Model
+                            Contract Energy Management (CEM)
                         </h2>
-                        <p className="text-gray-500 text-lg mb-8">
-                            Eliminate the fear of ROI failure. We invest 100% of the capital—you only pay from the actual, verified savings we generate.
+                        <p className="text-gray-500 text-lg mb-8 italic">
+                            "Create first, then share" — A win-win philosophy proven across <span className="text-industrial-950 font-bold">nearly 100 production lines</span>.
+                        </p>
+                        <p className="text-gray-500 text-md mb-8">
+                            We eliminate CAPEX barriers. SOUTH TECHNOLOGY invests in the technology and equipment; we share the wealth created by verified fuel savings.
                         </p>
                         <ul className="space-y-4">
                             <li className="flex gap-4">
-                                <CheckCircle2 className="text-green-500 shrink-0" size={24} />
-                                <span className="text-gray-700 font-medium">Cover equipment upgrades, repairs, and spare parts from shared savings.</span>
+                                <CheckCircle2 className="text-furnace-600 shrink-0" size={24} />
+                                <span className="text-gray-700 font-medium font-heading">Zero Initial Investment</span>
                             </li>
                             <li className="flex gap-4">
-                                <CheckCircle2 className="text-green-500 shrink-0" size={24} />
-                                <span className="text-gray-700 font-medium">Align incentives: your savings are our revenue.</span>
+                                <CheckCircle2 className="text-furnace-600 shrink-0" size={24} />
+                                <span className="text-gray-700 font-medium font-heading">Performance-Based Sharing</span>
                             </li>
                             <li className="flex gap-4">
-                                <CheckCircle2 className="text-green-500 shrink-0" size={24} />
-                                <span className="text-gray-700 font-medium">Performance guaranteed by T80 benchmarks.</span>
+                                <CheckCircle2 className="text-furnace-600 shrink-0" size={24} />
+                                <span className="text-gray-700 font-medium font-heading">Turnkey Energy Stewardship</span>
                             </li>
                         </ul>
                     </div>

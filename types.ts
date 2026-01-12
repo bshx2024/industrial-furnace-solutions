@@ -18,7 +18,7 @@ export interface FAQItem {
 
 export interface TechCardProps {
   title: string;
-  description: string;
+  description: string | string[];
   keywords: string[];
   imageSrc: string;
   isReversed?: boolean;

@@ -21,17 +21,14 @@ const AboutContact: React.FC = () => {
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <div>
                             <span className="text-furnace-600 font-black tracking-widest uppercase text-xs mb-4 block">Our Company</span>
-                            <h2 className="text-3xl font-heading font-bold text-industrial-900 mb-8">SOUTH ENERGY SAVING</h2>
+                            <h2 className="text-3xl font-heading font-bold text-industrial-900 mb-8">SOUTH TECHNOLOGY</h2>
                             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                SOUTH ENERGY SAVING is a premier technology provider focusing on <span className="text-industrial-950 font-bold">full-fiber furnace roofs</span>, <span className="text-industrial-950 font-bold">intelligent reheating systems</span>, and <span className="text-industrial-950 font-bold">non-ceramic functional coatings</span> for industrial energy saving.
+                                Headquartered in <span className="text-industrial-950 font-bold">Shanghai Yangpu District (Hopson International Center, 5A Grade-A Office)</span>.
+                                Our professional design team covers thermal process, environmental engineering, mechanical, automation, and vaporization cooling, providing turnkey industrial furnace solutions.
                             </p>
-                            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 mb-8 flex items-center gap-6">
-                                <div className="bg-furnace-600 p-4 rounded-xl text-white">
-                                    <Award size={32} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-industrial-950">Award Winning Excellence</h4>
-                                    <p className="text-sm text-gray-500">Nominated and listed in the 2024 T80 Extreme Energy Efficiency Technologies.</p>
+                            <div className="p-8 bg-industrial-950 text-white rounded-2xl border border-slate-100 mb-8 flex items-center justify-center gap-6 shadow-xl">
+                                <div className="text-2xl font-heading font-black italic text-center">
+                                    "Energy Needs Management, <br />Saving is Wealth"
                                 </div>
                             </div>
                         </div>
@@ -90,7 +87,7 @@ const AboutContact: React.FC = () => {
                     <div className="mt-20 flex flex-col md:flex-row justify-center gap-12 text-center md:text-left border-t border-slate-200 pt-16">
                         <div>
                             <h5 className="text-xs font-black uppercase tracking-widest text-industrial-950 mb-2">Main Office</h5>
-                            <p className="text-gray-500 text-sm">Jiangsu Province, China</p>
+                            <p className="text-gray-500 text-sm">Hopson International Center, Yangpu District, Shanghai, China</p>
                         </div>
                         <div>
                             <h5 className="text-xs font-black uppercase tracking-widest text-industrial-950 mb-2">Email Inquiry</h5>

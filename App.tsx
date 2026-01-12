@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Solutions from './pages/Solutions';
 import CaseStudies from './pages/CaseStudies';
+import PerformanceList from './pages/PerformanceList';
+import HeroCases from './pages/HeroCases';
 import AboutContact from './pages/AboutContact';
 
 const App: React.FC = () => {
@@ -16,6 +18,8 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/solutions" element={<Solutions />} />
+            <Route path="/portfolio" element={<PerformanceList />} />
+            <Route path="/hero-cases" element={<HeroCases />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/about" element={<AboutContact />} />
           </Routes>

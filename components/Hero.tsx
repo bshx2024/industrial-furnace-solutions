@@ -85,10 +85,10 @@ const Hero: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-furnace-500 to-orange-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
                 </a>
                 <a
-                  href="#case-summary"
+                  href="/hero-cases"
                   className="group relative px-8 py-6 border border-white/20 hover:border-white/40 text-white text-lg rounded-sm font-bold uppercase tracking-[0.1em] transition-all backdrop-blur-md flex items-center justify-center text-center"
                 >
-                  <span className="text-base md:text-lg">View Case Study</span>
+                  <span className="text-base md:text-lg">View Hero Cases</span>
                 </a>
               </div>
             </div>
@@ -101,7 +101,7 @@ const Hero: React.FC = () => {
             </div>
             <h3 className="text-xl font-heading font-bold text-white mb-6 flex items-center gap-2">
               <span className="w-1.5 h-6 bg-furnace-500"></span>
-              Quick ROI Projection
+              Energy Steward ROI Audit
             </h3>
 
             <div className="space-y-8">
@@ -130,9 +130,9 @@ const Hero: React.FC = () => {
                 <div className="flex items-center justify-between group/row">
                   <div className="flex flex-col">
                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
-                      <Zap size={10} className="text-furnace-500" /> Est. Fuel Saving
+                      <Zap size={10} className="text-furnace-500" /> Est. Annual Value
                     </span>
-                    <span className="text-xs text-gray-600 group-hover/row:text-gray-400 transition-colors">Target 11% average</span>
+                    <span className="text-xs text-gray-600 group-hover/row:text-gray-400 transition-colors">Shared Wealth Creation</span>
                   </div>
                   <div className="text-xl font-mono font-bold text-white tracking-widest italic animate-pulse">
                     ${estimatedSavings}
@@ -154,11 +154,13 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-4 p-3 bg-white/5 rounded border border-white/5 flex gap-3">
-                <Info size={16} className="text-furnace-500 shrink-0" />
-                <p className="text-[10px] text-gray-500 italic leading-relaxed">
-                  Projections based on T80 benchmarks. Actual results vary by furnace geometry and grade.
+              <div className="mt-4 p-4 bg-furnace-600/20 rounded border border-furnace-500/30 text-center">
+                <p className="text-[10px] text-white font-bold uppercase tracking-widest mb-2">
+                  Zero CAPEX Required
                 </p>
+                <a href="#assessment" className="text-xs font-black text-furnace-400 hover:text-white transition-colors underline underline-offset-4">
+                  Claim Your Full Performance Audit →
+                </a>
               </div>
             </div>
           </div>

@@ -31,7 +31,7 @@ const CaseStudies: React.FC = () => {
                             </div>
 
                             <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 italic text-gray-500 border-l-4 border-l-furnace-600">
-                                "Jointly implemented by SOUTH ENERGY SAVING, DONGMING GREEN ENERGY, and JINNAN STEEL GROUP to build a green, low-carbon demonstration project."
+                                "Jointly implemented by SOUTH TECHNOLOGY, DONGMING GREEN ENERGY, and JINNAN STEEL GROUP to build a green, low-carbon demonstration project."
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

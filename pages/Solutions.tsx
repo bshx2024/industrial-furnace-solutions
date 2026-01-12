@@ -75,8 +75,9 @@ const Solutions: React.FC = () => {
                                         </div>
                                     </td>
                                     <td className="p-6 align-top">
-                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: 7–15% reduction target per ton of steel</div>
-                                        <p className="text-[10px] leading-tight text-gray-500 italic">Designed to reach T80 extreme efficiency benchmarks for reheating furnaces; exact savings depend on your baseline.</p>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: {'>'}10% reduction target (Full Fiber Roof)</div>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: {'>'}5% reduction (Smart Burning)</div>
+                                        <p className="text-[10px] leading-tight text-gray-500 italic">Combined modernization targets to achieve T80 extreme efficiency benchmarks.</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -92,9 +93,9 @@ const Solutions: React.FC = () => {
                                         </div>
                                     </td>
                                     <td className="p-6 align-top">
-                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Scale loss: 5–15% reduction target</div>
-                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Yield: +0.1–0.3 percentage points typical improvement</div>
-                                        <p className="text-[10px] leading-tight text-gray-500 italic">Based on T80-listed full-fiber roof and functional coating applications in steel rolling reheating furnaces.</p>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Oxidation Loss: 0.1%–0.5% reduction target</div>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Yield: +0.1–0.5 percentage points improvement</div>
+                                        <p className="text-[10px] leading-tight text-gray-500 italic">Domestic leading levels achievement based on T80-validated intelligent reheating and functional coatings.</p>
                                     </td>
                                 </tr>
                                 <tr>

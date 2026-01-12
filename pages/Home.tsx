@@ -6,6 +6,7 @@ import ProcessCoverage from '../components/ProcessCoverage';
 import BenefitsSection from '../components/BenefitsSection';
 import BusinessModel from '../components/BusinessModel';
 import SocialProof from '../components/SocialProof';
+import LogoWall from '../components/LogoWall';
 import ContactForm from '../components/ContactForm';
 
 const Home: React.FC = () => {
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
             <BenefitsSection />
             <BusinessModel />
             <SocialProof />
+            <LogoWall />
             <ContactForm />
         </div>
     );
