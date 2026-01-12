@@ -21,11 +21,14 @@ const BusinessModel: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-16 items-start">
                     <div className="lg:w-1/3">
                         <span className="text-furnace-600 font-black tracking-widest uppercase text-xs mb-4 block">Our Model</span>
-                        <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-8 leading-tight">
-                            Contract Energy Management (CEM)
+                        <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-2 leading-tight">
+                            The Shared Savings Model
                         </h2>
+                        <h3 className="text-xl font-heading font-bold text-gray-400 mb-8 uppercase tracking-wide">
+                            Contract Energy Management (CEM)
+                        </h3>
                         <p className="text-gray-500 text-lg mb-8 italic">
-                            "Create first, then share" — A win-win philosophy proven across <span className="text-industrial-950 font-bold">nearly 100 production lines</span>.
+                            "Performance First. Payment Second." — A win-win philosophy proven across <span className="text-industrial-950 font-bold">nearly 100 production lines</span>.
                         </p>
                         <p className="text-gray-500 text-md mb-8">
                             We eliminate CAPEX barriers. SOUTH TECHNOLOGY invests in the technology and equipment; we share the wealth created by verified fuel savings.
@@ -57,7 +60,7 @@ const BusinessModel: React.FC = () => {
                             num="02"
                             icon={<PenTool size={40} />}
                             title="Technical Solution"
-                            desc="Full-fiber roof, intelligent reheating, non-ceramic coatings, and advanced controls integration."
+                            desc="Full-fiber roof, intelligent reheating, high-emissivity coatings, and advanced controls integration."
                         />
                         <ModelStep
                             num="03"

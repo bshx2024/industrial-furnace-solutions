@@ -20,7 +20,7 @@ const ProcessCoverage: React.FC = () => {
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">From Caster Exit to Reheating Furnace Exit</h2>
                     <p className="text-gray-400 text-lg">
-                        Deep potential excavation across the entire reheating process, not just single equipment retrofits. We optimize the complete thermal flow.
+                        Unlocking Hidden Efficiency across the entire reheating process, not just single equipment retrofits. We optimize the complete thermal flow.
                     </p>
                 </div>
 

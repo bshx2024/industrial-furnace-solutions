@@ -21,7 +21,7 @@ const SocialProof: React.FC = () => {
               <div>
                 <h4 className="text-xl font-bold mb-2">T80 Extreme Efficiency Listed</h4>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Listed in the 2024 ‘Extreme Energy Efficiency Technologies (T80)’ of China Iron and Steel Association for full-fiber furnace roof, intelligent reheating, and non-ceramic coatings.
+                  Listed in the 2024 ‘Extreme Energy Efficiency Technologies (T80)’ of China Iron and Steel Association for full-fiber furnace roof, intelligent reheating, and high-emissivity coatings.
                 </p>
               </div>
             </div>

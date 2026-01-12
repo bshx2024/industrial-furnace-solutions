@@ -107,18 +107,18 @@ const Technologies: React.FC = () => {
           <TechCard
             title="High-temperature Energy-saving Coating"
             description={[
-              "1. Advanced Formula: Unique 'non-ceramic' recipe solves the industry-wide problem of delamination and peeling.",
+              "1. Advanced Formula: Unique 'High-Emissivity' recipe solves the industry-wide problem of delamination and peeling.",
               "2. Durable Efficiency: Withstands 1700°C without efficiency decay, compatible with all refractory materials.",
               "3. Performance Gains: Lowers furnace shell temperature, boosts productivity, and extends refractory life."
             ]}
-            keywords={['Non-ceramic Formula', '1700°C Heat Resistance', 'Shell Temp Reduction', 'Extends Refractory Life']}
+            keywords={['High-Emissivity Formula', '1700°C Heat Resistance', 'Shell Temp Reduction', 'Extends Refractory Life']}
             imageSrc="/tech-coating.png"
           />
 
           <TechCard
-            title="Intelligence O&M Platform"
+            title="Intelligent O&M Platform"
             description={[
-              "1. Expert Interaction: Online support and a massive professional knowledge base for rapid troubleshooting.",
+              "1. Remote Expert Diagnostics: Online support and a massive professional knowledge base for rapid troubleshooting.",
               "2. AI Prediction: Real-time monitoring and predictive failure analysis to optimize maintenance decisions.",
               "3. Big Data Insight: Precision energy efficiency analysis and big data for strategic cost control.",
               "4. Process Visibility: Decarburization layer prediction and real-time visualization to minimize specialty steel defects."
@@ -429,7 +429,7 @@ const Technologies: React.FC = () => {
                                   <div className="space-y-3">
                                     <span className="text-furnace-500 text-[10px] font-bold uppercase tracking-widest">Technical Brief</span>
                                     <p className="text-gray-300 text-sm leading-relaxed">
-                                      Innovative "non-ceramic" nano-coating. Penetrates surface micro-pores of refractories to form an integrated 30-micron high-emissivity layer. Unlike traditional coatings, its elastic properties eliminate "peeling" caused by thermal expansion mismatches.
+                                      Innovative "High-Emissivity" nano-coating. Penetrates surface micro-pores of refractories to form an integrated 30-micron high-emissivity layer. Unlike traditional coatings, its elastic properties eliminate "peeling" caused by thermal expansion mismatches.
                                     </p>
                                   </div>
                                   <div className="grid grid-cols-2 gap-4">

@@ -44,10 +44,20 @@ const ContactForm: React.FC = () => {
               Find out exactly how much you can save. We provide a comprehensive baseline assessment and ROI projection <span className="text-white font-bold">at no upfront cost</span>.
             </p>
 
-            <div className="p-4 bg-furnace-600/20 border border-furnace-500/30 rounded-lg mb-8">
-              <p className="text-sm text-furnace-200 italic">
-                "Note: Due to the capital-heavy nature of our model, we only accept 2 new projects per month."
-              </p>
+            <div className="p-6 bg-furnace-600/20 border border-furnace-500/30 rounded-xl mb-10 relative overflow-hidden group">
+              <div className="relative z-10">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-black uppercase tracking-widest text-furnace-400">Current Availability</span>
+                  <span className="text-xs font-black text-white bg-furnace-600 px-2 py-0.5 rounded">1 SLOT LEFT</span>
+                </div>
+                <div className="h-2 bg-industrial-900 rounded-full overflow-hidden mb-3">
+                  <div className="h-full bg-furnace-500 w-1/2 animate-pulse"></div>
+                </div>
+                <p className="text-[11px] text-gray-300 leading-relaxed italic">
+                  Due to the capital-heavy nature of our model, we only accept 2 new projects per month. <span className="text-white font-bold">1 slot remaining for February.</span>
+                </p>
+              </div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-furnace-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
             </div>
 
             <div className="space-y-6 relative z-10">

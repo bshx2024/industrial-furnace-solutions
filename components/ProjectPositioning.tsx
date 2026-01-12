@@ -8,13 +8,13 @@ const ProjectPositioning: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-8 leading-tight">
-                            What Is the <span className="text-furnace-600">‘Reheating Furnace Energy Steward’</span> Project?
+                            Why Choose the <span className="text-furnace-600">Energy Steward Solution</span>?
                         </h2>
                         <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                            Nationwide pioneering energy steward model for steel rolling reheating processes, jointly developed by <span className="text-industrial-950 font-bold">SOUTH TECHNOLOGY</span> and <span className="text-industrial-950 font-bold">DONGMING GREEN ENERGY</span> for <span className="text-industrial-950 font-bold">JINNAN STEEL GROUP</span>.
+                            <span className="text-industrial-950 font-bold">EcoReheating</span> provides Zero CAPEX reheating furnace optimization using <span className="text-industrial-950 font-bold">CISA T80 verified technologies</span> like narrow window temperature control and full-fiber roofs, helping steel mills reduce fuel consumption by <span className="text-furnace-600 font-bold">7-15%</span>.
                         </p>
                         <p className="text-lg text-gray-500 mb-8">
-                            This comprehensive project covers the entire journey from <span className="font-semibold italic">continuous caster exit</span> to <span className="font-semibold italic">reheating furnace exit</span>, ensuring maximum efficiency at every stage.
+                            Developed by South Technology, this industry-defining solution—now a national benchmark—optimizes the entire thermal journey from <span className="font-semibold italic">continuous caster exit</span> to <span className="font-semibold italic">reheating furnace exit</span>.
                         </p>
                     </div>
 
@@ -44,7 +44,7 @@ const ProjectPositioning: React.FC = () => {
                                 <Shield className="text-furnace-600" size={32} />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-industrial-900 mb-2">Safe & Reliable Operation</h3>
+                                <h3 className="text-xl font-bold text-industrial-900 mb-2">Zero-Downtime Reliability</h3>
                                 <p className="text-gray-500">Long-term expert steward service ensuring equipment longevity and consistent performance.</p>
                             </div>
                         </div>
