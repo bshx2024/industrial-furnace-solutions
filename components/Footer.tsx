@@ -28,9 +28,9 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Navigation</h4>
             <ul className="space-y-4 text-sm">
-              <li><Link to="/" className="hover:text-furnace-500 transition-colors">Home Landing Page</Link></li>
+              <li><Link to="/" className="hover:text-furnace-500 transition-colors">Home</Link></li>
               <li><Link to="/solutions" className="hover:text-furnace-500 transition-colors">Energy Solutions</Link></li>
-              <li><Link to="/case-studies" className="hover:text-furnace-500 transition-colors">Jinnan Steel Case</Link></li>
+              <li><Link to="/hero-cases" className="hover:text-furnace-500 transition-colors">Case Studies</Link></li>
               <li><Link to="/about" className="hover:text-furnace-500 transition-colors">About & Contact</Link></li>
             </ul>
           </div>
@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm">
               <li><span className="text-gray-500">Full-fiber Furnace Roof</span></li>
               <li><span className="text-gray-500">Intelligent Reheating</span></li>
-              <li><span className="text-gray-500">Non-ceramic Coatings</span></li>
+              <li><span className="text-gray-500">High-Emissivity Coatings</span></li>
               <li><span className="text-gray-500">Energy Steward Model</span></li>
             </ul>
           </div>

@@ -48,16 +48,15 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-white leading-[1.0] mb-6 tracking-tight">
-              Stop Fuel Waste. <br />
-              <span className="text-furnace-500">Zero CAPEX</span> Upgrades.
+              Stop Reheating Furnace <br />Fuel Waste. <span className="text-furnace-500 text-6xl md:text-8xl">Zero CAPEX Upgrades.</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-white font-medium mb-4 max-w-4xl leading-snug">
               We invest, you save. Achieve <span className="text-furnace-500 font-bold">7–15% fuel reduction</span> in your reheating furnaces with our T80-validated extreme efficiency tech—paid entirely from verified energy savings.
             </p>
 
-            <p className="text-sm md:text-base text-gray-400 mb-8 uppercase tracking-[0.1em] font-bold">
-              For walking beam and walking hearth reheating furnaces in long and flat steel rolling mills.
+            <p className="text-sm md:text-base text-gray-300 mb-8 font-bold flex items-center gap-2">
+              <span className="text-furnace-500">✅</span> Optimized for Walking Beam & Walking Hearth Furnaces in Long/Flat Steel Mills.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-12 max-w-4xl">
@@ -88,8 +87,22 @@ const Hero: React.FC = () => {
                   href="/hero-cases"
                   className="group relative px-8 py-6 border border-white/20 hover:border-white/40 text-white text-lg rounded-sm font-bold uppercase tracking-[0.1em] transition-all backdrop-blur-md flex items-center justify-center text-center"
                 >
-                  <span className="text-base md:text-lg">View Hero Cases</span>
+                  <span className="text-base md:text-lg">View Case Studies</span>
                 </a>
+              </div>
+            </div>
+
+            {/* TRUST SIGNALS - MINI LOGO ROW */}
+            <div className="mt-10 flex flex-col items-start gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
+              <span className="text-[10px] uppercase font-black tracking-[0.2em] text-gray-500">Trusted by Global Steel Leaders:</span>
+              <div className="flex flex-wrap items-center gap-6 opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700">
+                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">FANGDA STEEL</span>
+                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">JINNAN STEEL</span>
+                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">LIUGANG GROUP</span>
+                <div className="h-4 w-[1px] bg-white/10 mx-2"></div>
+                <div className="flex items-center gap-2 bg-furnace-600/20 text-furnace-500 px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest border border-furnace-500/30">
+                  <ShieldCheck size={12} /> CISA T80 Verified
+                </div>
               </div>
             </div>
           </div>
@@ -154,13 +167,16 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-4 p-4 bg-furnace-600/20 rounded border border-furnace-500/30 text-center">
-                <p className="text-[10px] text-white font-bold uppercase tracking-widest mb-2">
-                  Zero CAPEX Required
-                </p>
-                <a href="#assessment" className="text-xs font-black text-furnace-400 hover:text-white transition-colors underline underline-offset-4">
-                  Claim Your Full Performance Audit →
+              <div className="mt-6">
+                <a
+                  href="#assessment"
+                  className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-sm transition-all shadow-xl text-center uppercase tracking-widest text-sm transform hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Calculate My Savings Now
                 </a>
+                <p className="text-[10px] text-gray-500 mt-3 text-center uppercase tracking-widest font-bold">
+                  Zero CAPEX Required • Performance Based
+                </p>
               </div>
             </div>
           </div>
@@ -173,14 +189,14 @@ const Hero: React.FC = () => {
           <div className="grid grid-cols-2 lg:grid-cols-6 gap-8 items-center text-center lg:text-left">
 
             <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
                 <Zap size={12} className="text-furnace-500" /> Fuel Saving (Target)
               </div>
               <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-1 text-gray-500">%</span></div>
             </div>
 
             <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
                 <ShieldCheck size={12} className="text-green-500" /> CO2 Reduction (Est.)
               </div>
               <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-1 text-gray-500">%</span></div>
@@ -196,7 +212,7 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
                 <Activity size={12} className="text-blue-500" /> Flue Oxygen (Example)
               </div>
               <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">1.8–2.5<span className="text-xs ml-1 text-gray-500">%</span></div>

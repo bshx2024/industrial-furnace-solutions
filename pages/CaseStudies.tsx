@@ -75,7 +75,7 @@ const CaseStudies: React.FC = () => {
                                 <li className="flex gap-4">
                                     <div className="w-1.5 h-1.5 rounded-full bg-furnace-500 mt-2 shrink-0"></div>
                                     <div>
-                                        <h4 className="font-bold mb-1">Non-ceramic functional coatings</h4>
+                                        <h4 className="font-bold mb-1">High-Emissivity functional coatings</h4>
                                         <p className="text-sm text-gray-400">Applied on critical furnace lining areas to reduce oxidation scale and protect refractory surfaces.</p>
                                     </div>
                                 </li>
