@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Activity, Zap, ShieldCheck, Gauge, Calculator, Info } from 'lucide-react';
+import LogoMarquee from './LogoMarquee';
 
 const Hero: React.FC = () => {
   const [production, setProduction] = useState<number>(2.5);
@@ -39,8 +40,8 @@ const Hero: React.FC = () => {
       </div>
 
       {/* TOP CONTENT: Heading & Action */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex items-center">
-        <div className="flex flex-col lg:flex-row gap-12 items-center w-full">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex flex-col justify-center py-12">
+        <div className="flex flex-col lg:flex-row gap-12 items-center w-full mb-16">
           <div className="flex-grow max-w-4xl">
             <div className="inline-flex items-center gap-2 bg-furnace-600/10 border border-furnace-500/30 text-furnace-400 px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-[0.3em] mb-8 backdrop-blur-xl">
               <span className="w-2 h-2 rounded-full bg-furnace-500 animate-ping"></span>
@@ -91,37 +92,23 @@ const Hero: React.FC = () => {
                 </a>
               </div>
             </div>
-
-            {/* TRUST SIGNALS - MINI LOGO ROW */}
-            <div className="mt-10 flex flex-col items-start gap-4 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
-              <span className="text-[10px] uppercase font-black tracking-[0.2em] text-gray-500">Trusted by Global Steel Leaders:</span>
-              <div className="flex flex-wrap items-center gap-6 opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700">
-                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">FANGDA STEEL</span>
-                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">JINNAN STEEL</span>
-                <span className="text-white font-heading font-bold text-sm tracking-widest border border-white/10 px-2 py-0.5">LIUGANG GROUP</span>
-                <div className="h-4 w-[1px] bg-white/10 mx-2"></div>
-                <div className="flex items-center gap-2 bg-furnace-600/20 text-furnace-500 px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest border border-furnace-500/30">
-                  <ShieldCheck size={12} /> CISA T80 Verified
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* INTERACTIVE CALCULATOR CARD */}
-          <div className="w-full lg:w-[400px] glass-hud p-8 rounded-sm border border-white/10 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-20">
-              <Calculator size={60} className="text-white" />
+          {/* INTERACTIVE CALCULATOR CARD - Apple-style Refined */}
+          <div className="w-full lg:w-[380px] glass-hud p-8 rounded-xl border border-white/10 relative overflow-hidden shadow-2xl self-center bg-white/[0.02] backdrop-blur-2xl">
+            <div className="absolute top-0 right-0 p-4 opacity-10">
+              <Calculator size={80} className="text-white" />
             </div>
-            <h3 className="text-xl font-heading font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-furnace-500"></span>
-              Energy Steward ROI Audit
+            <h3 className="text-xl font-heading font-bold text-white mb-8 flex items-center gap-3">
+              <span className="w-1 h-6 bg-furnace-500 rounded-full"></span>
+              ROI Calculator
             </h3>
 
-            <div className="space-y-8">
+            <div className="space-y-10">
               <div>
-                <div className="flex justify-between items-end mb-4">
-                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest">Annual Production</label>
-                  <span className="text-2xl font-mono font-bold text-furnace-500">{production} <span className="text-xs text-gray-500">Mt/y</span></span>
+                <div className="flex justify-between items-end mb-5">
+                  <label className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Annual Production</label>
+                  <span className="text-2xl font-mono font-bold text-furnace-500">{production} <span className="text-[10px] text-white/30 uppercase font-sans">Mt/y</span></span>
                 </div>
                 <input
                   type="range"
@@ -130,55 +117,69 @@ const Hero: React.FC = () => {
                   step="0.1"
                   value={production}
                   onChange={(e) => setProduction(parseFloat(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-furnace-500"
+                  className="w-full h-1 bg-white/10 rounded-full appearance-none cursor-pointer accent-furnace-500 hover:accent-furnace-400 transition-all"
                 />
-                <div className="flex justify-between text-[10px] text-gray-600 font-bold mt-2 font-mono uppercase">
-                  <span>0.5 Mt</span>
-                  <span>Scale Your Mill</span>
-                  <span>6.0 Mt</span>
+                <div className="flex justify-between text-[10px] text-white/20 font-bold mt-3 font-mono">
+                  <span>0.5 MT</span>
+                  <span className="text-white/10 uppercase tracking-widest">Adjust Capacity</span>
+                  <span>6.0 MT</span>
                 </div>
               </div>
 
-              <div className="space-y-4 pt-4 border-t border-white/5">
-                <div className="flex items-center justify-between group/row">
+              <div className="space-y-6 pt-6 border-t border-white/5">
+                <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
-                      <Zap size={10} className="text-furnace-500" /> Est. Annual Value
+                    <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest flex items-center gap-1.5">
+                      <Zap size={10} className="text-furnace-500/50" /> Annual Value
                     </span>
-                    <span className="text-xs text-gray-600 group-hover/row:text-gray-400 transition-colors">Shared Wealth Creation</span>
+                    <span className="text-[10px] text-white/20 uppercase tracking-tight">Shared wealth potential</span>
                   </div>
-                  <div className="text-xl font-mono font-bold text-white tracking-widest italic animate-pulse">
+                  <div className="text-2xl font-mono font-bold text-white tracking-tight">
                     ${estimatedSavings}
-                    <span className="text-[10px] ml-1 text-gray-500 font-normal">/yr</span>
+                    <span className="text-[10px] ml-1.5 text-white/30 font-normal">/yr</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between group/row">
+                <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
-                      <ShieldCheck size={10} className="text-green-500" /> CO2 Offset
+                    <span className="text-[10px] text-white/40 font-bold uppercase tracking-widest flex items-center gap-1.5">
+                      <ShieldCheck size={10} className="text-green-500/50" /> carbon offset
                     </span>
-                    <span className="text-xs text-gray-600 group-hover/row:text-gray-400 transition-colors">7.5k Carbon Credits est.</span>
+                    <span className="text-[10px] text-white/20 uppercase tracking-tight">7.5k Credits equivalent</span>
                   </div>
-                  <div className="text-xl font-mono font-bold text-green-500 tracking-widest italic animate-pulse">
+                  <div className="text-2xl font-mono font-bold text-green-500/90 tracking-tight">
                     {co2Savings}
-                    <span className="text-[10px] ml-1 text-gray-500 font-normal">t/yr</span>
+                    <span className="text-[10px] ml-1.5 text-white/30 font-normal">t/yr</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-8">
                 <a
                   href="#assessment"
-                  className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-sm transition-all shadow-xl text-center uppercase tracking-widest text-sm transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-lg transition-all shadow-xl text-center uppercase tracking-widest text-xs active:scale-[0.98] flex items-center justify-center gap-2"
                 >
-                  Calculate My Savings Now
+                  Calculate My Full ROI
+                  <ArrowRight size={14} />
                 </a>
-                <p className="text-[10px] text-gray-500 mt-3 text-center uppercase tracking-widest font-bold">
-                  Zero CAPEX Required • Performance Based
+                <p className="text-[9px] text-white/20 mt-4 text-center uppercase tracking-[0.3em] font-black">
+                  No CAPEX Required • Performance Based
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* TRUST SIGNALS - INFINITE MARQUEE */}
+        <div className="flex flex-col items-start gap-4 w-full overflow-hidden border-t border-white/5 pt-8 opacity-100 transition-all duration-700">
+          <div className="flex items-center gap-4">
+            <span className="text-[10px] uppercase font-black tracking-[0.2em] text-gray-400">Trusted by Global Steel Leaders:</span>
+            <div className="flex items-center gap-2 bg-furnace-600/10 text-furnace-500 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border border-furnace-500/20">
+              <ShieldCheck size={10} /> CISA T80 Verified
+            </div>
+          </div>
+          <div className="w-full">
+            <LogoMarquee />
           </div>
         </div>
       </div>
@@ -186,43 +187,44 @@ const Hero: React.FC = () => {
       {/* BOTTOM DASHBOARD: System Status Tags */}
       <div className="relative z-20 w-full glass-hud border-t border-white/5 pb-8 pt-6">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-6 gap-8 items-center text-center lg:text-left">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 items-center text-center lg:text-left">
 
-            <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+            <div className="border-r border-white/5 lg:pr-8 last:border-r-0">
+              <div className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2">
                 <Zap size={12} className="text-furnace-500" /> Fuel Saving (Target)
               </div>
-              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-1 text-gray-500">%</span></div>
+              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-0.5 text-gray-500">%</span></div>
             </div>
 
-            <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+            <div className="border-r border-white/5 lg:pr-8 last:border-r-0">
+              <div className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2">
                 <ShieldCheck size={12} className="text-green-500" /> CO2 Reduction (Est.)
               </div>
-              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-1 text-gray-500">%</span></div>
+              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-0.5 text-gray-500">%</span></div>
             </div>
 
-            <div className="hidden lg:block lg:col-span-1"></div>
-
-            <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-furnace-500 font-bold uppercase tracking-[0.2em] mb-1 flex items-center justify-center lg:justify-start gap-2">
-                <Gauge size={12} /> Zone Temp. (Typical Range)
+            <div className="border-r border-white/5 lg:pr-8 last:border-r-0 text-white/90">
+              <div className="text-[10px] text-furnace-500 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2 font-black">
+                <Gauge size={12} /> Zone Temp. (Typical)
               </div>
-              <div className="text-xl md:text-2xl font-mono text-white font-bold tracking-tighter">1,150–1,250<span className="text-xs ml-1 text-gray-500">°C</span></div>
+              <div className="text-xl md:text-2xl font-mono text-white font-bold tracking-tighter">1,150–1,250<span className="text-xs ml-0.5 text-gray-500">°C</span></div>
             </div>
 
-            <div className="border-r border-white/5 lg:pr-8">
-              <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest mb-1 flex items-center justify-center lg:justify-start gap-2">
+            <div className="border-r border-white/5 lg:pr-8 last:border-r-0">
+              <div className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2">
                 <Activity size={12} className="text-blue-500" /> Flue Oxygen (Example)
               </div>
-              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">1.8–2.5<span className="text-xs ml-1 text-gray-500">%</span></div>
+              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">1.8–2.5<span className="text-xs ml-0.5 text-gray-500">%</span></div>
             </div>
 
-            <div className="flex flex-col items-center lg:items-end">
-              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Syst. Status</div>
-              <div className="flex items-center gap-2 px-3 py-1 rounded bg-green-500/10 border border-green-500/20">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span className="text-xs text-green-400 font-mono font-bold">OPTIMIZED</span>
+            <div className="flex flex-col items-center lg:items-end col-span-2 lg:col-span-1 border-t lg:border-t-0 border-white/5 pt-6 lg:pt-0">
+              <div className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.15em] mb-2 font-black">Control Status</div>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/5 border border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                <div className="relative">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span className="absolute inset-0 w-1.5 h-1.5 rounded-full bg-green-500 animate-ping opacity-75"></span>
+                </div>
+                <span className="text-[10px] text-green-400 font-mono font-black tracking-widest uppercase">Optimized</span>
               </div>
             </div>
 
