@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                 <span>contact@ecoreheating.com</span>
               </li>
               <li className="leading-relaxed">
-                Jiangsu Province,<br />
+                Global HQ: Jiangsu,<br />
                 China
               </li>
             </ul>

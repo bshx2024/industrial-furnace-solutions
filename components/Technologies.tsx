@@ -105,7 +105,7 @@ const Technologies: React.FC = () => {
           />
 
           <TechCard
-            title="High-temperature Energy-saving Coating"
+            title="High-Temperature Energy-Saving Coating"
             description={[
               "1. Advanced Formula: Unique 'High-Emissivity' recipe solves the industry-wide problem of delamination and peeling.",
               "2. Durable Efficiency: Withstands 1700°C without efficiency decay, compatible with all refractory materials.",
