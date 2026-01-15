@@ -2,8 +2,8 @@ import React from 'react';
 import { TechCardProps } from '../types';
 import { Settings, Cpu, Factory, ShieldCheck, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const TechCard: React.FC<TechCardProps> = ({ title, description, keywords, imageSrc, isReversed }) => (
-  <div className={`flex flex-col lg:flex-row items-center gap-12 py-16 ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
+const TechCard: React.FC<TechCardProps> = ({ id, title, description, keywords, imageSrc, isReversed }) => (
+  <div id={id} className={`flex flex-col lg:flex-row items-center gap-12 py-16 scroll-mt-24 ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
     <div className="w-full lg:w-1/2 relative group">
       {/* Dynamic Background Shadow */}
       <div className="absolute inset-0 bg-furnace-600 rounded-lg transform translate-x-3 translate-y-3 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-700 ease-out opacity-20"></div>
@@ -104,6 +104,7 @@ const Technologies: React.FC = () => {
 
         <div className="divide-y divide-gray-100">
           <TechCard
+            id="tech-roof"
             title="Full-fiber Furnace Roof"
             description={[
               "1. Fuel Efficiency: >10% energy saving under identical conditions. No pre-heating required, drastically reducing startup fuel costs.",
@@ -116,6 +117,7 @@ const Technologies: React.FC = () => {
           />
 
           <TechCard
+            id="tech-ai"
             title="Intelligent Combustion System"
             description={[
               "1. Full-Process Traceability: Comprehensive material tracking from initial charging to final discharge.",
@@ -128,6 +130,7 @@ const Technologies: React.FC = () => {
           />
 
           <TechCard
+            id="tech-coating"
             title="High-Temperature Energy-Saving Coating"
             description={[
               "1. Advanced Formula: Unique 'High-Emissivity' recipe solves the industry-wide problem of delamination and peeling.",

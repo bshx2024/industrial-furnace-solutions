@@ -157,7 +157,7 @@ const Hero: React.FC = () => {
 
               <div className="mt-8">
                 <Link
-                  to="/about"
+                  to="/#assessment"
                   className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-lg transition-all shadow-xl text-center uppercase tracking-widest text-xs active:scale-[0.98] flex items-center justify-center gap-2"
                 >
                   Calculate My Full ROI

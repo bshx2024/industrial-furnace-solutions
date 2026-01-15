@@ -16,7 +16,7 @@ const ModelStep: React.FC<{ num: string; title: string; desc: string; icon: Reac
 
 const BusinessModel: React.FC = () => {
     return (
-        <section className="py-24 bg-white">
+        <section id="energy-steward" className="py-24 bg-white scroll-mt-24">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col lg:flex-row gap-16 items-start">
                     <div className="lg:w-1/3">

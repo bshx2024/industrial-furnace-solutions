@@ -165,7 +165,7 @@ const PerformanceList: React.FC = () => {
                     <h2 className="text-3xl font-bold mb-6">Ready to join our portfolio of excellence?</h2>
                     <p className="text-gray-400 mb-10 max-w-xl mx-auto">Our specialists can analyze your furnace baseline and project potential savings based on these real-world benchmarks.</p>
                     <Link
-                        to="/about"
+                        to="/about#assessment"
                         className="inline-block px-10 py-4 bg-furnace-600 text-white font-bold rounded-full hover:bg-furnace-500 transition-all shadow-xl hover:shadow-furnace-600/20"
                     >
                         Discuss Your Project

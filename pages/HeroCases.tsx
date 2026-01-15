@@ -367,7 +367,7 @@ const HeroCases: React.FC = () => {
                         Connect with our 'Energy Steward' specialists to analyze your current baseline and project potential savings based on these benchmarks.
                     </p>
                     <Link
-                        to="/about"
+                        to="/about#assessment"
                         className="inline-block px-10 py-4 bg-furnace-600 hover:bg-furnace-500 text-white font-bold rounded-full transition-all shadow-xl hover:shadow-furnace-500/20 active:scale-95"
                     >
                         Get Free ROI Audit

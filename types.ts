@@ -17,6 +17,7 @@ export interface FAQItem {
 }
 
 export interface TechCardProps {
+  id?: string;
   title: string;
   description: string | string[];
   keywords: string[];

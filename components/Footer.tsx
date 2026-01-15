@@ -38,10 +38,10 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Technologies</h4>
             <ul className="space-y-4 text-sm">
-              <li><span className="text-gray-500">Full-fiber Furnace Roof</span></li>
-              <li><span className="text-gray-500">Intelligent Reheating</span></li>
-              <li><span className="text-gray-500">High-Emissivity Coatings</span></li>
-              <li><span className="text-gray-500">Energy Steward Model</span></li>
+              <li><Link to="/#tech-roof" className="hover:text-furnace-500 transition-colors">Full-fiber Furnace Roof</Link></li>
+              <li><Link to="/#tech-ai" className="hover:text-furnace-500 transition-colors">Intelligent Reheating</Link></li>
+              <li><Link to="/#tech-coating" className="hover:text-furnace-500 transition-colors">High-Emissivity Coatings</Link></li>
+              <li><Link to="/#energy-steward" className="hover:text-furnace-500 transition-colors">Energy Steward Model</Link></li>
             </ul>
           </div>
 
