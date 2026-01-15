@@ -76,7 +76,7 @@ const Solutions: React.FC = () => {
                                     </td>
                                     <td className="p-6 align-top">
                                         <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: {'>'}10% reduction target (Full Fiber Roof)</div>
-                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: {'>'}5% reduction (Smart Burning)</div>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Fuel consumption: {'>'}5% reduction (Smart Combustion)</div>
                                         <p className="text-[10px] leading-tight text-gray-500 italic">Combined modernization targets to achieve T80 extreme efficiency benchmarks.</p>
                                     </td>
                                 </tr>

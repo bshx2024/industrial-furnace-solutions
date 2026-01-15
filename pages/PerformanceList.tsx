@@ -1,83 +1,154 @@
 import React from 'react';
-import { Globe, ArrowRight } from 'lucide-react';
+import { Globe, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PerformanceList: React.FC = () => {
     const sections = [
         {
-            title: "Strip Steel (带钢)",
+            title: "Strip Steel Reheating Furnaces",
             projects: [
-                { client: "Qian'an Jiujiang Wire Rod", detail: "1250 mm Strip 220t/h Reheating Furnace" },
-                { client: "Shanxi Gaoyi Iron & Steel", detail: "1250 mm Strip 210t/h Cold Charging" },
-                { client: "Tangshan Guotang Steel", detail: "1100 mm Strip 200t/h Reheating Furnace" },
+                { client: "Qian'an Jiujiang Wire Rod", detail: "1250mm Strip 220t/h Reheating Furnace" },
+                { client: "Shanxi Gaoyi Iron & Steel", detail: "1250mm Strip Cold Charging 210t/h" },
+                { client: "Tangshan Guotang Special Steel", detail: "1100mm Strip 200t/h Reheating Furnace" },
                 { client: "Shanxi Gaoyi", detail: "1000mm Strip 180t/h Reheating Furnace" },
-                { client: "Guangxi Liugang Zhongjin", detail: "850 mm Stainless Strip 150t/h" },
-                { client: "Guangdong Fogang Jincheng", detail: "650 mm Strip 180t/h & 120t/h" },
+                { client: "Jinjiang Zhonghui", detail: "900mm Strip 215t/h Reheating Furnace" },
+                { client: "Hebei Fengnan Bensen", detail: "850mm Strip 160t/h Reheating Furnace" },
+                { client: "Cangzhou Middle Iron", detail: "850mm Strip 180t/h Reheating Furnace" },
+                { client: "Guangxi Liugang Zhongjin", detail: "850mm Stainless Strip 150t/h" },
+                { client: "Fujian Fuxin", detail: "780mm Strip 250t/h Reheating Furnace" },
+                { client: "Shanxi Gaoyi", detail: "750mm Strip 180t/h Reheating Furnace" },
+                { client: "Tangshan Guotang", detail: "650mm Strip 215t/h Reheating Furnace" },
+                { client: "Shanxi Longmen", detail: "650mm Strip 200t/h Reheating Furnace" },
+                { client: "Guangdong Hongtai", detail: "650mm Strip 150t/h Reheating Furnace" },
+                { client: "Guangdong Fogang Jincheng", detail: "650mm Strip 120t/h Reheating Furnace" },
+                { client: "Qian'an Jiujiang", detail: "650mm Strip 180t/h Reheating Furnace" },
+                { client: "Hangtian Union", detail: "650mm Strip Reheating Furnace" },
+                { client: "Shanxi Gaoyi", detail: "650mm Strip Reheating Furnace" },
+                { client: "Guangdong Fogang Jincheng", detail: "650mm Strip 180t/h Reheating Furnace" },
             ]
         },
         {
-            title: "Bar & Wire (棒线材)",
+            title: "Bar & Wire Reheating Furnaces",
             projects: [
                 { client: "Bangladesh KSRM Steel", detail: "150t/h Side Charge/Discharge Furnace", isInternational: true },
                 { client: "Vietnam Shengli (Thang Long)", detail: "120t/h Cold Charging Furnace", isInternational: true },
                 { client: "Indonesia DCP Steel", detail: "100t/h Dual Fuel (Gas/Natural Gas)", isInternational: true },
                 { client: "Malaysia Ann Joo Steel", detail: "90t/h Dual Fuel Reheating Furnace", isInternational: true },
                 { client: "Ethiopia Steel Plant", detail: "50t/h Oil/Gas Dual Fuel Furnace", isInternational: true },
-                { client: "Binxin Steel", detail: "250t/h Regenerative Walking Beam Furnace" },
-                { client: "Dazhou Steel Group", detail: "240t/h & 220t/h BFG Regenerative Furnaces" },
+                { client: "Jiangsu Binxin Steel", detail: "250t/h Regenerative Walking Beam Furnace" },
+                { client: "Dazhou Iron & Steel", detail: "240t/h BFG Regenerative Furnace" },
+                { client: "Dazhou Iron & Steel", detail: "220t/h BFG Regenerative Furnace" },
+                { client: "Yunnan Qujing Minyuan", detail: "Dual High Speed Bar 220t/h Reheating Furnace" },
+                { client: "Shanxi Longmen", detail: "220t/h BFG Regenerative Furnace" },
+                { client: "Yancheng Liansin", detail: "200t/h Reheating Furnace (Cold Charging)" },
+                { client: "Dazhi Hualu", detail: "200t/h BFG Regenerative Furnace" },
+                { client: "Qian'an Jiujiang", detail: "200t/h BFG Regenerative Furnace" },
+                { client: "Fangda Special Steel", detail: "BFG Regenerative Walking Beam Furnace" },
+                { client: "Nanchang Changli", detail: "200t/h BFG Regenerative Furnace" },
+                { client: "Fengnan Bensen", detail: "190t/h Natural Gas Regenerative Furnace" },
+                { client: "Lianyugang Binxin Steel", detail: "180t/h BFG Regenerative Furnace" },
+                { client: "Shanxi Xinyu", detail: "180t/h Coal/Gas Dual Fuel Furnace" },
+                { client: "Shandong Binxin", detail: "180t/h BFG Regenerative Walking Beam Furnace" },
+                { client: "Longyan Shengfeng", detail: "180t/h BFG Regenerative Furnace" },
+                { client: "Shanxi Shengtai", detail: "170t/h BFG Regenerative Furnace" },
+                { client: "Fangda Special Steel", detail: "150t/h BFG Regenerative Furnace" },
+                { client: "Dazhou Iron & Steel", detail: "150t/h BFG Regenerative Furnace" },
+                { client: "Sichuan Desheng Group", detail: "150t/h BFG Regenerative Reheating Furnace" },
+                { client: "Jiangsu Binxin Steel", detail: "150t/h Producer Gas to Natural Gas Retrofit" },
+                { client: "Shanxi Jinnan Steel", detail: "150t/h Coal/Gas Regenerative Reheating Furnace" },
+                { client: "Zhongwei Energy", detail: "150t/h Coal Bed Methane Reheating Furnace" },
+                { client: "Jiangsu Hehua", detail: "150t/h Producer Gas Single Regenerative Furnace" },
+                { client: "Dongtai Jinyuan", detail: "150t/h Natural Gas Reheating Furnace" },
+                { client: "Shanxi Gaoyi", detail: "150t/h BFG Regenerative Reheating Furnace" },
+                { client: "Shanxi Jianlong", detail: "140t/h Regenerative Reheating Furnace" },
+                { client: "Shanxi Jinnan Steel", detail: "140t/h BFG Regenerative Reheating Furnace" },
+                { client: "Chongqing Fengdu Metal", detail: "140t/h Natural Gas Regenerative Furnaces" },
+                { client: "Hebei Hongzhong", detail: "140t/h BFG Regenerative Reheating Furnace" },
+                { client: "Jiangsu Binxin Steel", detail: "130t/h Regenerative Reheating Furnace" },
+                { client: "Shandong Binxin", detail: "130t/h BFG Regenerative Reheating Furnace" },
+                { client: "Zhonghaicheng", detail: "130t/h Natural Gas Reheating Furnace" },
+                { client: "Fangda Special Steel", detail: "120t/h BFG Regenerative Reheating Furnace" },
+                { client: "Shanxi Gaoyi", detail: "120t/h BFG Regenerative Reheating Furnace" },
+                { client: "Tangshan Guotang", detail: "120t/h Reheating Furnace" },
+                { client: "Xinzhou Zhongyuan", detail: "120t/h BFG Regenerative Furnace" },
+                { client: "Qian'an Jiujiang", detail: "120t/h BFG Regenerative Furnace" },
+                { client: "Ningxia Tailier", detail: "120t/h Coal/Gas Reheating Furnace" },
+                { client: "Chongqing Yonghang", detail: "120t/h Natural Gas Reheating Furnace" },
+                { client: "Fangda Special Steel", detail: "110t/h Natural Gas Regenerative Reheating Furnace" },
+                { client: "Qinghuangdao Yaoxin", detail: "100t/h Coal Bed Methane Reheating Furnace" },
+                { client: "Tangshan Guotang", detail: "100t/h Reheating Furnace" },
+                { client: "Qian'an Jiujiang", detail: "90t/h Natural Gas Regenerative Furnace" },
+                { client: "Qian'an Jiujiang", detail: "80t/h Natural Gas Regenerative Furnace" },
+                { client: "Xinjidong State", detail: "80t/h BFG Regenerative Reheating Furnace" },
+                { client: "Qian'an Jiujiang", detail: "70t/h Natural Gas Regenerative Furnace" },
+                { client: "Dongtai Jinyuan", detail: "60t/h Natural Gas Reheating Furnace" },
+                { client: "Jiangsu Shenli", detail: "60t/h High Efficiency Regenerative Furnace" },
             ]
         },
         {
-            title: "Section Steel (型材)",
+            title: "Section Steel Reheating Furnaces",
             projects: [
-                { client: "Guangxi Chiji Steel", detail: "Section Steel Production Line" },
-                { client: "Shanxi Jinnan Steel", detail: "Strategic Energy Steward Project" },
-                { client: "Shanxi Jinniu Steel", detail: "Section Steel Energy Optimization" },
+                { client: "Guangxi Wuzhou", detail: "300t/h BFG Regenerative Walking Beam Furnace" },
+                { client: "Guangxi Wuzhou", detail: "235t/h BFG Regenerative Walking Beam Furnace" },
+                { client: "Guangxi Wuzhou", detail: "200t/h BFG Regenerative Reheating Furnace" },
+                { client: "Shanxi Jinnan Steel", detail: "180t/h Coal/Gas Composite Reheating Furnace" },
             ]
         }
     ];
 
     return (
         <div className="bg-white">
-            <section className="pt-40 pb-20 bg-industrial-950 text-white">
-                <div className="container mx-auto px-4 md:px-6">
-                    <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Global Performance Portfolio</h1>
+            <section className="pt-40 pb-20 bg-industrial-950 text-white relative overflow-hidden">
+                {/* Decorative background element */}
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-furnace-600/10 skew-x-12 transform translate-x-20"></div>
+
+                <div className="container mx-auto px-4 md:px-6 relative z-10">
+                    <div className="inline-flex items-center gap-2 bg-furnace-600/20 text-furnace-400 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest mb-6 border border-furnace-600/30">
+                        <ShieldCheck size={14} /> Global Track Record
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Proven Industrial Excellence</h1>
                     <p className="text-xl text-gray-400 max-w-3xl leading-relaxed">
-                        Proven track record across <span className="text-furnace-500 font-bold">nearly 100 production lines</span> globally, delivering extreme energy efficiency to leading steel producers.
+                        Extensive deployment across <span className="text-furnace-500 font-bold">100+ production lines</span>, delivering extreme energy efficiency to leading steel producers from China to Southeast Asia.
                     </p>
                 </div>
             </section>
 
-            <section className="py-24">
+            <section className="py-24 bg-slate-50">
                 <div className="container mx-auto px-4 md:px-6">
-                    <div className="space-y-20">
+                    <div className="space-y-32">
                         {sections.map((section, idx) => (
                             <div key={idx} className="group">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="h-px flex-grow bg-slate-200 group-hover:bg-furnace-300 transition-colors"></div>
-                                    <h2 className="text-2xl font-heading font-black text-industrial-900 uppercase tracking-widest px-4">
+                                <div className="flex items-center gap-6 mb-12">
+                                    <div className="w-12 h-12 bg-industrial-900 rounded-2xl flex items-center justify-center text-white font-bold shadow-xl">
+                                        {idx + 1}
+                                    </div>
+                                    <h2 className="text-3xl font-heading font-bold text-industrial-900 uppercase tracking-tight">
                                         {section.title}
                                     </h2>
-                                    <div className="h-px flex-grow bg-slate-200 group-hover:bg-furnace-300 transition-colors"></div>
+                                    <div className="h-px flex-grow bg-slate-200"></div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {section.projects.map((project, pIdx) => (
-                                        <div key={pIdx} className="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-furnace-200 transition-all group/card">
-                                            <div className="flex justify-between items-start mb-4">
-                                                <h4 className="font-bold text-industrial-950 group-hover/card:text-furnace-600 transition-colors">
+                                        <div key={pIdx} className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 group/card relative overflow-hidden">
+                                            {/* Hover accent */}
+                                            <div className="absolute top-0 left-0 w-1 h-0 group-hover/card:h-full bg-furnace-600 transition-all duration-500"></div>
+
+                                            <div className="flex justify-between items-start mb-6">
+                                                <h4 className="font-bold text-industrial-950 text-lg group-hover/card:text-furnace-600 transition-colors leading-tight">
                                                     {project.client}
                                                 </h4>
                                                 {project.isInternational && (
-                                                    <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-tighter bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">
+                                                    <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-tighter bg-blue-50 text-blue-600 px-3 py-1 rounded-full border border-blue-100">
                                                         <Globe size={10} /> International
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="text-sm text-gray-500 mb-4 h-10 line-clamp-2">
+                                            <p className="text-sm text-gray-500 mb-6 leading-relaxed">
                                                 {project.detail}
                                             </p>
-                                            <div className="flex items-center gap-1 text-furnace-600 font-bold text-xs group/link cursor-pointer">
-                                                View Technical Docs <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                                            <div className="flex items-center gap-2 text-furnace-600 font-bold text-xs group/link cursor-pointer pt-4 border-t border-slate-50">
+                                                Performance Verified <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                                             </div>
                                         </div>
                                     ))}
@@ -87,8 +158,23 @@ const PerformanceList: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Bottom CTA */}
+            <section className="py-24 bg-industrial-950 text-white text-center">
+                <div className="container mx-auto px-4">
+                    <h2 className="text-3xl font-bold mb-6">Ready to join our portfolio of excellence?</h2>
+                    <p className="text-gray-400 mb-10 max-w-xl mx-auto">Our specialists can analyze your furnace baseline and project potential savings based on these real-world benchmarks.</p>
+                    <Link
+                        to="/about"
+                        className="inline-block px-10 py-4 bg-furnace-600 text-white font-bold rounded-full hover:bg-furnace-500 transition-all shadow-xl hover:shadow-furnace-600/20"
+                    >
+                        Discuss Your Project
+                    </Link>
+                </div>
+            </section>
         </div>
     );
 };
 
 export default PerformanceList;
+

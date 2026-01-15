@@ -5,10 +5,33 @@ import { Settings, Cpu, Factory, ShieldCheck, BookOpen, ChevronLeft, ChevronRigh
 const TechCard: React.FC<TechCardProps> = ({ title, description, keywords, imageSrc, isReversed }) => (
   <div className={`flex flex-col lg:flex-row items-center gap-12 py-16 ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
     <div className="w-full lg:w-1/2 relative group">
-      <div className="absolute inset-0 bg-furnace-600 rounded-lg transform translate-x-3 translate-y-3 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform"></div>
-      <div className="relative rounded-lg overflow-hidden shadow-xl aspect-video bg-gray-200">
-        <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-industrial-900/60 to-transparent"></div>
+      {/* Dynamic Background Shadow */}
+      <div className="absolute inset-0 bg-furnace-600 rounded-lg transform translate-x-3 translate-y-3 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform duration-700 ease-out opacity-20"></div>
+      <div className="absolute inset-0 bg-furnace-600/10 rounded-lg transform translate-x-1 translate-y-1 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500 delay-75"></div>
+
+      <div className="relative rounded-lg overflow-hidden shadow-2xl aspect-video bg-gray-900 border border-white/5">
+        {/* Ken Burns Image Effect */}
+        <img
+          src={imageSrc}
+          alt={title}
+          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
+        />
+
+        {/* Animated Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-industrial-900/80 via-transparent to-transparent opacity-60"></div>
+
+        {/* Scanning Light Effect */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-furnace-500/10 to-transparent -translate-y-full group-hover:translate-y-full transition-transform duration-[1500ms] ease-in-out"></div>
+
+        {/* Subtle Heat Shimmer Pulse */}
+        <div className="absolute inset-0 bg-furnace-500/5 opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-1000"></div>
+
+        {/* Detail Badge on Hover */}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
+          <div className="bg-industrial-950/80 backdrop-blur-md border border-white/10 px-3 py-1 rounded text-[10px] font-black text-furnace-500 uppercase tracking-widest">
+            Technical Detail
+          </div>
+        </div>
       </div>
     </div>
 
@@ -288,7 +311,7 @@ const Technologies: React.FC = () => {
                     1. Official Notice
                   </button>
                   <button
-                    onClick={() => setCurrentPage(1)}
+                    onClick={() => { setCurrentPage(1); setActiveDetail(null); }}
                     className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase transition-all ${currentPage === 1 ? 'bg-furnace-600 text-white' : 'text-gray-500 hover:text-white'}`}
                   >
                     2. Selection Directory
@@ -314,7 +337,15 @@ const Technologies: React.FC = () => {
                   <img src="/cisa-cover.jpg" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-left duration-700" alt="Notice" />
                 ) : (
                   <div className="relative h-[95%] w-[95%] flex flex-col items-center justify-center">
-                    <img src="/cisa-directory.png" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-right duration-700" alt="Directory" />
+                    {activeDetail === 47 ? (
+                      <img src="/item47.png" key="item47" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 47 Detail" />
+                    ) : activeDetail === 51 ? (
+                      <img src="/item51.png" key="item51" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 51 Detail" />
+                    ) : activeDetail === 52 ? (
+                      <img src="/item52.png" key="item52" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 52 Detail" />
+                    ) : (
+                      <img src="/cisa-directory.png" key="directory" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-right duration-700" alt="Directory" />
+                    )}
                   </div>
                 )}
 
@@ -353,7 +384,7 @@ const Technologies: React.FC = () => {
                       <p className="text-sm">
                         Following multiple rounds of rigorous expert review, CISA hereby releases the 2024 edition of the "T80" list. This list defines the national benchmark for advanced industrial furnace performance and energy efficiency.
                       </p>
-                      <div className="bg-white/5 p-6 rounded-2xl border-l-[3px] border-furnace-500 mt-8 group cursor-pointer" onClick={() => setCurrentPage(1)}>
+                      <div className="bg-white/5 p-6 rounded-2xl border-l-[3px] border-furnace-500 mt-8 group cursor-pointer" onClick={() => { setCurrentPage(1); setActiveDetail(null); }}>
                         <p className="text-sm italic mb-2 text-white">Click to view the directory containing technologies 47, 51, and 52.</p>
                         <div className="flex items-center gap-2 text-furnace-500 font-bold uppercase text-[10px] tracking-widest group-hover:translate-x-2 transition-transform">
                           Flip to Directory <ChevronRight size={14} />

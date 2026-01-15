@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Activity, Zap, ShieldCheck, Gauge, Calculator, Info } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import LogoMarquee from './LogoMarquee';
 
 const Hero: React.FC = () => {
@@ -53,7 +54,7 @@ const Hero: React.FC = () => {
             </h1>
 
             <p className="text-xl md:text-2xl text-white font-medium mb-4 max-w-4xl leading-snug">
-              We invest, you save. Achieve <span className="text-furnace-500 font-bold">7–15% fuel reduction</span> in your reheating furnaces with our T80-validated extreme efficiency tech—paid entirely from verified energy savings.
+              We invest, you save. Achieve a <span className="text-furnace-500 font-bold">typical 7–15% fuel consumption reduction</span> in your reheating furnaces with our T80-validated extreme efficiency tech—paid entirely from verified energy savings.
             </p>
 
             <p className="text-sm md:text-base text-gray-300 mb-8 font-bold flex items-center gap-2">
@@ -76,20 +77,20 @@ const Hero: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row items-center gap-8">
               <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-                <a
-                  href="#assessment"
+                <Link
+                  to="/about"
                   className="group relative overflow-hidden bg-furnace-600 text-white text-lg px-8 py-6 rounded-sm font-bold uppercase tracking-[0.1em] transition-all shadow-2xl flex items-center justify-center gap-3"
                 >
                   <span className="relative z-10 text-base md:text-lg text-center">Get Free ROI Audit</span>
                   <ArrowRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform" />
                   <div className="absolute inset-0 bg-gradient-to-r from-furnace-500 to-orange-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
-                </a>
-                <a
-                  href="/hero-cases"
+                </Link>
+                <Link
+                  to="/hero-cases"
                   className="group relative px-8 py-6 border border-white/20 hover:border-white/40 text-white text-lg rounded-sm font-bold uppercase tracking-[0.1em] transition-all backdrop-blur-md flex items-center justify-center text-center"
                 >
                   <span className="text-base md:text-lg">View Case Studies</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -155,13 +156,13 @@ const Hero: React.FC = () => {
               </div>
 
               <div className="mt-8">
-                <a
-                  href="#assessment"
+                <Link
+                  to="/about"
                   className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-lg transition-all shadow-xl text-center uppercase tracking-widest text-xs active:scale-[0.98] flex items-center justify-center gap-2"
                 >
                   Calculate My Full ROI
                   <ArrowRight size={14} />
-                </a>
+                </Link>
                 <p className="text-[9px] text-white/20 mt-4 text-center uppercase tracking-[0.3em] font-black">
                   No CAPEX Required • Performance Based
                 </p>
@@ -191,7 +192,7 @@ const Hero: React.FC = () => {
 
             <div className="border-r border-white/5 lg:pr-8 last:border-r-0">
               <div className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2">
-                <Zap size={12} className="text-furnace-500" /> Fuel Saving (Target)
+                <Zap size={12} className="text-furnace-500" /> Typical Fuel Saving
               </div>
               <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7–15<span className="text-xs ml-0.5 text-gray-500">%</span></div>
             </div>

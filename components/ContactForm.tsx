@@ -27,6 +27,14 @@ const ContactForm: React.FC = () => {
       });
   };
 
+  // Calculate target month for availability (Show next month if we're past the 15th)
+  const today = new Date();
+  const displayDate = new Date();
+  if (today.getDate() >= 15) {
+    displayDate.setMonth(today.getMonth() + 1);
+  }
+  const targetMonth = displayDate.toLocaleString('en-US', { month: 'long' });
+
   return (
     <section id="assessment" className="py-24 bg-slate-50 relative scroll-mt-20">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -54,7 +62,7 @@ const ContactForm: React.FC = () => {
                   <div className="h-full bg-furnace-500 w-1/2 animate-pulse"></div>
                 </div>
                 <p className="text-[11px] text-gray-300 leading-relaxed italic">
-                  Due to the capital-heavy nature of our model, we only accept 2 new projects per month. <span className="text-white font-bold">1 slot remaining for February.</span>
+                  Due to the capital-heavy nature of our model, we only accept 2 new projects per month. <span className="text-white font-bold">1 slot remaining for {targetMonth}.</span>
                 </p>
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-furnace-500/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
