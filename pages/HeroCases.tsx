@@ -286,10 +286,10 @@ const HeroCases: React.FC = () => {
                 onClose={() => setDossierClient(null)}
                 client={dossierClient || ""}
                 image={
-                    dossierClient === "Sichuan Desheng Group" ? "/南方科技公司业绩/四川德胜.png" :
-                        dossierClient === "Jiangsu Binxin Steel" ? "/南方科技公司业绩/江苏镔鑫.png" :
-                            dossierClient === "Fangda Special Steel" ? "/南方科技公司业绩/江西大方.png" :
-                                dossierClient === "Fogang Jincheng" ? "/南方科技公司业绩/佛冈金城.png" : ""
+                    dossierClient === "Sichuan Desheng Group" ? "/desheng.png" :
+                        dossierClient === "Jiangsu Binxin Steel" ? "/binxin.png" :
+                            dossierClient === "Fangda Special Steel" ? "/dafang.png" :
+                                dossierClient === "Fogang Jincheng" ? "/jincheng.png" : ""
                 }
             />
 
@@ -311,7 +311,7 @@ const HeroCases: React.FC = () => {
                         metric="Record-Breaking Efficiency"
                         result="≥30%"
                         desc="Unlike standard optimization (7–15%), this major overhaul project achieved a massive ≥30% comprehensive efficiency gain by combining our Full-Fiber Roof technology with AI Combustion Control, significantly reducing oxidation loss."
-                        image="/南方科技公司业绩/四川德胜.png"
+                        image="/desheng.png"
                         onOpenDossier={() => setDossierClient("Sichuan Desheng Group")}
                     />
 
@@ -324,7 +324,7 @@ const HeroCases: React.FC = () => {
                         result="<0.4%"
                         desc="Implementation of intelligent atmosphere control achieving domestic leading levels of oxidation loss reduction and yield improvement."
                         isReversed
-                        image="/南方科技公司业绩/江苏镔鑫.png"
+                        image="/binxin.png"
                         onOpenDossier={() => setDossierClient("Jiangsu Binxin Steel")}
                     />
 
@@ -335,7 +335,7 @@ const HeroCases: React.FC = () => {
                         metric="Gas Consumption"
                         result="-21.8%"
                         desc="Modernization project drop gas consumption from 228m³/t down to 178.3m³/t through systematic thermal optimization."
-                        image="/南方科技公司业绩/江西大方.png"
+                        image="/dafang.png"
                         onOpenDossier={() => setDossierClient("Fangda Special Steel")}
                     />
 
@@ -347,7 +347,7 @@ const HeroCases: React.FC = () => {
                         result=">15%"
                         desc="Full-fiber furnace roof retrofit demonstration showing rapid ROI and significant reduction in thermal inertia and standby heat loss."
                         isReversed
-                        image="/南方科技公司业绩/佛冈金城.png"
+                        image="/jincheng.png"
                         onOpenDossier={() => setDossierClient("Fogang Jincheng")}
                     />
 
