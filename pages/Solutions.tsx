@@ -1,9 +1,14 @@
 import React from 'react';
 import { CheckCircle2, AlertTriangle, Lightbulb } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Solutions: React.FC = () => {
     return (
         <div className="bg-white">
+            <SEO
+                title="Integrated Energy-Saving Solutions"
+                description="Comprehensive furnace optimization: Process simulation, T80 extreme efficiency standards, and AI-driven control for consistent heating and reduced defects."
+            />
             {/* Page Header */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white">
                 <div className="container mx-auto px-4 md:px-6">

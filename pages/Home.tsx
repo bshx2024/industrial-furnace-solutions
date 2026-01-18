@@ -8,10 +8,15 @@ import BusinessModel from '../components/BusinessModel';
 import SocialProof from '../components/SocialProof';
 import LogoWall from '../components/LogoWall';
 import ContactForm from '../components/ContactForm';
+import SEO from '../components/SEO';
 
 const Home: React.FC = () => {
     return (
         <div className="bg-white">
+            <SEO
+                title="Zero CAPEX Furnace Optimization"
+                description="Zero CAPEX reheating furnace optimization. Reduce fuel consumption by 7-15% with CISA T80 verified technology and our Energy Steward model for guaranteed savings."
+            />
             <Hero />
             <ProjectPositioning />
             <Technologies />

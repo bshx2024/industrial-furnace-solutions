@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, TrendingDown, Layers, Zap, X, FileText, ChevronRight, Globe, Info, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PerformanceList from './PerformanceList';
+import SEO from '../components/SEO';
 
 interface CaseDossierData {
     originalText: string[];
@@ -281,6 +282,10 @@ const HeroCases: React.FC = () => {
 
     return (
         <div className="bg-slate-50">
+            <SEO
+                title="High-Conversion Case Studies"
+                description="Explore our T80-verified reheating furnace modernization case studies. See how major steel mills achieved >30% efficiency gains with Zero CAPEX."
+            />
             <CaseDossier
                 isOpen={!!dossierClient}
                 onClose={() => setDossierClient(null)}

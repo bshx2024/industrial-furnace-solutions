@@ -1,6 +1,7 @@
 import React from 'react';
 import { Globe, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const PerformanceList: React.FC = () => {
     const sections = [
@@ -98,6 +99,10 @@ const PerformanceList: React.FC = () => {
 
     return (
         <div className="bg-white">
+            <SEO
+                title="Global Performance Track Record"
+                description="Browse our extensive portfolio of reheating furnace optimizations across strip steel, bar/wire, and section steel production lines worldwide."
+            />
             <section className="pt-40 pb-20 bg-industrial-950 text-white relative overflow-hidden">
                 {/* Decorative background element */}
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-furnace-600/10 skew-x-12 transform translate-x-20"></div>

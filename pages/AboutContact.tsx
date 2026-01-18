@@ -1,10 +1,15 @@
 import React from 'react';
 import ContactForm from '../components/ContactForm';
 import { Users, Globe, TrendingUp } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const AboutContact: React.FC = () => {
     return (
         <div className="bg-white">
+            <SEO
+                title="About South Technology & Contact Us"
+                description="Expert engineering for industrial furnaces since 2014. Contact us for turnkey energy-saving solutions and thermal process optimization."
+            />
             {/* Header */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white">
                 <div className="container mx-auto px-4 md:px-6">

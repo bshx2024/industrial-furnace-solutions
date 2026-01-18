@@ -1,9 +1,14 @@
 import React from 'react';
 import { Target, CheckCircle, Database, BarChart4 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const CaseStudies: React.FC = () => {
     return (
         <div className="bg-slate-50">
+            <SEO
+                title="Jinnan Steel Group Energy Steward Project"
+                description="Analysis of the pioneering energy steward model at Jinnan Steel Group, featuring full-fiber roof retrofit and intelligent reheating control."
+            />
             {/* Hero Section */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
