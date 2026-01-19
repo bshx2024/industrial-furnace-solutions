@@ -100,7 +100,7 @@ const PerformanceList: React.FC = () => {
     return (
         <div className="bg-white">
             <SEO
-                title="Global Performance Track Record"
+                title="Global Reheating Furnace Track Record"
                 description="Browse our extensive portfolio of reheating furnace optimizations across strip steel, bar/wire, and section steel production lines worldwide."
             />
             <section className="pt-40 pb-20 bg-industrial-950 text-white relative overflow-hidden">

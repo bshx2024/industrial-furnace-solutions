@@ -283,7 +283,7 @@ const HeroCases: React.FC = () => {
     return (
         <div className="bg-slate-50">
             <SEO
-                title="High-Conversion Case Studies"
+                title="Furnace Modernization Success Stories"
                 description="Explore our T80-verified reheating furnace modernization case studies. See how major steel mills achieved >30% efficiency gains with Zero CAPEX."
             />
             <CaseDossier

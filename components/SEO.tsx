@@ -19,7 +19,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, canonical }) => {
 
     useEffect(() => {
         // Update Title
-        document.title = `${title} | EcoReheating`;
+        document.title = `${title} | ecoreheating.com`;
 
         // Update Meta Description
         let metaDescription = document.querySelector('meta[name="description"]');

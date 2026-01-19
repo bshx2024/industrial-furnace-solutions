@@ -6,7 +6,7 @@ const CaseStudies: React.FC = () => {
     return (
         <div className="bg-slate-50">
             <SEO
-                title="Jinnan Steel Group Energy Steward Project"
+                title="Jinnan Steel Energy Steward Project"
                 description="Analysis of the pioneering energy steward model at Jinnan Steel Group, featuring full-fiber roof retrofit and intelligent reheating control."
             />
             {/* Hero Section */}

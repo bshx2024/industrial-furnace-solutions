@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     return (
         <div className="bg-white">
             <SEO
-                title="Zero CAPEX Furnace Optimization"
+                title="Zero CAPEX Reheating Furnace Efficiency"
                 description="Zero CAPEX reheating furnace optimization. Reduce fuel consumption by 7-15% with CISA T80 verified technology and our Energy Steward model for guaranteed savings."
             />
             <Hero />
