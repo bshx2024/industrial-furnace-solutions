@@ -1,0 +1,44 @@
+﻿
+> industrial-furnace-solutions@0.0.0 build
+> react-router build
+
+node.exe : Error: Could not determine server run
+time. Please install @react-router/node, or prov
+ide a custom entry.server.tsx/jsx file in your a
+pp directory.
+所在位置 D:\Program Files\nodejs\npm.ps1:29 字符: 3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Er 
+   ror: Could no... app directory.:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+    at resolveEntryFiles (E:\ai_coding\industria
+l-furnace-solutions\node_modules\@react-router\d
+ev\dist\vite.js:755:13)
+    at updatePluginContext (E:\ai_coding\industr
+ial-furnace-solutions\node_modules\@react-router
+\dev\dist\vite.js:2827:56)
+    at config (E:\ai_coding\industrial-furnace-s
+olutions\node_modules\@react-router\dev\dist\vit
+e.js:3241:9)
+    at runConfigHook (file:///E:/ai_coding/indus
+trial-furnace-solutions/node_modules/vite/dist/n
+ode/chunks/dep-D4NMHUTW.js:49479:17)
+    at Module.resolveConfig (file:///E:/ai_codin
+g/industrial-furnace-solutions/node_modules/vite
+/dist/node/chunks/dep-D4NMHUTW.js:48785:12)
+    at hasReactRouterRscPlugin (E:\ai_coding\ind
+ustrial-furnace-solutions\node_modules\@react-ro
+uter\dev\dist\cli\index.js:1355:22)
+    at build (E:\ai_coding\industrial-furnace-so
+lutions\node_modules\@react-router\dev\dist\cli\
+index.js:1921:72)
+    at build2 (E:\ai_coding\industrial-furnace-s
+olutions\node_modules\@react-router\dev\dist\cli
+\index.js:2260:5)
+    at run2 (E:\ai_coding\industrial-furnace-sol
+utions\node_modules\@react-router\dev\dist\cli\i
+ndex.js:2565:7)
