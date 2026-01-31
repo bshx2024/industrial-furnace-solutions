@@ -1,0 +1,976 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router';
+
+export type Language = 'en' | 'vi';
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+  l: (href: string) => string;
+  switchLanguage: (lang: Language) => void;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+const translations = {
+  en: {
+    // SEO
+    'seo.home.title': 'Zero CAPEX Reheating Furnace Efficiency',
+    'seo.home.desc': 'Zero CAPEX reheating furnace optimization. Reduce fuel consumption by 7-15% with CISA T80 verified technology and our Energy Steward model for guaranteed savings.',
+
+    // Navigation
+    'nav.home': 'HOME',
+    'nav.solutions': 'SOLUTIONS',
+    'nav.caseStudies': 'CASE STUDIES',
+    'nav.heroCases': 'HERO CASES',
+    'nav.about': 'ABOUT',
+    'nav.freeAssessment': 'FREE ASSESSMENT',
+
+    // Language selector
+    'lang.english': 'English',
+    'lang.vietnamese': 'Tiếng Việt',
+
+    // Hero section
+    'hero.badge': 'System Intelligence v4.2',
+    'hero.title': 'Stop Reheating Furnace Fuel Waste.',
+    'hero.titleAccent': 'Zero CAPEX Upgrades.',
+    'hero.subtitle': 'We invest, you save. Achieve a typical 7-15% fuel consumption reduction in your reheating furnaces with our T80-validated extreme efficiency tech paid for entirely by verified energy savings.',
+    'hero.optimized': 'Optimized for Walking Beam & Walking Hearth Furnaces in Long/Flat Steel Mills.',
+    'hero.bullet1': "Performance-based 'Energy Steward' model. No CAPEX, paid for by verified savings.",
+    'hero.bullet2': "Enhance yield and surface quality through T80-listed oxidation control technologies.",
+    'hero.bullet3': "Designed and validated in integrated steel mills.",
+    'hero.bullet4': "Listed in CISA T80 extreme efficiency technologies.",
+    'hero.btnRoi': 'Get Free ROI Audit',
+    'hero.btnCases': 'View Case Studies',
+
+    // ROI Calculator
+    'calc.title': 'ROI Calculator',
+    'calc.production': 'Annual Production',
+    'calc.adjust': 'Adjust Capacity',
+    'calc.value': 'Annual Value',
+    'calc.savings': 'Estimated Annual Savings',
+    'calc.carbon': 'carbon offset',
+    'calc.credits': 'Carbon Credits Equiv.',
+    'calc.btn': 'Calculate My Full ROI',
+    'calc.footer': 'No CAPEX Required | Performance Based',
+    'calc.trusted': 'Trusted by Global Steel Leaders:',
+    'calc.verified': 'CISA T80 Verified',
+
+    // Stats
+    'stat.fuel': 'Typical Fuel Saving',
+    'stat.co2': 'CO2 Reduction (Est.)',
+    'stat.temp': 'Zone Temp. (Typical)',
+    'stat.oxygen': 'Flue Oxygen (Example)',
+    'stat.status': 'Control Status',
+    'stat.optimized': 'Optimized',
+
+    // Why Choose section
+    'why.title': 'Why Choose the Energy Steward Solution?',
+    'why.p1': 'EcoReheating provides Zero CAPEX reheating furnace optimization using CISA T80 verified technologies like narrow window temperature control and full-fiber roofs, helping steel mills reduce fuel consumption by 7-15%.',
+    'why.p2': 'Developed by South Technology, this industry-defining solution — now a national benchmark — optimizes the entire thermal journey from continuous caster exit to reheating furnace exit.',
+    'why.item1.title': 'Maximize Heating Capacity',
+    'why.item1.desc': 'Eliminate bottlenecks in the reheating process to ensure peak production throughput.',
+    'why.item2.title': 'Optimize Reheating Process',
+    'why.item2.desc': 'Advanced AI and process simulation to achieve precise thermal curves and minimum fuel usage.',
+    'why.item3.title': 'Zero-Downtime Reliability',
+    'why.item3.desc': 'Long-term expert steward service ensuring equipment longevity and consistent performance.',
+
+    // Common
+    'common.learnMore': 'Learn More',
+    'common.contactUs': 'Contact Us',
+
+    // About Page
+    'about.title': 'About & Contact',
+    'about.subtitle': 'Leading the transition to extreme energy efficiency in the steel industry through advanced thermal engineering and AI optimization.',
+    'about.company': 'Our Company',
+    'about.companyTitle': 'SOUTH TECHNOLOGY',
+    'about.excellence': 'Engineering Excellence Since 2014',
+    'about.p1': "Headquartered in Shanghai's prestigious Hopson International Center, South Technology is a leading engineering enterprise specialized in turnkey (EPC) solutions for industrial furnaces and environmental systems.",
+    'about.p2': 'Since our strategic technology transfer from UK-based FCS in 2014, we have successfully implemented advanced British thermal engineering in over 300 production lines globally, achieving comprehensive energy efficiency gains of up to 20% (including yield improvements) for major facility retrofits.',
+    'about.p3': 'Guided by the mission of industrial carbon neutrality, we have evolved from a specialized manufacturer into an "Energy Steward" service provider, integrating full-fiber roof technology and AI-supported smart combustion to deliver sustainable industrial value.',
+    'about.quote': '"Mastering Energy. Creating Value."',
+    'about.signedBy': 'Strategic Alliance Signing (2014): Chairman Chao & Michael (FCS UK Legal Representative)',
+    'about.advantage1Title': 'Strategic Alliance',
+    'about.advantage1Desc': 'Backed by Dongming Green Energy for robust capital support, ensuring zero-risk project delivery for large-scale steel groups.',
+    'about.advantage2Title': 'Global Vision',
+    'about.advantage2Desc': 'Demonstrated excellence across over 300 production lines globally, setting the benchmark for low-carbon metallurgy and extreme resource utilization.',
+    'about.advantage3Title': 'Innovation Driven',
+    'about.advantage3Desc': 'Continuous R&D in AI-supported smart combustion control and advanced regenerative refractory materials.',
+    'about.foundationTitle': 'Technical Foundation & Global Credentials',
+    'about.foundationDesc': 'Our strength lies in a high-caliber professional team covering thermal processes, mechanical design, electrical automation, environmental engineering, and vaporization cooling. This integrated expertise allows us to provide truly seamless turnkey solutions with strict quality control.',
+    'about.getInTouch': 'Get in Touch',
+    'about.getInTouchDesc': "Whether you're looking for an energy audit, technical consultation, or partnership opportunities, our experts are ready to assist.",
+    'about.globalOps': 'Global Operations',
+    'about.globalOpsDesc': 'Headquartered in Shanghai, China, with a global engineering hub serving steel mills across Asia and beyond.',
+
+    // Solutions Page
+    'solutions.title': 'Integrated Energy-Saving Solutions',
+    'solutions.subtitle': 'Integrated energy-saving solutions for reheating furnaces and soaking pits in steel rolling mills, built around the Energy Steward Model pioneered with Jinnan Steel.',
+    'solutions.processScope': 'Process Scope',
+    'solutions.processDesc': 'Our solutions address the entire thermal journey of the steel product, ensuring consistency and efficiency from start to finish.',
+    'solutions.scopeItem1': 'Continuous caster exit',
+    'solutions.scopeItem2': 'Soaking pits integration',
+    'solutions.scopeItem3': 'Walking beam reheating furnaces',
+    'solutions.scopeItem4': 'Walking hearth reheating furnaces',
+    'solutions.scopeItem5': 'Rolling mill entry synchronization',
+    'solutions.painPointsTitle': 'Pain Points & Solution Strategy',
+    'solutions.tableHead1': 'Pain Point',
+    'solutions.tableHead2': 'Solution Module',
+    'solutions.tableHead3': 'Expected Direction',
+    'solutions.painPoint1Title': 'High fuel consumption',
+    'solutions.painPoint1Desc': 'Inefficient insulation and unoptimized burner control leading to excessive gas/fuel bills.',
+    'solutions.solution1Title': 'Full-fiber roof + combustion optimization',
+    'solutions.direction1_1': 'Fuel consumption: >10% reduction target (Full-fiber Roof)',
+    'solutions.direction1_2': 'Fuel consumption: >5% reduction (Smart Combustion)',
+    'solutions.direction1Footer': 'Combined modernization targets to achieve T80 extreme efficiency benchmarks.',
+    'solutions.painPoint2Title': 'High oxidation loss',
+    'solutions.painPoint2Desc': 'Excessive furnace atmosphere leading to metal surface loss.',
+    'solutions.solution2Title': 'Non-ceramic coatings + intelligent reheating',
+    'solutions.direction2_1': 'Oxidation Loss: 0.1%-0.5% reduction target',
+    'solutions.direction2_2': 'Yield: +0.1-0.5 percentage points improvement',
+    'solutions.direction2Footer': 'Domestic leading levels achievement based on T80-validated intelligent reheating and functional coatings.',
+    'solutions.painPoint3Title': 'Unstable furnace temp',
+    'solutions.painPoint3Desc': 'Inconsistent heating quality affecting the subsequent rolling stage.',
+    'solutions.solution3Title': 'Intelligent reheating control (AI)',
+    'solutions.direction3_1': 'Exit temperature hit rate: >95% design target',
+    'solutions.direction3Footer': 'AI-supported intelligent reheating aims to keep reheating furnace exit temperature within tight bands, reducing downstream quality deviations.',
+    'solutions.painPoint4Title': 'Frequent maintenance',
+    'solutions.painPoint4Desc': 'Short lifespan of traditional furnace linings under extreme thermal cycling.',
+    'solutions.solution4Title': 'Enhanced linings & coatings',
+    'solutions.direction4_1': 'Maintenance intervals: extended by one major shutdown cycle (target)',
+    'solutions.direction4Footer': 'Full-fiber roof and non-ceramic functional coatings are designed to reduce lining wear and unplanned shutdowns; actual intervals depend on your operational profile.',
+    'solutions.disclaimer': "All target ranges are based on China Iron and Steel Association's T80 extreme energy efficiency benchmarks and similar reheating furnace retrofit cases. Actual performance will be determined after baseline assessment at your plant.",
+    'solutions.howItWorksTitle': 'How it Works',
+    'solutions.step1Title': 'Data Collection',
+    'solutions.step2Title': 'Process Simulation',
+    'solutions.step3Title': 'Modernization',
+    'solutions.step4Title': 'Online Optimization',
+    'solutions.step5Title': 'Long-term Steward',
+
+    // HeroCases & PerformanceList Pages
+    'cases.title': 'High-Conversion Case Studies',
+    'cases.subtitle': 'Data-driven results from the field, authenticated by client-stamped proof and technical audits.',
+    'cases.reportBtn': 'Full Technical Report',
+    'cases.readyTitle': 'Ready for Your Free ROI Audit?',
+    'cases.readyBtn': 'Get Free ROI Audit',
+    'cases.dossierOriginal': 'Original Technical Evidence',
+    'cases.dossierVerified': 'Verified Scan',
+    'cases.dossierTwin': 'Digital Twin & Translation',
+    'cases.dossierContext': 'Project Context',
+    'cases.dossierDate': 'Certification Date',
+    'cases.dossierAuth': 'Authenticated',
+    'cases.authPlate': 'Authenticated Plate',
+    'cases.clickExpand': 'Click to expand technical autopsy.',
+    'cases.peakPerformance': 'Peak Performance',
+    'cases.includesFuel': 'Includes fuel reduction & yield improvement',
+    'cases.verifiedData': 'Verified Data',
+
+    // HeroCase 1: Desheng
+    'cases.desheng.title': 'Major Overhaul & Retrofit',
+    'cases.desheng.summary': 'Largest Private Steel Enterprise in Sichuan | Top 500 China Private Enterprises',
+    'cases.desheng.metric': 'Record-Breaking Efficiency',
+    'cases.desheng.desc': 'Unlike standard optimization (7-15%), this major overhaul project achieved a massive ≥30% comprehensive efficiency gain by combining our Full-Fiber Roof technology with AI Combustion Control, significantly reducing oxidation loss.',
+    'cases.desheng.intro': 'Sichuan Desheng Group is the largest private steel enterprise in Sichuan and a Top 500 China Private Enterprise. This major overhaul project set a new benchmark for comprehensive efficiency recovery in aging furnace systems.',
+    'cases.desheng.reportDate': 'June 6, 2022',
+    'cases.desheng.trans1': 'Sichuan Desheng Group Vanadium-Titanium Co., Ltd. Rolling Mill',
+    'cases.desheng.trans2': 'Energy Efficiency Report: Record-Breaking Major Reheating Furnace Overhaul',
+    'cases.desheng.trans3': 'South Energy Saving Tech performed the EPC for the comprehensive furnace overhaul and technical modernization from Nov 2021 to Jan 2022.',
+    'cases.desheng.trans4': 'Peak Performance Result: By completely replacing the refractory roof and integrating AI control, we maximized total thermal efficiency far beyond standard retrofits, achieving a massive comprehensive energy gain of ≥30%.',
+
+    // HeroCase 2: Binxin
+    'cases.binxin.title': 'Surface Quality & Yield',
+    'cases.binxin.summary': 'Strategic Coastal Production Base | China Top 500 Private Enterprise',
+    'cases.binxin.metric': 'Oxidation Scale',
+    'cases.binxin.desc': 'Implementation of intelligent atmosphere control, achieved domestic leading levels of oxidation loss reduction and yield improvement.',
+    'cases.binxin.intro': 'Binxin Steel is a strategic coastal steel production base in East China. This project demonstrated the extreme precision of our AI atmosphere control in high-speed bar production lines.',
+    'cases.binxin.reportDate': 'October 12, 2023',
+    'cases.binxin.trans1': 'Jiangsu Binxin Steel Group Co., Ltd.',
+    'cases.binxin.trans2': 'Project Summary: 260t/h Double-High Speed Bar Reheating Furnace',
+    'cases.binxin.trans3': "Located in Lianyugang's coastal industrial zone with strategic logistics advantages, Binxin Steel is a China Top 500 Private Enterprise.",
+    'cases.binxin.trans4': 'The 260 t/h double-high bar reheating furnace project (cold charging) utilizes intelligent heating control and fiber structure optimization. Post-commissioning gas consumption and oxidation loss metrics rank among the industry\'s elite.',
+
+    // HeroCase 3: Fangda
+    'cases.fangda.title': 'Efficiency Modernization',
+    'cases.fangda.summary': 'Annual Capacity 20M Tons | Diversified Industrial Conglomerate',
+    'cases.fangda.metric': 'Gas Consumption',
+    'cases.fangda.desc': 'Modernization project reduced gas consumption from 228 m³ /t down to 178.3 m³ /t through systematic thermal optimization.',
+    'cases.fangda.intro': 'Fangda Special Steel is a global leader in automotive spring steel. Our optimization helped maintain their competitive edge by drastically reducing fuel intensity in their core heating process.',
+    'cases.fangda.reportDate': 'March 20, 2023',
+    'cases.fangda.trans1': 'Jiangxi Fangda Iron & Steel Group Co., Ltd.',
+    'cases.fangda.trans2': 'Fangda Special Steel Reheating Furnace Efficiency Retrofit Brief',
+    'cases.fangda.trans3': 'A large-scale steel conglomerate with diversified operations in automotive components and mining, boasting an annual capacity of 20 million tons.',
+    'cases.fangda.trans4': 'We completed systematic energy-saving retrofits for two furnaces at Fangda Special Steel. Through thermal regime optimization and advanced lining technology, verified energy savings exceeded 20%.',
+
+    // HeroCase 4: Jincheng
+    'cases.jincheng.title': 'Structural Retrofit',
+    'cases.jincheng.summary': 'Specialty Steel Deep Processing | Comprehensive Rolling Operations',
+    'cases.jincheng.metric': 'Fuel Saving',
+    'cases.jincheng.desc': 'Full-fiber furnace roof retrofit demonstration showing rapid ROI and significant reduction in thermal inertia and standby heat loss.',
+    'cases.jincheng.intro': "Jincheng Metal's multi-product rolling lines require high thermal flexibility. Our full-fiber solution provided the rapid response and efficiency needed for their diverse production schedule.",
+    'cases.jincheng.reportDate': 'August 15, 2022',
+    'cases.jincheng.trans1': 'Fogang Jincheng Metal Products Co., Ltd.',
+    'cases.jincheng.trans2': 'Project Report: Full-Fiber Roof Strip Reheating Furnace',
+    'cases.jincheng.trans3': 'Specializes in the production and deep processing of specialty steels, including stainless steel, threading bars, and strip steel products.',
+    'cases.jincheng.trans4': 'The full-fiber roof retrofit project for the strip reheating furnace achieved over 15% energy savings under equivalent operating conditions by minimizing radiant heat loss and thermal inertia.',
+
+    'perf.title': 'Proven Industrial Excellence',
+    'perf.subtitle': 'Extensive deployment across 100+ production lines, delivering extreme energy efficiency to leading steel producers.',
+    'perf.cat1': 'Strip Steel Reheating Furnaces',
+    'perf.cat2': 'Bar & Wire Reheating Furnaces',
+    'perf.cat3': 'Section Steel Reheating Furnaces',
+    'perf.international': 'International',
+    'perf.verified': 'Performance Verified',
+    'perf.trackRecord': 'Track Record',
+    'perf.ctaTitle': 'Ready to join our portfolio of excellence?',
+    'perf.ctaDesc': 'Our specialists can analyze your furnace baseline and project potential savings based on these real-world benchmarks.',
+    'perf.ctaBtn': 'Discuss Your Project',
+
+    // CaseStudies Page
+    'case.badge': 'Selected Success Story',
+    'case.title': 'Energy Steward Project at JINNAN STEEL GROUP',
+    'case.subtitle': 'Domestic pioneering energy steward model launch as a green, low-carbon demonstration and resource utilization benchmark.',
+    'case.plantTitle': 'Plant & Process',
+    'case.plantDesc': 'JINNAN STEEL GROUP (Shanxi, China) is an integrated steel producer with a complete steel rolling process. The project focuses on the reheating furnace and 5th caster soaking pit.',
+    'case.quote': 'Jointly implemented by SOUTH TECHNOLOGY, DONGMING GREEN ENERGY, and JINNAN STEEL GROUP to build a green, low-carbon demonstration project.',
+    'case.feature1Title': 'AI Integration',
+    'case.feature1Desc': 'Full-process thermal management powered by proprietary AI algorithms.',
+    'case.feature2Title': 'Safe Operation',
+    'case.feature2Desc': 'Long-term steward service ensuring 24/7 reliability and performance monitoring.',
+    'case.scopeTitle': 'Technical Scope',
+    'case.scopeItem1Title': 'Full-fiber furnace roof retrofit',
+    'case.scopeItem1Desc': 'Total replacement of traditional roof with high-efficiency fiber lining to minimize thermal inertia.',
+    'case.scopeItem2Title': 'Intelligent reheating control',
+    'case.scopeItem2Desc': 'End-to-end optimization from caster exit to furnace exit, ensuring precise temperature uniformity.',
+    'case.scopeItem3Title': 'High-Emissivity functional coatings',
+    'case.scopeItem3Desc': 'Applied on critical furnace lining areas to reduce oxidation scale and protect refractory surfaces.',
+    'case.targetsTitle': 'Project Performance Targets',
+    'case.targetsSubtitle': 'Benchmarks aligned with T80 Extreme Efficiency standards',
+    'case.target1Title': 'Target Fuel Saving',
+    'case.target1Desc': 'Per ton of steel, based on T80 extreme efficiency benchmarks for reheating furnaces.',
+    'case.target2Title': 'Scale Loss Reduction',
+    'case.target2Desc': 'Significant decrease in surface metal loss due to atmosphere control.',
+    'case.target3Title': 'Yield Improvement',
+    'case.target3Desc': 'Incremental gain in saleable material across the entire reheating process.',
+    'case.target4Title': 'Benchmark Achievement',
+    'case.target4Desc': 'Engineered to achieve high-efficiency resource utilization benchmarks.',
+    'case.noteTitle': 'Note on performance:',
+    'case.noteDesc': "The exact performance depends on each plant's baseline and process, but the project is designed and implemented to meet or exceed T80-level performance benchmarks established by the China Iron and Steel Association.",
+
+    // Technologies Component
+    'tech.badge': 'Our Expertise',
+    'tech.title': 'Core Technologies for Furnace Conservation',
+    'tech.detail': 'Technical Detail',
+    'tech.kpi': 'Key Performance Indicators:',
+    'tech.verifiedBadge': 'Officially Verified: The "Extreme Efficiency" Selection',
+    'tech.verifiedTitle': 'Nationally Recognized',
+    'tech.verifiedAccent': '"Extreme Efficiency" Technologies',
+    'tech.verifiedDesc': 'Selected by the China Iron & Steel Association (CISA) representing 50%+ of global steel capacity. Only the most rigorous, scale-proven technologies make this industry benchmark list.',
+    'tech.viewDoc': 'View Official Document & Full Directory',
+    'tech.officialDocNum': 'Official Document: CISA [2024] No. 185',
+    'tech.ipLabel': 'Exclusive Intellectual Property',
+    'tech.ipTitle': 'Original Standard Innovator',
+    'tech.ipQuote': '"South Technology holds the exclusive invention patents for these T80-listed solutions. We are the original innovators behind these national standards."',
+    'tech.dossierTitle': 'Technical Validation Dossier',
+    'tech.dossierSubtitle': 'CISA T80 Extreme Efficiency Selection (2024)',
+    'tech.page1': '1. Official Notice',
+    'tech.page2': '2. Selection Directory',
+
+    // Tech Cards
+    'tech.roof.title': 'Full-fiber Furnace Roof',
+    'tech.roof.desc1': '1. Fuel Efficiency: >10% energy saving under identical conditions. No pre-heating required, drastically reducing startup fuel costs.',
+    'tech.roof.desc2': '2. Rapid Assembly: Factory pre-assembled modules; on-site installation completed in just 2 days.',
+    'tech.roof.desc3': '3. Long Lifespan: Durable design ensuring a service life of over 10 years.',
+    'tech.roof.desc4': '4. Safety & Stability: Enhanced performance in extreme heat, high vibration, and corrosive environments, lowering O&M risks.',
+    'tech.roof.kpis': ['>10% Fuel Saving', '2-Day Assembly', '10+ Year Lifespan', 'Operational Safety'],
+
+    'tech.ai.title': 'Intelligent Combustion System',
+    'tech.ai.desc1': '1. Full-Process Traceability: Comprehensive material tracking from initial charging to final discharge.',
+    'tech.ai.desc2': '2. Precision Control: Saves >5% fuel and reduces relative oxidation loss by >10% through accurate temp management.',
+    'tech.ai.desc3': '3. Core Tech: Driven by mechanism modeling, self-learning AI, and advanced proprietary algorithms.',
+    'tech.ai.kpis': ['Material Traceability', '>5% Fuel Saving', 'Lower Oxidation Loss', 'Self-learning AI'],
+
+    'tech.coating.title': 'High-Temperature Energy-Saving Coating',
+    'tech.coating.desc1': "1. Advanced Formula: Unique 'High-Emissivity' recipe solves the industry-wide problem of delamination and peeling.",
+    'tech.coating.desc2': '2. Durable Efficiency: Withstands 1700 °C without efficiency decay, compatible with all refractory materials.',
+    'tech.coating.desc3': '3. Performance Gains: Lowers furnace shell temperature, boosts productivity, and extends refractory life.',
+    'tech.coating.kpis': ['High-Emissivity Formula', '1700 °C Heat Resistance', 'Shell Temp Reduction', 'Extends Refractory Life'],
+
+    'tech.om.title': 'Intelligent O&M Platform',
+    'tech.om.desc1': '1. Remote Expert Diagnostics: Online support and a massive professional knowledge base for rapid troubleshooting.',
+    'tech.om.desc2': '2. AI Prediction: Real-time monitoring and predictive failure analysis to optimize maintenance decisions.',
+    'tech.om.desc3': '3. Big Data Insight: Precision energy efficiency analysis and big data for strategic cost control.',
+    'tech.om.desc4': '4. Process Visibility: Decarburization layer prediction and real-time visualization to minimize specialty steel defects.',
+    'tech.om.kpis': ['Expert Knowledge Base', 'Predictive Maintenance', 'Energy Big Data', 'Decarburization Control'],
+
+    'tech.dossierNoticeHeader': 'China Iron and Steel Association',
+    'tech.dossierNoticeDocNum': 'CISA [2024] No. 185',
+    'tech.dossierNoticeTitle': 'Notice on the Update and Release of the List of Ultimate Energy Efficiency Technologies (T80)',
+    'tech.dossierNoticeGreeting': 'To all relevant units:',
+    'tech.dossierNoticeP1': 'Following multiple rounds of rigorous expert review, CISA hereby releases the 2024 edition of the "T80" list. This list defines the national benchmark for advanced industrial furnace performance and energy efficiency.',
+    'tech.dossierNoticeP2': 'Click to view the directory containing technologies 47, 51, and 52.',
+    'tech.dossierFlip': 'Flip to Directory',
+    'tech.brief': 'Technical Brief',
+    'tech.profile': 'Technical Profile',
+    'tech.benchmarks': 'Technical Benchmarks:',
+    'tech.tempPrecision': 'Temp Precision',
+    'tech.intelligentRate': 'Intelligent Rate',
+
+    'tech.explorerTitle': 'Selection Directory Explorer',
+    'tech.explorerDesc': 'Below are the specific entries recognized in the CISA T80 catalogue. Click on an item to see its detailed technical transformation roadmap.',
+
+    'tech.item47Title': '"Narrow Window" Precision Control for Discharge Temperature',
+    'tech.item47Benefit': 'Maximizes heating uniformity and ensures precise temperature consistency closer to the theoretical limit.',
+    'tech.item51Title': 'High-Emissivity Coating for Enhanced Thermal Radiation',
+    'tech.item51Benefit': 'Boosts wall radiation and heat transfer efficiency by 10-15%, significantly shortening heating cycles.',
+    'tech.item52Title': 'All-Ceramic Fiber Roof Structure',
+    'tech.item52Benefit': 'Advanced refractory design for minimal heat loss and drastically reduced thermal inertia.',
+
+    // ProcessCoverage
+    'process.title': 'From Continuous Caster to Furnace Discharge',
+    'process.subtitle': 'Unlocking Hidden Efficiency across the entire reheating process, not just single equipment retrofits. We optimize the complete thermal flow.',
+    'process.step1': 'Continuous Casting Exit',
+    'process.step2': 'Soaking Pits',
+    'process.step3': 'Reheating Furnace',
+    'process.step4': 'Rolling Mill Entry',
+    'process.phase1': 'Phase 1',
+    'process.phase1Desc': 'Synchronized temperature management at the caster exit to preserve latent heat.',
+    'process.phase2': 'Phase 2',
+    'process.phase2Desc': 'Advanced soaking pit energy saving project integration.',
+    'process.phase3': 'Phase 3',
+    'process.phase3Desc': 'T80-listed retrofits for the main reheating furnace body.',
+    'process.phase4': 'Phase 4',
+    'process.phase4Desc': 'Intelligent mill-pacing integration for optimized entry temperature.',
+
+    // BenefitsSection
+    'benefits.badge': 'Proven Performance',
+    'benefits.title': 'Typical Results from T80-level Reheating Furnace Upgrades',
+    'benefits.subtitle': 'Our benchmarks are based on the China Iron and Steel Association T80 extreme efficiency list and real-world results from the Jinnan Steel project.',
+    'benefits.card1.label': 'Fuel Consumption',
+    'benefits.card1.desc': 'Typical reduction range in fuel used per ton of steel after comprehensive upgrade.',
+    'benefits.card2.label': 'Oxidation Scale',
+    'benefits.card2.desc': 'Significant reduction in surface oxidation loss during the reheating process.',
+    'benefits.card3.label': 'Yield Improvement',
+    'benefits.card3.desc': 'Overall increase in saleable product through optimized thermal management.',
+    'benefits.card4.label': 'Payback Period',
+    'benefits.card4.desc': 'Typical ROI timeframe under performance-based energy steward contracts.',
+    'benefits.footer.title': "The exact performance depends on each plant's baseline and process, but our projects are engineered to achieve T80-level benchmarks.",
+    'benefits.footer.badge': 'EXTREME EFFICIENCY LIST',
+    'benefits.footer.standards': 'CISA T80 STANDARDS COMPLIANT',
+
+    // BusinessModel
+    'model.badge': 'Our Model',
+    'model.title': 'The Shared Savings Model',
+    'model.subtitle': 'Contract Energy Management (CEM)',
+    'model.quote': '"Performance First. Payment Second." A win-win philosophy proven across over 300 production lines.',
+    'model.desc': 'We eliminate CAPEX barriers. SOUTH TECHNOLOGY invests in the technology and equipment; we share the value created by verified fuel savings.',
+    'model.check1': 'Zero Initial Investment',
+    'model.check2': 'Performance-Based Sharing',
+    'model.check3': 'Turnkey Energy Stewardship',
+    'model.step1.title': 'Assessment & Collection',
+    'model.step1.desc': 'Pre-assessment & data collection for reheating furnace and soaking pits baseline establishment.',
+    'model.step2.title': 'Technical Solution',
+    'model.step2.desc': 'Full-fiber roof, intelligent reheating, high-emissivity coatings, and advanced controls integration.',
+    'model.step3.title': 'Retrofit & AI Tuning',
+    'model.step3.desc': 'On-site retrofitting, commissioning, and AI-enabled process optimization for maximum efficiency.',
+    'model.step4.title': 'Long-term Steward',
+    'model.step4.desc': 'Continuous maintenance and expert services with shared energy savings as compensation.',
+
+    // SocialProof
+    'proof.badge': 'Industry Recognition',
+    'proof.title': 'Recognized by Leading Steel Industry Bodies',
+    'proof.item1.title': 'T80 Extreme Efficiency Listed',
+    'proof.item1.desc': 'Listed in the 2024 Extreme Energy Efficiency Technologies (T80) of China Iron and Steel Association for full-fiber furnace roof, intelligent reheating, and high-emissivity coatings.',
+    'proof.item2.title': 'Jinnan Steel Demonstration Project',
+    'proof.item2.desc': 'Project launched at JINNAN STEEL GROUP as a green, low-carbon demonstration and high-efficiency resource utilization benchmark.',
+    'proof.doc1': 'T80 Extreme Efficiency Technology Catalogue',
+    'proof.doc2': 'Jinnan Steel Demonstration Site',
+
+    // LogoWall
+    'wall.badge': 'Global Partner Network',
+    'wall.title': 'Powering the World\'s Steel Giants',
+    'wall.subtitle_1': 'Successfully deployed in ',
+    'wall.subtitle_2': '300+ production lines',
+    'wall.subtitle_3': ' with a combined capacity of ',
+    'wall.subtitle_4': '>200 Million Tons/Year',
+    'wall.footer': 'Including Tier-1 Global technical giants and major regional industry leaders',
+
+    // ContactForm
+    'contact.badge': 'Limited Opportunity',
+    'contact.title': 'Claim Your Free ROI Potential Audit',
+    'contact.desc': 'Find out exactly how much you can save. We provide a comprehensive baseline assessment and ROI projection at no upfront cost.',
+    'contact.avail.head': 'Current Availability',
+    'contact.avail.slot': '1 SLOT LEFT',
+    'contact.avail.desc': 'Due to the capital-heavy nature of our model, we only accept 2 new projects per month. 1 slot remaining for ',
+    'contact.feature1.title': 'Data Driven',
+    'contact.feature1.desc': 'Baseline established via actual mill production logs.',
+    'contact.feature2.title': 'Expert Analysis',
+    'contact.feature2.desc': 'T80-level engineering review of your process geometry.',
+    'contact.success.title': 'Assessment Requested!',
+    'contact.success.desc': 'Thank you. One of our energy stewards will contact you to collect the necessary production data for the preliminary assessment.',
+    'contact.success.btn': 'Submit another request',
+    'contact.form.name': 'Name',
+    'contact.form.name_placeholder': 'Your full name',
+    'contact.form.role': 'Role',
+    'contact.form.role_placeholder': 'Select your role...',
+    'contact.form.company': 'Company',
+    'contact.form.company_placeholder': 'Steel mill / Group name',
+    'contact.form.region': 'Country / Region',
+    'contact.form.region_placeholder': 'e.g. China, Vietnam, Brazil...',
+    'contact.form.email': 'Work Email',
+    'contact.form.email_placeholder': 'name@company.com',
+    'contact.form.phone': 'Phone / WhatsApp (Optional)',
+    'contact.form.production': 'Annual Production',
+    'contact.form.production_placeholder': 'e.g. 2.5 MTPA',
+    'contact.form.furnace': 'Furnace Type',
+    'contact.form.furnace_placeholder': 'Select type...',
+    'contact.form.message': 'Message (Optional)',
+    'contact.form.message_placeholder': 'Specific challenges or process details...',
+    'contact.form.submit': 'Analyze My ROI Now',
+    'contact.form.submitting': 'Analyzing Data...',
+    'contact.form.footer_1': 'Join 15+ steel mills already optimized by our T80 technology.',
+    'contact.form.footer_2': 'Privacy Guarantee: Your data is protected by MNDA.',
+    'contact.role.plantManager': 'Plant Manager',
+    'contact.role.energyManager': 'Energy Manager',
+    'contact.role.maintenanceManager': 'Maintenance Manager',
+    'contact.role.other': 'Other',
+    'contact.furnace.walkingBeam': 'Walking Beam',
+    'contact.furnace.walkingHearth': 'Walking Hearth',
+    'contact.furnace.pusher': 'Pusher',
+    'contact.furnace.other': 'Other',
+
+    // FAQ
+    'faq.badge': 'Expert Insights',
+    'faq.title': 'Industrial Furnace Efficiency',
+    'faq.desc': 'Understanding the technical nuances of combustion control and insulation is key to ROI. We answer the most common engineering questions about furnace retrofitting here.',
+    'faq.specific': 'Have a specific technical question?',
+    'faq.q1': 'How do you calculate reheating furnace efficiency?',
+    'faq.a1': 'We perform a comprehensive heat balance calculation based on fuel caloric value, flue gas temperature, oxygen content, and wall heat losses. Our audit determines the exact thermal efficiency percentage and identifies specific areas for heat recovery potential.',
+    'faq.q2': 'What is the difference between Walking Beam and Pusher Furnaces?',
+    'faq.a2': 'Pusher furnaces slide steel on skids, which can cause skid marks and surface damage. Walking Beam furnaces lift and move material, reducing damage and allowing for better bottom-side heating. However, Walking Beam furnaces have more openings, requiring advanced sealing and pressure control to maintain high efficiency.',
+    'faq.q3': 'How much can I save with regenerative burners?',
+    'faq.a3': 'Regenerative burners can recover up to 80-90% of waste heat from flue gases, preheating combustion air to very high temperatures. Typically, clients see fuel savings between 30% to 50% compared to cold air burners, and 10-15% compared to standard recuperative systems.',
+    'faq.q4': 'Do you comply with industrial energy standards?',
+    'faq.a4': 'Yes, our solutions are designed to help you meet ISO 50001 Energy Management standards and local environmental regulations regarding NOx and CO2 emissions.',
+    'footer.energySteward': 'Energy Steward Model',
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
+    'footer.compliance': 'T80 Compliance',
+  },
+  vi: {
+    // SEO
+    'seo.home.title': 'Tiết kiệm Lò nung lại Zero CAPEX',
+    'seo.home.desc': 'Tối ưu hóa lò nung lại Zero CAPEX. Giảm tiêu thụ nhiên liệu 7-15% với công nghệ xác thực CISA T80 và mô hình Quản gia Năng lượng cho khoản tiết kiệm được đảm bảo.',
+
+    // Navigation
+    'nav.home': 'TRANG CHỦ',
+    'nav.solutions': 'GIẢI PHÁP',
+    'nav.caseStudies': 'DỰ ÁN',
+    'nav.heroCases': 'DỰ ÁN TIÊU BIỂU',
+    'nav.about': 'VỀ CHÚNG TÔI',
+    'nav.freeAssessment': 'ĐÁNH GIÁ MIỄN PHÍ',
+
+    // Language selector
+    'lang.english': 'English',
+    'lang.vietnamese': 'Tiếng Việt',
+
+    // Hero section
+    'hero.badge': 'Hệ thống Thông minh v4.2',
+    'hero.title': 'Chấm dứt Lãng phí nhiên liệu Lò nung lại.',
+    'hero.titleAccent': 'Nâng cấp Zero CAPEX.',
+    'hero.subtitle': 'Chúng tôi đầu tư, bạn tiết kiệm. Đạt được mức giảm tiêu thụ nhiên liệu điển hình 7-15% trong các lò nung lại của bạn với công nghệ hiệu suất cực cao được xác thực chuẩn T80, chi trả hoàn toàn bằng khoản tiết kiệm năng lượng đã được xác minh.',
+    'hero.optimized': 'Tối ưu hóa cho Lò dầm bước & Lò đáy bước trong các nhà máy cán thép dài/phẳng.',
+    'hero.bullet1': "Mô hình 'Quản gia năng lượng' dựa trên hiệu suất. Zero CAPEX, trả bằng khoản tiết kiệm.",
+    'hero.bullet2': "Nâng cao năng suất và chất lượng bề mặt thông qua kiểm soát vảy oxit T80.",
+    'hero.bullet3': "Thiết kế và xác thực tại các nhà máy thép tích hợp.",
+    'hero.bullet4': "Nằm trong danh mục công nghệ hiệu suất cực cao CISA T80.",
+    'hero.btnRoi': 'Nhận Đánh giá ROI Miễn phí',
+    'hero.btnCases': 'Xem Dự án Tiêu biểu',
+
+    // ROI Calculator
+    'calc.title': 'Tính Toán ROI',
+    'calc.production': 'Sản lượng hàng năm',
+    'calc.adjust': 'Điều chỉnh công suất',
+    'calc.value': 'Giá trị hàng năm',
+    'calc.savings': 'Tiết kiệm ước tính/năm',
+    'calc.carbon': 'Giảm thải carbon',
+    'calc.credits': 'Tín chỉ Carbon tương đương',
+    'calc.btn': 'Tính toán ROI đầy đủ',
+    'calc.footer': 'Zero CAPEX | Dựa trên hiệu suất thực',
+    'calc.trusted': 'Đối tác thép toàn cầu tin dùng:',
+    'calc.verified': 'Chứng nhận CISA T80',
+
+    // Stats
+    'stat.fuel': 'Tiết kiệm nhiên liệu điển hình',
+    'stat.co2': 'Giảm CO2 (Ước tính)',
+    'stat.temp': 'Nhiệt độ vùng (Điển hình)',
+    'stat.oxygen': 'Oxy khí thải (Ví dụ)',
+    'stat.status': 'Trạng thái điều khiển',
+    'stat.optimized': 'Tối ưu hóa',
+
+    // Why Choose section
+    'why.title': 'Tại sao chọn Giải pháp Quản gia năng lượng?',
+    'why.p1': 'EcoReheating cung cấp tối ưu hóa lò nung lại Zero CAPEX sử dụng công nghệ được xác thực chuẩn CISA T80 như kiểm soát nhiệt độ cửa sổ hẹp và mái lò toàn sợi gốm, giúp các nhà máy thép giảm tiêu thụ nhiên liệu 7-15%.',
+    'why.p2': 'Được phát triển bởi South Technology, giải pháp tiên phong ngành này — hiện là tiêu chuẩn quốc gia — tối ưu hóa toàn bộ hành trình nhiệt từ lối ra máy đúc liên tục đến lối ra lò nung lại.',
+    'why.item1.title': 'Tăng tối đa Công suất Gia nhiệt',
+    'why.item1.desc': 'Loại bỏ nghẽn cổ chai trong quy trình gia nhiệt để đảm bảo công suất sản xuất đỉnh cao.',
+    'why.item2.title': 'Tối ưu hóa Quy trình Gia nhiệt',
+    'why.item2.desc': 'AI tiên tiến và mô phỏng quy trình để đạt được đường cong nhiệt chính xác và mức tiêu thụ nhiên liệu tối thiểu.',
+    'why.item3.title': 'Độ tin cậy Không ngừng hoạt động',
+    'why.item3.desc': 'Dịch vụ quản gia chuyên gia dài hạn đảm bảo tuổi thọ thiết bị và hiệu suất ổn định.',
+
+    'case.noteTitle': 'Lưu ý về hiệu suất:',
+    'case.noteDesc': 'Hiệu suất chính xác phụ thuộc vào cơ sở và quy trình của từng nhà máy, nhưng dự án được thiết kế và triển khai để đáp ứng hoặc vượt qua các chuẩn mực hiệu suất cấp T80.',
+
+    // HeroCases & PerformanceList Pages
+    'cases.title': 'Dự án Tiêu biểu Hiệu quả cao',
+    'cases.subtitle': 'Kết quả dựa trên dữ liệu từ hiện trường, được xác thực bằng bằng chứng có đóng dấu của khách hàng và đánh giá kỹ thuật.',
+    'cases.reportBtn': 'Báo cáo Kỹ thuật Đầy đủ',
+    'cases.readyTitle': 'Sẵn sàng cho Đánh giá ROI Miễn phí?',
+    'cases.readyBtn': 'Nhận Đánh giá ROI Miễn phí',
+    'cases.dossierOriginal': 'Bằng chứng Kỹ thuật Gốc',
+    'cases.dossierVerified': 'Bản quét Đã xác thực',
+    'cases.dossierTwin': 'Bản sao Số & Bản dịch',
+    'cases.dossierContext': 'Bối cảnh Dự án',
+    'cases.dossierDate': 'Ngày Chứng nhận',
+    'cases.dossierAuth': 'Đã xác thực',
+    'cases.authPlate': 'Tấm biển Đã xác thực',
+    'cases.clickExpand': 'Nhấp để mở rộng phân tích kỹ thuật.',
+    'cases.peakPerformance': 'Hiệu suất Đỉnh cao',
+    'cases.includesFuel': 'Bao gồm giảm nhiên liệu & cải thiện năng suất',
+    'perf.trackRecord': 'Hồ sơ Năng lực',
+    'cases.verifiedData': 'Dữ liệu Đã xác thực',
+
+    // HeroCase 1: Desheng
+    'cases.desheng.title': 'Đại tu & Cải tạo Lớn',
+    'cases.desheng.summary': 'Doanh nghiệp Thép Tư nhân Lớn nhất Tứ Xuyên | Top 500 Doanh nghiệp Tư nhân Trung Quốc',
+    'cases.desheng.metric': 'Hiệu suất Kỷ lục',
+    'cases.desheng.desc': 'Không giống như tối ưu hóa tiêu chuẩn (7-15%), dự án đại tu lớn này đã đạt được mức tăng hiệu quả toàn diện đáng kể ≥30% bằng cách kết hợp công nghệ Mái lò Toàn Sợi của chúng tôi với Điều khiển Đốt AI, giảm đáng kể hao hụt oxy hóa.',
+    'cases.desheng.intro': 'Tập đoàn Tứ Xuyên Desheng là doanh nghiệp thép tư nhân lớn nhất Tứ Xuyên và nằm trong Top 500 Doanh nghiệp Tư nhân Trung Quốc. Dự án đại tu lớn này đã thiết lập một chuẩn mực mới cho việc phục hồi hiệu quả toàn diện trong các hệ thống lò nung cũ.',
+    'cases.desheng.reportDate': '6 tháng 6, 2022',
+    'cases.desheng.trans1': 'Xưởng cán Công ty TNHH Vanadium-Titanium Tập đoàn Tứ Xuyên Desheng',
+    'cases.desheng.trans2': 'Báo cáo Hiệu quả Năng lượng: Kỷ lục Đại tu Lò nung lại Lớn',
+    'cases.desheng.trans3': 'South Energy Saving Tech đã thực hiện EPC cho việc đại tu lò nung toàn diện và hiện đại hóa kỹ thuật từ tháng 11 năm 2021 đến tháng 1 năm 2022.',
+    'cases.desheng.trans4': 'Kết quả Hiệu suất Đỉnh cao: Bằng cách thay thế hoàn toàn mái lò chịu lửa và tích hợp điều khiển AI, chúng tôi đã tối đa hóa tổng hiệu suất nhiệt vượt xa các mức cải tạo tiêu chuẩn, đạt được mức tăng năng lượng toàn diện đáng kể ≥30%.',
+
+    // HeroCase 2: Binxin
+    'cases.binxin.title': 'Chất lượng Bề mặt & Năng suất',
+    'cases.binxin.summary': 'Cơ sở Sản xuất Chiến lược Ven biển | Top 500 Doanh nghiệp Tư nhân Trung Quốc',
+    'cases.binxin.metric': 'Vảy Oxy hóa',
+    'cases.binxin.desc': 'Triển khai kiểm soát khí quyển thông minh, đạt được mức giảm hao hụt oxy hóa và cải thiện năng suất hàng đầu trong nước.',
+    'cases.binxin.intro': 'Thép Binxin là một cơ sở sản xuất thép chiến lược ven biển ở miền Đông Trung Quốc. Dự án này đã chứng minh độ chính xác cực cao của việc kiểm soát khí quyển AI của chúng tôi trong các dây chuyền sản xuất thép thanh tốc độ cao.',
+    'cases.binxin.reportDate': '12 tháng 10, 2023',
+    'cases.binxin.trans1': 'Công ty TNHH Tập đoàn Thép Giang Tô Binxin',
+    'cases.binxin.trans2': 'Tóm tắt Dự án: Lò nung lại Thép thanh Tốc độ Cao Đôi 260t/h',
+    'cases.binxin.trans3': 'Nằm trong khu công nghiệp ven biển Liên Vân Cảng với lợi thế logistic chiến lược, Thép Binxin là một trong 500 Doanh nghiệp Tư nhân hàng đầu Trung Quốc.',
+    'cases.binxin.trans4': 'Dự án lò nung lại thép thanh tốc độ cao đôi 260 t/h (nạp nguội) sử dụng điều khiển gia nhiệt thông minh và tối ưu hóa cấu trúc sợi. Các chỉ số tiêu thụ gas và hao hụt oxy hóa sau khi vận hành đều nằm trong nhóm hàng đầu ngành.',
+
+    // HeroCase 3: Fangda
+    'cases.fangda.title': 'Hiện đại hóa Hiệu suất',
+    'cases.fangda.summary': 'Công suất Hàng năm 20 Triệu Tấn | Tập đoàn Công nghiệp Đa năng',
+    'cases.fangda.metric': 'Tiêu thụ Gas',
+    'cases.fangda.desc': 'Dự án hiện đại hóa đã giảm tiêu thụ gas từ 228 m³/t xuống 178.3 m³/t thông qua tối ưu hóa nhiệt hệ thống.',
+    'cases.fangda.intro': 'Thép đặc biệt Fangda là công ty dẫn đầu toàn cầu về thép lò xò ô tô. Sự tối ưu hóa của chúng tôi đã giúp duy trì lợi thế cạnh tranh của họ bằng cách giảm đáng kể cường độ nhiên liệu trong quy trình gia nhiệt cốt lõi của họ.',
+    'cases.fangda.reportDate': '20 tháng 3, 2023',
+    'cases.fangda.trans1': 'Công ty TNHH Tập đoàn Sắt thép Fangda Giang Tây',
+    'cases.fangda.trans2': 'Sơ lược về Cải tạo Hiệu suất Lò nung lại Thép đặc biệt Fangda',
+    'cases.fangda.trans3': 'Một tập đoàn thép quy mô lớn với các hoạt động đa dạng trong lĩnh vực phụ tùng ô tô và khai thác mỏ, sở hữu công suất hàng năm 20 triệu tấn.',
+    'cases.fangda.trans4': 'Chúng tôi đã hoàn thành cải tạo tiết kiệm năng lượng có hệ thống cho hai lò nung tại Thép đặc biệt Fangda. Thông qua tối ưu hóa chế độ nhiệt và công nghệ lớp lót tiên tiến, mức tiết kiệm năng lượng đã xác thực vượt quá 20%.',
+
+    // HeroCase 4: Jincheng
+    'cases.jincheng.title': 'Cải tạo Cấu trúc',
+    'cases.jincheng.summary': 'Gia công Sâu Thép Đặc biệt | Vận hành Cán Toàn diện',
+    'cases.jincheng.metric': 'Tiết kiệm Nhiên liệu',
+    'cases.jincheng.desc': 'Trình diễn cải tạo mái lò toàn sợi cho thấy ROI nhanh chóng và giảm đáng kể quán tính nhiệt cũng như tổn thất nhiệt chờ.',
+    'cases.jincheng.intro': 'Các dây chuyền cán đa sản phẩm của Jincheng Metal yêu cầu độ linh hoạt nhiệt cao. Giải pháp toàn sợi của chúng tôi cung cấp phản ứng nhanh và hiệu quả cần thiết cho lịch trình sản xuất đa dạng của họ.',
+    'cases.jincheng.reportDate': '15 tháng 8, 2022',
+    'cases.jincheng.trans1': 'Công ty TNHH Sản phẩm Kim loại Fogang Jincheng',
+    'cases.jincheng.trans2': 'Báo cáo Dự án: Lò nung lại Thép dải Mái lò Toàn Sợi',
+    'cases.jincheng.trans3': 'Chuyên sản xuất và gia công sâu các loại thép đặc biệt, bao gồm thép không gỉ, thép thanh ren và các sản phẩm thép dải.',
+    'cases.jincheng.trans4': 'Dự án cải tạo mái lò toàn sợi cho lò nung lại thép dải đạt được mức tiết kiệm năng lượng hơn 15% trong các điều kiện vận hành tương đương bằng cách giảm thiểu tổn thất nhiệt bức xạ và quán tính nhiệt.',
+
+    'perf.title': 'Sự Xuất sắc Công nghiệp Đã được Chứng minh',
+    'perf.subtitle': 'Triển khai rộng rãi trên hơn 100 dây chuyền sản xuất, mang lại hiệu quả năng lượng cực cao cho các nhà sản xuất thép hàng đầu.',
+    'perf.cat1': 'Lò nung thép dải',
+    'perf.cat2': 'Lò nung thép thanh & thép dây',
+    'perf.cat3': 'Lò nung thép hình',
+    'perf.international': 'Quốc tế',
+    'perf.verified': 'Hiệu suất Đã xác thực',
+    'perf.ctaTitle': 'Sẵn sàng tham gia vào danh mục xuất sắc của chúng tôi?',
+    'perf.ctaDesc': 'Các chuyên gia của chúng tôi có thể phân tích cơ sở lò nung của bạn và dự báo các khoản tiết kiệm tiềm năng dựa trên các chuẩn mực thực tế này.',
+    'perf.ctaBtn': 'Thảo luận về Dự án của Bạn',
+
+    // CaseStudies Page
+    'case.badge': 'Câu chuyện Thành công Điển hình',
+    'case.title': 'Dự án Quản gia Năng lượng tại TẬP ĐOÀN THÉP JINNAN',
+    'case.subtitle': 'Triển khai mô hình quản gia năng lượng tiên phong trong nước như một mô hình trình diễn xanh, ít carbon và chuẩn mực sử dụng tài nguyên.',
+    'case.plantTitle': 'Nhà máy & Quy trình',
+    'case.plantDesc': 'TẬP ĐOÀN THÉP JINNAN (Sơn Tây, Trung Quốc) là nhà sản xuất thép tích hợp với quy trình cán thép hoàn chỉnh. Dự án tập trung vào lò nung lại và lò ngâm máy đúc thứ 5.',
+    'case.quote': 'Được phối hợp triển khai bởi SOUTH TECHNOLOGY, DONGMING GREEN ENERGY và TẬP ĐOÀN THÉP JINNAN nhằm xây dựng một dự án trình diễn xanh, ít carbon.',
+    'case.feature1Title': 'Tích hợp AI',
+    'case.feature1Desc': 'Quản lý nhiệt toàn quy trình được thúc đẩy bởi các thuật toán AI độc quyền.',
+    'case.feature2Title': 'Vận hành An toàn',
+    'case.feature2Desc': 'Dịch vụ quản gia dài hạn đảm bảo độ tin cậy 24/7 và giám sát hiệu suất.',
+    'case.scopeTitle': 'Phạm vi Kỹ thuật',
+    'case.scopeItem1Title': 'Cải tạo mái lò toàn sợi',
+    'case.scopeItem1Desc': 'Thay thế hoàn toàn mái lò truyền thống bằng lớp lót sợi hiệu suất cao để giảm thiểu quán tính nhiệt.',
+    'case.scopeItem2Title': 'Điều khiển gia nhiệt thông minh',
+    'case.scopeItem2Desc': 'Tối ưu hóa từ đầu đến cuối từ lối ra máy đúc đến lối ra lò nung, đảm bảo độ đồng đều nhiệt độ chính xác.',
+    'case.scopeItem3Title': 'Lớp phủ chức năng phát xạ cao',
+    'case.scopeItem3Desc': 'Áp dụng trên các khu vực lớp lót lò quan trọng để giảm vảy oxy hóa và bảo vệ bề mặt vật liệu chịu lửa.',
+    'case.targetsTitle': 'Mục tiêu Hiệu suất Dự án',
+    'case.targetsSubtitle': 'Các chuẩn mực phù hợp với tiêu chuẩn Hiệu suất Cực cao T80',
+    'case.target1Title': 'Mục tiêu Tiết kiệm Nhiên liệu',
+    'case.target1Desc': 'Trên mỗi tấn thép, dựa trên các chuẩn mực hiệu suất cực cao T80 cho lò nung lại.',
+    'case.target2Title': 'Giảm Hao hụt Vảy',
+    'case.target2Desc': 'Giảm đáng kể hao hụt kim loại bề mặt do kiểm soát khí quyển lò.',
+    'case.target3Title': 'Cải thiện Năng suất',
+    'case.target3Desc': 'Tăng thêm lượng vật liệu có thể bán được trong toàn bộ quy trình gia nhiệt.',
+
+    // Common elements
+    'common.learnMore': 'Tìm hiểu thêm',
+    'common.contactUs': 'Liên hệ với Chúng tôi',
+
+    // About Page
+    'about.title': 'Giới thiệu & Liên hệ',
+    'about.subtitle': 'Dẫn đầu sự chuyển đổi sang hiệu quả năng lượng cực cao trong ngành thép thông qua kỹ thuật nhiệt tiên tiến và tối ưu hóa AI.',
+    'about.company': 'Công ty của Chúng tôi',
+    'about.companyTitle': 'SOUTH TECHNOLOGY',
+    'about.excellence': 'Kỹ thuật Xuất sắc Từ năm 2014',
+    'about.p1': 'Có trụ sở chính tại Hopson International Center danh tiếng của Thượng Hải, South Technology là doanh nghiệp kỹ thuật hàng đầu chuyên về các giải pháp chìa khóa trao tay (EPC) cho lò nung công nghiệp và hệ thống môi trường.',
+    'about.p2': 'Kể từ khi chuyển giao công nghệ chiến lược từ FCS có trụ sở tại Vương quốc Anh vào năm 2014, chúng tôi đã triển khai thành công kỹ thuật nhiệt tiên tiến của Anh trên hơn 300 dây chuyền sản xuất toàn cầu, đạt được mức tăng hiệu quả năng lượng toàn diện lên đến 20% (bao gồm cả cải thiện năng suất) cho các hoạt động cải tạo cơ sở lớn.',
+    'about.p3': 'Được hướng dẫn bởi sứ mệnh trung hòa carbon công nghiệp, chúng tôi đã phát triển từ một nhà sản xuất chuyên dụng thành một nhà cung cấp dịch vụ "Quản gia Năng lượng", tích hợp công nghệ mái lò toàn sợi và đốt cháy thông minh hỗ trợ AI để mang lại giá trị công nghiệp bền vững.',
+    'about.quote': '"Làm chủ Năng lượng. Kiến tạo Giá trị."',
+    'about.signedBy': 'Ký kết Liên minh Chiến lược (2014): Chủ tịch Chao & Michael (Đại diện Pháp luật FCS Vương quốc Anh)',
+    'about.integrity': 'Chính trực',
+    'about.innovation': 'Đổi mới',
+    'about.success': 'Thành công Chung',
+    'about.dedication': 'Tận tụy',
+    'about.ipTitle': 'Sở hữu Trí tuệ Cốt lõi & Danh mục Bằng sáng chế Toàn cầu',
+    'about.advantage1Title': 'Liên minh Chiến lược',
+    'about.advantage1Desc': 'Được hỗ trợ bởi Dongming Green Energy để có nguồn vốn mạnh mẽ, đảm bảo triển khai dự án không rủi rơ cho các tập đoàn thép quy mô lớn.',
+    'about.advantage2Title': 'Tầm nhìn Toàn cầu',
+    'about.advantage2Desc': 'Đã chứng minh sự xuất sắc trên hơn 300 dây chuyền sản xuất toàn cầu, thiết lập chuẩn mực cho luyện kim ít carbon và sử dụng tài nguyên hiệu quả cao.',
+    'about.advantage3Title': 'Đổi mới Thúc đẩy',
+    'about.advantage3Desc': 'Nghiên cứu và phát triển liên tục trong điều khiển đốt cháy thông minh hỗ trợ AI và vật liệu chịu lửa tái sinh tiên tiến.',
+    'about.foundationTitle': 'Nền tảng Kỹ thuật & Chứng nhận Toàn cầu',
+    'about.foundationDesc': 'Sức mạnh của chúng tôi nằm ở đội ngũ chuyên gia cao cấp bao quát các quy trình nhiệt, thiết kế cơ khí, tự động hóa điện, kỹ thuật môi trường và làm mát hóa hơi. Chuyên môn tích hợp này cho phép chúng tôi cung cấp các giải pháp chìa khóa trao tay thực sự liền mạch với sự kiểm soát chất lượng nghiêm ngặt.',
+    'about.getInTouch': 'Liên hệ với Chúng tôi',
+    'about.getInTouchDesc': 'Cho dù bạn đang tìm kiếm một cuộc đánh giá năng lượng, tư vấn kỹ thuật hay cơ hội hợp tác, các chuyên gia của chúng tôi luôn sẵn sàng hỗ trợ.',
+    'about.globalOps': 'Hoạt động Toàn cầu',
+    'about.globalOpsDesc': 'Trụ sở chính tại Thượng Hải, Trung Quốc, với trung tâm kỹ thuật toàn cầu phục vụ các nhà máy thép tại Châu Á và xa hơn nữa.',
+
+    // Solutions Page
+    'solutions.title': 'Giải pháp Tiết kiệm Năng lượng Tích hợp',
+    'solutions.subtitle': 'Giải pháp tiết kiệm năng lượng tích hợp cho lò nung lại và lò ngâm trong các nhà máy cán thép, được xây dựng dựa trên Mô hình Quản gia Năng lượng tiên phong cùng với Thép Jinnan.',
+    'solutions.processScope': 'Phạm vi Quy trình',
+    'solutions.processDesc': 'Giải pháp của chúng tôi giải quyết toàn bộ hành trình nhiệt của sản phẩm thép, đảm bảo tính nhất quán và hiệu quả từ đầu đến cuối.',
+    'solutions.scopeItem1': 'Lối ra máy đúc liên tục',
+    'solutions.scopeItem2': 'Tích hợp lò ngâm',
+    'solutions.scopeItem3': 'Lò nung lại dầm bước',
+    'solutions.scopeItem4': 'Lò nung lại đáy bước',
+    'solutions.scopeItem5': 'Đồng bộ hóa lối vào máy cán',
+    'solutions.painPointsTitle': 'Vấn đề & Chiến lược Giải pháp',
+    'solutions.tableHead1': 'Vấn đề',
+    'solutions.tableHead2': 'Mô-đun Giải pháp',
+    'solutions.tableHead3': 'Hướng đi Kỳ vọng',
+    'solutions.painPoint1Title': 'Tiêu thụ nhiên liệu cao',
+    'solutions.painPoint1Desc': 'Cách nhiệt không hiệu quả và kiểm soát đầu đốt không được tối ưu hóa dẫn đến hóa đơn gas/nhiên liệu quá mức.',
+    'solutions.solution1Title': 'Mái lò toàn sợi + tối ưu hóa đốt cháy',
+    'solutions.direction1_1': 'Tiêu thụ nhiên liệu: mục tiêu giảm >10% (Mái lò toàn sợi)',
+    'solutions.direction1_2': 'Tiêu thụ nhiên liệu: giảm >5% (Đốt cháy thông minh)',
+    'solutions.direction1Footer': 'Kết hợp các mục tiêu hiện đại hóa để đạt được các chuẩn mực hiệu suất cực cao T80.',
+    'solutions.painPoint2Title': 'Hao hụt oxy hóa cao',
+    'solutions.painPoint2Desc': 'Khí quyển lò quá mức dẫn đến hao hụt bề mặt kim loại.',
+    'solutions.solution2Title': 'Lớp phủ phi gốm + gia nhiệt thông minh',
+    'solutions.direction2_1': 'Hao hụt Oxy hóa: mục tiêu giảm 0.1%-0.5%',
+    'solutions.direction2_2': 'Năng suất: cải thiện +0.1-0.5 điểm phần trăm',
+    'solutions.direction2Footer': 'Đạt được các cấp độ hàng đầu trong nước dựa trên gia nhiệt thông minh đã được xác thực T80 và các lớp phủ chức năng.',
+    'solutions.painPoint3Title': 'Nhiệt độ lò không ổn định',
+    'solutions.painPoint3Desc': 'Chất lượng gia nhiệt không nhất quán ảnh hưởng đến giai đoạn cán tiếp theo.',
+    'solutions.solution3Title': 'Điều khiển gia nhiệt thông minh (AI)',
+    'solutions.direction3_1': 'Tỷ lệ đạt nhiệt độ ra lò: mục tiêu thiết kế >95%',
+    'solutions.direction3Footer': 'Gia nhiệt thông minh hỗ trợ AI nhằm giữ nhiệt độ ra lò nung lại trong các dải hẹp, giảm sai lệch chất lượng hạ nguồn.',
+    'solutions.painPoint4Title': 'Bảo trì thường xuyên',
+    'solutions.painPoint4Desc': 'Tuổi thọ ngắn của các lớp lót lò truyền thống dưới các chu kỳ nhiệt cực đoan.',
+    'solutions.solution4Title': 'Lớp lót & lớp phủ tăng cường',
+    'solutions.direction4_1': 'Khoảng thời gian bảo trì: kéo dài thêm một chu kỳ dừng lò chính (mục tiêu)',
+    'solutions.direction4Footer': 'Mái lò toàn sợi và các lớp phủ chức năng phi gốm được thiết kế để giảm mài mòn lớp lót và dừng lò ngoài kế hoạch; các khoảng thời gian thực tế phụ thuộc vào hồ sơ vận hành của bạn.',
+    'solutions.disclaimer': 'Tất cả các phạm vi mục tiêu đều dựa trên các chuẩn mực hiệu quả năng lượng cực cao T80 của Hiệp hội Sắt thép Trung Quốc và các trường hợp cải tạo lò nung lại tương tự. Hiệu suất thực tế sẽ được xác định sau khi đánh giá cơ sở tại nhà máy của bạn.',
+    'solutions.howItWorksTitle': 'Quy trình Hoạt động',
+    'solutions.step1Title': 'Thu thập Dữ liệu',
+    'solutions.step2Title': 'Mô phỏng Quy trình',
+    'solutions.step3Title': 'Hiện đại hóa',
+    'solutions.step4Title': 'Tối ưu hóa Trực tuyến',
+    'solutions.step5Title': 'Quản gia Dài hạn',
+
+    // Technologies Component
+    'tech.badge': 'Chuyên môn của Chúng tôi',
+    'tech.title': 'Các Công nghệ Cốt lõi cho Tiết kiệm Lò nung',
+    'tech.detail': 'Chi tiết Kỹ thuật',
+    'tech.kpi': 'Chỉ số Hiệu suất Chính:',
+    'tech.verifiedBadge': 'Đã Xác thực Chính thức: Lựa chọn "Hiệu suất Cực cao"',
+    'tech.verifiedTitle': 'Được Công nhận Toàn quốc',
+    'tech.verifiedAccent': 'Công nghệ "Hiệu suất Cực cao"',
+    'tech.verifiedDesc': 'Được Hiệp hội Sắt thép Trung Quốc (CISA) lựa chọn, đại diện cho hơn 50% công suất thép toàn cầu. Chỉ những công nghệ nghiêm ngặt, đã được chứng minh quy mô mới lọt vào danh sách chuẩn mực ngành này.',
+    'tech.viewDoc': 'Xem Tài liệu Chính thức & Danh mục Đầy đủ',
+    'tech.officialDocNum': 'Tài liệu Chính thức: CISA [2024] Số 185',
+    'tech.ipLabel': 'Sở hữu Trí tuệ Độc quyền',
+    'tech.ipTitle': 'Nhà Đổi mới Tiêu chuẩn Gốc',
+    'tech.ipQuote': '"South Technology nắm giữ các bằng sáng chế phát minh độc quyền cho các giải pháp niêm yết T80 này. Chúng tôi là những nhà đổi mới ban đầu đằng sau các tiêu chuẩn quốc gia này."',
+    'tech.dossierTitle': 'Hồ sơ Xác thực Kỹ thuật',
+    'tech.dossierSubtitle': 'Lựa chọn Hiệu suất Cực cao CISA T80 (2024)',
+    'tech.page1': '1. Thông báo Chính thức',
+    'tech.page2': '2. Danh mục Lựa chọn',
+
+    // Tech Cards
+    'tech.roof.title': 'Mái lò Toàn Sợi Gốm',
+    'tech.roof.desc1': '1. Hiệu suất Nhiên liệu: Tiết kiệm năng lượng >10% trong cùng điều kiện. Không cần sấy lò, giảm đáng kể chi phí nhiên liệu khởi động.',
+    'tech.roof.desc2': '2. Lắp ráp Nhanh: Các mô-đun được lắp ráp sẵn tại nhà máy; lắp đặt tại chỗ hoàn tất chỉ trong 2 ngày.',
+    'tech.roof.desc3': '3. Tuổi thọ Dài: Thiết kế bền bỉ đảm bảo tuổi thọ phục vụ trên 10 năm.',
+    'tech.roof.desc4': '4. An toàn & Ổn định: Nâng cao hiệu suất trong nhiệt độ cực cao, độ rung lớn và môi trường ăn mòn, giảm rủi ro vận hành & bảo trì.',
+    'tech.roof.kpis': ['Tiết kiệm Nhiên liệu >10%', 'Lắp ráp 2 Ngày', 'Tuổi thọ 10+ Năm', 'An toàn Vận hành'],
+
+    'tech.ai.title': 'Hệ thống Đốt Thông minh',
+    'tech.ai.desc1': '1. Truy xuất Toàn Quy trình: Theo dõi vật liệu toàn diện từ khi nạp liệu đến khi ra lò.',
+    'tech.ai.desc2': '2. Điều khiển Chính xác: Tiết kiệm >5% nhiên liệu và giảm hao hụt oxy hóa tương đối >10% thông qua quản lý nhiệt độ chính xác.',
+    'tech.ai.desc3': '3. Công nghệ Cốt lõi: Được thúc đẩy bởi mô hình hóa cơ chế, AI tự học và các thuật toán độc quyền tiên tiến.',
+    'tech.ai.kpis': ['Truy xuất Vật liệu', 'Tiết kiệm Nhiên liệu >5%', 'Giảm Hao hụt Oxy hóa', 'AI Tự học'],
+
+    'tech.coating.title': 'Lớp phủ Tiết kiệm Năng lượng Nhiệt độ cao',
+    'tech.coating.desc1': '1. Công thức Tiên tiến: Công thức "Phát xạ cao" độc đáo giải quyết vấn đề bong tróc và bong lớp phổ biến trong ngành.',
+    'tech.coating.desc2': '2. Hiệu quả Bền bỉ: Chịu được 1700 °C mà không suy giảm hiệu suất, tương thích với mọi vật liệu chịu lửa.',
+    'tech.coating.desc3': '3. Cải thiện Hiệu suất: Giảm nhiệt độ vỏ lò, tăng năng suất và kéo dài tuổi thọ vật liệu chịu lửa.',
+    'tech.coating.kpis': ['Công thức Phát xạ cao', 'Chịu nhiệt 1700 °C', 'Giảm Nhiệt độ Vỏ', 'Kéo dài Tuổi thọ Vật liệu'],
+
+    'tech.om.title': 'Nền tảng Quản lý Vận hành (O&M) Thông minh',
+    'tech.om.desc1': '1. Chẩn đoán Chuyên gia Từ xa: Hỗ trợ trực tuyến và cơ sở kiến thức chuyên môn khổng lồ để khắc phục sự cố nhanh chóng.',
+    'tech.om.desc2': '2. Dự đoán AI: Giám sát thời gian thực và phân tích lỗi dự đoán để tối ưu hóa quyết định bảo trì.',
+    'tech.om.desc3': '3. Thông tin từ Dữ liệu Lớn: Phân tích hiệu quả năng lượng chính xác và dữ liệu lớn để kiểm soát chi phí chiến lược.',
+    'tech.om.desc4': '4. Khả năng hiển thị Quy trình: Dự đoán lớp thoát carbon và hiển thị thời gian thực để giảm thiểu khuyết tật thép đặc biệt.',
+    'tech.om.kpis': ['Cơ sở Kiến thức Chuyên gia', 'Bảo trì Dự đoán', 'Dữ liệu Lớn Năng lượng', 'Kiểm soát Thoát Carbon'],
+
+    'tech.dossierNoticeHeader': 'Hiệp hội Sắt thép Trung Quốc',
+    'tech.dossierNoticeDocNum': 'CISA [2024] Số 185',
+    'tech.dossierNoticeTitle': 'Thông báo về việc Cập nhật và Công bố Danh sách các Công nghệ Hiệu suất Năng lượng Cực cao (T80)',
+    'tech.dossierNoticeGreeting': 'Gửi các đơn vị liên quan:',
+    'tech.dossierNoticeP1': 'Sau nhiều vòng đánh giá chuyên gia nghiêm ngặt, CISA theo đây công bố ấn bản năm 2024 của danh sách "T80". Danh sách này định nghĩa chuẩn mực quốc gia về hiệu suất lò nung công nghiệp tiên tiến và hiệu quả năng lượng.',
+    'tech.dossierNoticeP2': 'Nhấp để xem danh mục chứa các công nghệ 47, 51 và 52.',
+    'tech.dossierFlip': 'Chuyển sang Danh mục',
+
+    'tech.explorerTitle': 'Khám phá Danh mục Lựa chọn',
+    'tech.explorerDesc': 'Dưới đây là các mục cụ thể được công nhận trong danh mục CISA T80. Nhấp vào một mục để xem lộ trình chuyển đổi kỹ thuật chi tiết.',
+
+    'tech.item47Title': 'Điều khiển Chính xác "Cửa sổ Hẹp" cho Nhiệt độ Ra lò',
+    'tech.item47Benefit': 'Tối đa hóa độ đồng đều gia nhiệt và đảm bảo tính nhất quán nhiệt độ chính xác gần với giới hạn lý thuyết.',
+    'tech.item51Title': 'Lớp phủ Phát xạ cao để Tăng cường Bức xạ Nhiệt',
+    'tech.item51Benefit': 'Tăng cường bức xạ tường và hiệu suất truyền nhiệt thêm 10-15%, rút ngắn đáng kể chu kỳ gia nhiệt.',
+    'tech.item52Title': 'Cấu trúc Mái lò Toàn Sợi Gốm',
+    'tech.item52Benefit': 'Thiết kế vật liệu chịu lửa tiên tiến để giảm thiểu thất thoát nhiệt và giảm đáng kể quán tính nhiệt.',
+
+    // ProcessCoverage
+    'process.title': 'Từ Máy Đúc Liên tục đến Cửa ra Lò nung',
+    'process.subtitle': 'Khai phá Hiệu suất Ẩn trong toàn bộ quy trình gia nhiệt, không chỉ là cải tạo thiết bị đơn lẻ. Chúng tôi tối ưu hóa toàn bộ dòng nhiệt.',
+    'process.step1': 'Lối ra Máy Đúc Liên tục',
+    'process.step2': 'Lò Ngâm',
+    'process.step3': 'Lò Nung lại',
+    'process.step4': 'Lối vào Máy Cán',
+    'process.phase1': 'Giai đoạn 1',
+    'process.phase1Desc': 'Quản lý nhiệt độ đồng bộ tại lối ra máy đúc để bảo tồn ẩn nhiệt.',
+    'process.phase2': 'Giai đoạn 2',
+    'process.phase2Desc': 'Tích hợp dự án tiết kiệm năng lượng lò ngâm tiên tiến.',
+    'process.phase3': 'Giai đoạn 3',
+    'process.phase3Desc': 'Cải tạo niêm yết T80 cho thân lò nung lại chính.',
+    'process.phase4': 'Giai đoạn 4',
+    'process.phase4Desc': 'Tích hợp nhịp máy cán thông minh để tối ưu hóa nhiệt độ lối vào.',
+
+    // BenefitsSection
+    'benefits.badge': 'Hiệu suất Đã được Chứng minh',
+    'benefits.title': 'Kết quả Điển hình từ việc Nâng cấp Lò nung lại cấp T80',
+    'benefits.subtitle': 'Các chuẩn mực của chúng tôi dựa trên danh sách hiệu suất cực cao T80 của Hiệp hội Sắt thép Trung Quốc và kết quả thực tế từ dự án Thép Jinnan.',
+    'benefits.card1.label': 'Tiêu thụ Nhiên liệu',
+    'benefits.card1.desc': 'Phạm vi giảm điển hình lượng nhiên liệu sử dụng trên mỗi tấn thép sau khi nâng cấp toàn diện.',
+    'benefits.card2.label': 'Vảy Oxy hóa',
+    'benefits.card2.desc': 'Giảm đáng kể hao hụt oxy hóa bề mặt trong quá trình gia nhiệt lại.',
+    'benefits.card3.label': 'Cải thiện Năng suất',
+    'benefits.card3.desc': 'Tăng tổng thể sản phẩm có thể bán được thông qua quản lý nhiệt tối ưu.',
+    'benefits.card4.label': 'Thời gian Hoàn vốn',
+    'benefits.card4.desc': 'Khung thời gian ROI điển hình theo các hợp đồng quản gia năng lượng dựa trên hiệu suất.',
+    'benefits.footer.title': 'Hiệu suất chính xác phụ thuộc vào cơ sở và quy trình của từng nhà máy, nhưng các dự án của chúng tôi được thiết kế để đạt được các chuẩn mực cấp T80.',
+    'benefits.footer.badge': 'DANH SÁCH HIỆU SUẤT CỰC CAO',
+    'benefits.footer.standards': 'TUÂN THỦ TIÊU CHUẨN CISA T80',
+
+    // BusinessModel
+    'model.badge': 'Mô hình của Chúng tôi',
+    'model.title': 'Mô hình Chia sẻ Tiết kiệm',
+    'model.subtitle': 'Quản lý Năng lượng theo Hợp đồng (CEM)',
+    'model.quote': '"Hiệu suất Trước. Thanh toán Sau." Một triết lý đôi bên cùng có lợi đã được chứng minh trên hơn 300 dây chuyền sản xuất.',
+    'model.desc': 'Chúng tôi loại bỏ rào cản CAPEX. SOUTH TECHNOLOGY đầu tư vào công nghệ và thiết bị; chúng tôi chia sẻ giá trị được tạo ra từ các khoản tiết kiệm nhiên liệu đã được xác minh.',
+    'model.check1': 'Không cần Đầu tư Ban đầu',
+    'model.check2': 'Chia sẻ dựa trên Hiệu suất',
+    'model.check3': 'Quản gia Năng lượng Chìa khóa trao tay',
+    'model.step1.title': 'Đánh giá & Thu thập',
+    'model.step1.desc': 'Tiền đánh giá & thu thập dữ liệu để thiết lập chuẩn cơ sở cho lò nung lại và lò ngâm.',
+    'model.step2.title': 'Giải pháp Kỹ thuật',
+    'model.step2.desc': 'Mái lò toàn sợi, gia nhiệt thông minh, lớp phủ phát xạ cao và tích hợp điều khiển tiên tiến.',
+    'model.step3.title': 'Cải tạo & Hiệu chỉnh AI',
+    'model.step3.desc': 'Cải tạo tại chỗ, vận hành thử và tối ưu hóa quy trình hỗ trợ AI để đạt hiệu suất tối đa.',
+    'model.step4.title': 'Quản gia Dài hạn',
+    'model.step4.desc': 'Bảo trì liên tục và dịch vụ chuyên gia với khoản tiết kiệm năng lượng chung là thù lao.',
+
+    // SocialProof
+    'proof.badge': 'Sự Công nhận của Ngành',
+    'proof.title': 'Được Công nhận bởi các Cơ quan Ngành Thép Hàng đầu',
+    'proof.item1.title': 'Nằm trong Danh sách Hiệu suất Cực cao T80',
+    'proof.item1.desc': 'Nằm trong danh sách Các công nghệ hiệu suất năng lượng cực cao (T80) năm 2024 của Hiệp hội Sắt thép Trung Quốc cho mái lò toàn sợi, gia nhiệt thông minh và lớp phủ phát xạ cao.',
+    'proof.item2.title': 'Dự án Trình diễn Thép Jinnan',
+    'proof.item2.desc': 'Dự án được triển khai tại TẬP ĐOÀN THÉP JINNAN như một mô hình trình diễn xanh, ít carbon và chuẩn mực sử dụng tài nguyên hiệu quả cao.',
+    'proof.doc1': 'Danh mục Công nghệ Hiệu suất Cực cao T80',
+    'proof.doc2': 'Địa điểm Trình diễn Thép Jinnan',
+
+    // LogoWall
+    'wall.badge': 'Mạng lưới Đối tác Toàn cầu',
+    'wall.title': 'Tiếp sức cho các Người khổng lồ Ngành thép Thế giới',
+    'wall.subtitle_1': 'Triển khai thành công trên ',
+    'wall.subtitle_2': '300+ dây chuyền sản xuất',
+    'wall.subtitle_3': ' với tổng công suất hơn ',
+    'wall.subtitle_4': '200 Triệu Tấn/Năm',
+    'wall.footer': 'Bao gồm các tập đoàn công nghệ toàn cầu Cấp 1 và các đối tác dẫn đầu ngành tại địa phương',
+
+    // ContactForm
+    'contact.badge': 'Cơ hội Có hạn',
+    'contact.title': 'Nhận Đánh giá Tiềm năng ROI Miễn phí',
+    'contact.desc': 'Tìm hiểu chính xác mức tiết kiệm của bạn. Chúng tôi cung cấp đánh giá cơ sở toàn diện và dự báo ROI mà không tính phí trước.',
+    'contact.avail.head': 'Tình trạng Hiện tại',
+    'contact.avail.slot': 'CÒN 1 SUẤT',
+    'contact.avail.desc': 'Do tính chất thâm dụng vốn của mô hình, chúng tôi chỉ chấp nhận 2 dự án mới mỗi tháng. Còn 1 suất cho ',
+    'contact.feature1.title': 'Dựa trên Dữ liệu',
+    'contact.feature1.desc': 'Cơ sở được thiết lập thông qua nhật ký sản xuất thực tế của nhà máy.',
+    'contact.feature2.title': 'Phân tích Chuyên gia',
+    'contact.feature2.desc': 'Đánh giá kỹ thuật cấp T80 về hình học quy trình của bạn.',
+    'contact.success.title': 'Đã Yêu cầu Đánh giá!',
+    'contact.success.desc': 'Cảm ơn bạn. Một trong những quản gia năng lượng của chúng tôi sẽ liên hệ với bạn để thu thập dữ liệu sản xuất cần thiết cho đánh giá sơ bộ.',
+    'contact.success.btn': 'Gửi yêu cầu khác',
+    'contact.form.name': 'Họ và tên',
+    'contact.form.name_placeholder': 'Họ và tên của bạn',
+    'contact.form.role': 'Chức vụ',
+    'contact.form.role_placeholder': 'Chọn chức vụ của bạn...',
+    'contact.form.company': 'Công ty',
+    'contact.form.company_placeholder': 'Tên nhà máy thép / Tập đoàn',
+    'contact.form.region': 'Quốc gia / Khu vực',
+    'contact.form.region_placeholder': 'VD: Trung Quốc, Việt Nam, Brazil...',
+    'contact.form.email': 'Email Công việc',
+    'contact.form.email_placeholder': 'ten@congty.com',
+    'contact.form.phone': 'Điện thoại / WhatsApp (Không bắt buộc)',
+    'contact.form.production': 'Sản lượng Hàng năm',
+    'contact.form.production_placeholder': 'VD: 2.5 MTPA',
+    'contact.form.furnace': 'Loại Lò',
+    'contact.form.furnace_placeholder': 'Chọn loại lò...',
+    'contact.form.message': 'Tin nhắn (Không bắt buộc)',
+    'contact.form.message_placeholder': 'Thách thức cụ thể hoặc chi tiết quy trình...',
+    'contact.form.submit': 'Phân tích ROI của Tôi Ngay',
+    'contact.form.submitting': 'Đang Phân tích Dữ liệu...',
+    'contact.form.footer_1': 'Tham gia cùng hơn 15 nhà máy thép đã được tối ưu hóa bằng công nghệ T80 của chúng tôi.',
+    'contact.form.footer_2': 'Cam kết Bảo mật: Dữ liệu của bạn được bảo vệ bởi MNDA.',
+    'contact.role.plantManager': 'Giám đốc Nhà máy',
+    'contact.role.energyManager': 'Quản lý Năng lượng',
+    'contact.role.maintenanceManager': 'Quản lý Bảo trì',
+    'contact.role.other': 'Khác',
+    'contact.furnace.walkingBeam': 'Dầm bước',
+    'contact.furnace.walkingHearth': 'Đáy bước',
+    'contact.furnace.pusher': 'Đẩy',
+    'contact.furnace.other': 'Khác',
+    'tech.brief': 'Tóm tắt Kỹ thuật',
+    'tech.profile': 'Hồ sơ Kỹ thuật',
+    'tech.benchmarks': 'Chuẩn mực Kỹ thuật:',
+    'tech.tempPrecision': 'Độ chính xác Nhiệt độ',
+    'tech.intelligentRate': 'Tỷ lệ Thông minh',
+
+    // FAQ
+    'faq.badge': 'Góc nhìn Chuyên gia',
+    'faq.title': 'Hiệu suất Lò nung Công nghiệp',
+    'faq.desc': 'Hiểu rõ các sắc thái kỹ thuật của kiểm soát đốt cháy và cách nhiệt là chìa khóa cho ROI. Chúng tôi trả lời các câu hỏi kỹ thuật phổ biến nhất về cải tạo lò nung tại đây.',
+    'faq.specific': 'Bạn có câu hỏi kỹ thuật cụ thể?',
+    'faq.q1': 'Làm thế nào để tính toán hiệu suất lò nung lại?',
+    'faq.a1': 'Chúng tôi thực hiện tính toán cân bằng nhiệt toàn diện dựa trên giá trị nhiệt lượng nhiên liệu, nhiệt độ khói thải, hàm lượng oxy và tổn thất nhiệt qua vách. Đánh giá của chúng tôi xác định tỷ lệ phần trăm hiệu suất nhiệt chính xác và chỉ ra các khu vực cụ thể có tiềm năng thu hồi nhiệt.',
+    'faq.q2': 'Sự khác biệt giữa Lò dầm bước và Lò đẩy là gì?',
+    'faq.a2': 'Lò đẩy trượt thép trên các thanh trượt, có thể gây ra vết trượt và hư hỏng bề mặt. Lò dầm bước nâng và di chuyển vật liệu, giảm hư hỏng và cho phép gia nhiệt mặt dưới tốt hơn. Tuy nhiên, lò dầm bước có nhiều khe hở hơn, yêu cầu niêm kín và kiểm soát áp suất tiên tiến để duy trì hiệu suất cao.',
+    'faq.q3': 'Tôi có thể tiết kiệm bao nhiêu với đầu đốt tái sinh?',
+    'faq.a3': 'Đầu đốt tái sinh có thể thu hồi tới 80-90% nhiệt thải từ khói thải, làm nóng trước không khí đốt lên nhiệt độ rất cao. Thông thường, khách hàng thấy tiết kiệm nhiên liệu từ 30% đến 50% so với đầu đốt không khí lạnh và 10-15% so với các hệ thống thu hồi tiêu chuẩn.',
+    'faq.q4': 'Bạn có tuân thủ các tiêu chuẩn năng lượng công nghiệp không?',
+    'faq.a4': 'Có, các giải pháp của chúng tôi được thiết kế để giúp bạn đáp ứng các tiêu chuẩn Quản lý Năng lượng ISO 50001 và các quy định về môi trường địa phương liên quan đến khí thải NOx và CO2.',
+    'footer.energySteward': 'Mô hình Quản gia Năng lượng',
+    'footer.privacy': 'Quyền riêng tư',
+    'footer.terms': 'Điều khoản',
+    'footer.compliance': 'Tuân thủ T80',
+  },
+};
+
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [language, setLanguageState] = useState<Language>('en');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Detect language from URL
+    const isVietnamese = location.pathname.startsWith('/vi');
+    const detectedLang: Language = isVietnamese ? 'vi' : 'en';
+    setLanguageState(detectedLang);
+
+    // Also check localStorage
+    const savedLang = localStorage.getItem('language') as Language;
+    if (savedLang && (savedLang === 'en' || savedLang === 'vi')) {
+      if (savedLang !== detectedLang) {
+        // URL takes precedence over localStorage
+        localStorage.setItem('language', detectedLang);
+      }
+    }
+  }, [location.pathname]);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem('language', lang);
+  };
+
+  const switchLanguage = (lang: Language) => {
+    setLanguage(lang);
+
+    // Get current path without language prefix
+    let currentPath = location.pathname;
+
+    // Remove /vi prefix if it exists
+    if (currentPath.startsWith('/vi')) {
+      currentPath = currentPath.substring(3) || '/';
+    }
+
+    // Add /vi prefix if switching to Vietnamese
+    const newPath = lang === 'vi' ? `/vi${currentPath}` : currentPath;
+
+    // Navigate to the new path
+    navigate(newPath);
+  };
+
+  const t = (key: string): string => {
+    return translations[language][key as keyof typeof translations['en']] || key;
+  };
+
+  const l = (href: string): string => {
+    if (language === 'en') return href;
+    if (href.startsWith('/vi')) return href;
+    return href === '/' ? '/vi' : `/vi${href}`;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, l, switchLanguage }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};

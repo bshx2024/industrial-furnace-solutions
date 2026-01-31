@@ -1,10 +1,12 @@
- import React from 'react';
+import React from 'react';
 
 import Header from './components/Header';
 
 import Footer from './components/Footer';
 
 import { useLocation, Outlet } from 'react-router';
+
+import { LanguageProvider } from './contexts/LanguageContext';
 
 
 
@@ -46,25 +48,29 @@ const ScrollToHashElement = () => {
 
 
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 
     return (
 
-        <div className="font-sans antialiased text-gray-900 bg-white selection:bg-furnace-500 selection:text-white flex flex-col min-h-screen">
+        <LanguageProvider>
 
-            <ScrollToHashElement />
+            <div className="font-sans antialiased text-gray-900 bg-white selection:bg-furnace-500 selection:text-white flex flex-col min-h-screen">
 
-            <Header />
+                <ScrollToHashElement />
 
-            <main className="flex-grow">
+                <Header />
 
-                {children}
+                <main className="flex-grow">
 
-            </main>
+                    {children || <Outlet />}
 
-            <Footer />
+                </main>
 
-        </div>
+                <Footer />
+
+            </div>
+
+        </LanguageProvider>
 
     );
 

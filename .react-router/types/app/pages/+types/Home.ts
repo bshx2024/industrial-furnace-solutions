@@ -9,9 +9,9 @@ type Module = typeof import("../Home.js")
 
 export type Info = {
   parents: [Parent0],
-  id: "pages/Home"
+  id: "vi-home"
   file: "pages/Home.tsx"
-  path: "undefined"
+  path: "vi"
   params: {} & { [key: string]: string | undefined }
   module: Module
   loaderData: T.CreateLoaderData<Module>

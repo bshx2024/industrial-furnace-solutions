@@ -1,8 +1,10 @@
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-import { Menu, X, Flame } from 'lucide-react';
+import { Menu, X, Flame, Globe, ChevronDown } from 'lucide-react';
 
 import { Link, useLocation } from 'react-router';
+
+import { useLanguage, Language } from '../contexts/LanguageContext';
 
 
 
@@ -12,7 +14,13 @@ const Header: React.FC = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+
   const location = useLocation();
+
+  const { language, switchLanguage, t, l } = useLanguage();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
 
 
@@ -32,17 +40,48 @@ const Header: React.FC = () => {
 
 
 
+  useEffect(() => {
+
+    const handleClickOutside = (event: MouseEvent) => {
+
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+
+        setIsLangDropdownOpen(false);
+
+      }
+
+    };
+
+
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+
+  }, []);
+
+
+
   const navLinks = [
+    { name: t('nav.home'), href: l('/') },
+    { name: t('nav.solutions'), href: l('/solutions') },
+    { name: t('nav.caseStudies'), href: l('/hero-cases') },
+    { name: t('nav.about'), href: l('/about') },
+  ];
 
-    { name: 'Home', href: '/' },
 
-    { name: 'Solutions', href: '/solutions' },
 
-    { name: 'Case Studies', href: '/hero-cases' },
+  const languages: { code: Language; name: string; flag: string }[] = [
 
-    { name: 'About', href: '/about' },
+    { code: 'en', name: t('lang.english'), flag: '🇬🇧' },
+
+    { code: 'vi', name: t('lang.vietnamese'), flag: '🇻🇳' },
 
   ];
+
+
+
+  const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
 
 
 
@@ -60,7 +99,7 @@ const Header: React.FC = () => {
 
         {/* Logo */}
 
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to={l('/')} className="flex items-center gap-2 group">
 
           <div className="bg-furnace-600 p-2 rounded text-white group-hover:bg-furnace-500 transition-colors">
 
@@ -112,15 +151,78 @@ const Header: React.FC = () => {
 
           ))}
 
-          <a
 
-            href="/#assessment"
+
+          {/* Language Dropdown */}
+
+          <div className="relative" ref={dropdownRef}>
+
+            <button
+
+              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+
+              className="flex items-center gap-2 text-gray-300 hover:text-furnace-500 transition-colors border border-gray-700 hover:border-furnace-500 px-3 py-2 rounded"
+
+            >
+
+              <Globe size={18} />
+
+              <span className="text-sm font-semibold uppercase">{currentLanguage.flag}</span>
+
+              <ChevronDown size={16} className={`transition-transform ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
+
+            </button>
+
+
+
+            {isLangDropdownOpen && (
+
+              <div className="absolute right-0 mt-2 w-48 bg-industrial-800 border border-gray-700 rounded shadow-xl z-50">
+
+                {languages.map((lang) => (
+
+                  <button
+
+                    key={lang.code}
+
+                    onClick={() => {
+
+                      switchLanguage(lang.code);
+
+                      setIsLangDropdownOpen(false);
+
+                    }}
+
+                    className={`w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-industrial-700 transition-colors ${language === lang.code ? 'bg-industrial-700 text-furnace-500' : 'text-gray-300'
+
+                      }`}
+
+                  >
+
+                    <span className="text-xl">{lang.flag}</span>
+
+                    <span className="text-sm font-semibold">{lang.name}</span>
+
+                  </button>
+
+                ))}
+
+              </div>
+
+            )}
+
+          </div>
+
+
+
+          <a
+            href={l('/#assessment')}
 
             className="bg-furnace-600 hover:bg-furnace-500 text-white px-6 py-2 rounded font-bold text-sm uppercase tracking-wide transition-all transform hover:scale-105 shadow-lg shadow-furnace-600/30"
 
           >
 
-            Free Assessment
+            {t('nav.freeAssessment')}
 
           </a>
 
@@ -176,9 +278,58 @@ const Header: React.FC = () => {
 
             ))}
 
-            <a
 
-              href="/#assessment"
+
+            {/* Mobile Language Selector */}
+
+            <div className="border-t border-gray-800 pt-4">
+
+              <div className="flex flex-col gap-2">
+
+                <div className="flex items-center gap-2 text-gray-400 text-xs uppercase mb-2">
+
+                  <Globe size={14} />
+
+                  <span>Language</span>
+
+                </div>
+
+                {languages.map((lang) => (
+
+                  <button
+
+                    key={lang.code}
+
+                    onClick={() => {
+
+                      switchLanguage(lang.code);
+
+                      setIsMobileMenuOpen(false);
+
+                    }}
+
+                    className={`flex items-center gap-3 px-3 py-2 rounded ${language === lang.code ? 'bg-industrial-700 text-furnace-500' : 'text-gray-300 hover:bg-industrial-800'
+
+                      }`}
+
+                  >
+
+                    <span className="text-xl">{lang.flag}</span>
+
+                    <span className="text-sm font-semibold">{lang.name}</span>
+
+                  </button>
+
+                ))}
+
+              </div>
+
+            </div>
+
+
+
+            <a
+              href={l('/#assessment')}
 
               onClick={() => setIsMobileMenuOpen(false)}
 
@@ -186,7 +337,7 @@ const Header: React.FC = () => {
 
             >
 
-              Free Assessment
+              {t('nav.freeAssessment')}
 
             </a>
 
