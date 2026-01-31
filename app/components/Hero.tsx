@@ -174,7 +174,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* TRUST SIGNALS - INFINITE MARQUEE */}
-        <div className="flex flex-col items-start gap-4 w-full overflow-hidden border-t border-white/5 pt-8 opacity-100 transition-all duration-700">
+        <div className="flex flex-col items-start gap-4 w-full overflow-hidden border-t border-white/5 pt-16 opacity-100 transition-all duration-700">
           <div className="flex items-center gap-4">
             <span className="text-[10px] uppercase font-black tracking-[0.2em] text-gray-400">{t('calc.trusted')}</span>
             <div className="flex items-center gap-2 bg-furnace-600/10 text-furnace-500 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border border-furnace-500/20">
@@ -200,16 +200,16 @@ const Hero: React.FC = () => {
 
             <div className="border-r border-white/5 lg:pr-8 last:border-r-0">
               <div className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2">
-                <ShieldCheck size={12} className="text-green-500" /> {t('stat.co2')}
+                <ShieldCheck size={12} className="text-green-500" /> {t('stat.oxidation')}
               </div>
-              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">7-15<span className="text-xs ml-0.5 text-gray-500">%</span></div>
+              <div className="text-2xl md:text-3xl font-mono text-white font-bold tracking-tighter">5-15<span className="text-xs ml-0.5 text-gray-500">%</span></div>
             </div>
 
             <div className="border-r border-white/5 lg:pr-8 last:border-r-0 text-white/90">
               <div className="text-[10px] text-furnace-500 font-bold uppercase tracking-[0.15em] mb-1.5 flex items-center justify-center lg:justify-start gap-2 font-black">
                 <Gauge size={12} /> {t('stat.temp')}
               </div>
-              <div className="text-xl md:text-2xl font-mono text-white font-bold tracking-tighter">1,150-1,250<span className="text-xs ml-0.5 text-gray-500"> °C</span></div>
+              <div className="text-xl md:text-2xl font-mono text-white font-bold tracking-tighter">280-350<span className="text-xs ml-0.5 text-gray-500"> °C</span></div>
             </div>
 
             <div className="border-r border-white/5 lg:pr-8 last:border-r-0">

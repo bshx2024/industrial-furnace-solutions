@@ -20,7 +20,7 @@ const BenefitCard: React.FC<{ icon: React.ReactNode; range: string; label: strin
 );
 
 const BenefitsSection: React.FC = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
 
     return (
         <section className="py-24 bg-white">
@@ -38,13 +38,13 @@ const BenefitsSection: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <BenefitCard
                         icon={<TrendingDown size={32} />}
-                        range="7-15%"
+                        range={`${language === 'vi' ? 'GIẢM ' : ''}7-15%`}
                         label={t('benefits.card1.label')}
                         description={t('benefits.card1.desc')}
                     />
                     <BenefitCard
                         icon={<Percent size={32} />}
-                        range="5-15%"
+                        range={`${language === 'vi' ? 'GIẢM ' : ''}5-15%`}
                         label={t('benefits.card2.label')}
                         description={t('benefits.card2.desc')}
                     />

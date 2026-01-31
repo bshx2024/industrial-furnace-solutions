@@ -31,7 +31,7 @@ TRANSLATIONS = {
     
     # ==================== CTA 按钮 ====================
     "Free Assessment": "Đánh giá miễn phí",
-    "Get Free ROI Audit": "Nhận Đánh giá ROI Miễn phí",
+    "Get Free ROI Audit": "NHẬN ĐÁNH GIÁ ROI MIỄN PHÍ",
     "View Case Studies": "Xem Dự án Tiêu biểu",
     "Calculate My Full ROI": "Tính toán ROI đầy đủ",
     "Learn More": "Tìm hiểu thêm",
@@ -46,7 +46,7 @@ TRANSLATIONS = {
     "We invest, you save.": "Chúng tôi đầu tư, bạn tiết kiệm.",
     "typical 7-15% fuel consumption reduction": "giảm tiêu thụ nhiên liệu điển hình 7-15%",
     "in your reheating furnaces": "trong lò nung lại của bạn",
-    "with our T80-validated extreme efficiency tech": "với công nghệ hiệu suất cực cao được xác thực chuẩn T80",
+    "with our T80-validated extreme efficiency tech": "với công nghệ hiệu suất cực cao được kiểm chứng thực tế bởi T80",
     "paid for entirely by verified energy savings.": "chi trả hoàn toàn bằng khoản tiết kiệm năng lượng đã được xác minh.",
     
     "Optimized for Walking Beam &amp; Walking Hearth Furnaces": "Tối ưu hóa cho Lò dầm bước & Lò đáy bước",
@@ -75,7 +75,7 @@ TRANSLATIONS = {
     # ==================== 统计数据 ====================
     "Typical Fuel Saving": "Tiết kiệm nhiên liệu điển hình",
     "CO2 Reduction (Est.)": "Giảm CO2 (Ước tính)",
-    "Zone Temp. (Typical)": "Nhiệt độ vùng (Điển hình)",
+    "Zone Temp. (Typical)": "NHIỆT ĐỘ VỎ LÒ (ĐIỂN HÌNH)",
     "Flue Oxygen (Example)": "Oxy khí thải (Ví dụ)",
     "Control Status": "Trạng thái điều khiển",
     "Optimized": "Tối ưu hóa",
@@ -90,7 +90,7 @@ TRANSLATIONS = {
     
     " provides Zero CAPEX reheating furnace optimization using ": 
         " cung cấp tối ưu hóa lò nung lại Zero CAPEX sử dụng ",
-    "CISA T80 verified technologies": "công nghệ được xác thực chuẩn CISA T80",
+    "CISA T80 verified technologies": "công nghệ được kiểm chứng thực tế bởi CISA T80",
     "like narrow window temperature control and full-fiber roofs, helping steel mills reduce fuel consumption by ": 
         "như kiểm soát nhiệt độ cửa sổ hẹp và mái lò toàn sợi gốm, giúp các nhà máy thép giảm tiêu thụ nhiên liệu ",
     
@@ -101,6 +101,9 @@ TRANSLATIONS = {
     "continuous caster exit": "lối ra máy đúc liên tục",
     " to ": " đến ",
     "reheating furnace exit": "lối ra lò nung lại",
+    
+    "Rolling Mill Entry": "Máy Cán",
+    "CO2 Reduction (Est.)": "VẢY ÔXY HÓA",
     
     "Maximize Heating Capacity": "Tăng tối đa Công suất Gia nhiệt",
     "Eliminate bottlenecks in the reheating process to ensure peak production throughput.": 

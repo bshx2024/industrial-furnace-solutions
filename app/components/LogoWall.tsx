@@ -23,15 +23,7 @@ const LogoWall: React.FC = () => {
                         </span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-heading font-bold text-slate-900 mb-8 leading-[1.1]">
-                        {language === 'en' ? (
-                            <>
-                                Powering the World's <span className="text-furnace-600">Steel Giants</span>
-                            </>
-                        ) : (
-                            <>
-                                Tiếp sức cho các <span className="text-furnace-600">Người khổng lồ Ngành thép</span> Thế giới
-                            </>
-                        )}
+                        {t('wall.title')}
                     </h2>
                     <p className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
                         {t('wall.subtitle_1')}
