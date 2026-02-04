@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
             </Link>
             <p className="text-sm mb-6 leading-relaxed">
               {language === 'vi'
-                ? 'Dẫn đầu quá trình chuyển đổi sang hiệu năng năng lượng cực cao trong ngành thép thông qua kỹ thuật nhiệt chuẩn T80 và tối ưu hóa AI.'
+                ? 'Dẫn đầu sự chuyển đổi sang hiệu quả năng lượng cực cao trong ngành thép thông qua kỹ thuật nhiệt tiên tiến và tối ưu hóa AI.'
                 : 'Leading the transition to extreme energy efficiency in the steel industry through T80-listed thermal engineering and AI optimization.'}
             </p>
             <div className="flex gap-4">
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-industrial-800 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
           <p className="mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} ECOREHEATING. {t('calc.verified').toUpperCase()}.
+            &copy; {new Date().getFullYear()} ECOREHEATING. {t('calc.verified').toUpperCase()}
           </p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">{t('footer.privacy')}</a>
@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 };
 

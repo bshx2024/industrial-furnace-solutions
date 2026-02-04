@@ -4,8 +4,53 @@ import { Link } from 'react-router';
 import SEO from '../components/SEO';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const translateProjectDetail = (detail: string, lang: string) => {
+    if (lang !== 'vi') return detail;
+
+    let translated = detail;
+
+    // Ordered replacements to avoid mangling
+    translated = translated.replace(/BFG Regenerative Walking Beam Furnace/g, 'Lò nung kiểu thanh bước tái sinh khí cao dung');
+    translated = translated.replace(/BFG Regenerative Reheating Furnace/g, 'Lò nung lại tái sinh khí cao dung');
+    translated = translated.replace(/BFG Regenerative Furnace/g, 'Lò nung tái sinh khí cao dung');
+    translated = translated.replace(/Regenerative Walking Beam Furnace/g, 'Lò nung kiểu thanh bước tái sinh');
+    translated = translated.replace(/Regenerative Reheating Furnace/g, 'Lò nung lại tái sinh');
+    translated = translated.replace(/Regenerative Furnace/g, 'Lò nung tái sinh');
+    translated = translated.replace(/Side Charge\/Discharge Furnace/g, 'Lò nung nạp/ra phôi bên hông');
+    translated = translated.replace(/Dual High Speed Bar/g, 'Thép thanh tốc độ cao đôi');
+    translated = translated.replace(/Dual Fuel \(Gas\/Natural Gas\)/g, 'Nhiên liệu kép (Khí lò/Khí tự nhiên)');
+    translated = translated.replace(/Oil\/Gas Dual Fuel/g, 'Nhiên liệu kép Dầu/Khí');
+    translated = translated.replace(/High Efficiency Regenerative Furnace/g, 'Lò nung tái sinh hiệu suất cao');
+    translated = translated.replace(/Coal\/Gas Composite Reheating Furnace/g, 'Lò nung lại hỗn hợp Than/Khí');
+    translated = translated.replace(/Coal\/Gas Regenerative Reheating Furnace/g, 'Lò nung lại tái sinh Than/Khí');
+    translated = translated.replace(/Natural Gas Regenerative Reheating Furnace/g, 'Lò nung lại tái sinh Khí tự nhiên');
+    translated = translated.replace(/Natural Gas Regenerative Furnace/g, 'Lò nung tái sinh Khí tự nhiên');
+    translated = translated.replace(/Coal Bed Methane Reheating Furnace/g, 'Lò nung lại Khí mê-tan mỏ than');
+    translated = translated.replace(/Producer Gas to Natural Gas Retrofit/g, 'Cải tạo khí than sang khí tự nhiên');
+    translated = translated.replace(/Producer Gas Single Regenerative Furnace/g, 'Lò nung tái sinh đơn khí than');
+
+    // Simple terms
+    translated = translated.replace(/Reheating Furnace/g, 'Lò nung lại');
+    translated = translated.replace(/Strip/g, 'thép dải');
+    translated = translated.replace(/Cold Charging/g, 'nạp phôi nguội');
+    translated = translated.replace(/Furnace/g, 'Lò nung');
+    translated = translated.replace(/Walking Beam/g, 'kiểu thanh bước');
+    translated = translated.replace(/Dual Fuel/g, 'Nhiên liệu kép');
+    translated = translated.replace(/Natural Gas/g, 'Khí tự nhiên');
+    translated = translated.replace(/Coal\/Gas/g, 'Than/Khí');
+    translated = translated.replace(/High Speed Bar/g, 'Thép thanh tốc độ cao');
+
+    // "t/h" logic - wrap with "công suất"
+    translated = translated.replace(/(\d+)\s*t\/h/g, 'công suất $1 t/h');
+
+    // Normalizing
+    translated = translated.replace(/\s+/g, ' ').trim();
+
+    return translated;
+};
+
 const PerformanceList: React.FC = () => {
-    const { t, l } = useLanguage();
+    const { t, l, language } = useLanguage();
 
     const sections = [
         {
@@ -153,7 +198,7 @@ const PerformanceList: React.FC = () => {
                                                 )}
                                             </div>
                                             <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-                                                {project.detail}
+                                                {translateProjectDetail(project.detail, language)}
                                             </p>
                                             <div className="flex items-center gap-2 text-furnace-600 font-bold text-xs group/link cursor-pointer pt-4 border-t border-slate-50">
                                                 {t('perf.verified')} <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />

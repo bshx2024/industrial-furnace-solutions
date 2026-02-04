@@ -180,7 +180,7 @@ const Technologies: React.FC = () => {
                   className="w-full h-auto transform group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                 />
                 <div className="absolute top-4 right-4 bg-furnace-600 text-white px-3 py-1.5 rounded shadow-lg flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
-                  <ShieldCheck size={14} /> T80 Verified
+                  <ShieldCheck size={14} /> {t('calc.verified')}
                 </div>
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
                   <div className="bg-white/95 p-4 rounded-full shadow-2xl opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100 duration-500">
