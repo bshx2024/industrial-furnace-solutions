@@ -13,6 +13,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <head>
+                {/* Global Data Layer Initialization */}
+                <script dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        window.gtag = gtag; // Explicitly attach to window
+                    `
+                }} />
+
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 {/* SEO Metadata */}
