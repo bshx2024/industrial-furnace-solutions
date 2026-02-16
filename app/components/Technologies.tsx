@@ -15,6 +15,7 @@ const TechCard: React.FC<TechCardProps> = ({ id, title, description, keywords, i
           <img
             src={imageSrc}
             alt={title}
+            loading="lazy"
             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-industrial-900/80 via-transparent to-transparent opacity-60"></div>
@@ -177,6 +178,7 @@ const Technologies: React.FC = () => {
                 <img
                   src="/cisa-cover.jpg"
                   alt="CISA T80 Certification Document"
+                  loading="lazy"
                   className="w-full h-auto transform group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                 />
                 <div className="absolute top-4 right-4 bg-furnace-600 text-white px-3 py-1.5 rounded shadow-lg flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
@@ -317,7 +319,7 @@ const Technologies: React.FC = () => {
                 <div className="absolute inset-0 bg-slate-100/50 pointer-events-none"></div>
 
                 {currentPage === 0 ? (
-                  <img src="/cisa-cover.jpg" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-left duration-700" alt="CISA T80 Verified Technology Certificate Cover" />
+                  <img src="/cisa-cover.jpg" loading="lazy" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-left duration-700" alt="CISA T80 Verified Technology Certificate Cover" />
                 ) : (
                   <div className="relative h-[95%] w-[95%] flex flex-col items-center justify-center">
                     {activeDetail === 47 ? (

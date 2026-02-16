@@ -40,6 +40,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Meta />
                 <Links />
 
+                {/* Performance: Preload hero background poster */}
+                <link rel="preload" as="image" href="/hero-bg.png" />
+
                 {/* Global Data Layer Initialization */}
                 <script dangerouslySetInnerHTML={{
                     __html: `

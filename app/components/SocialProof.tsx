@@ -48,13 +48,13 @@ const SocialProof: React.FC = () => {
               <div className="absolute inset-0 bg-industrial-900/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 backdrop-blur-sm">
                 <span className="text-xs font-bold uppercase tracking-widest px-4 text-center">{t('proof.doc1')}</span>
               </div>
-              <img src="/t80-doc.png" alt="CISA T80 Verified Technology Catalogue" className="w-full h-full object-cover rounded-xl" />
+              <img src="/t80-doc.png" alt="CISA T80 Verified Technology Catalogue" loading="lazy" className="w-full h-full object-cover rounded-xl" />
             </div>
             <div className="bg-white/10 rounded-2xl p-2 aspect-[3/4] border border-white/10 relative overflow-hidden group translate-y-8 shadow-2xl">
               <div className="absolute inset-0 bg-industrial-900/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 backdrop-blur-sm">
                 <span className="text-xs font-bold uppercase tracking-widest px-4 text-center">{t('proof.doc2')}</span>
               </div>
-              <img src="/jinnan-site.png" alt="EcoReheating Implementation at Jinnan Steel Site" className="w-full h-full object-cover rounded-xl" />
+              <img src="/jinnan-site.png" alt="EcoReheating Implementation at Jinnan Steel Site" loading="lazy" className="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
