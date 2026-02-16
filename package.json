@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
+    "vercel-build": "react-router build",
     "lint": "react-router typegen && tsc",
     "start": "react-router-serve ./build/server/index.js",
     "preview": "vite preview"
