@@ -43,3 +43,4 @@ dist-ssr
 .agent/
 
 build
+.vite-react-ssg-temp
