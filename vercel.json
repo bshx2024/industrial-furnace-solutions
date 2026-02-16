@@ -1,5 +1,5 @@
 {
-    "outputDirectory": "build/client",
     "version": 2,
-    "framework": "vite"
+    "cleanUrls": true,
+    "description": "Vercel SSR migration build fix - React Router v7"
 }
