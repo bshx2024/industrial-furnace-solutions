@@ -1,5 +1,0 @@
-{
-    "version": 2,
-    "cleanUrls": true,
-    "description": "Vercel SSR migration build fix - React Router v7"
-}
