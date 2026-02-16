@@ -35,6 +35,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# React Router v7
+.react-router
+.vercel
+
 # AI Agent
 .agent/
 

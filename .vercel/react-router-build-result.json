@@ -20,7 +20,7 @@
       "vi-hero-cases": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "vi-case-studies": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "vi-about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/sitemap[.]xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+      "routes/sitemap.xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
     },
     "routes": {
       "root": {
@@ -119,10 +119,10 @@
           "runtime": "nodejs"
         }
       },
-      "routes/sitemap[.]xml": {
-        "id": "routes/sitemap[.]xml",
+      "routes/sitemap.xml": {
+        "id": "routes/sitemap.xml",
         "parentId": "root",
-        "file": "app/routes/sitemap[.]xml.ts",
+        "file": "app/routes/sitemap.xml.ts",
         "path": "sitemap.xml",
         "config": {
           "runtime": "nodejs"
@@ -203,10 +203,10 @@
         "file": "pages/AboutContact.tsx",
         "path": "vi/about"
       },
-      "routes/sitemap[.]xml": {
-        "id": "routes/sitemap[.]xml",
+      "routes/sitemap.xml": {
+        "id": "routes/sitemap.xml",
         "parentId": "root",
-        "file": "routes/sitemap[.]xml.ts",
+        "file": "routes/sitemap.xml.ts",
         "path": "sitemap.xml"
       }
     },
