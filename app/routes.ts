@@ -13,5 +13,5 @@ export default [
     route("vi/hero-cases", "pages/HeroCases.tsx", { id: "vi-hero-cases" }),
     route("vi/case-studies", "pages/CaseStudies.tsx", { id: "vi-case-studies" }),
     route("vi/about", "pages/AboutContact.tsx", { id: "vi-about" }),
-    route("sitemap.xml", "routes/sitemap.xml.ts"),
+    route("sitemap.xml", "routes/sitemap.ts"),
 ] satisfies RouteConfig;
