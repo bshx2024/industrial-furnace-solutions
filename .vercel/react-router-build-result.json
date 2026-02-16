@@ -123,7 +123,7 @@
         "id": "routes/sitemap[.]xml",
         "parentId": "root",
         "file": "app/routes/sitemap[.]xml.ts",
-        "path": "sitemap[.]xml",
+        "path": "sitemap.xml",
         "config": {
           "runtime": "nodejs"
         }
@@ -207,7 +207,7 @@
         "id": "routes/sitemap[.]xml",
         "parentId": "root",
         "file": "routes/sitemap[.]xml.ts",
-        "path": "sitemap[.]xml"
+        "path": "sitemap.xml"
       }
     },
     "serverBuildFile": "index.js",
