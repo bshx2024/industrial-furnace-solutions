@@ -103,6 +103,11 @@ export const translations = {
     'about.getInTouchDesc': "Whether you're looking for an energy audit, technical consultation, or partnership opportunities, our experts are ready to assist.",
     'about.globalOps': 'Global Operations',
     'about.globalOpsDesc': 'Headquartered in Shanghai, China, with a global engineering hub serving steel mills across Asia and beyond.',
+    'about.integrity': 'Integrity',
+    'about.innovation': 'Innovation',
+    'about.success': 'Shared Success',
+    'about.dedication': 'Dedication',
+    'about.ipTitle': 'Intellectual Property & Certifications',
 
     // Solutions Page
     'solutions.title': 'Integrated Energy-Saving Solutions',
@@ -645,8 +650,8 @@ export const translations = {
     'about.integrity': 'Chính trực',
     'about.innovation': 'Đổi mới',
     'about.success': 'Thành công Chung',
-    'about.dedication': 'Tận tụy',
-    'about.ipTitle': 'Sở hữu Trí tuệ Cốt lõi & Danh mục Bằng sáng chế Toàn cầu',
+    'about.dedication': 'Tận tâm',
+    'about.ipTitle': 'Sở hữu Trí tuệ & Chứng nhận',
     'about.advantage1Title': 'Liên minh Chiến lược',
     'about.advantage1Desc': 'Được hỗ trợ bởi Dongming Green Energy mang lại nguồn vốn mạnh mẽ, đảm bảo triển khai dự án không rủi ro cho các tập đoàn thép quy mô lớn.',
     'about.advantage2Title': 'Tầm nhìn Toàn cầu',
