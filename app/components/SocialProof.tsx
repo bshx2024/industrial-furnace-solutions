@@ -19,7 +19,7 @@ const SocialProof: React.FC = () => {
           <div className="space-y-8">
             <div className="flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-furnace-500/30 transition-all group">
               <div className="bg-furnace-600/10 p-4 rounded-xl text-furnace-500 group-hover:bg-furnace-600 group-hover:text-white transition-all">
-                < Award size={32} />
+                <Award size={32} />
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2">{t('proof.item1.title')}</h4>
