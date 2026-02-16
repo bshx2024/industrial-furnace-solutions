@@ -1,8 +1,7 @@
 import type { Config } from "@react-router/dev/config";
+import { vercelPreset } from "@vercel/react-router/vite";
 
 export default {
-    ssr: false, // Set to false for full static site generation (SSG)
-    async prerender() {
-        return ["/", "/solutions", "/hero-cases", "/case-studies", "/about"];
-    },
+    ssr: true,
+    presets: [vercelPreset()],
 } satisfies Config;

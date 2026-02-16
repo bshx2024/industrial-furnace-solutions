@@ -8,18 +8,43 @@ import BusinessModel from '../components/BusinessModel';
 import SocialProof from '../components/SocialProof';
 import LogoWall from '../components/LogoWall';
 import ContactForm from '../components/ContactForm';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../contexts/LanguageContext';
+import type { MetaFunction } from 'react-router';
+
+export const meta: MetaFunction = ({ location }) => {
+    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+
+    const organizationSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "EcoReheating",
+        "url": "https://www.ecoreheating.com",
+        "description": "Zero CAPEX reheating furnace optimization using CISA T80 verified technologies",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Sales",
+            "email": "contact@ecoreheating.com"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Shanghai",
+            "addressCountry": "CN"
+        }
+    };
+
+    return [
+        { title: `${t['seo.home.title']} | EcoReheating` },
+        { name: "description", content: t['seo.home.desc'] },
+        {
+            "script:ld+json": organizationSchema,
+        },
+    ];
+};
 
 const Home: React.FC = () => {
-    const { t } = useLanguage();
-
     return (
         <div className="bg-white">
-            <SEO
-                title={t('seo.home.title')}
-                description={t('seo.home.desc')}
-            />
             <Hero />
             <ProjectPositioning />
             <Technologies />

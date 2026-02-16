@@ -1,18 +1,37 @@
 import React from 'react';
 import ContactForm from '../components/ContactForm';
 import { Users, Globe, TrendingUp } from 'lucide-react';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, translations } from '../contexts/LanguageContext';
+import type { MetaFunction } from 'react-router';
+
+export const meta: MetaFunction = ({ location }) => {
+    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+
+    const aboutSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "EcoReheating",
+            "description": t['about.subtitle']
+        }
+    };
+
+    return [
+        { title: `${t['about.title']} | EcoReheating` },
+        { name: "description", content: t['about.subtitle'] },
+        {
+            "script:ld+json": aboutSchema,
+        }
+    ];
+};
 
 const AboutContact: React.FC = () => {
-    const { t, l } = useLanguage();
+    const { t } = useLanguage();
 
     return (
         <div className="bg-white">
-            <SEO
-                title={t('about.title')}
-                description={t('about.subtitle')}
-            />
 
             {/* Header */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white">
@@ -54,7 +73,7 @@ const AboutContact: React.FC = () => {
                                 <div className="relative group/img overflow-hidden rounded-2xl shadow-lg border border-slate-100">
                                     <img
                                         src="/fcs-signing.jpg"
-                                        alt="Strategic Alliance 2014"
+                                        alt="Strategic Alliance signing ceremony between FCS and EcoReheating in 2014"
                                         className="h-48 w-full object-cover grayscale hover:grayscale-0 transition-all duration-700 transform hover:scale-105"
                                     />
                                 </div>

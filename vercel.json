@@ -1,9 +1,5 @@
 {
     "outputDirectory": "build/client",
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+    "version": 2,
+    "framework": "vite"
 }

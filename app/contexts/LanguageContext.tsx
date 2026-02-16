@@ -13,7 +13,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const translations = {
+export const translations = {
   en: {
     // SEO
     'seo.home.title': 'Zero CAPEX Reheating Furnace Efficiency',
@@ -906,30 +906,16 @@ const translations = {
   },
 };
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('en');
+export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({ children, initialLanguage }) => {
+  const [language, setLanguageState] = useState<Language>(initialLanguage || 'en');
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    // Detect language from URL
-    const isVietnamese = location.pathname.startsWith('/vi');
-    const detectedLang: Language = isVietnamese ? 'vi' : 'en';
-    setLanguageState(detectedLang);
-
-    // Also check localStorage
-    const savedLang = localStorage.getItem('language') as Language;
-    if (savedLang && (savedLang === 'en' || savedLang === 'vi')) {
-      if (savedLang !== detectedLang) {
-        // URL takes precedence over localStorage
-        localStorage.setItem('language', detectedLang);
-      }
-    }
-  }, [location.pathname]);
-
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('language', lang);
+    }
   };
 
   const switchLanguage = (lang: Language) => {

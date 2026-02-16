@@ -49,31 +49,16 @@ const ScrollToHashElement = () => {
 
 
 const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-
     return (
-
-        <LanguageProvider>
-
-            <div className="font-sans antialiased text-gray-900 bg-white selection:bg-furnace-500 selection:text-white flex flex-col min-h-screen">
-
-                <ScrollToHashElement />
-
-                <Header />
-
-                <main className="flex-grow">
-
-                    {children || <Outlet />}
-
-                </main>
-
-                <Footer />
-
-            </div>
-
-        </LanguageProvider>
-
+        <div className="font-sans antialiased text-gray-900 bg-white selection:bg-furnace-500 selection:text-white flex flex-col min-h-screen">
+            <ScrollToHashElement />
+            <Header />
+            <main className="flex-grow">
+                {children || <Outlet />}
+            </main>
+            <Footer />
+        </div>
     );
-
 };
 
 

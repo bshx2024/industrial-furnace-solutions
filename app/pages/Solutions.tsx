@@ -1,17 +1,22 @@
 import React from 'react';
 import { CheckCircle2, AlertTriangle, Lightbulb } from 'lucide-react';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, translations } from '../contexts/LanguageContext';
+import type { MetaFunction } from 'react-router';
+
+export const meta: MetaFunction = ({ location }) => {
+    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+    return [
+        { title: `${t['solutions.title']} | EcoReheating` },
+        { name: "description", content: t['solutions.subtitle'] },
+    ];
+};
 
 const Solutions: React.FC = () => {
     const { t, l } = useLanguage();
 
     return (
         <div className="bg-white">
-            <SEO
-                title={t('solutions.title')}
-                description={t('solutions.subtitle')}
-            />
 
             {/* Page Header */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white">

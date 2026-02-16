@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { ShieldCheck, TrendingDown, Layers, Zap, X, FileText, ChevronRight, Globe, Info, Search } from 'lucide-react';
 import { Link } from 'react-router';
 import PerformanceList from './PerformanceList';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, translations } from '../contexts/LanguageContext';
+import type { MetaFunction } from 'react-router';
+
+export const meta: MetaFunction = ({ location }) => {
+    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+    return [
+        { title: `${t['nav.heroCases']} | EcoReheating` },
+        { name: "description", content: t['cases.subtitle'] },
+    ];
+};
 
 interface CaseDossierData {
     translatedKeys: string[];
@@ -82,7 +91,7 @@ const CaseDossier: React.FC<{
                     </div>
                     <div className="flex-grow overflow-auto p-4 md:p-8 flex items-center justify-center">
                         <div className="bg-white shadow-xl border border-slate-300 p-2 transform rotate-1 hover:rotate-0 transition-transform duration-500 max-w-[90%] md:max-w-full">
-                            <img src={image} alt="Original Document" className="w-full h-auto shadow-sm" />
+                            <img src={image} alt={`Official signed verification report for ${client}`} className="w-full h-auto shadow-sm" />
                         </div>
                     </div>
                 </div>
@@ -170,7 +179,7 @@ const HeroCase: React.FC<{
                 >
                     <img
                         src={image}
-                        alt={client}
+                        alt={`Third-party verified performance report for ${client}`}
                         className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-industrial-950/30 to-transparent"></div>
@@ -182,7 +191,7 @@ const HeroCase: React.FC<{
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 flex items-center gap-4 text-left">
                     <div className="w-10 h-10 bg-white rounded p-1 shrink-0">
-                        <img src={image} className="w-full h-full object-contain" alt="thumbnail" />
+                        <img src={image} className="w-full h-full object-contain" alt="Report icon" />
                     </div>
                     <div>
                         <span className="text-white/80 text-[8px] uppercase tracking-[0.2em] font-black block">{t('cases.authPlate')}</span>
@@ -248,10 +257,6 @@ const HeroCases: React.FC = () => {
 
     return (
         <div className="bg-slate-50">
-            <SEO
-                title={t('nav.caseStudies')}
-                description={t('cases.subtitle')}
-            />
             <CaseDossier
                 isOpen={!!dossierClient}
                 onClose={() => setDossierClient(null)}

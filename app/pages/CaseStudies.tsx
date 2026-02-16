@@ -1,17 +1,22 @@
 import React from 'react';
 import { Target, CheckCircle, Database, BarChart4 } from 'lucide-react';
-import SEO from '../components/SEO';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage, translations } from '../contexts/LanguageContext';
+import type { MetaFunction } from 'react-router';
+
+export const meta: MetaFunction = ({ location }) => {
+    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+    return [
+        { title: `${t['nav.caseStudies']} | EcoReheating` },
+        { name: "description", content: t['case.subtitle'] },
+    ];
+};
 
 const CaseStudies: React.FC = () => {
     const { t } = useLanguage();
 
     return (
-        <div className="bg-slate-50">
-            <SEO
-                title={t('case.title')}
-                description={t('case.subtitle')}
-            />
+        <div className="bg-white">
 
             {/* Hero Section */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white relative overflow-hidden">

@@ -1,0 +1,222 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "pages/Home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "pages/Solutions": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "pages/HeroCases": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "pages/CaseStudies": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "pages/AboutContact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "vi-home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "vi-solutions": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "vi-hero-cases": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "vi-case-studies": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "vi-about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/sitemap[.]xml": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "path": "",
+        "id": "root",
+        "file": "app/root.tsx",
+        "config": {}
+      },
+      "pages/Home": {
+        "id": "pages/Home",
+        "parentId": "root",
+        "file": "app/pages/Home.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "pages/Solutions": {
+        "id": "pages/Solutions",
+        "parentId": "root",
+        "file": "app/pages/Solutions.tsx",
+        "path": "solutions",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "pages/HeroCases": {
+        "id": "pages/HeroCases",
+        "parentId": "root",
+        "file": "app/pages/HeroCases.tsx",
+        "path": "hero-cases",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "pages/CaseStudies": {
+        "id": "pages/CaseStudies",
+        "parentId": "root",
+        "file": "app/pages/CaseStudies.tsx",
+        "path": "case-studies",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "pages/AboutContact": {
+        "id": "pages/AboutContact",
+        "parentId": "root",
+        "file": "app/pages/AboutContact.tsx",
+        "path": "about",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "vi-home": {
+        "id": "vi-home",
+        "parentId": "root",
+        "file": "app/pages/Home.tsx",
+        "path": "vi",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "vi-solutions": {
+        "id": "vi-solutions",
+        "parentId": "root",
+        "file": "app/pages/Solutions.tsx",
+        "path": "vi/solutions",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "vi-hero-cases": {
+        "id": "vi-hero-cases",
+        "parentId": "root",
+        "file": "app/pages/HeroCases.tsx",
+        "path": "vi/hero-cases",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "vi-case-studies": {
+        "id": "vi-case-studies",
+        "parentId": "root",
+        "file": "app/pages/CaseStudies.tsx",
+        "path": "vi/case-studies",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "vi-about": {
+        "id": "vi-about",
+        "parentId": "root",
+        "file": "app/pages/AboutContact.tsx",
+        "path": "vi/about",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/sitemap[.]xml": {
+        "id": "routes/sitemap[.]xml",
+        "parentId": "root",
+        "file": "app/routes/sitemap[.]xml.ts",
+        "path": "sitemap[.]xml",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "E:/ai_coding/industrial-furnace-solutions/app",
+    "basename": "/",
+    "buildDirectory": "E:/ai_coding/industrial-furnace-solutions/build",
+    "future": {
+      "unstable_optimizeDeps": false
+    },
+    "routes": {
+      "root": {
+        "path": "",
+        "id": "root",
+        "file": "root.tsx"
+      },
+      "pages/Home": {
+        "id": "pages/Home",
+        "parentId": "root",
+        "file": "pages/Home.tsx",
+        "index": true
+      },
+      "pages/Solutions": {
+        "id": "pages/Solutions",
+        "parentId": "root",
+        "file": "pages/Solutions.tsx",
+        "path": "solutions"
+      },
+      "pages/HeroCases": {
+        "id": "pages/HeroCases",
+        "parentId": "root",
+        "file": "pages/HeroCases.tsx",
+        "path": "hero-cases"
+      },
+      "pages/CaseStudies": {
+        "id": "pages/CaseStudies",
+        "parentId": "root",
+        "file": "pages/CaseStudies.tsx",
+        "path": "case-studies"
+      },
+      "pages/AboutContact": {
+        "id": "pages/AboutContact",
+        "parentId": "root",
+        "file": "pages/AboutContact.tsx",
+        "path": "about"
+      },
+      "vi-home": {
+        "id": "vi-home",
+        "parentId": "root",
+        "file": "pages/Home.tsx",
+        "path": "vi"
+      },
+      "vi-solutions": {
+        "id": "vi-solutions",
+        "parentId": "root",
+        "file": "pages/Solutions.tsx",
+        "path": "vi/solutions"
+      },
+      "vi-hero-cases": {
+        "id": "vi-hero-cases",
+        "parentId": "root",
+        "file": "pages/HeroCases.tsx",
+        "path": "vi/hero-cases"
+      },
+      "vi-case-studies": {
+        "id": "vi-case-studies",
+        "parentId": "root",
+        "file": "pages/CaseStudies.tsx",
+        "path": "vi/case-studies"
+      },
+      "vi-about": {
+        "id": "vi-about",
+        "parentId": "root",
+        "file": "pages/AboutContact.tsx",
+        "path": "vi/about"
+      },
+      "routes/sitemap[.]xml": {
+        "id": "routes/sitemap[.]xml",
+        "parentId": "root",
+        "file": "routes/sitemap[.]xml.ts",
+        "path": "sitemap[.]xml"
+      }
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
