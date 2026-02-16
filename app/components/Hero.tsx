@@ -79,14 +79,14 @@ const Hero: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row items-center gap-8">
               <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-                <a
-                  href="/#assessment"
+                <Link
+                  to={l('/#assessment')}
                   className="group relative overflow-hidden bg-furnace-600 text-white text-lg px-8 py-6 rounded-sm font-bold uppercase tracking-[0.1em] transition-all shadow-2xl flex items-center justify-center gap-3"
                 >
                   <span className="relative z-10 text-base md:text-lg text-center">{t('hero.btnRoi')}</span>
                   <ArrowRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform" />
                   <div className="absolute inset-0 bg-gradient-to-r from-furnace-500 to-orange-500 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
-                </a>
+                </Link>
                 <Link
                   to={l('/hero-cases')}
                   className="group relative px-8 py-6 border border-white/20 hover:border-white/40 text-white text-lg rounded-sm font-bold uppercase tracking-[0.1em] transition-all backdrop-blur-md flex items-center justify-center text-center"
@@ -237,4 +237,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-
