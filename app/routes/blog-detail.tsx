@@ -165,6 +165,9 @@ export default function BlogDetail() {
           prose-strong:text-white prose-strong:font-bold
           prose-a:text-furnace-500 hover:prose-a:text-furnace-400 prose-a:transition-colors
           prose-blockquote:text-gray-300 prose-blockquote:border-l-furnace-500 prose-blockquote:bg-zinc-900/30 prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:rounded-r-lg
+          prose-table:border-collapse prose-table:my-8
+          prose-th:border prose-th:border-white/20 prose-th:bg-white/5 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:text-furnace-500 prose-th:font-bold prose-th:uppercase prose-th:text-xs prose-th:tracking-wider
+          prose-td:border prose-td:border-white/10 prose-td:px-4 prose-td:py-3 prose-td:text-gray-300 prose-td:text-sm
           "
                 >
                     <MDXProvider>
