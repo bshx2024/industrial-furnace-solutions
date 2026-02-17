@@ -138,14 +138,16 @@ export default function BlogDetail() {
                     )}
                 </header>
 
-                <div className="prose prose-invert prose-orange max-w-none 
-          prose-h2:font-oswald prose-h2:uppercase prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-l-4 prose-h2:border-orange-600 prose-h2:pl-4
-          prose-h3:text-xl prose-h3:font-bold prose-h3:mt-8 prose-h3:mb-4
-          prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-6
-          prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6
-          prose-li:text-zinc-300 prose-li:mb-2
-          prose-strong:text-orange-500
-          prose-blockquote:border-l-orange-600 prose-blockquote:bg-zinc-900/50 prose-blockquote:p-6 prose-blockquote:rounded-r-lg"
+                <div className="prose prose-invert prose-lg max-w-none
+          prose-headings:text-white prose-headings:font-oswald prose-headings:uppercase
+          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-l-4 prose-h2:border-furnace-500 prose-h2:pl-4
+          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
+          prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+          prose-li:text-gray-300 prose-li:mb-2
+          prose-strong:text-white prose-strong:font-bold
+          prose-a:text-furnace-500 hover:prose-a:text-furnace-400 prose-a:transition-colors
+          prose-blockquote:text-gray-300 prose-blockquote:border-l-furnace-500 prose-blockquote:bg-zinc-900/30 prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:rounded-r-lg
+          "
                 >
                     <MDXProvider>
                         <MDXContent />
