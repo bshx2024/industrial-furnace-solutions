@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from "react-router";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
-import { getPostBySlug } from "../utils/blog.server";
+import { getPostBySlug, getAllPosts } from "../utils/blog.server";
 import type { Post } from "../utils/blog.server";
 import { MDXProvider } from "@mdx-js/react";
 
@@ -19,7 +19,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     }
 
     // Find related posts (same tags, different slug)
-    const { getAllPosts } = await import("../utils/blog.server");
     const allPosts = await getAllPosts(lang);
     const relatedPosts = allPosts
         .filter(p => p.slug !== slug && p.tags.some(tag => post.tags.includes(tag)))
