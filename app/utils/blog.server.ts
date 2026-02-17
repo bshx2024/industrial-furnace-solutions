@@ -9,11 +9,14 @@ export interface Post {
     description: string;
     date: string;
     author: string;
+    authorTitle?: string;
+    authorBio?: string;
     tags: string[];
     image: string;
     lang: string;
     readingTime: string;
     content: string;
+    faq?: { question: string; answer: string }[];
 }
 
 export interface PostListItem extends Omit<Post, "content"> { }

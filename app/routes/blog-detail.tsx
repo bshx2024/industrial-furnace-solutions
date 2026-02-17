@@ -88,12 +88,31 @@ export default function BlogDetail() {
         }
     };
 
+    const faqSchema = post.faq ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": post.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
+
     return (
         <article className="bg-[#0a0a0a] min-h-screen pt-24 pb-16">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
                 <Link
@@ -152,6 +171,22 @@ export default function BlogDetail() {
                         <MDXContent />
                     </MDXProvider>
                 </div>
+
+                {/* Author Bio Section */}
+                {post.authorBio && (
+                    <div className="mt-16 p-8 bg-zinc-900/50 border border-zinc-800 rounded-xl flex flex-col md:flex-row gap-8 items-center md:items-start transition-all hover:bg-zinc-900/80">
+                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex-shrink-0 flex items-center justify-center text-3xl font-bold text-white shadow-xl">
+                            {post.author.charAt(0)}
+                        </div>
+                        <div className="flex-1 text-center md:text-left">
+                            <h4 className="text-white font-bold text-xl mb-1">{post.author}</h4>
+                            {post.authorTitle && <p className="text-orange-500 text-sm font-medium uppercase tracking-wider mb-4">{post.authorTitle}</p>}
+                            <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
+                                {post.authorBio}
+                            </p>
+                        </div>
+                    </div>
+                )}
 
                 {/* CTA Section */}
                 <div className="mt-16 p-8 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg text-center shadow-xl">
