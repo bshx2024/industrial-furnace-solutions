@@ -25,6 +25,7 @@ export const translations = {
     'nav.caseStudies': 'CASE STUDIES',
     'nav.heroCases': 'HERO CASES',
     'nav.about': 'ABOUT',
+    'nav.blog': 'BLOG',
     'nav.freeAssessment': 'FREE ASSESSMENT',
 
     // Language selector
@@ -473,6 +474,7 @@ export const translations = {
     'nav.caseStudies': 'DỰ ÁN',
     'nav.heroCases': 'DỰ ÁN TIÊU BIỂU',
     'nav.about': 'VỀ CHÚNG TÔI',
+    'nav.blog': 'BÀI VIẾT',
     'nav.freeAssessment': 'ĐÁNH GIÁ MIỄN PHÍ',
 
     // Language selector

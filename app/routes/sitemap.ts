@@ -1,60 +1,77 @@
 import type { LoaderFunctionArgs } from "react-router";
+import { getAllPosts } from "../utils/blog.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
+  const baseUrl = "https://www.ecoreheating.com";
+
+  const staticRoutes = [
+    { en: "/", vi: "/vi/", priority: "1.0" },
+    { en: "/solutions", vi: "/vi/solutions", priority: "0.9" },
+    { en: "/hero-cases", vi: "/vi/hero-cases", priority: "0.8" },
+    { en: "/case-studies", vi: "/vi/case-studies", priority: "0.8" },
+    { en: "/about", vi: "/vi/about", priority: "0.7" },
+    { en: "/blog", vi: "/vi/blog", priority: "0.8" },
+  ];
+
+  const enPosts = await getAllPosts("en");
+  const viPosts = await getAllPosts("vi");
+
+  // Create a map of slugs to check availability in both languages
+  const viSlugs = new Set(viPosts.map(p => p.slug));
+  const enSlugs = new Set(enPosts.map(p => p.slug));
+
+  let xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
+
+  // Static Routes
+  staticRoutes.forEach(route => {
+    // EN version
+    xmlContent += `
   <url>
-    <loc>https://www.ecoreheating.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ecoreheating.com/" />
-    <priority>1.0</priority>
+    <loc>${baseUrl}${route.en}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}${route.en}" />
+    <xhtml:link rel="alternate" hreflang="vi" href="${baseUrl}${route.vi}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${route.en}" />
+    <priority>${route.priority}</priority>
     <changefreq>weekly</changefreq>
-  </url>
+  </url>`;
+    // VI version
+    xmlContent += `
   <url>
-    <loc>https://www.ecoreheating.com/vi/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/" />
-    <priority>1.0</priority>
+    <loc>${baseUrl}${route.vi}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}${route.en}" />
+    <xhtml:link rel="alternate" hreflang="vi" href="${baseUrl}${route.vi}" />
+    <priority>${route.priority}</priority>
     <changefreq>weekly</changefreq>
-  </url>
+  </url>`;
+  });
+
+  // Blog Posts - EN
+  enPosts.forEach(post => {
+    const hasVi = viSlugs.has(post.slug);
+    xmlContent += `
   <url>
-    <loc>https://www.ecoreheating.com/solutions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/solutions" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/solutions" />
-    <priority>0.9</priority>
-  </url>
+    <loc>${baseUrl}/blog/${post.slug}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/blog/${post.slug}" />
+    ${hasVi ? `<xhtml:link rel="alternate" hreflang="vi" href="${baseUrl}/vi/blog/${post.slug}" />` : ""}
+    <priority>0.6</priority>
+  </url>`;
+  });
+
+  // Blog Posts - VI
+  viPosts.forEach(post => {
+    const hasEn = enSlugs.has(post.slug);
+    xmlContent += `
   <url>
-    <loc>https://www.ecoreheating.com/vi/solutions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/solutions" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/solutions" />
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.ecoreheating.com/hero-cases</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/hero-cases" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/hero-cases" />
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ecoreheating.com/vi/hero-cases</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/hero-cases" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/hero-cases" />
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.ecoreheating.com/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/about" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/about" />
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.ecoreheating.com/vi/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.ecoreheating.com/about" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://www.ecoreheating.com/vi/about" />
-    <priority>0.7</priority>
-  </url>
+    <loc>${baseUrl}/vi/blog/${post.slug}</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="${baseUrl}/vi/blog/${post.slug}" />
+    ${hasEn ? `<xhtml:link rel="alternate" hreflang="en" href="${baseUrl}/blog/${post.slug}" />` : ""}
+    <priority>0.6</priority>
+  </url>`;
+  });
+
+  xmlContent += `
 </urlset>`;
 
   return new Response(xmlContent, {
