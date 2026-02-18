@@ -44,11 +44,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {/* Performance: Preload hero background poster */}
                 <link rel="preload" as="image" href="/hero-bg.png" />
 
-                {/* Global Data Layer Initialization */}
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FKDBWSQJ7"></script>
                 <script dangerouslySetInnerHTML={{
                     __html: `
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-7FKDBWSQJ7');
                         window.gtag = gtag;
                     `
                 }} />
