@@ -23,4 +23,5 @@ export default [
     route("vi/blog/:slug", "routes/blog-detail.tsx", { id: "vi-blog-detail" }),
 
     route("sitemap.xml", "routes/sitemap.ts"),
+    route("vi/lp/vietnam-steel", "pages/VietnamSteelLP.tsx", { id: "vi-lp-vietnam-steel" }),
 ] satisfies RouteConfig;
