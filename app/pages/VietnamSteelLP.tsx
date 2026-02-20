@@ -12,30 +12,82 @@ import {
     Building2,
     Users,
     MousePointerClick,
-    Info
+    Info,
+    X
 } from 'lucide-react';
 import type { MetaFunction } from 'react-router';
 import emailjs from '@emailjs/browser';
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ location }) => {
     return [
         { title: "Tuân thủ CBAM cho Thép Việt Nam | Giải pháp Năng lượng Không cần Vốn | EcoReheating" },
         { name: "description", content: "Giảm chi phí CBAM và tiết kiệm nhiên liệu 7-15% với giải pháp thu hồi nhiệt thải không cần vốn đầu tư. Đã chứng minh tại Thép Shengli Việt Nam. Đánh giá miễn phí." },
+        { property: "og:title", content: "Tuân thủ CBAM cho Thép Việt Nam | EcoReheating" },
+        { property: "og:description", content: "Giảm chi phí CBAM 20-40% + Tiết kiệm nhiên liệu 7-15%. Không cần vốn đầu tư ban đầu." },
+        { property: "og:image", content: "https://ecoreheating.com/images/vietnam-steel-og.jpg" },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: `https://ecoreheating.com${location.pathname}` },
+        { tagName: "link", rel: "canonical", href: `https://ecoreheating.com${location.pathname}` },
     ];
 };
 
 const VietnamSteelLP: React.FC = () => {
     const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [showExitIntent, setShowExitIntent] = useState(false);
+    const [hasExited, setHasExited] = useState(false);
+
+    // GA Tracking Helper
+    const trackEvent = (action: string, category: string, label: string, value?: number) => {
+        if (typeof (window as any).gtag === 'function') {
+            (window as any).gtag('event', action, {
+                'event_category': category,
+                'event_label': label,
+                'value': value
+            });
+        }
+    };
+
+    // Exit Intent Logic
+    useEffect(() => {
+        const handleMouseLeave = (e: MouseEvent) => {
+            if (e.clientY < 0 && !hasExited) {
+                setShowExitIntent(true);
+                setHasExited(true);
+                trackEvent('exit_intent_show', 'engagement', 'vietnam_steel_lp');
+            }
+        };
+
+        document.addEventListener('mouseleave', handleMouseLeave);
+        return () => document.removeEventListener('mouseleave', handleMouseLeave);
+    }, [hasExited]);
+
+    // Scroll Depth Tracking
+    useEffect(() => {
+        const thresholds = [25, 50, 75, 100];
+        const tracked = new Set();
+
+        const handleScroll = () => {
+            const scrollPos = window.scrollY + window.innerHeight;
+            const totalHeight = document.documentElement.scrollHeight;
+            const percentage = Math.round((scrollPos / totalHeight) * 100);
+
+            thresholds.forEach(t => {
+                if (percentage >= t && !tracked.has(t)) {
+                    tracked.add(t);
+                    trackEvent('scroll_depth', 'engagement', `vietnam_steel_lp_${t}%`, t);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormState('submitting');
+        trackEvent('form_submit_start', 'conversion', 'vietnam_steel_lp');
 
-        const formData = new FormData(e.currentTarget);
-        const data: Record<string, any> = {};
-        formData.forEach((value, key) => { data[key] = value; });
-
-        // Environment variables - use import.meta.env for Vite
         const SERVICE_ID = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
         const TEMPLATE_ID = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
         const PUBLIC_KEY = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
@@ -43,19 +95,19 @@ const VietnamSteelLP: React.FC = () => {
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.currentTarget, PUBLIC_KEY)
             .then(() => {
                 setFormState('success');
-                // Track event if GA is available
-                if (typeof (window as any).gtag === 'function') {
-                    (window as any).gtag('event', 'generate_lead', {
-                        'event_category': 'form',
-                        'event_label': 'vietnam_steel_lp'
-                    });
-                }
+                trackEvent('generate_lead', 'conversion', 'vietnam_steel_lp');
             })
             .catch((error) => {
                 console.error('FAILED...', error);
                 alert("Đã xảy ra lỗi. Vui lòng thử lại hoặc gửi email cho chúng tôi tại contact@ecoreheating.com");
                 setFormState('idle');
             });
+    };
+
+    const handlePdfDownload = (type: string) => {
+        trackEvent('pdf_download', 'resource', type);
+        // Link to actual PDF asset
+        window.open('/assets/ecoreheating-vietnam-steel-cbam-guide.pdf', '_blank');
     };
 
     // Calculate target month for availability
@@ -68,6 +120,53 @@ const VietnamSteelLP: React.FC = () => {
 
     return (
         <div className="font-sans text-gray-800 bg-white selection:bg-furnace-500/30 overflow-x-hidden">
+            {/* EXIT INTENT MODAL */}
+            {showExitIntent && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-industrial-950/80 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-[32px] overflow-hidden max-w-lg w-full shadow-2xl relative">
+                        <button
+                            onClick={() => setShowExitIntent(false)}
+                            className="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                        <div className="p-10 text-center">
+                            <div className="w-20 h-20 bg-orange-100 text-furnace-600 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                                <AlertTriangle size={40} />
+                            </div>
+                            <h3 className="text-2xl font-black text-slate-900 mb-4 leading-tight">
+                                ⚠️ Đợi đã! Đừng để CBAM <br />làm giảm lợi nhuận của bạn
+                            </h3>
+                            <p className="text-slate-600 mb-8 leading-relaxed">
+                                Tải xuống hướng dẫn miễn phí độc quyền của chúng tôi: <br />
+                                <strong>"5 Bước Tuân thủ CBAM cho Nhà máy Thép Việt Nam"</strong>
+                            </p>
+                            <div className="space-y-4">
+                                <button
+                                    onClick={() => {
+                                        handlePdfDownload('exit_intent_guide');
+                                        setShowExitIntent(false);
+                                    }}
+                                    className="w-full bg-furnace-600 text-white font-black py-5 rounded-2xl hover:bg-furnace-700 transition-all shadow-xl shadow-furnace-600/20 flex items-center justify-center gap-3"
+                                >
+                                    TẢI XUỐNG CẨM NANG MIỄN PHÍ
+                                    <ArrowRight size={20} />
+                                </button>
+                                <button
+                                    onClick={() => setShowExitIntent(false)}
+                                    className="text-xs text-slate-400 font-bold uppercase tracking-widest hover:text-slate-600"
+                                >
+                                    TÔI SẼ TỰ TÌM HIỂU SAU
+                                </button>
+                            </div>
+                        </div>
+                        <div className="bg-slate-50 p-4 border-t border-slate-100 text-center">
+                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Đã giúp 300+ nhà máy tối ưu hóa năng lượng</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* HERO SECTION */}
             <header className="relative py-20 lg:py-32 bg-industrial-950 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-furnace-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -97,6 +196,7 @@ const VietnamSteelLP: React.FC = () => {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                         <a
                             href="#assessment-form"
+                            onClick={() => trackEvent('cta_click', 'conversion', 'hero_assessment')}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-furnace-600 hover:bg-furnace-700 text-white font-black px-12 py-6 rounded-2xl text-xl transition-all shadow-2xl shadow-furnace-600/40 uppercase tracking-widest group"
                         >
                             NHẬN ĐÁNH GIÁ MIỄN PHÍ (CÒN 1 CHỖ)
@@ -104,6 +204,7 @@ const VietnamSteelLP: React.FC = () => {
                         </a>
                         <a
                             href="#case-study"
+                            onClick={() => trackEvent('cta_click', 'engagement', 'hero_case_study')}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-bold px-12 py-6 rounded-2xl text-xl transition-all uppercase tracking-widest"
                         >
                             XEM DỰ ÁN VIỆT NAM
@@ -175,7 +276,10 @@ const VietnamSteelLP: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <button className="w-full mt-10 py-5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 border border-slate-200">
+                                <button
+                                    onClick={() => handlePdfDownload('shengli_specs')}
+                                    className="w-full mt-10 py-5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 border border-slate-200"
+                                >
                                     TẢI THÔNG SỐ KỸ THUẬT
                                     <ArrowRight size={16} />
                                 </button>
@@ -264,7 +368,11 @@ const VietnamSteelLP: React.FC = () => {
                                     <p className="text-slate-800 font-bold leading-tight">
                                         Muốn biết nhà máy của bạn có thể tiết kiệm được bao nhiêu?
                                     </p>
-                                    <a href="#assessment-form" className="bg-furnace-600 text-white p-3 rounded-full hover:bg-furnace-700 transition-all shrink-0">
+                                    <a
+                                        href="#assessment-form"
+                                        onClick={() => trackEvent('cta_click', 'engagement', 'cbam_urgency_arrow')}
+                                        className="bg-furnace-600 text-white p-3 rounded-full hover:bg-furnace-700 transition-all shrink-0"
+                                    >
                                         <ArrowRight />
                                     </a>
                                 </div>
@@ -289,6 +397,7 @@ const VietnamSteelLP: React.FC = () => {
                                 <div className="md:col-span-2 pt-6">
                                     <a
                                         href="#assessment-form"
+                                        onClick={() => trackEvent('cta_click', 'engagement', 'benefit_calculator')}
                                         className="w-full flex items-center justify-center gap-4 bg-slate-900 text-white font-black py-6 rounded-2xl uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl group"
                                     >
                                         <MousePointerClick size={24} className="text-furnace-500 group-hover:scale-110 transition-transform" />
@@ -483,13 +592,13 @@ const VietnamSteelLP: React.FC = () => {
 
                                 <div className="space-y-10">
                                     {[
-                                        { title: "Dựa trên Dữ liệu", desc: "Đường cơ sở được thiết lập qua nhật ký sản xuất thực tế", icon: <BarChart3 /> },
-                                        { title: "Phân tích Chuyên gia", desc: "Đánh giá kỹ thuật cấp độ CISA T80", icon: <Users /> },
-                                        { title: "Đã Chứng minh tại Việt Nam", desc: "Thép Shengli: Lò 120 tấn/giờ, giảm nhiên liệu 7-15%", icon: <Building2 /> }
+                                        { title: "Dựa trên Dữ liệu", desc: "Đường cơ sở được thiết lập qua nhật ký sản xuất thực tế", icon: BarChart3 },
+                                        { title: "Phân tích Chuyên gia", desc: "Đánh giá kỹ thuật cấp độ CISA T80", icon: Users },
+                                        { title: "Đã Chứng minh tại Việt Nam", desc: "Thép Shengli: Lò 120 tấn/giờ, giảm nhiên liệu 7-15%", icon: Building2 }
                                     ].map((item, i) => (
                                         <div key={i} className="flex gap-6 items-start group">
                                             <div className="w-12 h-12 bg-white/5 text-furnace-500 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-furnace-600 group-hover:text-white transition-all duration-500 shadow-xl border border-white/10">
-                                                {React.cloneElement(item.icon as React.ReactElement, { size: 24 })}
+                                                <item.icon size={24} />
                                             </div>
                                             <div>
                                                 <h4 className="font-black text-lg mb-1">✓ {item.title}</h4>
@@ -509,9 +618,20 @@ const VietnamSteelLP: React.FC = () => {
                                         <CheckCircle size={48} />
                                     </div>
                                     <h3 className="text-4xl font-heading font-black text-slate-900 mb-4 tracking-tighter uppercase">GỬI THÀNH CÔNG!</h3>
-                                    <p className="text-slate-600 text-lg leading-relaxed max-w-sm mx-auto italic">
+                                    <p className="text-slate-600 text-lg leading-relaxed max-w-sm mx-auto italic mb-10">
                                         Cảm ơn bạn! Chúng tôi đã nhận được yêu cầu và sẽ liên hệ với bạn trong vòng 24 giờ.
                                     </p>
+
+                                    <div className="bg-slate-50 p-8 rounded-[32px] border border-slate-100 w-full mb-10">
+                                        <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">TÀI LIỆU DÀNH CHO BẠN:</p>
+                                        <button
+                                            onClick={() => handlePdfDownload('success_page_guide')}
+                                            className="w-full bg-slate-900 text-white font-black py-5 rounded-2xl hover:bg-slate-800 transition-all flex items-center justify-center gap-3 group"
+                                        >
+                                            TẢI THÔNG SỐ KỸ THUẬT & HƯỚNG DẪN CBAM
+                                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                        </button>
+                                    </div>
                                     <button
                                         onClick={() => setFormState('idle')}
                                         className="mt-12 text-furnace-600 font-black hover:underline tracking-widest text-sm uppercase p-4"

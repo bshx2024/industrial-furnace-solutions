@@ -26,6 +26,7 @@ export const translations = {
     'nav.heroCases': 'HERO CASES',
     'nav.about': 'ABOUT',
     'nav.blog': 'BLOG',
+    'nav.vietnamSteel': 'VIETNAM STEEL (CBAM)',
     'nav.freeAssessment': 'FREE ASSESSMENT',
 
     // Language selector
@@ -475,6 +476,7 @@ export const translations = {
     'nav.heroCases': 'DỰ ÁN TIÊU BIỂU',
     'nav.about': 'VỀ CHÚNG TÔI',
     'nav.blog': 'BÀI VIẾT',
+    'nav.vietnamSteel': 'THÉP VIỆT NAM (CBAM)',
     'nav.freeAssessment': 'ĐÁNH GIÁ MIỄN PHÍ',
 
     // Language selector

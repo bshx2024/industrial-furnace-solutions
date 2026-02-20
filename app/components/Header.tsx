@@ -64,7 +64,13 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: t('nav.home'), href: l('/') },
-    { name: t('nav.solutions'), href: l('/solutions') },
+    {
+      name: t('nav.solutions'),
+      href: l('/solutions'),
+      dropdown: language === 'vi' ? [
+        { name: t('nav.vietnamSteel'), href: '/vi/lp/vietnam-steel' }
+      ] : undefined
+    },
     { name: t('nav.caseStudies'), href: l('/hero-cases') },
     { name: t('nav.about'), href: l('/about') },
     { name: t('nav.blog'), href: l('/blog') },
@@ -131,25 +137,31 @@ const Header: React.FC = () => {
         {/* Desktop Nav */}
 
         <nav className="hidden md:flex items-center gap-8">
-
           {navLinks.map((link) => (
+            <div key={link.name} className="relative group/nav">
+              <Link
+                to={link.href}
+                className={`text-sm font-semibold transition-colors uppercase tracking-wide flex items-center gap-1 ${location.pathname === link.href ? 'text-furnace-500' : 'text-gray-300 hover:text-furnace-500'
+                  }`}
+              >
+                {link.name}
+                {link.dropdown && <ChevronDown size={14} className="group-hover/nav:rotate-180 transition-transform" />}
+              </Link>
 
-            <Link
-
-              key={link.name}
-
-              to={link.href}
-
-              className={`text-sm font-semibold transition-colors uppercase tracking-wide ${location.pathname === link.href ? 'text-furnace-500' : 'text-gray-300 hover:text-furnace-500'
-
-                }`}
-
-            >
-
-              {link.name}
-
-            </Link>
-
+              {link.dropdown && (
+                <div className="absolute left-0 mt-2 w-64 bg-industrial-800 border border-gray-700 rounded shadow-xl opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all z-50 p-2">
+                  {link.dropdown.map((sub) => (
+                    <Link
+                      key={sub.name}
+                      to={sub.href}
+                      className="block px-4 py-3 text-[10px] font-black tracking-widest text-gray-400 hover:bg-industrial-700 hover:text-furnace-500 transition-colors border-l-2 border-transparent hover:border-furnace-500 uppercase italic"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
 
 
@@ -258,25 +270,30 @@ const Header: React.FC = () => {
           <div className="flex flex-col p-4 space-y-4">
 
             {navLinks.map((link) => (
-
-              <Link
-
-                key={link.name}
-
-                to={link.href}
-
-                onClick={() => setIsMobileMenuOpen(false)}
-
-                className={`font-semibold uppercase tracking-wide ${location.pathname === link.href ? 'text-furnace-500' : 'text-gray-300 hover:text-furnace-500'
-
-                  }`}
-
-              >
-
-                {link.name}
-
-              </Link>
-
+              <React.Fragment key={link.name}>
+                <Link
+                  to={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-semibold uppercase tracking-wide flex items-center justify-between ${location.pathname === link.href ? 'text-furnace-500' : 'text-gray-300 hover:text-furnace-500'
+                    }`}
+                >
+                  {link.name}
+                </Link>
+                {link.dropdown && (
+                  <div className="pl-4 flex flex-col space-y-3 border-l-2 border-gray-800">
+                    {link.dropdown.map((sub) => (
+                      <Link
+                        key={sub.name}
+                        to={sub.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-xs font-black tracking-widest text-gray-500 hover:text-furnace-500 uppercase italic"
+                      >
+                        → {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
             ))}
 
 
