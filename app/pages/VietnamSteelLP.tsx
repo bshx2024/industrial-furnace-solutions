@@ -35,6 +35,7 @@ const VietnamSteelLP: React.FC = () => {
     const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
     const [showExitIntent, setShowExitIntent] = useState(false);
     const [hasExited, setHasExited] = useState(false);
+    const [showSpecsModal, setShowSpecsModal] = useState(false);
 
     // GA Tracking Helper
     const trackEvent = (action: string, category: string, label: string, value?: number) => {
@@ -167,6 +168,152 @@ const VietnamSteelLP: React.FC = () => {
                 </div>
             )}
 
+            {/* SPECS MODAL */}
+            {showSpecsModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-industrial-950/80 backdrop-blur-sm animate-fade-in overflow-y-auto">
+                    <div className="bg-white rounded-[32px] overflow-hidden max-w-2xl w-full shadow-2xl relative my-8">
+                        {/* Header */}
+                        <div className="bg-industrial-950 p-6 sm:p-8 text-white relative">
+                            <button
+                                onClick={() => setShowSpecsModal(false)}
+                                className="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors"
+                            >
+                                <X size={24} />
+                            </button>
+                            <div className="flex items-center gap-3 mb-2">
+                                <span className="text-furnace-500 text-xs font-black uppercase tracking-widest">THÔNG SỐ KỸ THUẬT CHI TIẾT</span>
+                            </div>
+                            <h3 className="text-2xl font-black mb-0">Thép Shengli (Thăng Long)</h3>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-6 sm:p-8 space-y-8 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200">
+                            
+                            {/* Dự án */}
+                            <div>
+                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Building2 size={18} className="text-furnace-500"/> THÔNG TIN DỰ ÁN</h4>
+                                <div className="grid grid-cols-2 gap-4 text-sm">
+                                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                        <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Nhà máy</span>
+                                        <strong className="text-slate-900">Shengli Steel, Việt Nam</strong>
+                                    </div>
+                                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                        <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Thiết bị</span>
+                                        <strong className="text-slate-900">Lò Nạp Liệu Lạnh 120t/h</strong>
+                                    </div>
+                                    <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                        <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Thời gian triển khai</span>
+                                        <strong className="text-slate-900">2023</strong>
+                                    </div>
+                                    <div className="bg-green-50 p-3 rounded-xl border border-green-100">
+                                        <span className="text-[10px] text-green-600 font-bold uppercase block mb-1">Trạng thái</span>
+                                        <strong className="text-green-800 flex items-center gap-1">Đã xác thực <CheckCircle size={14}/></strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Công nghệ */}
+                            <div>
+                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Zap size={18} className="text-furnace-500"/> CÔNG NGHỆ TRIỂN KHAI</h4>
+                                <div className="space-y-3">
+                                    {[
+                                        { title: "Mái lò sợi đầy đủ", effect: "Giảm thất thoát nhiệt qua mái lò", result: "Tiết kiệm nhiên liệu 3-5%" },
+                                        { title: "Điều khiển nung thông minh", effect: "Tối ưu hóa tỷ lệ không khí/nhiên liệu", result: "Giảm tiêu hao gas 5-8%" },
+                                        { title: "Lớp phủ phát xạ cao", effect: "Tăng hiệu suất truyền nhiệt", result: "Giảm oxy hóa cán 5-15%" },
+                                        { title: "Tối ưu hóa đốt cháy tiên tiến", effect: "Cải thiện phân bố nhiệt độ", result: "Tăng sản lượng 0.1-0.3%" }
+                                    ].map((tech, i) => (
+                                        <div key={i} className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                            <div className="sm:w-1/3">
+                                                <strong className="text-slate-900 text-sm block">{i + 1}. {tech.title}</strong>
+                                            </div>
+                                            <div className="sm:w-2/3 text-sm text-slate-600">
+                                                <div className="flex items-center gap-2">
+                                                    <ArrowRight size={14} className="text-slate-400 shrink-0"/> {tech.effect}
+                                                </div>
+                                                <div className="flex items-center gap-2 text-furnace-600 font-medium mt-1">
+                                                    <ArrowRight size={14} className="text-furnace-400 shrink-0"/> {tech.result}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Kết quả */}
+                            <div className="grid sm:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><BarChart3 size={18} className="text-furnace-500"/> KẾT QUẢ ĐÃ XÁC THỰC</h4>
+                                    <div className="space-y-3 text-sm">
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Giảm tiêu thụ nhiên liệu:</span>
+                                            <strong className="text-furnace-600">7-15%</strong>
+                                        </div>
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Giảm cán oxy hóa:</span>
+                                            <strong className="text-slate-900">5-15%</strong>
+                                        </div>
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Cải thiện năng suất:</span>
+                                            <strong className="text-slate-900">0.1-0.3%</strong>
+                                        </div>
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Thời gian hoàn vốn:</span>
+                                            <strong className="text-green-600">1-2 năm</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><DollarSign size={18} className="text-furnace-500"/> TÁC ĐỘNG TÀI CHÍNH <span className="text-[10px] font-normal text-slate-400 ml-1">(Nhà máy 500K tấn/năm)</span></h4>
+                                    <div className="space-y-3 text-sm">
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Tiết kiệm nhiên liệu:</span>
+                                            <strong className="text-slate-900">$800K - $1.2M/năm</strong>
+                                        </div>
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Giảm phế phẩm:</span>
+                                            <strong className="text-slate-900">$200K - $400K/năm</strong>
+                                        </div>
+                                        <div className="flex justify-between border-b border-slate-100 pb-2">
+                                            <span className="text-slate-500">Tăng sản lượng:</span>
+                                            <strong className="text-slate-900">$100K - $300K/năm</strong>
+                                        </div>
+                                        <div className="flex justify-between bg-furnace-50 p-2 rounded-lg border border-furnace-100 mt-2">
+                                            <span className="text-furnace-700 font-bold">Tổng tiết kiệm:</span>
+                                            <strong className="text-furnace-600 text-base">$1.1M - $1.9M/năm</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Footer (Actions) */}
+                        <div className="p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row gap-4">
+                            <button
+                                onClick={() => handlePdfDownload('shengli_specs_full')}
+                                className="flex-1 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-bold py-4 rounded-xl transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2"
+                            >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                TẢI BẢN ĐẦY ĐỦ (PDF)
+                            </button>
+                            <a
+                                href="#assessment-form"
+                                onClick={() => {
+                                    setShowSpecsModal(false);
+                                    trackEvent('cta_click', 'conversion', 'modal_consultation');
+                                }}
+                                className="flex-1 bg-furnace-600 hover:bg-furnace-700 text-white font-bold py-4 rounded-xl transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2 shadow-lg shadow-furnace-600/20"
+                            >
+                                <Users size={16} />
+                                ĐẶT LỊCH TƯ VẤN
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* HERO SECTION */}
             <header className="relative py-20 lg:py-32 bg-industrial-950 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-furnace-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -277,7 +424,10 @@ const VietnamSteelLP: React.FC = () => {
                                 </div>
 
                                 <button
-                                    onClick={() => handlePdfDownload('shengli_specs')}
+                                    onClick={() => {
+                                        setShowSpecsModal(true);
+                                        trackEvent('view_specs_modal', 'engagement', 'vietnam_steel_lp');
+                                    }}
                                     className="w-full mt-10 py-5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 border border-slate-200"
                                 >
                                     TẢI THÔNG SỐ KỸ THUẬT
