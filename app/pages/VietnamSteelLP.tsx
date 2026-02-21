@@ -188,10 +188,10 @@ const VietnamSteelLP: React.FC = () => {
 
                         {/* Content */}
                         <div className="p-6 sm:p-8 space-y-8 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200">
-                            
+
                             {/* Dự án */}
                             <div>
-                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Building2 size={18} className="text-furnace-500"/> THÔNG TIN DỰ ÁN</h4>
+                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Building2 size={18} className="text-furnace-500" /> THÔNG TIN DỰ ÁN</h4>
                                 <div className="grid grid-cols-2 gap-4 text-sm">
                                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
                                         <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Nhà máy</span>
@@ -207,14 +207,14 @@ const VietnamSteelLP: React.FC = () => {
                                     </div>
                                     <div className="bg-green-50 p-3 rounded-xl border border-green-100">
                                         <span className="text-[10px] text-green-600 font-bold uppercase block mb-1">Trạng thái</span>
-                                        <strong className="text-green-800 flex items-center gap-1">Đã xác thực <CheckCircle size={14}/></strong>
+                                        <strong className="text-green-800 flex items-center gap-1">Đã xác thực <CheckCircle size={14} /></strong>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Công nghệ */}
                             <div>
-                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Zap size={18} className="text-furnace-500"/> CÔNG NGHỆ TRIỂN KHAI</h4>
+                                <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><Zap size={18} className="text-furnace-500" /> CÔNG NGHỆ TRIỂN KHAI</h4>
                                 <div className="space-y-3">
                                     {[
                                         { title: "Mái lò sợi đầy đủ", effect: "Giảm thất thoát nhiệt qua mái lò", result: "Tiết kiệm nhiên liệu 3-5%" },
@@ -228,10 +228,10 @@ const VietnamSteelLP: React.FC = () => {
                                             </div>
                                             <div className="sm:w-2/3 text-sm text-slate-600">
                                                 <div className="flex items-center gap-2">
-                                                    <ArrowRight size={14} className="text-slate-400 shrink-0"/> {tech.effect}
+                                                    <ArrowRight size={14} className="text-slate-400 shrink-0" /> {tech.effect}
                                                 </div>
                                                 <div className="flex items-center gap-2 text-furnace-600 font-medium mt-1">
-                                                    <ArrowRight size={14} className="text-furnace-400 shrink-0"/> {tech.result}
+                                                    <ArrowRight size={14} className="text-furnace-400 shrink-0" /> {tech.result}
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +242,7 @@ const VietnamSteelLP: React.FC = () => {
                             {/* Kết quả */}
                             <div className="grid sm:grid-cols-2 gap-8">
                                 <div>
-                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><BarChart3 size={18} className="text-furnace-500"/> KẾT QUẢ ĐÃ XÁC THỰC</h4>
+                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><BarChart3 size={18} className="text-furnace-500" /> KẾT QUẢ ĐÃ XÁC THỰC</h4>
                                     <div className="space-y-3 text-sm">
                                         <div className="flex justify-between border-b border-slate-100 pb-2">
                                             <span className="text-slate-500">Giảm tiêu thụ nhiên liệu:</span>
@@ -264,7 +264,7 @@ const VietnamSteelLP: React.FC = () => {
                                 </div>
 
                                 <div>
-                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><DollarSign size={18} className="text-furnace-500"/> TÁC ĐỘNG TÀI CHÍNH <span className="text-[10px] font-normal text-slate-400 ml-1">(Nhà máy 500K tấn/năm)</span></h4>
+                                    <h4 className="flex items-center gap-2 text-slate-900 font-black mb-4"><DollarSign size={18} className="text-furnace-500" /> TÁC ĐỘNG TÀI CHÍNH <span className="text-[10px] font-normal text-slate-400 ml-1">(Nhà máy 500K tấn/năm)</span></h4>
                                     <div className="space-y-3 text-sm">
                                         <div className="flex justify-between border-b border-slate-100 pb-2">
                                             <span className="text-slate-500">Tiết kiệm nhiên liệu:</span>
@@ -294,7 +294,7 @@ const VietnamSteelLP: React.FC = () => {
                                 className="flex-1 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-bold py-4 rounded-xl transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2"
                             >
                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
                                 TẢI BẢN ĐẦY ĐỦ (PDF)
                             </button>
@@ -963,17 +963,27 @@ const VietnamSteelLP: React.FC = () => {
                 </div>
             </footer>
 
-            {/* EXIT INTENT (Pseudo Implementation for Landing Page) */}
-            <div className="fixed bottom-8 right-8 z-50 pointer-events-none sm:pointer-events-auto">
-                <div className="bg-white p-4 rounded-2xl shadow-2xl border border-slate-200 flex items-center gap-4 animate-bounce-subtle">
-                    <div className="w-10 h-10 bg-furnace-600 text-white rounded-full flex items-center justify-center shrink-0">
+            {/* FLOATING ACTION BUTTON */}
+            <div className="fixed bottom-6 right-6 z-50">
+                <a
+                    href="#assessment-form"
+                    onClick={() => trackEvent('cta_click', 'conversion', 'floating_widget_survey')}
+                    className="bg-white p-4 rounded-2xl shadow-2xl border border-slate-200 flex items-center gap-4 hover:-translate-y-1 hover:border-furnace-500 hover:shadow-furnace-500/20 transition-all cursor-pointer group animate-bounce-subtle"
+                >
+                    <div className="w-10 h-10 bg-furnace-600 text-white rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-furnace-600/30">
                         <BarChart3 size={20} />
                     </div>
-                    <div className="text-left">
-                        <p className="text-[10px] font-black text-furnace-500 uppercase tracking-widest">ĐANG TRỰC TUYẾN</p>
-                        <p className="text-xs font-bold text-slate-900">Khảo sát baseline miễn phí</p>
+                    <div className="text-left pr-2">
+                        <div className="flex items-center gap-2 mb-0.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <p className="text-[10px] font-black text-furnace-500 uppercase tracking-widest">ĐANG TRỰC TUYẾN</p>
+                        </div>
+                        <p className="text-xs font-bold text-slate-900 group-hover:text-furnace-600 transition-colors tracking-tight">Khảo sát baseline miễn phí</p>
                     </div>
-                </div>
+                </a>
             </div>
 
             {/* STYLES FOR ANIMATIONS */}
