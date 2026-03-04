@@ -30,7 +30,7 @@ export async function getAllPosts(lang: "en" | "vi"): Promise<PostListItem[]> {
         return [];
     }
 
-    const files = fs.readdirSync(langPath).filter((file) => file.endsWith(".mdx"));
+    const files = fs.readdirSync(langPath).filter((file) => file.endsWith(".mdx") || file.endsWith(".md"));
 
     const posts = files.map((file) => {
         const fullPath = path.join(langPath, file);
@@ -40,7 +40,7 @@ export async function getAllPosts(lang: "en" | "vi"): Promise<PostListItem[]> {
 
         return {
             ...(data as any),
-            slug: (data.slug || file.replace(".mdx", "")) as string,
+            slug: (data.slug || file.replace(/\.mdx?$/, "")) as string,
             lang,
             readingTime: stats.text,
         } as PostListItem;
@@ -51,10 +51,13 @@ export async function getAllPosts(lang: "en" | "vi"): Promise<PostListItem[]> {
 
 export async function getPostBySlug(slug: string, lang: "en" | "vi"): Promise<Post | null> {
     const langPath = path.join(BLOG_PATH, lang);
-    const fullPath = path.join(langPath, `${slug}.mdx`);
+    let fullPath = path.join(langPath, `${slug}.mdx`);
 
     if (!fs.existsSync(fullPath)) {
-        return null;
+        fullPath = path.join(langPath, `${slug}.md`);
+        if (!fs.existsSync(fullPath)) {
+            return null;
+        }
     }
 
     const fileContent = fs.readFileSync(fullPath, "utf-8");
