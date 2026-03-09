@@ -40,7 +40,9 @@ const VietnamSteelLP: React.FC = () => {
     const [showExitIntent, setShowExitIntent] = useState(false);
     const [hasExited, setHasExited] = useState(false);
     const [showSpecsModal, setShowSpecsModal] = useState(false);
-    const [calcValue, setCalcValue] = useState<number | string>('');
+    const [calcAnnualProd, setCalcAnnualProd] = useState<number | string>('');
+    const [calcEuRatio, setCalcEuRatio] = useState<number | string>('');
+    const [calcIntensity, setCalcIntensity] = useState<number | string>(2.1);
     const [isCalculating, setIsCalculating] = useState(false);
     const [calcResult, setCalcResult] = useState<{ cost: number; savings: number } | null>(null);
     const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null);
@@ -140,18 +142,25 @@ const VietnamSteelLP: React.FC = () => {
     };
 
     const handleCalculate = () => {
-        if (!calcValue || isNaN(Number(calcValue))) return;
+        if (!calcAnnualProd || isNaN(Number(calcAnnualProd))) return;
         setIsCalculating(true);
         trackEvent('calculator_use', 'engagement', 'hero_calc');
 
         setTimeout(() => {
-            const prod = Number(calcValue);
-            // Rough calculation: Prod * 2.1 tCO2/t * 80 EUR/tCO2
-            const cost = prod * 2.1 * 80;
-            const savings = cost * 0.25; // Estimate 25% reduction
+            const prod = Number(calcAnnualProd);
+            const ratio = Number(calcEuRatio || 100) / 100;
+            const intensity = Number(calcIntensity || 2.1);
+
+            const euVolume = prod * ratio;
+            // Rough calculation: EU Volume * Intensity tCO2/t * 80 EUR/tCO2
+            const cost = euVolume * intensity * 80;
+            // Savings are roughly 15% of the intensity reduction (7-15% fuel savings)
+            const savings = cost * 0.15;
+
             setCalcResult({ cost, savings });
             setIsCalculating(false);
-        }, 600);
+            trackEvent('calculator_result', 'engagement', 'hero_calc', Math.round(cost));
+        }, 800);
     };
 
     // Calculate target month for availability
@@ -410,27 +419,50 @@ const VietnamSteelLP: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-[40px] p-2 md:p-3 mb-20 backdrop-blur-md shadow-2xl overflow-hidden">
+                    <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-[40px] p-2 md:p-3 mb-20 backdrop-blur-md shadow-2xl overflow-hidden">
                         <div className="flex flex-col md:flex-row items-stretch gap-2">
                             <div className="flex-1 p-8 md:p-10">
-                                <label className="block text-[10px] font-black text-furnace-500 uppercase tracking-[0.3em] mb-4">
-                                    ƯỚC TÍNH CHI PHÍ CBAM CỦA BẠN
+                                <label className="block text-[10px] font-black text-furnace-500 uppercase tracking-[0.3em] mb-6">
+                                    CÔNG CỤ TÍNH CHI PHÍ CBAM QUY MÔ NHÀ MÁY
                                 </label>
-                                <div className="flex gap-4">
-                                    <input
-                                        type="text"
-                                        value={calcValue}
-                                        onChange={(e) => setCalcValue(e.target.value)}
-                                        placeholder="Sản lượng xuất khẩu EU (tấn/năm)"
-                                        className="flex-1 bg-transparent border-b-2 border-white/20 py-4 outline-none focus:border-furnace-500 transition-all font-black text-2xl placeholder:text-white/20 placeholder:font-normal placeholder:text-lg"
-                                    />
-                                    <button
-                                        onClick={handleCalculate}
-                                        className="bg-furnace-600 hover:bg-furnace-700 text-white px-8 rounded-2xl font-black transition-all flex items-center justify-center shadow-lg shadow-furnace-600/20"
-                                    >
-                                        TÍNH TOÁN
-                                    </button>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Sản lượng (tấn/năm)</label>
+                                        <input
+                                            type="text"
+                                            value={calcAnnualProd}
+                                            onChange={(e) => setCalcAnnualProd(e.target.value)}
+                                            placeholder="VD: 500,000"
+                                            className="w-full bg-white/5 border-b border-white/20 py-2 outline-none focus:border-furnace-500 transition-all font-black text-xl text-white"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Tỷ lệ xuất EU (%)</label>
+                                        <input
+                                            type="text"
+                                            value={calcEuRatio}
+                                            onChange={(e) => setCalcEuRatio(e.target.value)}
+                                            placeholder="VD: 30"
+                                            className="w-full bg-white/5 border-b border-white/20 py-2 outline-none focus:border-furnace-500 transition-all font-black text-xl text-white"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Cường độ CO2 (t/t)</label>
+                                        <input
+                                            type="text"
+                                            value={calcIntensity}
+                                            onChange={(e) => setCalcIntensity(e.target.value)}
+                                            className="w-full bg-white/5 border-b border-white/20 py-2 outline-none focus:border-furnace-500 transition-all font-black text-xl text-white"
+                                        />
+                                    </div>
                                 </div>
+                                <button
+                                    onClick={handleCalculate}
+                                    className="w-full bg-furnace-600 hover:bg-furnace-700 text-white py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-lg shadow-furnace-600/20 uppercase tracking-widest text-sm"
+                                >
+                                    <BarChart3 size={18} />
+                                    TÍNH TOÁN CHI PHÍ & TIẾT KIỆM
+                                </button>
                             </div>
 
                             <div className={`md:w-2/5 p-8 md:p-10 rounded-[32px] transition-all duration-500 flex flex-col justify-center ${calcResult ? 'bg-furnace-600 text-white' : 'bg-white/5 text-white/40'}`}>
@@ -957,6 +989,15 @@ const VietnamSteelLP: React.FC = () => {
 
                         {/* Form Side (Right) */}
                         <div className="lg:w-3/5 p-10 md:p-16">
+                            <div className="mb-12">
+                                <h3 className="text-2xl md:text-3xl font-heading font-black text-slate-900 mb-2 tracking-tighter uppercase italic">
+                                    Tính Toán Chi Phí CBAM Của Bạn <span className="text-furnace-600">(Miễn Phí)</span>
+                                </h3>
+                                <p className="text-slate-500 text-sm font-bold italic border-l-2 border-furnace-500/30 pl-4 uppercase tracking-tighter opacity-70">
+                                    Điền thông tin để nhận báo cáo phân tích lộ trình giảm Carbon & Tiết kiệm chi tiết.
+                                </p>
+                            </div>
+
                             {formState === 'success' ? (
                                 <div className="h-full flex flex-col items-center justify-center text-center animate-fade-in-up">
                                     <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 shadow-inner shadow-green-600/10">
