@@ -1100,7 +1100,7 @@ const VietnamSteelLP: React.FC = () => {
 
                                     <div className="grid md:grid-cols-2 gap-10">
                                         <div className="relative group">
-                                            <label className="block text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-4">
+                                            <label className="block text-[12px] font-black text-slate-900 uppercase tracking-[0.2em] mb-4">
                                                 SẢN LƯỢNG HÀNG NĂM <span className="text-furnace-500">*</span>
                                             </label>
                                             <input
@@ -1112,7 +1112,7 @@ const VietnamSteelLP: React.FC = () => {
                                             />
                                         </div>
                                         <div className="relative group">
-                                            <label className="block text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-4">
+                                            <label className="block text-[12px] font-black text-slate-900 uppercase tracking-[0.2em] mb-4">
                                                 LƯỢNG XUẤT KHẨU EU (TẤN) <span className="text-furnace-500">*</span>
                                             </label>
                                             <input
@@ -1169,11 +1169,11 @@ const VietnamSteelLP: React.FC = () => {
                                     <button
                                         type="submit"
                                         disabled={formState === 'submitting'}
-                                        className={`w-full bg-furnace-600 hover:bg-furnace-700 text-white font-black text-2xl py-8 rounded-[24px] uppercase tracking-[0.3em] transition-all shadow-2xl shadow-furnace-600/30 flex items-center justify-center gap-4 group ${formState === 'submitting' ? 'opacity-75 cursor-wait' : 'hover:scale-[1.01]'}`}
+                                        className={`w-full bg-furnace-600 hover:bg-furnace-700 text-white font-black text-2xl py-8 rounded-[24px] uppercase tracking-[0.2em] transition-all shadow-2xl shadow-furnace-600/30 flex items-center justify-center gap-4 group ${formState === 'submitting' ? 'opacity-75 cursor-wait' : 'hover:scale-[1.01]'}`}
                                     >
                                         {formState === 'submitting' ? 'ĐANG GỬI...' : (
                                             <>
-                                                GỬI YÊU CẦU ĐÁNH GIÁ (CÒN 1 CHỖ)
+                                                NHẬN TƯ VẤN & TÍNH TOÁN NGAY
                                                 <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" />
                                             </>
                                         )}
