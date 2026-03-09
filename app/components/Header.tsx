@@ -68,7 +68,7 @@ const Header: React.FC = () => {
       name: t('nav.solutions'),
       href: l('/solutions'),
       dropdown: language === 'vi' ? [
-        { name: t('nav.vietnamSteel'), href: '/vi/lp/vietnam-steel' }
+        { name: t('nav.vietnamSteel'), href: '/vi/lp/cbam-steel-vietnam' }
       ] : undefined
     },
     { name: t('nav.caseStudies'), href: l('/hero-cases') },

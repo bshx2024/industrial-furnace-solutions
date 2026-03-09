@@ -13,7 +13,11 @@ import {
     Users,
     MousePointerClick,
     Info,
-    X
+    X,
+    ChevronDown,
+    Plus,
+    Minus,
+    ArrowUpRight
 } from 'lucide-react';
 import type { MetaFunction } from 'react-router';
 import emailjs from '@emailjs/browser';
@@ -24,10 +28,10 @@ export const meta: MetaFunction = ({ location }) => {
         { name: "description", content: "Giảm chi phí CBAM và tiết kiệm nhiên liệu 7-15% với giải pháp thu hồi nhiệt thải không cần vốn đầu tư. Đã chứng minh tại Thép Shengli Việt Nam. Đánh giá miễn phí." },
         { property: "og:title", content: "Tuân thủ CBAM cho Thép Việt Nam | EcoReheating" },
         { property: "og:description", content: "Giảm chi phí CBAM 20-40% + Tiết kiệm nhiên liệu 7-15%. Không cần vốn đầu tư ban đầu." },
-        { property: "og:image", content: "https://ecoreheating.com/images/vietnam-steel-og.jpg" },
+        { property: "og:image", content: "https://www.ecoreheating.com/images/vietnam-steel-og.jpg" },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: `https://ecoreheating.com${location.pathname}` },
-        { tagName: "link", rel: "canonical", href: `https://ecoreheating.com${location.pathname}` },
+        { property: "og:url", content: `https://www.ecoreheating.com${location.pathname}` },
+        { tagName: "link", rel: "canonical", href: `https://www.ecoreheating.com${location.pathname}` },
     ];
 };
 
@@ -36,6 +40,30 @@ const VietnamSteelLP: React.FC = () => {
     const [showExitIntent, setShowExitIntent] = useState(false);
     const [hasExited, setHasExited] = useState(false);
     const [showSpecsModal, setShowSpecsModal] = useState(false);
+    const [calcValue, setCalcValue] = useState<number | string>('');
+    const [isCalculating, setIsCalculating] = useState(false);
+    const [calcResult, setCalcResult] = useState<{ cost: number; savings: number } | null>(null);
+    const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number } | null>(null);
+
+    // Countdown Logic
+    useEffect(() => {
+        const targetDate = new Date('2026-01-01T00:00:00');
+        const timer = setInterval(() => {
+            const now = new Date();
+            const diff = targetDate.getTime() - now.getTime();
+            if (diff <= 0) {
+                clearInterval(timer);
+                return;
+            }
+            setTimeLeft({
+                days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                mins: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+                secs: Math.floor((diff % (1000 * 60)) / 1000)
+            });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     // GA Tracking Helper
     const trackEvent = (action: string, category: string, label: string, value?: number) => {
@@ -109,6 +137,21 @@ const VietnamSteelLP: React.FC = () => {
         trackEvent('pdf_download', 'resource', type);
         // Link to actual PDF asset
         window.open('/assets/ecoreheating-vietnam-steel-cbam-guide.pdf', '_blank');
+    };
+
+    const handleCalculate = () => {
+        if (!calcValue || isNaN(Number(calcValue))) return;
+        setIsCalculating(true);
+        trackEvent('calculator_use', 'engagement', 'hero_calc');
+
+        setTimeout(() => {
+            const prod = Number(calcValue);
+            // Rough calculation: Prod * 2.1 tCO2/t * 80 EUR/tCO2
+            const cost = prod * 2.1 * 80;
+            const savings = cost * 0.25; // Estimate 25% reduction
+            setCalcResult({ cost, savings });
+            setIsCalculating(false);
+        }, 600);
     };
 
     // Calculate target month for availability
@@ -317,28 +360,105 @@ const VietnamSteelLP: React.FC = () => {
             {/* HERO SECTION */}
             <header className="relative py-20 lg:py-32 bg-industrial-950 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-1/2 h-full bg-furnace-600/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="container mx-auto px-4 relative z-10 text-center">
-                    <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
-                        <span className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-furnace-500 text-[10px] font-black tracking-widest uppercase">
-                            CÔNG NGHỆ NIÊM YẾT CISA T80
-                        </span>
-                        <span className="px-4 py-1 rounded-full bg-furnace-600/20 border border-furnace-500/20 text-white text-[10px] font-black tracking-widest uppercase">
-                            ĐÃ CHỨNG MINH TẠI THÉP SHENGLI (THĂNG LONG)
-                        </span>
-                        <span className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black tracking-widest uppercase">
-                            300+ DÂY CHUYỀN TRÊN TOÀN THẾ GIỚI
-                        </span>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="text-center mb-12">
+                        <div className="flex flex-wrap justify-center gap-2 mb-10 animate-fade-in">
+                            <span className="px-4 py-1 rounded-full bg-white/10 border border-white/20 text-furnace-500 text-[10px] font-black tracking-widest uppercase">
+                                CÔNG NGHỆ NIÊM YẾT CISA T80
+                            </span>
+                            <span className="px-4 py-1 rounded-full bg-furnace-600/20 border border-furnace-500/20 text-white text-[10px] font-black tracking-widest uppercase">
+                                ĐÃ CHỨNG MINH TẠI THÉP SHENGLI (THĂNG LONG)
+                            </span>
+                        </div>
+
+                        {/* CBAM COUNTDOWN TIMER */}
+                        {timeLeft && (
+                            <div className="inline-flex flex-wrap items-center justify-center gap-4 mb-10 p-2 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 animate-fade-in shadow-xl">
+                                <div className="text-[10px] font-black uppercase tracking-[0.3em] text-furnace-500 pl-4 pr-2">
+                                    ĐẾM NGƯỢC THUẾ CBAM:
+                                </div>
+                                <div className="flex gap-2">
+                                    {[
+                                        { v: timeLeft.days, u: "Ngày" },
+                                        { v: timeLeft.hours, u: "Giờ" },
+                                        { v: timeLeft.mins, u: "Phút" },
+                                        { v: timeLeft.secs, u: "Giây" }
+                                    ].map((t, i) => (
+                                        <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-industrial-950 rounded-xl border border-white/10">
+                                            <span className="text-xl font-black tracking-tighter tabular-nums text-white">
+                                                {t.v.toString().padStart(2, '0')}
+                                            </span>
+                                            <span className="text-[8px] font-black uppercase text-gray-500 tracking-tighter">{t.u}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="hidden lg:flex items-center gap-2 pl-2 pr-4 text-[10px] font-bold text-red-500 animate-pulse">
+                                    <AlertTriangle size={12} />
+                                    BẮT ĐẦU ÁP THUẾ ĐẦY ĐỦ
+                                </div>
+                            </div>
+                        )}
+
+                        <h1 className="text-4xl md:text-7xl font-heading font-black mb-8 leading-tight max-w-6xl mx-auto tracking-tight">
+                            CBAM Đang Tăng Chi Phí Xuất Khẩu? <br />
+                            <span className="text-furnace-500 underline decoration-white/10 italic">Giảm 20-40% Phát Thải, Tiết Kiệm €2-3M/Năm</span>
+                        </h1>
+
+                        <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-16 font-light leading-relaxed">
+                            Giải pháp Thu hồi Nhiệt thải Không cần Vốn đầu tư cho Nhà máy Thép Việt Nam.
+                            Chủ động ứng phó CBAM, bảo vệ biên lợi nhuận xuất khẩu.
+                        </p>
                     </div>
 
-                    <h1 className="text-4xl md:text-7xl font-heading font-black mb-8 leading-tight max-w-5xl mx-auto">
-                        Giảm Chi phí CBAM + <br />
-                        <span className="text-furnace-500 underline decoration-white/10">Tiết kiệm Nhiên liệu 7-15%</span>
-                    </h1>
+                    <div className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-[40px] p-2 md:p-3 mb-20 backdrop-blur-md shadow-2xl overflow-hidden">
+                        <div className="flex flex-col md:flex-row items-stretch gap-2">
+                            <div className="flex-1 p-8 md:p-10">
+                                <label className="block text-[10px] font-black text-furnace-500 uppercase tracking-[0.3em] mb-4">
+                                    ƯỚC TÍNH CHI PHÍ CBAM CỦA BẠN
+                                </label>
+                                <div className="flex gap-4">
+                                    <input
+                                        type="text"
+                                        value={calcValue}
+                                        onChange={(e) => setCalcValue(e.target.value)}
+                                        placeholder="Sản lượng xuất khẩu EU (tấn/năm)"
+                                        className="flex-1 bg-transparent border-b-2 border-white/20 py-4 outline-none focus:border-furnace-500 transition-all font-black text-2xl placeholder:text-white/20 placeholder:font-normal placeholder:text-lg"
+                                    />
+                                    <button
+                                        onClick={handleCalculate}
+                                        className="bg-furnace-600 hover:bg-furnace-700 text-white px-8 rounded-2xl font-black transition-all flex items-center justify-center shadow-lg shadow-furnace-600/20"
+                                    >
+                                        TÍNH TOÁN
+                                    </button>
+                                </div>
+                            </div>
 
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-                        Giải pháp Thu hồi Nhiệt thải Không cần Vốn đầu tư cho Nhà máy Thép Việt Nam.
-                        Tối ưu hóa hành trình nhiệt từ máy đúc đến lò nung.
-                    </p>
+                            <div className={`md:w-2/5 p-8 md:p-10 rounded-[32px] transition-all duration-500 flex flex-col justify-center ${calcResult ? 'bg-furnace-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                                {isCalculating ? (
+                                    <div className="flex flex-col items-center gap-2 py-4">
+                                        <div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                                        <span className="text-[10px] font-black tracking-widest uppercase">ĐANG PHÂN TÍCH...</span>
+                                    </div>
+                                ) : calcResult ? (
+                                    <div className="animate-fade-in">
+                                        <p className="text-[10px] font-black uppercase tracking-widest mb-4 opacity-70">PHẢI TRẢ (ƯỚC TÍNH):</p>
+                                        <div className="text-3xl font-black tracking-tighter mb-4 italic">
+                                            €{(calcResult.cost / 1000000).toFixed(1)}M <span className="text-xl font-normal opacity-60">/năm</span>
+                                        </div>
+                                        <div className="pt-4 border-t border-white/20">
+                                            <p className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">CƠ HỘI TIẾT KIỆM:</p>
+                                            <strong className="text-xl font-black">€{(calcResult.savings / 1000000).toFixed(1)}M/năm</strong>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="text-center italic opacity-60">
+                                        <Info size={32} className="mx-auto mb-4 opacity-20" />
+                                        Nhập sản lượng để xem số tiền bạn có thể tiết kiệm
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                         <a
@@ -346,7 +466,7 @@ const VietnamSteelLP: React.FC = () => {
                             onClick={() => trackEvent('cta_click', 'conversion', 'hero_assessment')}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-furnace-600 hover:bg-furnace-700 text-white font-black px-12 py-6 rounded-2xl text-xl transition-all shadow-2xl shadow-furnace-600/40 uppercase tracking-widest group"
                         >
-                            NHẬN ĐÁNH GIÁ MIỄN PHÍ (CÒN 1 CHỖ)
+                            NHẬN BÁO CÁO CẮT GIẢM CHI PHÍ
                             <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                         </a>
                         <a
@@ -359,13 +479,124 @@ const VietnamSteelLP: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale contrast-150 brightness-200">
-                        {/* Simple placeholder logos */}
                         <div className="text-sm font-black tracking-tighter italic">CISA T80 Listed</div>
                         <div className="text-sm font-black tracking-tighter italic">ISO 50001 Verified</div>
                         <div className="text-sm font-black tracking-tighter italic">Performance Guaranteed</div>
                     </div>
                 </div>
             </header>
+
+            {/* CBAM URGENCY SECTION - MOVED TO SECOND SCREEN */}
+            <section className="py-24 bg-white relative scroll-mt-20">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="flex flex-col lg:flex-row gap-20 items-center">
+                            <div className="lg:w-1/2">
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-8 border border-orange-200 shadow-sm shadow-orange-600/10 animate-pulse">
+                                    <AlertTriangle size={14} />
+                                    CBAM ĐÃ CÓ HIỆU LỰC TỪ 01/01/2026
+                                </div>
+                                <h2 className="text-4xl md:text-5xl font-heading font-black mb-6 leading-tight text-slate-900">
+                                    Tác động của CBAM đến <br />
+                                    Thép Xuất Khẩu Việt Nam
+                                </h2>
+                                <p className="text-lg text-slate-600 mb-10 leading-relaxed font-light">
+                                    EU bắt đầu áp dụng thuế carbon đầy đủ. Nếu không hành động ngay, chi phí xuất khẩu sẽ tăng <strong>€75-100/tấn CO2</strong>, trực tiếp xóa sổ lợi thế cạnh tranh của các nhà máy thép Việt Nam.
+                                </p>
+
+                                <div className="bg-red-50 p-8 rounded-3xl border border-red-100 mb-10">
+                                    <h4 className="font-black text-red-900 mb-4 flex items-center gap-2">⚠️ RỦI RO NẾU KHÔNG HÀNH ĐỘNG NGAY:</h4>
+                                    <ul className="space-y-3 text-red-800 text-sm font-medium">
+                                        <li className="flex items-start gap-2">
+                                            <X size={16} className="shrink-0 mt-0.5" /> Chi phí xuất khẩu tăng vọt (không kiểm soát được thuế Carbon)
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <X size={16} className="shrink-0 mt-0.5" /> Mất lợi thế cạnh tranh so với các đối thủ đã tối ưu hóa
+                                        </li>
+                                        <li className="flex items-start gap-2">
+                                            <X size={16} className="shrink-0 mt-0.5" /> Đối tác EU ưu tiên chuyển sang các nhà cung cấp Carbon thấp
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-slate-950 p-8 rounded-3xl text-white mb-10 shadow-2xl relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 blur-3xl rounded-full"></div>
+                                    <h4 className="font-bold mb-6 text-furnace-500 flex items-center gap-2">
+                                        <Info size={18} />
+                                        Mô phỏng thiệt hại tài chính:
+                                    </h4>
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                                            <span className="text-gray-400 text-sm">Sản lượng xuất khẩu:</span>
+                                            <span className="font-black">150.000 tấn/năm</span>
+                                        </div>
+                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                                            <span className="text-gray-400 text-sm">Cường độ phát thải:</span>
+                                            <span className="font-black text-red-400">2,1 tấn CO2/tấn</span>
+                                        </div>
+                                        <div className="flex flex-col pt-4">
+                                            <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest mb-1">CHI PHÍ PHÁT SINH HÀNG NĂM:</span>
+                                            <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">€2,4 - 3,2M</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-1/2">
+                                <h4 className="text-[10px] font-black text-furnace-500 uppercase tracking-[0.3em] mb-8">
+                                    LỘ TRÌNH 3 BƯỚC KHẮC PHỤC
+                                </h4>
+                                <div className="space-y-6">
+                                    {[
+                                        {
+                                            step: "01",
+                                            title: "Đánh giá Baseline",
+                                            desc: "Đo lường cường độ phát thải thực tế của nhà máy.",
+                                            icon: <BarChart3 />
+                                        },
+                                        {
+                                            step: "02",
+                                            title: "Tối ưu hóa Lò Nung",
+                                            desc: "Giảm 7-15% nhiên liệu = Giảm 7-15% CO2 phát thải.",
+                                            icon: <Zap />
+                                        },
+                                        {
+                                            step: "03",
+                                            title: "Xác thực & Báo cáo",
+                                            desc: "Dữ liệu đo đạc thực tế theo tiêu chuẩn CISA T80 cho đối tác EU.",
+                                            icon: <ShieldCheck />
+                                        }
+                                    ].map((s, i) => (
+                                        <div key={i} className="flex gap-6 p-8 bg-white border border-slate-100 rounded-[32px] shadow-lg hover:shadow-2xl transition-all group">
+                                            <div className="w-16 h-16 bg-slate-50 text-furnace-500 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-furnace-600 group-hover:text-white transition-all duration-500 shadow-xl">
+                                                {s.icon}
+                                            </div>
+                                            <div>
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <span className="text-slate-300 font-black text-2xl italic">{s.step}</span>
+                                                    <h4 className="font-black text-slate-900 text-xl">{s.title}</h4>
+                                                </div>
+                                                <p className="text-sm text-slate-500 leading-relaxed font-bold italic">{s.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="mt-12">
+                                    <a
+                                        href="#assessment-form"
+                                        onClick={() => trackEvent('cta_click', 'engagement', 'cbam_strategy_click')}
+                                        className="w-full flex items-center justify-center gap-4 bg-slate-900 text-white font-black py-8 rounded-3xl uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl group"
+                                    >
+                                        <MousePointerClick size={24} className="text-furnace-500 group-hover:scale-110 transition-transform" />
+                                        NHẬN TƯ VẤN LỘ TRÌNH MIỄN PHÍ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* VIETNAM CASE STUDY SECTION */}
             <section id="case-study" className="py-24 bg-slate-50 scroll-mt-20">
@@ -463,96 +694,6 @@ const VietnamSteelLP: React.FC = () => {
                                             </div>
                                         </div>
                                     ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* CBAM URGENCY SECTION */}
-            <section className="py-24 bg-white relative">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="flex flex-col lg:flex-row gap-20 items-center">
-                            <div className="lg:w-1/2">
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-8 border border-orange-200 shadow-sm">
-                                    <AlertTriangle size={14} className="animate-pulse" />
-                                    TÁC ĐỘNG TÀI CHÍNH 2026
-                                </div>
-                                <h2 className="text-4xl md:text-5xl font-heading font-black mb-6 leading-tight text-slate-900">
-                                    Tác động của CBAM đến <br />
-                                    Xuất khẩu Thép Việt Nam
-                                </h2>
-                                <p className="text-lg text-slate-600 mb-10 leading-relaxed font-light">
-                                    Từ <strong>01/01/2026</strong>, EU bắt đầu áp dụng thuế carbon đầy đủ. Các nhà nhập khẩu thép phải trả <strong>€75-100</strong> cho mỗi tấn CO2 trong thép Việt Nam nếu không chứng minh được hiệu quả năng lượng.
-                                </p>
-
-                                <div className="bg-slate-950 p-8 rounded-3xl text-white mb-10 shadow-2xl relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 blur-3xl rounded-full"></div>
-                                    <h4 className="font-bold mb-6 text-furnace-500 flex items-center gap-2">
-                                        <Info size={18} />
-                                        Mô phỏng tác động nhà máy điển hình:
-                                    </h4>
-                                    <div className="space-y-4">
-                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                                            <span className="text-gray-400 text-sm">Sản lượng mỗi năm:</span>
-                                            <span className="font-black">500.000 tấn</span>
-                                        </div>
-                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                                            <span className="text-gray-400 text-sm">Tỷ lệ xuất khẩu EU:</span>
-                                            <span className="font-black">30%</span>
-                                        </div>
-                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
-                                            <span className="text-gray-400 text-sm">Cường độ phát thải:</span>
-                                            <span className="font-black text-red-400">2,1 tấn CO2/tấn</span>
-                                        </div>
-                                        <div className="flex flex-col pt-4">
-                                            <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest mb-1">CHI PHÍ PHÁT SINH HÀNG NĂM:</span>
-                                            <span className="text-4xl md:text-5xl font-black text-white tracking-tighter">€2,4 - 3,2M</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="p-6 border-l-4 border-furnace-500 bg-furnace-50 flex items-center justify-between gap-6 rounded-r-2xl">
-                                    <p className="text-slate-800 font-bold leading-tight">
-                                        Muốn biết nhà máy của bạn có thể tiết kiệm được bao nhiêu?
-                                    </p>
-                                    <a
-                                        href="#assessment-form"
-                                        onClick={() => trackEvent('cta_click', 'engagement', 'cbam_urgency_arrow')}
-                                        className="bg-furnace-600 text-white p-3 rounded-full hover:bg-furnace-700 transition-all shrink-0"
-                                    >
-                                        <ArrowRight />
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {[
-                                    { title: "Giảm phát thải 20-40%", desc: "Hạ thấp gánh nặng thuế CBAM trực tiếp thông qua tối ưu hóa nhiệt.", icon: <Zap className="text-furnace-500" /> },
-                                    { title: "Cắt giảm 7-15% chi phí", desc: "Tăng biên lợi nhuận ngay lập tức bằng cách tiết kiệm nhiên liệu.", icon: <BarChart3 className="text-furnace-500" /> },
-                                    { title: "Dữ liệu phát thải xác thực", desc: "Đáp ứng báo cáo khắt khe từ đối tác EU bằng chứng nhận thực tế.", icon: <ShieldCheck className="text-furnace-500" /> },
-                                    { title: "Vốn đầu tư ban đầu bằng 0", desc: "Mô hình chia sẻ lợi nhuận, chúng tôi chịu rủi ro vốn.", icon: <DollarSign className="text-furnace-500" /> }
-                                ].map((benefit, i) => (
-                                    <div key={i} className="p-8 bg-white border border-slate-100 rounded-[32px] shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                                        <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6">
-                                            {benefit.icon}
-                                        </div>
-                                        <h4 className="font-black text-slate-900 mb-3 text-lg">✅ {benefit.title}</h4>
-                                        <p className="text-sm text-slate-500 leading-relaxed">{benefit.desc}</p>
-                                    </div>
-                                ))}
-
-                                <div className="md:col-span-2 pt-6">
-                                    <a
-                                        href="#assessment-form"
-                                        onClick={() => trackEvent('cta_click', 'engagement', 'benefit_calculator')}
-                                        className="w-full flex items-center justify-center gap-4 bg-slate-900 text-white font-black py-6 rounded-2xl uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl group"
-                                    >
-                                        <MousePointerClick size={24} className="text-furnace-500 group-hover:scale-110 transition-transform" />
-                                        TÍNH TOÁN TIẾT KIỆM CỦA BẠN
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -701,6 +842,60 @@ const VietnamSteelLP: React.FC = () => {
                 </div>
             </section>
 
+            {/* COMPETITOR COMPARISON SECTION */}
+            <section className="py-24 bg-slate-50 relative overflow-hidden">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-5xl font-heading font-black mb-6 text-slate-900 leading-tight italic uppercase tracking-tighter">
+                                Vì sao 300+ nhà máy <br />
+                                <span className="text-furnace-600">Chọn EcoReheating?</span>
+                            </h2>
+                            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light leading-relaxed italic border-l-4 border-furnace-500 pl-6 text-left inline-block">
+                                So sánh các phương án tối ưu hóa lò nung và tuân thủ CBAM hiện nay tại thị trường Việt Nam.
+                            </p>
+                        </div>
+
+                        <div className="overflow-x-auto pb-8">
+                            <table className="w-full min-w-[800px] border-collapse bg-white rounded-[40px] overflow-hidden shadow-2xl border border-slate-200">
+                                <thead>
+                                    <tr className="bg-industrial-950 text-white">
+                                        <th className="p-8 text-left text-xs font-black uppercase tracking-[0.2em] opacity-40">TÍNH NĂNG</th>
+                                        <th className="p-8 text-center text-xs font-black uppercase tracking-[0.2em] opacity-40 bg-white/5">MUA MỚI / EPC</th>
+                                        <th className="p-8 text-center text-xs font-black uppercase tracking-[0.2em] opacity-40">TỰ CẢI TẠO</th>
+                                        <th className="p-8 text-center text-sm font-black uppercase tracking-[0.3em] text-furnace-500 bg-white/10 relative">
+                                            ECOREHEATING
+                                            <div className="absolute top-0 right-0 p-2">
+                                                <div className="bg-furnace-600 text-[8px] px-2 py-0.5 rounded text-white font-black animate-pulse">CISA T80</div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-slate-700 font-bold">
+                                    {[
+                                        { field: "Vốn đầu tư (CAPEX)", traditional: "$2M - $5M+", self: "$500k - $1M+", eco: "$0 (Không đồng)", highlight: true },
+                                        { field: "Rủi ro kỹ thuật", traditional: "Chủ đầu tư chịu", self: "Rất cao (tự mò mẫm)", eco: "100% EcoReheating chịu" },
+                                        { field: "Tuân thủ CBAM", traditional: "Tùy nhà sản xuất", self: "Không đảm bảo", eco: "Đạt chuẩn CISA T80" },
+                                        { field: "Sâu định hướng Carbon", traditional: "Kén thiết bị", self: "Khó thực hiện", eco: "Theo bộ tiêu chuẩn EU" },
+                                        { field: "Thời gian hoàn vốn", traditional: "3 - 5 năm", self: "Không rõ ràng", eco: "Tức thì (Tiết kiệm > Chi phí)" },
+                                        { field: "Bảo trì & Vận hành", traditional: "Chủ đầu tư", self: "Tự cung tự cấp", eco: "Trọn gói (Miễn phí)" }
+                                    ].map((row, i) => (
+                                        <tr key={i} className={`border-b border-slate-100 last:border-0 hover:bg-slate-50 transition-all ${row.highlight ? 'bg-orange-50/30' : ''}`}>
+                                            <td className="p-8 text-sm uppercase tracking-tight font-black border-r border-slate-100">{row.field}</td>
+                                            <td className="p-8 text-center opacity-60 text-sm">{row.traditional}</td>
+                                            <td className="p-8 text-center opacity-60 text-sm">{row.self}</td>
+                                            <td className="p-8 text-center text-slate-900 font-black text-base bg-furnace-50/30">
+                                                <span className={row.eco.includes("$0") || row.eco.includes("100%") ? "text-furnace-600" : ""}>{row.eco}</span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ASSESSMENT FORM SECTION */}
             <section id="assessment-form" className="py-24 bg-slate-50 relative scroll-mt-20">
                 <div className="container mx-auto px-4">
@@ -716,9 +911,9 @@ const VietnamSteelLP: React.FC = () => {
                                     <span className="inline-block px-4 py-1 rounded-full bg-furnace-600/20 border border-furnace-500/30 text-furnace-500 text-[10px] font-black tracking-[0.3em] uppercase mb-8">
                                         CƠ HỘI CÓ HẠN
                                     </span>
-                                    <h2 className="text-4xl md:text-5xl font-heading font-black mb-8 leading-tight">
-                                        Nhận Đánh giá <br />
-                                        <span className="text-furnace-500">Tuân thủ CBAM</span> Miễn phí
+                                    <h2 className="text-4xl md:text-5xl font-heading font-black mb-8 leading-tight text-white">
+                                        Tính Toán Chi Phí <br />
+                                        <span className="text-furnace-500">CBAM Của Bạn</span> (Miễn Phí)
                                     </h2>
                                     <p className="text-gray-400 text-lg leading-relaxed mb-12 font-light italic">
                                         Tìm hiểu chính xác bạn có thể tiết kiệm được bao nhiêu.
@@ -859,19 +1054,16 @@ const VietnamSteelLP: React.FC = () => {
                                             />
                                         </div>
                                         <div className="relative group">
-                                            <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">
-                                                CHỨC VỤ (Tùy chọn)
+                                            <label className="block text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-4">
+                                                LƯỢNG XUẤT KHẨU EU (TẤN) <span className="text-furnace-500">*</span>
                                             </label>
-                                            <select
-                                                name="user_role"
-                                                className="w-full bg-slate-50 border-b-2 border-slate-200 py-4 outline-none focus:border-furnace-500 transition-all font-bold bg-transparent"
-                                            >
-                                                <option value="">Chọn chức vụ...</option>
-                                                <option value="CEO">CEO / Tổng giám đốc</option>
-                                                <option value="Technical-Director">Giám đốc kỹ thuật</option>
-                                                <option value="Energy-Manager">Quản lý năng lượng</option>
-                                                <option value="Other">Khác</option>
-                                            </select>
+                                            <input
+                                                required
+                                                type="text"
+                                                name="user_eu_export"
+                                                className="w-full bg-slate-50 border-b-2 border-slate-200 py-4 outline-none focus:border-furnace-500 transition-all font-bold placeholder:italic"
+                                                placeholder="Sản lượng xuất EU mỗi năm"
+                                            />
                                         </div>
                                     </div>
 
@@ -940,6 +1132,61 @@ const VietnamSteelLP: React.FC = () => {
                                     </div>
                                 </form>
                             )}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* FAQ SECTION */}
+            <section className="py-24 bg-white relative">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="text-center mb-16">
+                            <span className="text-furnace-600 text-xs font-black uppercase tracking-[0.3em] mb-4 block">HỎI ĐÁP QUAN TRỌNG</span>
+                            <h2 className="text-3xl md:text-5xl font-heading font-black text-slate-900 tracking-tighter uppercase italic">
+                                Bạn còn thắc mắc <br />
+                                <span className="text-furnace-600">về CBAM & Tối ưu hóa?</span>
+                            </h2>
+                        </div>
+
+                        <div className="space-y-4">
+                            {[
+                                {
+                                    q: "CISA T80 là gì và tại sao nó lại quan trọng cho CBAM?",
+                                    a: "CISA T80 (CISA Technical Standard 80) là bộ tiêu chuẩn quốc tế cho hiệu suất lò nung thép. Các đối tác EU tin tưởng dữ liệu được xác thực bởi CISA T80 hơn các báo cáo đo lường nội bộ thủ công, giúp nhà máy chứng minh nỗ lực giảm Carbon một cách chính xác trước khi áp thuế CBAM đầy đủ."
+                                },
+                                {
+                                    q: "Làm thế nào để đo lường tiết kiệm nhiên liệu một cách khách quan?",
+                                    a: "Chúng tôi lắp đặt hệ thống đồng hồ đo khí đốt/dầu và lưu lượng kế đạt chuẩn quốc tế trước khi thực hiện tối ưu hóa để lấy dữ liệu Baseline (đường cơ sở). Khoản tiết kiệm được tính bằng chênh lệch giữa Baseline và số đo thực tế sau nung, được cả hai bên xác nhận dựa trên nhật ký vận hành."
+                                },
+                                {
+                                    q: "Tại sao EcoReheating có thể đầu tư 100% vốn cho nhà máy?",
+                                    a: "Dựa trên 300+ dự án thành công, chúng tôi có sự tin cậy tuyệt đối vào công nghệ của mình. Mô hình Zero-CAPEX (Quản lý Năng lượng) cho phép chúng tôi chia sẻ lợi ích từ chính khoản nhiên liệu mà bạn tiết kiệm được. Nếu không tiết kiệm được, chúng tôi không nhận được gì."
+                                },
+                                {
+                                    q: "Dự án lắp đặt có ảnh hưởng đến lịch sản xuất của nhà máy không?",
+                                    a: "Mọi hoạt động khảo sát và lắp đặt đều được phối hợp chặt chẽ với kế hoạch dừng lò bảo trì định kỳ của nhà máy. Chúng tôi cam kết không gây gián đoạn sản xuất ngoài kế hoạch."
+                                },
+                                {
+                                    q: "Thời hạn CBAM bắt đầu có hiệu lực và áp thuế đầy đủ là khi nào?",
+                                    a: "CBAM đã bắt đầu giai đoạn chuyển tiếp. Giai đoạn áp thuế đầy đủ sẽ bắt đầu từ 01/01/2026. Nếu nhà máy chưa có giải pháp giảm phát thải trước thời điểm này, chi phí xuất khẩu sang EU sẽ tăng vọt trung bình 15-25% tùy cường độ Carbon."
+                                }
+                            ].map((faq, i) => (
+                                <details key={i} className="group bg-slate-50 rounded-[24px] border border-slate-100 overflow-hidden transition-all duration-300 open:shadow-xl open:border-furnace-100">
+                                    <summary className="flex items-center justify-between p-8 cursor-pointer list-none">
+                                        <h4 className="font-black text-slate-900 pr-8 group-open:text-furnace-600 transition-colors uppercase tracking-tight italic">
+                                            {faq.q}
+                                        </h4>
+                                        <div className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 group-open:bg-furnace-600 group-open:text-white transition-all group-open:rotate-180">
+                                            <ChevronDown size={20} />
+                                        </div>
+                                    </summary>
+                                    <div className="px-8 pb-8 animate-fade-in">
+                                        <p className="text-slate-600 leading-relaxed font-medium italic border-l-2 border-furnace-500/20 pl-6">
+                                            {faq.a}
+                                        </p>
+                                    </div>
+                                </details>
+                            ))}
                         </div>
                     </div>
                 </div>

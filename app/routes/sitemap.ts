@@ -12,6 +12,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     { en: "/case-studies", vi: "/vi/case-studies", priority: "0.8", changefreq: "monthly" },
     { en: "/about", vi: "/vi/about", priority: "0.7", changefreq: "monthly" },
     { en: "/blog", vi: "/vi/blog", priority: "0.8", changefreq: "daily" },
+    { en: "/vi/lp/cbam-steel-vietnam", vi: "/vi/lp/cbam-steel-vietnam", priority: "0.8", changefreq: "weekly" }, // LP has no EN version, mapping to itself for simple logic
   ];
 
   const enPosts = await getAllPosts("en");
