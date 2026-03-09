@@ -465,28 +465,45 @@ const VietnamSteelLP: React.FC = () => {
                                 </button>
                             </div>
 
-                            <div className={`md:w-2/5 p-8 md:p-10 rounded-[32px] transition-all duration-500 flex flex-col justify-center ${calcResult ? 'bg-furnace-600 text-white' : 'bg-white/5 text-white/40'}`}>
+                            <div className={`md:w-2/5 p-8 md:p-10 rounded-[32px] transition-all duration-700 flex flex-col justify-center relative overflow-hidden ${calcResult ? 'bg-furnace-600 text-white shadow-[0_20px_50px_rgba(249,115,22,0.3)]' : 'bg-white/5 text-white/50 border border-white/10'}`}>
                                 {isCalculating ? (
-                                    <div className="flex flex-col items-center gap-2 py-4">
-                                        <div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
-                                        <span className="text-[10px] font-black tracking-widest uppercase">ĐANG PHÂN TÍCH...</span>
+                                    <div className="flex flex-col items-center gap-4 py-4 animate-pulse">
+                                        <div className="w-12 h-12 border-4 border-furnace-500/30 border-t-furnace-500 rounded-full animate-spin"></div>
+                                        <span className="text-[10px] font-black tracking-[0.4em] uppercase text-furnace-500">ĐANG PHÂN TÍCH...</span>
                                     </div>
                                 ) : calcResult ? (
-                                    <div className="animate-fade-in">
-                                        <p className="text-[10px] font-black uppercase tracking-widest mb-4 opacity-70">PHẢI TRẢ (ƯỚC TÍNH):</p>
-                                        <div className="text-3xl font-black tracking-tighter mb-4 italic">
-                                            €{(calcResult.cost / 1000000).toFixed(1)}M <span className="text-xl font-normal opacity-60">/năm</span>
-                                        </div>
-                                        <div className="pt-4 border-t border-white/20">
-                                            <p className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-70">CƠ HỘI TIẾT KIỆM:</p>
-                                            <strong className="text-xl font-black">€{(calcResult.savings / 1000000).toFixed(1)}M/năm</strong>
+                                    <div className="animate-fade-in-up">
+                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-6 text-white/70">KẾT QUẢ DỰ BÁO CBAM:</p>
+                                        <div className="space-y-6">
+                                            <div>
+                                                <p className="text-[10px] font-bold uppercase text-white/60 mb-1">PHẢI TRẢ (DỰ KIẾN):</p>
+                                                <div className="text-4xl font-black tracking-tighter italic">
+                                                    €{(calcResult.cost / 1000000).toFixed(2)}M <span className="text-xl font-normal opacity-60">/năm</span>
+                                                </div>
+                                            </div>
+                                            <div className="pt-6 border-t border-white/20">
+                                                <p className="text-[10px] font-bold uppercase text-white/60 mb-1 tracking-widest">CƠ HỘI TIẾT KIỆM TỨC THÌ:</p>
+                                                <div className="text-3xl font-black text-white flex items-center gap-2">
+                                                    €{(calcResult.savings / 1000000).toFixed(2)}M
+                                                    <ArrowUpRight size={24} className="text-white/40" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="text-center italic opacity-60">
-                                        <Info size={32} className="mx-auto mb-4 opacity-20" />
-                                        Nhập sản lượng để xem số tiền bạn có thể tiết kiệm
+                                    <div className="text-center space-y-4 py-4 relative z-10 animate-fade-in text-white/70">
+                                        <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-2 border border-white/5">
+                                            <Info size={32} className="text-furnace-500/50" />
+                                        </div>
+                                        <p className="text-sm font-bold italic leading-relaxed max-w-[180px] mx-auto">
+                                            Nhập thông tin bên trái để <span className="text-furnace-500">xem ngay</span> chi phí CBAM của bạn
+                                        </p>
                                     </div>
+                                )}
+
+                                {/* Background glow for empty state */}
+                                {!calcResult && !isCalculating && (
+                                    <div className="absolute inset-0 bg-gradient-to-br from-furnace-600/5 to-transparent pointer-events-none"></div>
                                 )}
                             </div>
                         </div>
