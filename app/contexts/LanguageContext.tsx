@@ -16,8 +16,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations = {
   en: {
     // SEO
-    'seo.home.title': 'Zero CAPEX Reheating Furnace Efficiency',
-    'seo.home.desc': 'Zero CAPEX reheating furnace optimization. Reduce fuel consumption by 7-15% with CISA T80 verified technology and our Energy Steward model for guaranteed savings.',
+    'seo.home.title': 'Zero CAPEX Reheating Furnace Energy Saving | Save 7-15% Fuel',
+    'seo.home.desc': 'Stop wasting fuel. Our CISA T80 verified "Energy Steward" model requires $0 upfront investment. We invest, you save. Get a free ROI audit now.',
 
     // Navigation
     'nav.home': 'HOME',
@@ -57,7 +57,7 @@ export const translations = {
     'calc.btn': 'Calculate My Full ROI',
     'calc.footer': 'No CAPEX Required | Performance Based',
     'calc.trusted': 'Trusted by Global Steel Leaders:',
-    'calc.verified': 'CISA T80 Verified',
+    'calc.verified': 'CISA T80 Verified | Doc. No. 185',
 
     // Stats
     'stat.fuel': 'Typical Fuel Saving',
@@ -441,6 +441,10 @@ export const translations = {
     'contact.role.energyManager': 'Energy Manager',
     'contact.role.maintenanceManager': 'Maintenance Manager',
     'contact.role.other': 'Other',
+    'contact.roi.title': 'Quick ROI Estimator',
+    'contact.roi.production': 'Annual Production',
+    'contact.roi.savings': 'Estimated Annual Fuel Savings',
+    'contact.roi.cbam': 'Estimated CBAM Cost Reduction',
     'contact.furnace.walkingBeam': 'Walking Beam',
     'contact.furnace.walkingHearth': 'Walking Hearth',
     'contact.furnace.pusher': 'Pusher',
@@ -466,8 +470,8 @@ export const translations = {
   },
   vi: {
     // SEO
-    'seo.home.title': 'Tiết kiệm Lò nung lại Zero CAPEX',
-    'seo.home.desc': 'Tối ưu hóa lò nung lại Zero CAPEX. Giảm tiêu thụ nhiên liệu 7-15% với công nghệ xác thực CISA T80 và mô hình Quản gia Năng lượng cho khoản tiết kiệm được đảm bảo.',
+    'seo.home.title': 'Tiết kiệm 7-15% Nhiên liệu Lò nung | Giải pháp Zero CAPEX',
+    'seo.home.desc': 'Ngừng lãng phí năng lượng. Công nghệ xác thực CISA T80 giúp giảm 7-15% tiêu thụ gas. Không cần vốn đầu tư ban đầu. Đăng ký đánh giá ROI miễn phí.',
 
     // Navigation
     'nav.home': 'TRANG CHỦ',
@@ -507,7 +511,7 @@ export const translations = {
     'calc.btn': 'Tính toán ROI đầy đủ',
     'calc.footer': 'Zero CAPEX | Dựa trên hiệu suất thực',
     'calc.trusted': 'Đối tác thép toàn cầu tin dùng:',
-    'calc.verified': 'Đạt chuẩn CISA T80',
+    'calc.verified': 'Đạt chuẩn CISA T80 | Công văn số 185',
 
     // Stats
     'stat.fuel': 'Tiết kiệm nhiên liệu điển hình',
@@ -885,6 +889,10 @@ export const translations = {
     'contact.role.energyManager': 'Quản lý Năng lượng',
     'contact.role.maintenanceManager': 'Quản lý Bảo trì',
     'contact.role.other': 'Khác',
+    'contact.roi.title': 'Ước tính ROI Nhanh',
+    'contact.roi.production': 'Sản lượng Hàng năm',
+    'contact.roi.savings': 'Tiết kiệm Nhiên liệu Hàng năm',
+    'contact.roi.cbam': 'Giảm chi phí CBAM ước tính',
     'contact.furnace.walkingBeam': 'Thanh bước',
     'contact.furnace.walkingHearth': 'Đáy sàn',
     'contact.furnace.pusher': 'Đẩy',

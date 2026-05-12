@@ -24,8 +24,8 @@ import emailjs from '@emailjs/browser';
 
 export const meta: MetaFunction = ({ location }) => {
     return [
-        { title: "Tuân thủ CBAM cho Thép Việt Nam | Giải pháp Năng lượng Không cần Vốn | EcoReheating" },
-        { name: "description", content: "Giảm chi phí CBAM và tiết kiệm nhiên liệu 7-15% với giải pháp thu hồi nhiệt thải không cần vốn đầu tư. Đã chứng minh tại Thép Shengli Việt Nam. Đánh giá miễn phí." },
+        { title: "Tuân thủ CBAM cho Thép Việt Nam | Tiết kiệm €2-3M phí Carbon mỗi năm" },
+        { name: "description", content: "Bạn đang lo lắng về thuế Carbon EU? Giảm 20-40% phát thải và tiết kiệm 7-15% nhiên liệu với giải pháp Zero CAPEX. Đã chứng minh tại Thép Shengli. Đánh giá ROI miễn phí ngay." },
         { property: "og:title", content: "Tuân thủ CBAM cho Thép Việt Nam | EcoReheating" },
         { property: "og:description", content: "Giảm chi phí CBAM 20-40% + Tiết kiệm nhiên liệu 7-15%. Không cần vốn đầu tư ban đầu." },
         { property: "og:image", content: "https://www.ecoreheating.com/images/vietnam-steel-og.jpg" },

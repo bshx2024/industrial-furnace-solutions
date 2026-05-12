@@ -6,6 +6,21 @@ import { useLanguage } from '../contexts/LanguageContext';
 const ContactForm: React.FC = () => {
   const { t, language } = useLanguage();
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [production, setProduction] = useState<number>(2.5);
+
+  // ROI Logic
+  const fuelSavingRate = 0.11;
+  const fuelCostPerTon = 14;
+  const cbamFactor = 85; // EUR per ton CO2
+  const co2PerTon = 0.052;
+
+  const estimatedSavings = (production * 1000000 * fuelCostPerTon * fuelSavingRate).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US', {
+    maximumFractionDigits: 0
+  });
+
+  const cbamSavings = (production * 1000000 * co2PerTon * cbamFactor).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US', {
+    maximumFractionDigits: 0
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,7 +128,43 @@ const ContactForm: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-10">
+                {/* ROI Slider Tool */}
+                <div className="p-8 bg-slate-50 rounded-2xl border border-slate-100 mb-10">
+                  <h3 className="text-sm font-black uppercase tracking-widest text-industrial-900 mb-6 flex items-center gap-2">
+                    <span className="w-1.5 h-4 bg-furnace-500 rounded-full"></span>
+                    {t('contact.roi.title')}
+                  </h3>
+                  <div className="space-y-8">
+                    <div>
+                      <div className="flex justify-between items-end mb-4">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{t('contact.roi.production')}</label>
+                        <span className="text-xl font-mono font-bold text-furnace-600">{production} <span className="text-[10px] text-slate-400">Mtpa</span></span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="6.0"
+                        step="0.1"
+                        value={production}
+                        onChange={(e) => setProduction(parseFloat(e.target.value))}
+                        className="w-full h-1.5 bg-slate-200 rounded-full appearance-none cursor-pointer accent-furnace-600"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">{t('contact.roi.savings')}</span>
+                        <span className="text-lg font-mono font-bold text-industrial-950">${estimatedSavings}</span>
+                      </div>
+                      <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">{t('contact.roi.cbam')}</span>
+                        <span className="text-lg font-mono font-bold text-green-600">€{cbamSavings}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2 text-left">
@@ -256,7 +307,8 @@ const ContactForm: React.FC = () => {
                   <span className="font-bold">{t('contact.form.footer_2')}</span>
                 </p>
               </form>
-            )}
+            </div>
+          )}
           </div>
         </div>
       </div>
