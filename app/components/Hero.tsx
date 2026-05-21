@@ -42,6 +42,18 @@ const Hero: React.FC = () => {
         <div className="engine-scan-animate"></div>
       </div>
 
+      {/* SUMMER CRISIS ALERT BANNER - SITE WIDE URGENCE */}
+      <div className="relative z-30 bg-red-600/90 backdrop-blur-md border-b border-white/10 py-3 overflow-hidden">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-4 text-white text-xs md:text-sm font-black tracking-widest uppercase animate-pulse">
+          <Zap size={16} />
+          {t('hero.summerAlert')}
+          <Link to={l('/vietnam-steel-industry-outlook-2026-cbam-roadmap')} className="underline hover:text-white/80 transition-colors flex items-center gap-2">
+            {t('hero.summerCta')} <ArrowRight size={14} />
+          </Link>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer pointer-events-none"></div>
+      </div>
+
       {/* TOP CONTENT: Heading & Action */}
       <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex flex-col justify-center py-12">
         <div className="flex flex-col lg:flex-row gap-12 items-center w-full mb-16">

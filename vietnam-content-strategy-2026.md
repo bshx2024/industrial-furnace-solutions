@@ -10,12 +10,12 @@ This document outlines the 3-month (12-week) content plan for `ecoreheating.com`
 ---
 
 ## Phase 1: Summer Energy Crisis (May - June)
-**Objective**: Leverage immediate pain of high electricity bills to drive ROI audits.
+**Objective**: Leverage immediate pain of high electricity bills and EVN Decision 963 to drive ROI audits.
 
 | Week | Title (EN/VI) | Target CTA |
 | :--- | :--- | :--- |
-| **W1** | **Summer 2026: Maintaining 15% Efficiency Under Extreme Heat** <br> (Triển vọng 2026: Duy trì 15% hiệu quả dưới cái nóng cực đoan) | ROI Estimator usage |
-| **W2** | **AI Thermal Management: Shifting Loads Amidst 3.3x Price Gaps** <br> (Quản lý nhiệt AI: Dịch chuyển phụ tải trong bối cảnh chênh lệch giá 3.3x) | AI System Demo |
+| **W1** | **EVN Decision 963 Survival Guide: Shifting Reheating Furnace Loads to Save $10,000/Month** <br> (Cẩm nang sống sót EVN 963: Dịch chuyển tải lò nung tiết kiệm $10,000/tháng) | ROI Estimator / Peak Cost Calculator |
+| **W2** | **How Small & Medium Vietnam Steel Mills Can Combat Hoa Phat's Self-Generation Advantage** <br> (Cách nhà máy thép trung và nhỏ ứng phó với lợi thế tự phát điện 90% của Hoa Phát) | Energy Steward (Zero CAPEX) Pitch |
 | **W3** | **Preventing Downtime: Auditing Heat Loss in Legacy Furnaces** <br> (Ngăn ngừa dừng máy: Kiểm toán tổn thất nhiệt trên các lò nung cũ) | Free "Summer Health Check" |
 | **W4** | **Emergency Cost Cutting: 5% Gas Reduction via Wall Coatings** <br> (Cắt giảm chi phí khẩn cấp: Giảm 5% khí gas qua lớp phủ tường lò) | Quick Deployment Request |
 
@@ -26,9 +26,9 @@ This document outlines the 3-month (12-week) content plan for `ecoreheating.com`
 
 | Week | Title (EN/VI) | Target CTA |
 | :--- | :--- | :--- |
-| **W5** | **Mid-Year Review: Carbon Intensity of Vietnam Steel Exports 2026** <br> (Đánh giá nửa năm: Cường độ Carbon của thép xuất khẩu Việt Nam 2026) | Download 2026 Whitepaper |
+| **W5** | **CBAM Certification Guide for Vietnam Mills: How to Avoid the €100/Ton Default Carbon Fine** <br> (Hướng dẫn cấp chứng nhận CBAM cho thép Việt Nam: Cách tránh mức phạt carbon mặc định €100/tấn) | Download CBAM Compliance Roadmap |
 | **W6** | **Avoiding Penalties: Preparing Digital Twin Evidence for CBAM** <br> (Tránh án phạt: Chuẩn bị bằng chứng Digital Twin cho CBAM) | Consult Carbon Dashboard |
-| **W7** | **Case: How Shengli Steel Passed EU Carbon Audit via T80** <br> (Dự án: Thép Shengli đã vượt qua kiểm toán Carbon EU qua T80 như thế nào) | Audit Template request |
+| **W7** | **The $70 Billion North-South High-Speed Rail: How to Qualify Your Steel's Carbon Footprint** <br> (Đường sắt cao tốc 70 tỷ USD: Cách chứng minh dấu chân carbon để đủ điều kiện thầu thép) | Download Audit Qualification Checklist |
 | **W8** | **Why 2026 Upgrades Must Be Hydrogen-Ready for 2030** <br> (Tại sao nâng cấp 2026 phải sẵn sàng cho Hydro để chuẩn bị cho 2030) | Future Strategy Consultation |
 
 ---

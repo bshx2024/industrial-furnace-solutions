@@ -1,0 +1,311 @@
+---
+title: "EVN Decision 963 Survival Guide: Shifting Reheating Furnace Loads to Save $10,000/Month"
+description: "Learn how the new EVN Decision 963 peak electricity tariff reshapes reheating furnace economics. Shift loads with AI to save $10,000/month."
+date: "2026-05-21"
+author: "Zhang Liang"
+authorTitle: "Senior Process Engineer, South Technology"
+authorBio: "Zhang Liang has over 12 years of experience in industrial automation and combustion optimization. He specializes in deploying AI-driven control systems and energy-saving technologies across B2B steel reheating lines."
+tags: ["EVN Decision 963", "electricity peak hours", "load shifting", "reheating furnace", "Zero CAPEX", "T80 Standard"]
+image: "/blog/evn-decision-963-cover.png"
+slug: "evn-decision-963-reheating-furnace-load-shifting"
+lang: "en"
+faq:
+  - question: "How does the new EVN Decision No. 963/QD-BCT impact steel furnace operations?"
+    answer: "Decision 963 changes the cost structure by raising the peak rate to 3.640 VND/kWh. Traditional reheating furnaces operate on a 'continuous draw' model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows."
+  - question: "Why does combustion optimization reduce fuel consumption in reheating furnaces?"
+    answer: "Combustion optimization adjusts the air-fuel ratio in real-time across each burner zone, eliminating excess air that carries heat out through the flue. By maintaining optimal stoichiometric conditions, furnaces achieve 7-15% fuel savings while improving temperature uniformity and reducing surface oxidation (scale loss)."
+  - question: "How does high-emissivity wall coating prevent thermal energy loss?"
+    answer: "Standard refractory bricks and castables have low emissivity at high temperatures, meaning they absorb heat and conduct it outward through the furnace walls. High-emissivity ceramic coatings reflect infrared radiation back into the furnace chamber. This prevents heat from penetrating the refractory lining, reducing heat losses through the furnace shell by 15-25%."
+  - question: "How does the Zero CAPEX model work when traditional furnace upgrades require $500,000+ investment?"
+    answer: "Under the Energy Steward Model, South Technology assumes all financial risk. We design, procure, install, and program the optimization systems using our own capital. The steel mill pays nothing upfront. Once the system is commissioned, we measure fuel savings against an agreed baseline using certified meters. The mill shares a portion of the verified savings with us over a set period. If the system fails to deliver measurable fuel savings, the mill owes us nothing."
+  - question: "How can a steel mill quickly build CBAM-compliant carbon measurement?"
+    answer: "The fastest path is deploying AI-driven combustion control systems that monitor fuel consumption, air-fuel ratios, and flue gas composition in real-time across every burner zone. By linking fuel flow data directly to carbon emission calculations, these systems generate the granular, verifiable emissions reports required by EU auditors."
+---
+
+It is 5:30 PM. The shift supervisor at a steel rolling mill in Hải Phòng checks the control panel. Under Vietnam’s newly implemented energy policy, **EVN Decision No. 963/QD-BCT**, this mark indicates the beginning of the evening peak electricity rate window. For the next five hours, the mill will pay **3,640 VND/kWh**—a staggering **3.3x multiplier** compared to off-peak periods. Operating a walking beam reheating furnace under traditional constant-throughput parameters during this peak window is no longer financially viable. It eats directly into the razor-thin margins of steel manufacturing.
+
+For steel mill owners and energy engineers across Vietnam, the summer of 2026 represents a critical inflection point. As electricity demand rises by 12% nationwide, the Ministry of Industry and Trade (MoIT) is tightening grid regulations. Unoptimized reheating furnaces, which typically consume 60-70% of a rolling mill’s total energy, are the largest single contributor to bloated utility bills. 
+
+However, forward-thinking mills are not shutting down production. By leveraging AI-driven thermal load shifting and CISA T80-certified combustion efficiency technologies, early adopters are reducing monthly operating costs by **$10,000 to $15,000 per production line**—without sacrificing daily tonnage targets. This guide outlines the exact technical roadmap to survive Decision 963 and build a permanent cost advantage.
+
+---
+
+### Reheating Furnace Operating Costs: Peak vs. Off-Peak Under Decision 963
+
+| Operating Parameter | Traditional Mode (No Load Shifting) | AI-Optimized Mode (T80 Load Shifting) | Variance / Savings |
+| :--- | :---: | :---: | :---: |
+| **Peak Hour Tariff Rate** | 3,640 VND/kWh ($0.145) | 3,640 VND/kWh ($0.145) | — |
+| **Peak Hour Energy Draw** | 2,400 kWh / hour | 720 kWh / hour | 🟢 -70% Peak Draw |
+| **Off-Peak Tariff Rate** | 1,094 VND/kWh ($0.044) | 1,094 VND/kWh ($0.044) | — |
+| **Off-Peak Energy Draw** | 1,800 kWh / hour | 2,800 kWh / hour | 🔴 +55% Off-Peak Draw |
+| **Monthly Electricity Cost** | $28,400 / month | $18,100 / month | 🟢 $10,300 Saved (36%) |
+| **Average Billet Scale Loss** | 1.15% (Surface Oxidation) | 0.72% (Stoichiometric Control) | 🟢 0.43% Yield Recovery |
+| **Carbon Certificate Cost** | €77.24 per Ton CO₂ | €77.24 per Ton CO₂ | — (EU CBAM Price) |
+| **Carbon Intensity** | 125 kg CO₂ / Ton Steel | 104 kg CO₂ / Ton Steel | 🟢 -17% Carbon Footprint |
+
+---
+
+## 1. The Peak-Hour Shifting Technical Module
+
+The new regulations under **EVN Decision No. 963/QD-BCT** have moved the industrial peak-hour tariff to **5:30 PM – 10:30 PM** daily (excluding Sundays). This 5-hour peak window is particularly challenging because it coincides with peak residential power consumption, forcing Vietnam Electricity (EVN) to impose penalizing pricing to discourage industrial draws.
+
+**How does the new EVN Decision No. 963/QD-BCT impact steel furnace operations?**
+
+Decision 963 changes the cost structure by raising the peak rate to 3,640 VND/kWh. Traditional reheating furnaces operate on a \"continuous draw\" model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows.
+
+### Technical Principle: Predictive Thermal Inertia Control
+AI-driven load shifting relies on the thermodynamic concept of **thermal inertia**. A steel billet (typically 150mm x 150mm x 12000mm) possesses significant thermal mass. Our AI system monitors the rolling mill production schedule and predicts furnace heat demands 2 to 4 hours in advance. 
+
+1.  **Pre-Charging Zone (3:00 PM – 5:30 PM):** During the cheaper \"normal rate\" window, the AI adjusts the combustion zones to increase the core temperature of the billets to their upper metallurgical limits (e.g., 1,220°C).
+2.  **Peak Rate Shedding (5:30 PM – 10:30 PM):** Once the peak rate hits, the system lowers the furnace atmosphere temperature while maintaining billet core temperatures. The air fans and gas flow are reduced to minimum maintenance levels. The mill draws on the \"stored heat\" within the billets to feed the rolling stands, reducing electrical fan draws by up to 70%.
+3.  **Post-Peak Stabilization (10:30 PM onwards):** The system ramps back up to steady-state operations during the off-peak rate window (1,094 VND/kWh).
+
+```
+[3:00 PM - 5:30 PM Normal Rate] -> Over-charge billets to 1,220°C (Store Thermal Energy)
+[5:30 PM - 10:30 PM Peak Rate]   -> Drop burner output, reduce fan speed, utilize stored heat
+[10:30 PM onwards Off-Peak]     -> Restore steady-state combustion at 1,094 VND/kWh tariff
+```
+
+### Case Study: Shengli Steel (Hải Phòng)
+Shengli Steel deployed our AI Predictive Load Shifting software on their 500,000 TPY walking beam reheating furnace. By shifting 22% of their furnace-related electrical load from peak hours to off-peak periods, they achieved an immediate reduction of **$11,400 in their monthly electricity bill**, with zero impact on production throughput.
+
+> \"Many engineers believe that changing furnace temperatures during a shift will create rolling defects. However, AI thermal modeling allows us to dynamically modulate heat zones while ensuring that the billet core temperature remains perfectly uniform when it hits the roughing stand.\"
+> — Zhang Liang, Senior Process Engineer, South Technology
+
+---
+
+## 2. Stoichiometric AI Correction During Summer Pressure Drops
+
+During the hot dry season in Vietnam, the national power grid relies heavily on gas-fired thermal plants. This creates massive gas demand, causing pipeline pressure fluctuations at industrial parks in Bình Dương and Bà Rịa - Vũng Tàu. 
+
+**Why does combustion optimization reduce fuel consumption in reheating furnaces?**
+
+Traditional PLC-based combustion control systems use pre-set air-fuel curves. When gas supply pressure drops by even 10%, the system continues to supply the same volume of air, leading to a \"lean\" air-fuel ratio. This excess air carries valuable heat straight out through the flue stack, forcing the burners to consume more fuel to maintain temperature. Additionally, excess oxygen in the furnace atmosphere reacts with the hot steel surface, creating thick iron oxide layers known as **scale loss**. AI combustion optimization solves this by dynamically correcting the ratio in real-time, reducing fuel consumption by 7-15%.
+
+### Technical Principle: Real-Time Closed-Loop Stoichiometric Control
+Our [T80 combustion optimization system](/solutions) integrates high-precision zirconium oxide analyzers in the flue ducts with real-time fuel mass flow meters. The AI controller runs a continuous stoichiometric check:
+
+*   **Continuous Oxygen Monitoring:** The AI analyzes the oxygen content in the combustion exhaust every 500 milliseconds.
+*   **Dynamic Air-Fuel Modulation:** If oxygen levels deviate from the optimal 1.5% limit, the AI adjusts the variable speed drives (VSD) of the combustion air blower to trim the air volume.
+*   **Billet Scale Protection:** By maintaining the oxygen content at a low, stable level, the rate of steel surface oxidation is halved, saving tonnes of metal that would otherwise be lost as scale.
+
+```
+[Gas Pressure Drop Detected] -> [Oxygen Level Rises in Exhaust] -> [AI Trims Air Blower Speed] -> [Stoichiometric Ratio Restored in 3 Seconds]
+```
+
+### Case Study: Thắng Lợi Steel (Bình Dương)
+At Thắng Lợi Steel, gas pressure fluctuations in the industrial park routinely caused fuel efficiency drops. After installing the T80 closed-loop combustion system, the mill maintained a stable 1.8% flue gas oxygen content. This resulted in a **12% reduction in natural gas consumption** and reduced scale loss from 1.2% to 0.75%, generating an extra **$8,500/month in recovered steel yield**.
+
+> \"Maintaining stable combustion with variable fuel pressures is like driving a car on a bumpy road. A human driver reacts too slowly, but AI adjusts the suspension in milliseconds, keeping the furnace running at peak thermodynamic efficiency.\"
+> — Dr. Chen Wei, Chief Thermal Engineer, South Technology
+
+---
+
+## 3. High-Emissivity Ceramic Coatings for Shell Thermal Protection
+
+Industrial steel reheating furnaces operate with internal temperatures exceeding 1,250°C. In the Vietnamese summer, ambient shop temperatures can reach 42°C. The temperature difference between the furnace interior and the external environment drives massive heat loss through the refractory walls, heating the furnace steel shell up to 130°C.
+
+**How does high-emissivity wall coating prevent thermal energy loss?**
+
+Standard refractory bricks and castables have low emissivity at high temperatures, meaning they absorb heat and conduct it outward through the furnace walls. High-emissivity ceramic coatings reflect infrared radiation back into the furnace chamber. This prevents heat from penetrating the refractory lining, reducing heat losses through the furnace shell. By reflecting the heat back to the steel billets, the furnace requires less fuel input to maintain the target temperature, saving up to 5% in gas.
+
+<div className="my-8 border-l-4 border-orange-500 bg-gray-900 rounded-r-lg p-6">
+  <span className="text-xs font-bold uppercase tracking-wider text-orange-400">Definition</span>
+  <h4 className="mt-2 text-lg font-semibold text-white">High-Emissivity Coating</h4>
+  <p className="mt-2 text-gray-300">A specialized liquid refractory material containing silicon carbide and transition metal oxides. When sprayed onto the inner refractory walls of a furnace, it cures into a high-density, high-emissivity (ε ≥ 0.92) micro-layer. This layer reflects up to 90% of infrared radiation back into the heating chamber, reducing conduction heat loss and protecting the underlying lining from thermal shock.</p>
+</div>
+
+### Technical Principle: Radiant Heat Reflection
+When fuel burns, heat transfer to the billet occurs primarily through **radiation** (up to 85% of total transfer). When the furnace wall is coated with our high-emissivity material:
+
+1.  **Reflectance Boost:** The wall emissivity is increased from 0.55 (standard castable) to 0.92.
+2.  **Wall Insulation:** Conduction heat loss through the furnace lining is reduced by 15-25%.
+3.  **Temperature Uniformity:** Reflecting heat in all directions improves temperature distribution inside the chamber, eliminating \"cold spots\" and ensuring the billets are heated evenly.
+
+### Case Study: Southern Steel Sheet Mill
+The mill applied our functional high-emissivity coating to the roof and sidewalls of their reheating furnace soaking zone during a scheduled 4-day maintenance shutdown. The external shell temperature dropped from **122°C to 78°C**, improving the shop floor working environment and delivering a **4.8% reduction in gas consumption**.
+
+> \"Applying high-emissivity coatings is the fastest way to upgrade a furnace without replacing the entire refractory lining. It acts as an internal mirror, keeping the heat where it belongs—in the steel, not in the shop.\"
+> — Zhang Liang, Senior Process Engineer, South Technology
+
+---
+
+## 4. The Zero CAPEX Energy Steward Model
+
+Upgrading industrial combustion systems, software, and refractories typically requires a capital expenditure (CAPEX) of **$300,000 to $600,000**. During periods of export contraction and compressed margins, few mill owners are willing to commit this level of capital.
+
+**How does the Zero CAPEX model work when traditional furnace upgrades require $500,000+ investment?**
+
+Under our [Energy Steward Model](/#energy-steward), South Technology assumes all financial risk. We design, procure, install, and program the optimization systems using our own capital. The steel mill pays nothing upfront. Once the system is commissioned, we measure fuel savings against an agreed baseline using certified meters. The mill shares a portion of the verified savings with us over a set period. If the system fails to deliver measurable fuel savings, the mill owes us nothing, completely eliminating financial risk.
+
+```
+[Design & Procurement] -> Funded 100% by South Technology ($0 Cost to Mill)
+[Installation & Commissioning] -> Completed during scheduled maintenance shutdown
+[Savings Verification] -> Measured by certified third-party gas and electric meters
+[Revenue Share] -> Mill pays a % of actual, verified monthly savings (Positive Cash Flow)
+```
+
+### Technical Principle: Performance-Contracted Savings Sharing
+We establish a baseline fuel consumption profile (e.g., cubic meters of gas per ton of steel heated) based on 12 months of historical production data. The performance contract is bound by strict terms:
+
+*   **Verified baseline calculation:** Compensating for billet size, steel grade, and utilization rates.
+*   **Shared saving metrics:** Typically a 60/40 split in favor of the mill for the contract duration.
+*   **Maintenance inclusion:** South Technology provides full system maintenance and software updates at no cost during the contract term.
+
+### Case Study: Vina Kyoei Steel Partnership
+Facing strict cost targets, Vina Kyoei partnered with us under the Energy Steward model. We invested $420,000 in AI combustion controls and fiber refractory upgrades. The mill achieved a **13.5% energy savings** from month 1. They paid their share entirely out of the accrued savings, maintaining a **positive monthly cash flow of $6,200** throughout the contract.
+
+> \"The Zero CAPEX model aligns our interests perfectly. We only make money if our technology works. This forces us to be extremely precise in our engineering and calculations.\"
+> — Li Minghua, Project Director, South Technology
+
+---
+
+## 5. Integrating CBAM Carbon Compliance with Combustion AI
+
+As of **January 1, 2026**, the European Union’s Carbon Border Adjustment Mechanism (CBAM) requires steel exporters to purchase carbon certificates matching the embedded emissions of their products. Additionally, Vietnam’s local Emissions Trading System (ETS) pilot is placing carbon caps on 25 major steel plants.
+
+**How can a steel mill quickly build CBAM-compliant carbon measurement?**
+
+The fastest path is deploying AI-driven combustion control systems that monitor fuel consumption, air-fuel ratios, and flue gas composition in real-time across every burner zone. By linking fuel flow data directly to carbon emission calculations, these systems generate the granular, verifiable emissions reports required by EU auditors. Simultaneously, by optimizing combustion efficiency, the AI system reduces the emissions themselves by 7-15%, lower carbon intensity below the CBAM penalty threshold.
+
+### Technical Principle: Real-Time Embedded Carbon Intensity Tracking
+Our AI control system computes emissions continuously:
+
+1.  **Mass Balance Calculation:** Tracing gas flow against chemical composition to determine exact CO₂ output.
+2.  **Product Attribution:** Linking the calculated CO₂ output to the weight of steel billets passing through the roughing mill.
+3.  **Audit-Ready Reports:** Generating daily, weekly, and monthly reports detailing kg CO₂ per Ton of Steel, compliant with <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener noreferrer">EU CBAM standards</a>.
+
+```
+[Gas Flow Input] + [Burner Efficiency Data] -> [AI Carbon Processor] -> [Real-Time kg CO₂ / Ton Steel Output] -> [CBAM Audit File]
+```
+
+### Case Study: Prime Steel Export Line
+Prime Steel utilized our AI tracking system to verify emissions for a 20,000-ton shipment of wire rod to Germany. The system proved a carbon footprint of **104 kg CO₂/ton**, which was 18% lower than the default industry average. This allowed the importer to avoid over **€42,000 in CBAM certificate penalties**, securing Prime Steel's status as a preferred supplier.
+
+> \"CBAM is not just a tax; it is a data challenge. The mill that can prove its carbon footprint with verified, sensor-driven data will win the export market, while unmonitored mills face default penalties.\"
+> — Dr. Chen Wei, Chief Thermal Engineer, South Technology
+
+---
+
+<div className="my-10 p-8 bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border border-zinc-800 border-l-4 border-orange-500 rounded-r-2xl shadow-2xl relative overflow-hidden group">
+  <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/5 rounded-full blur-3xl -z-10 group-hover:scale-125 transition-transform duration-1000"></div>
+  
+  <div className="flex items-center gap-2 mb-4">
+    <span className="bg-orange-500/10 text-orange-500 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+      Free B2B Resource
+    </span>
+    <span className="text-zinc-500 text-xs">|</span>
+    <span className="text-orange-400 text-xs font-semibold animate-pulse">
+      🔥 Only 12 Spots Left
+    </span>
+  </div>
+
+  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 uppercase font-oswald tracking-wide">
+    EcoReheating CBAM Compliance Roadmap for Vietnamese Steel Enterprises
+  </h3>
+
+  <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-6">
+    We've compiled a complete, actionable compliance roadmap for Vietnamese steel mills facing EU CBAM carbon tariffs and local ETS pilot requirements. Download the bundle to receive:
+  </p>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <div className="flex items-start gap-3">
+      <span className="text-orange-500 mt-1 font-bold">✓</span>
+      <div>
+        <h4 className="text-white text-sm font-semibold">CBAM Certificate Templates</h4>
+        <p className="text-zinc-500 text-xs mt-0.5">Pre-configured sheets to calculate embedded CO₂ intensity.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <span className="text-orange-500 mt-1 font-bold">✓</span>
+      <div>
+        <h4 className="text-white text-sm font-semibold">ETS Quota Trading Strategies</h4>
+        <p className="text-zinc-500 text-xs mt-0.5">Maximize revenue by selling surplus carbon allocations.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <span className="text-orange-500 mt-1 font-bold">✓</span>
+      <div>
+        <h4 className="text-white text-sm font-semibold">6-Step Export Plan</h4>
+        <p className="text-zinc-500 text-xs mt-0.5">Actionable checklist for compliance directors to maintain Western access.</p>
+      </div>
+    </div>
+    <div className="flex items-start gap-3">
+      <span className="text-orange-500 mt-1 font-bold">✓</span>
+      <div>
+        <h4 className="text-white text-sm font-semibold">Fuel Reduction Calculator</h4>
+        <p className="text-zinc-500 text-xs mt-0.5">Quickly estimate your potential savings under T80 standards.</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+    <a href="/#assessment" className="text-center bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-lg text-sm transition-all shadow-lg hover:shadow-orange-500/20 active:scale-98">
+      Download Free Roadmap →
+    </a>
+    <a href="/hero-cases" className="text-center border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900 text-zinc-300 font-semibold px-6 py-3 rounded-lg text-sm transition-all">
+      View Case Studies
+    </a>
+  </div>
+  
+  <p className="text-[11px] text-zinc-500 mt-4 italic">
+    *This resource is free for steel manufacturing executives and energy engineers. Delivered instantly via email.*
+  </p>
+</div>
+
+---
+
+## Conclusion: Act Before the Dry Season Peak
+
+The implementation of **EVN Decision No. 963/QD-BCT** is not a temporary hurdle; it is a permanent structural shift in Vietnam’s industrial energy pricing. Continuing to run high-temperature walking beam reheating furnaces without active load management and combustion optimization will render your operations uncompetitive.
+
+By integrating AI thermal load shifting, closed-loop stoichiometric combustion control, and high-emissivity coatings, steel mills can reduce operating costs by over **$10,000 per month**. Under the Zero CAPEX Energy Steward partnership, these upgrades require no upfront investment, allowing you to fund efficiency entirely out of recovered savings. The window to prepare for the summer heatwave is short. Contact South Technology today to lock in your seasonal savings.
+
+---
+
+<div className="my-12 p-8 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 border-t-4 border-orange-500 rounded-2xl shadow-2xl relative overflow-hidden group">
+  <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -z-10 group-hover:scale-125 transition-transform duration-1000"></div>
+  
+  <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
+    <div className="flex-1">
+      <span className="inline-block text-[10px] tracking-widest uppercase font-bold text-orange-500 bg-orange-500/10 px-3 py-1 rounded-full mb-4">
+        Limited Opportunity
+      </span>
+      <h3 className="text-2xl font-bold text-white mb-3 uppercase font-oswald tracking-wide leading-tight">
+        Get Your Free Furnace Efficiency Assessment
+      </h3>
+      <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-4">
+        Do you know how much fuel your reheating furnace is wasting right now? In a 30-minute consultation, our chief thermal engineers will calculate your exact energy loss and outline a custom T80-standard roadmap to cut fuel costs by 7-15%.
+      </p>
+      
+      <div className="flex flex-wrap gap-4 text-xs text-zinc-500">
+        <span className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+          Zero CAPEX Model
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+          CISA T80 Certified
+        </span>
+        <span className="flex items-center gap-1.5 text-orange-400 font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping"></span>
+          Only 1 Spot Left This Month
+        </span>
+      </div>
+    </div>
+    
+    <div className="w-full md:w-auto flex flex-col items-stretch gap-3">
+      <a href="/#assessment" className="text-center bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-lg text-sm transition-all shadow-lg hover:shadow-orange-500/20 active:scale-98">
+        Register for Free Assessment →
+      </a>
+      <p className="text-[10px] text-zinc-600 text-center max-w-[220px] mx-auto italic leading-normal">
+        *We prioritize mills with savings potential exceeding $100,000/year.*
+      </p>
+    </div>
+  </div>
+</div>
+
+#### Zhang Liang
+Senior Process Engineer, South Technology
+
+Zhang Liang has over 12 years of experience in industrial automation and combustion optimization. He specializes in deploying AI-driven control systems and energy-saving technologies across B2B steel reheating lines.

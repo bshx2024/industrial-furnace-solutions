@@ -67,9 +67,10 @@ const Header: React.FC = () => {
     {
       name: t('nav.solutions'),
       href: l('/solutions'),
-      dropdown: language === 'vi' ? [
-        { name: t('nav.vietnamSteel'), href: '/vi/lp/cbam-steel-vietnam' }
-      ] : undefined
+      dropdown: [
+        ...(language === 'vi' ? [{ name: t('nav.vietnamSteel'), href: '/vi/lp/cbam-steel-vietnam' }] : []),
+        { name: t('nav.summerCrisis'), href: l('/blog/vietnam-steel-industry-outlook-2026-cbam-roadmap') }
+      ]
     },
     { name: t('nav.caseStudies'), href: l('/hero-cases') },
     { name: t('nav.about'), href: l('/about') },

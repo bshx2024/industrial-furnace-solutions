@@ -27,6 +27,7 @@ export const translations = {
     'nav.about': 'ABOUT',
     'nav.blog': 'BLOG',
     'nav.vietnamSteel': 'VIETNAM STEEL (CBAM)',
+    'nav.summerCrisis': 'SUMMER ENERGY ALERT',
     'nav.freeAssessment': 'FREE ASSESSMENT',
 
     // Language selector
@@ -43,6 +44,8 @@ export const translations = {
     'hero.bullet2': "Enhance yield and surface quality through T80-listed oxidation control technologies.",
     'hero.bullet3': "Designed and validated in integrated steel mills.",
     'hero.bullet4': "Listed in CISA T80 extreme efficiency technologies.",
+    'hero.summerAlert': 'URGENT: EVN Decision 963 Impact - High Peak Prices are here. Optimize now.',
+    'hero.summerCta': 'Summer Survival Roadmap',
     'hero.btnRoi': 'Get Free ROI Audit',
     'hero.btnCases': 'View Case Studies',
 
@@ -481,6 +484,7 @@ export const translations = {
     'nav.about': 'VỀ CHÚNG TÔI',
     'nav.blog': 'BÀI VIẾT',
     'nav.vietnamSteel': 'THÉP VIỆT NAM (CBAM)',
+    'nav.summerCrisis': 'CẢNH BÁO NĂNG LƯỢNG HÈ',
     'nav.freeAssessment': 'ĐÁNH GIÁ MIỄN PHÍ',
 
     // Language selector
@@ -497,6 +501,8 @@ export const translations = {
     'hero.bullet2': "Nâng cao năng suất và chất lượng bề mặt thông qua kiểm soát lớp vảy oxit T80.",
     'hero.bullet3': "Thiết kế và xác thực tại các nhà máy thép tích hợp.",
     'hero.bullet4': "Đạt chuẩn hiệu suất cực cao CISA T80.",
+    'hero.summerAlert': 'KHẨN CẤP: Quy định 963 của EVN - Giá điện cao điểm tăng 3.3x. Tối ưu ngay.',
+    'hero.summerCta': 'Lộ trình Vượt Khủng Hoảng Hè',
     'hero.btnRoi': 'NHẬN ĐÁNH GIÁ ROI MIỄN PHÍ',
     'hero.btnCases': 'Xem Dự án Tiêu biểu',
 

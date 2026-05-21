@@ -146,6 +146,24 @@ const Solutions: React.FC = () => {
                                         <p className="text-[10px] leading-tight text-gray-500 italic">{t('solutions.direction4Footer')}</p>
                                     </td>
                                 </tr>
+                                <tr className="bg-red-50/50">
+                                    <td className="p-6 align-top">
+                                        <div className="flex items-center gap-3 font-bold text-industrial-900 mb-2">
+                                            <Zap size={16} className="text-red-600 animate-pulse" /> 2026 Summer Peak (EVN 963)
+                                        </div>
+                                        <p className="text-xs text-gray-500">Peak hour price hikes (17:30-22:30) impacting margins by up to 30%.</p>
+                                    </td>
+                                    <td className="p-6 align-top">
+                                        <div className="flex items-center gap-3 font-bold text-industrial-950 mb-2">
+                                            <Activity size={16} className="text-furnace-500" /> AI Demand Response
+                                        </div>
+                                    </td>
+                                    <td className="p-6 align-top">
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Peak Load Shifting: 20-30% reduction</div>
+                                        <div className="font-bold text-industrial-900 mb-1 text-sm">Cost Mitigation: Instant impact</div>
+                                        <p className="text-[10px] leading-tight text-gray-500 italic">Automated thermal management during peak hours without production halt.</p>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

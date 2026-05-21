@@ -49,7 +49,8 @@ const VietnamSteelLP: React.FC = () => {
 
     // Countdown Logic
     useEffect(() => {
-        const targetDate = new Date('2026-01-01T00:00:00');
+        // Count down to the end of the 2026 Summer Peak Season (August 31)
+        const targetDate = new Date('2026-08-31T23:59:59');
         const timer = setInterval(() => {
             const now = new Date();
             const diff = targetDate.getTime() - now.getTime();
@@ -153,11 +154,17 @@ const VietnamSteelLP: React.FC = () => {
 
             const euVolume = prod * ratio;
             // Rough calculation: EU Volume * Intensity tCO2/t * 80 EUR/tCO2
-            const cost = euVolume * intensity * 80;
-            // Savings are roughly 15% of the intensity reduction (7-15% fuel savings)
-            const savings = cost * 0.15;
+            const carbonCost = euVolume * intensity * 80;
+            
+            // NEW: Summer Electricity Spike Calculation (Decision 963 impact)
+            // Assuming 20% of energy is during peak hours, and peak is 3.3x costlier
+            const summerElectricityCost = (prod * 0.05) * 3.3 * 100; // Simplified proxy for cost hike
+            
+            const totalCost = carbonCost + summerElectricityCost;
+            // Savings are roughly 15% of the intensity reduction + 20% load shifting savings
+            const savings = totalCost * 0.18;
 
-            setCalcResult({ cost, savings });
+            setCalcResult({ cost: totalCost, savings });
             setIsCalculating(false);
             trackEvent('calculator_result', 'engagement', 'hero_calc', Math.round(cost));
         }, 800);
@@ -173,6 +180,15 @@ const VietnamSteelLP: React.FC = () => {
 
     return (
         <div className="font-sans text-gray-800 bg-white selection:bg-furnace-500/30 overflow-x-hidden">
+            {/* SUMMER CRISIS ALERT BANNER */}
+            <div className="bg-red-600 text-white py-3 px-4 text-center sticky top-0 z-[60] shadow-lg">
+                <div className="container mx-auto flex items-center justify-center gap-3 text-sm md:text-base font-black uppercase tracking-widest">
+                    <Zap size={18} className="animate-pulse" />
+                    CẢNH BÁO: QUY ĐỊNH 963 CỦA EVN ĐÃ CÓ HIỆU LỰC - GIÁ ĐIỆN CAO ĐIỂM TĂNG 3.3X
+                    <a href="#decision-963" className="underline hover:text-white/80 ml-4 hidden md:inline">XEM GIẢI PHÁP TỨC THÌ →</a>
+                </div>
+            </div>
+
             {/* EXIT INTENT MODAL */}
             {showExitIntent && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-industrial-950/80 backdrop-blur-sm animate-fade-in">
@@ -403,19 +419,19 @@ const VietnamSteelLP: React.FC = () => {
                                 </div>
                                 <div className="hidden lg:flex items-center gap-2 pl-2 pr-4 text-[10px] font-bold text-red-500 animate-pulse">
                                     <AlertTriangle size={12} />
-                                    BẮT ĐẦU ÁP THUẾ ĐẦY ĐỦ
+                                    KẾT THÚC MÙA CAO ĐIỂM HÈ
                                 </div>
                             </div>
                         )}
 
                         <h1 className="text-4xl md:text-7xl font-heading font-black mb-8 leading-tight max-w-6xl mx-auto tracking-tight">
-                            CBAM Đang Tăng Chi Phí Xuất Khẩu? <br />
-                            <span className="text-furnace-500 underline decoration-white/10 italic">Giảm 20-40% Phát Thải, Tiết Kiệm €2-3M/Năm</span>
+                            Khủng Hoảng Điện Hè & CBAM 2026? <br />
+                            <span className="text-furnace-500 underline decoration-white/10 italic">Giảm 30% Phụ Tải Đỉnh, Tiết Kiệm Tới 15% Nhiên Liệu</span>
                         </h1>
 
                         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-16 font-light leading-relaxed">
-                            Giải pháp Thu hồi Nhiệt thải Không cần Vốn đầu tư cho Nhà máy Thép Việt Nam.
-                            Chủ động ứng phó CBAM, bảo vệ biên lợi nhuận xuất khẩu.
+                            Đối phó với Quyết định 963 và Thuế Carbon EU với mô hình Zero CAPEX.
+                            Giảm chi phí vận hành ngay trong đợt nắng nóng kỷ lục này.
                         </p>
                     </div>
 
@@ -423,7 +439,7 @@ const VietnamSteelLP: React.FC = () => {
                         <div className="flex flex-col md:flex-row items-stretch gap-2">
                             <div className="flex-1 p-8 md:p-10">
                                 <label className="block text-[10px] font-black text-furnace-500 uppercase tracking-[0.3em] mb-6">
-                                    CÔNG CỤ TÍNH CHI PHÍ CBAM QUY MÔ NHÀ MÁY
+                                    CÔNG CỤ TÍNH CHI PHÍ KHỦNG HOẢNG NĂNG LƯỢNG 2026
                                 </label>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                                     <div className="space-y-2">
@@ -478,13 +494,13 @@ const VietnamSteelLP: React.FC = () => {
                                             <div>
                                                 <p className="text-[10px] font-bold uppercase text-white/60 mb-1">PHẢI TRẢ (DỰ KIẾN):</p>
                                                 <div className="text-4xl font-black tracking-tighter italic">
-                                                    €{(calcResult.cost / 1000000).toFixed(2)}M <span className="text-xl font-normal opacity-60">/năm</span>
+                                                    $ {(calcResult.cost / 1000000).toFixed(2)}M <span className="text-xl font-normal opacity-60">/năm</span>
                                                 </div>
                                             </div>
                                             <div className="pt-6 border-t border-white/20">
                                                 <p className="text-[10px] font-bold uppercase text-white/60 mb-1 tracking-widest">CƠ HỘI TIẾT KIỆM TỨC THÌ:</p>
                                                 <div className="text-3xl font-black text-white flex items-center gap-2">
-                                                    €{(calcResult.savings / 1000000).toFixed(2)}M
+                                                    $ {(calcResult.savings / 1000000).toFixed(2)}M
                                                     <ArrowUpRight size={24} className="text-white/40" />
                                                 </div>
                                             </div>
@@ -496,7 +512,7 @@ const VietnamSteelLP: React.FC = () => {
                                             <Info size={32} className="text-furnace-500/50" />
                                         </div>
                                         <p className="text-sm font-bold italic leading-relaxed max-w-[180px] mx-auto">
-                                            Nhập thông tin bên trái để <span className="text-furnace-500">xem ngay</span> chi phí CBAM của bạn
+                                            Nhập thông tin để <span className="text-furnace-500">xem ngay</span> thiệt hại từ Điện & CBAM
                                         </p>
                                     </div>
                                 )}
@@ -641,6 +657,71 @@ const VietnamSteelLP: React.FC = () => {
                                         NHẬN TƯ VẤN LỘ TRÌNH MIỄN PHÍ
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* DECISION 963 TECHNICAL SECTION */}
+            <section id="decision-963" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-furnace-500 to-transparent"></div>
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid lg:grid-cols-2 gap-16 items-center">
+                            <div className="order-2 lg:order-1">
+                                <div className="p-8 md:p-12 bg-white/5 rounded-[40px] border border-white/10 relative">
+                                    <div className="absolute -top-6 -left-6 w-20 h-20 bg-furnace-600 rounded-3xl flex items-center justify-center shadow-xl rotate-3">
+                                        <Zap size={40} className="text-white" />
+                                    </div>
+                                    <h3 className="text-2xl font-black mb-8 pt-4">Phân tích Quyết định 963/QĐ-BCT</h3>
+                                    <div className="space-y-6">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center shrink-0 font-bold">!</div>
+                                            <p className="text-gray-300 text-sm leading-relaxed">
+                                                <strong className="text-white">Giờ cao điểm mới:</strong> 17:30 – 22:30 hàng ngày. Đây là khung giờ tiêu thụ điện của lò nung lại đắt đỏ nhất (gấp 3.3 lần giờ thấp điểm).
+                                            </p>
+                                        </div>
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-furnace-500/20 text-furnace-500 flex items-center justify-center shrink-0 font-bold">✓</div>
+                                            <p className="text-gray-300 text-sm leading-relaxed">
+                                                <strong className="text-white">Giải pháp T80:</strong> Sử dụng AI để dự báo nhu cầu cán và "nạp nhiệt tích lũy" trong giờ bình thường. Khi đến 17:30, lò tự động chuyển sang chế độ duy trì tiêu thụ điện tối thiểu mà không làm gián đoạn dây chuyền.
+                                            </p>
+                                        </div>
+                                        <div className="pt-6 border-t border-white/10 mt-6">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Tiềm năng tiết kiệm điện mùa hè:</span>
+                                                <span className="text-xl font-black text-furnace-500">20% - 30%</span>
+                                            </div>
+                                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                                <div className="h-full bg-furnace-600 w-[75%]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="order-1 lg:order-2">
+                                <span className="text-furnace-500 text-xs font-black uppercase tracking-[0.3em] mb-4 block">KỸ THUẬT & VẬN HÀNH</span>
+                                <h2 className="text-4xl md:text-5xl font-heading font-black mb-8 leading-tight">
+                                    Dịch Chuyển Phụ Tải <br />
+                                    Thông Minh Bằng AI
+                                </h2>
+                                <p className="text-gray-400 text-lg mb-10 font-light leading-relaxed">
+                                    Chúng tôi không chỉ cải thiện hiệu suất nhiệt; chúng tôi cung cấp khả năng <strong>"Phản ứng phụ tải" (Demand Response)</strong>. Lò nung T80 của bạn sẽ tự động biết khi nào nên tăng tốc và khi nào nên tiết kiệm để tối ưu hóa hóa đơn tiền điện EVN.
+                                </p>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Kiểm soát Stoichiometry dự đoán theo thời gian thực",
+                                        "Tự động hóa nạp/xuất phôi dựa trên biểu giá điện",
+                                        "Giảm tỷ lệ oxy hóa bề mặt trong điều kiện nhiệt độ cao",
+                                        "Báo cáo carbon kỹ thuật số tự động cho CBAM"
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-center gap-3 text-gray-200 font-bold text-sm">
+                                            <CheckCircle size={18} className="text-furnace-500 shrink-0" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>
