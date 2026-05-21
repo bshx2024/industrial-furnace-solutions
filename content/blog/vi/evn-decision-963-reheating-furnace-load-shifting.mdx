@@ -11,7 +11,7 @@ slug: "evn-decision-963-reheating-furnace-load-shifting"
 lang: "vi"
 faq:
   - question: "Quyết định số 963/QĐ-BCT của EVN ảnh hưởng thế nào đến vận hành lò nung thép?"
-    answer: "Quyết định 963 thay đổi cơ cấu chi phí bằng cách tăng giá điện giờ cao điểm lên 3.640 VND/kWh. Các lò nung lại truyền thống hoạt động theo mô hình 'tải liên tục', duy trì nhiệt độ các vùng lò không đổi bất kể giá lưới điện. Điều này dẫn đến lượng điện tiêu thụ tối đa cho quạt gió lò nung, bơm thủy lực, hệ thống làm mát và bộ gia nhiệt cảm ứng diễn ra vào những giờ đắt đỏ nhất. Tối ưu hóa dịch chuyển phụ tải bằng AI giải quyết vấn đề này bằng cách biến lò nung thành một 'bình ắc quy lưu trữ nhiệt': gia nhiệt vượt mức cho phôi thép trong khung giờ điện rẻ và chạy đà (coasting) trong khung giờ cao điểm."
+    answer: "Quyết định 963 thay đổi cơ cấu chi phí bằng cách tăng giá điện giờ cao điểm lên 3.266 VND/kWh. Các lò nung lại truyền thống hoạt động theo mô hình 'tải liên tục', duy trì nhiệt độ các vùng lò không đổi bất kể giá lưới điện. Điều này dẫn đến lượng điện tiêu thụ tối đa cho quạt gió lò nung, bơm thủy lực, hệ thống làm mát và bộ gia nhiệt cảm ứng diễn ra vào những giờ đắt đỏ nhất. Tối ưu hóa dịch chuyển phụ tải bằng AI giải quyết vấn đề này bằng cách biến lò nung thành một 'bình ắc quy lưu trữ nhiệt': gia nhiệt vượt mức cho phôi thép trong khung giờ điện rẻ và chạy đà (coasting) trong khung giờ cao điểm."
   - question: "Tại sao tối ưu hóa buồng đốt giúp giảm tiêu thụ nhiên liệu trong lò nung lại?"
     answer: "Tối ưu hóa đốt cháy điều chỉnh tỷ lệ khí-gió trong thời gian thực trên từng vùng vòi đốt, loại bỏ lượng khí dư mang nhiệt lượng thoát ra ngoài qua ống khói. Bằng cách duy trì các điều kiện stoichiometric (tỷ lượng) tối ưu, lò nung đạt mức tiết kiệm nhiên liệu 7-15% đồng thời cải thiện độ đồng đều nhiệt độ và giảm tổn thất do oxy hóa bề mặt (vảy sắt)."
   - question: "Làm thế nào lớp phủ tường phát xạ cao ngăn ngừa tổn thất năng lượng nhiệt?"
@@ -22,11 +22,11 @@ faq:
     answer: "Con đường nhanh nhất là triển khai các hệ thống kiểm soát buồng đốt bằng AI để giám sát lưu lượng nhiên liệu, tỷ lệ gió-gas và thành phần khí thải theo thời gian thực trên từng vùng vòi đốt. Bằng cách liên kết dữ liệu tiêu thụ nhiên liệu trực tiếp với các công thức tính phát thải carbon, hệ thống tự động xuất ra các báo cáo phát thải chi tiết và có thể kiểm toán theo yêu cầu của các thanh tra EU."
 ---
 
-Đồng hồ điểm 17h30. Trưởng ca vận hành tại một nhà máy cán thép ở Hải Phòng kiểm tra bảng điều khiển. Theo chính sách năng lượng mới của Việt Nam, **Quyết định số 963/QĐ-BCT của EVN**, mốc thời gian này đánh dấu sự bắt đầu của khu vực giờ cao điểm tối. Trong 5 giờ tiếp theo, nhà máy sẽ phải trả mức giá điện lên tới **3.640 VND/kWh**—tăng gấp **3,3 lần** so với khung giờ thấp điểm. Việc vận hành lò nung lại dầm bước theo các thông số sản lượng liên tục truyền thống trong khung giờ cao điểm này không còn hiệu quả về mặt kinh tế, trực tiếp bào mòn biên lợi nhuận vốn đã mỏng của ngành sản xuất thép.
+Đồng hồ điểm 17h30. Trưởng ca vận hành tại một nhà máy cán thép ở Hải Phòng kiểm tra bảng điều khiển. Theo chính sách năng lượng mới của Việt Nam, **Quyết định số 963/QĐ-BCT của EVN**, mốc thời gian này đánh dấu sự bắt đầu của khu vực giờ cao điểm tối. Trong 5 giờ tiếp theo, nhà máy sẽ phải trả mức giá điện lên tới **3.266 VND/kWh**—tăng gấp **2,85 lần** so với khung giờ thấp điểm. Việc vận hành lò nung lại dầm bước theo các thông số sản lượng liên tục truyền thống trong khung giờ cao điểm này không còn hiệu quả về mặt kinh tế, trực tiếp bào mòn biên lợi nhuận vốn đã mỏng của ngành sản xuất thép.
 
 Đối với các chủ nhà máy thép và kỹ sư năng lượng tại Việt Nam, mùa khô năm 2026 đại diện cho một điểm ngoặt quan trọng. Khi nhu cầu điện toàn quốc tăng 12%, Bộ Công Thương (MoIT) đang thắt chặt các quy định vận hành lưới điện. Các lò nung lại chưa được tối ưu hóa—vốn tiêu thụ 60-70% tổng năng lượng của một nhà máy cán—chính là nguyên nhân lớn nhất khiến hóa đơn tiền điện tăng vọt.
 
-Tuy nhiên, các nhà máy có tư duy đi đầu không chọn cách dừng sản xuất. Bằng cách tận dụng công nghệ dịch chuyển phụ tải nhiệt dựa trên AI và hiệu suất đốt cháy đạt chứng nhận CISA T80, những doanh nghiệp áp dụng sớm đang giảm chi phí vận hành hàng tháng từ **$10.000 đến $15.000 trên mỗi dây chuyền sản xuất** mà không ảnh hưởng đến mục tiêu sản lượng hàng ngày. Hướng dẫn này vạch ra lộ trình kỹ thuật chính xác để thích ứng với Quyết định 963 và xây dựng lợi thế chi phí lâu dài.
+Tuy nhiên, các nhà máy có tư duy đi đầu không chọn cách dừng sản xuất. Bằng cách tận dụng công nghệ dịch chuyển phụ tải nhiệt dựa trên AI và hiệu suất đốt cháy đạt chứng nhận CISA T80, những doanh nghiệp áp dụng sớm đang giảm chi phí vận hành hàng tháng từ **$9.000 đến $13.000 trên mỗi dây chuyền sản xuất** mà không ảnh hưởng đến mục tiêu sản lượng hàng ngày. Hướng dẫn này vạch ra lộ trình kỹ thuật chính xác để thích ứng với Quyết định 963 và xây dựng lợi thế chi phí lâu dài.
 
 ---
 
@@ -34,11 +34,11 @@ Tuy nhiên, các nhà máy có tư duy đi đầu không chọn cách dừng s�
 
 | Thông số vận hành | Chế độ truyền thống (Không dịch chuyển tải) | Chế độ tối ưu hóa AI (Dịch chuyển tải T80) | Chênh lệch / Tiết kiệm |
 | :--- | :---: | :---: | :---: |
-| **Giá điện giờ cao điểm** | 3.640 VND/kWh ($0.145) | 3.640 VND/kWh ($0.145) | — |
+| **Giá điện giờ cao điểm** | 3.266 VND/kWh ($0.130) | 3.266 VND/kWh ($0.130) | — |
 | **Điện năng tiêu thụ giờ cao điểm** | 2.400 kWh / giờ | 720 kWh / hour | 🟢 -70% Tải cao điểm |
-| **Giá điện giờ thấp điểm** | 1.094 VND/kWh ($0.044) | 1.094 VND/kWh ($0.044) | — |
+| **Giá điện giờ thấp điểm** | 1.146 VND/kWh ($0.046) | 1.146 VND/kWh ($0.046) | — |
 | **Điện năng tiêu thụ giờ thấp điểm** | 1.800 kWh / giờ | 2.800 kWh / hour | 🔴 +55% Tải thấp điểm |
-| **Hóa đơn tiền điện hàng tháng** | $28,400 / tháng | $18,100 / tháng | 🟢 Tiết kiệm $10.300 (36%) |
+| **Hóa đơn tiền điện hàng tháng** | $26,000 / tháng | $17,000 / tháng | 🟢 Tiết kiệm $9.000 (35%) |
 | **Hao hụt vảy oxit sắt trung bình** | 1.15% (Oxy hóa bề mặt) | 0.72% (Kiểm soát tỷ lượng) | 🟢 Thu hồi 0.43% sản lượng |
 | **Chi phí chứng chỉ carbon** | €77.24 mỗi tấn CO₂ | €77.24 mỗi tấn CO₂ | — (Giá CBAM Châu Âu) |
 | **Cường độ phát thải carbon** | 125 kg CO₂ / tấn thép | 104 kg CO₂ / tấn thép | 🟢 Giảm 17% dấu chân carbon |
@@ -259,7 +259,7 @@ Thép Prime đã sử dụng hệ thống theo dõi bằng AI của chúng tôi 
 
 Việc thực thi **Quyết định số 963/QĐ-BCT của EVN** không phải là một trở ngại tạm thời; đó là sự thay đổi cấu trúc lâu dài về giá năng lượng công nghiệp tại Việt Nam. Tiếp tục vận hành các lò nung lại dầm bước nhiệt độ cao mà không có hệ thống quản lý tải chủ động và tối ưu hóa buồng đốt sẽ khiến hoạt động sản xuất của bạn mất đi khả năng cạnh tranh.
 
-Bằng cách tích hợp dịch chuyển phụ tải nhiệt bằng AI, kiểm soát stoichiometric vòng kín và lớp phủ phát xạ cao, các nhà máy thép có thể giảm chi phí vận hành hơn **$10,000 mỗi tháng**. Dưới mô hình hợp tác Quản gia Năng lượng Zero CAPEX, những nâng cấp này không đòi hỏi vốn đầu tư ban đầu, cho phép bạn tài trợ hoàn toàn cho hiệu quả năng lượng từ chính số tiền tiết kiệm được. Cửa sổ chuẩn bị trước đợt nắng nóng mùa hè đang rất ngắn. Hãy liên hệ với South Technology ngay hôm nay để khóa khoản tiết kiệm theo mùa của bạn.
+Bằng cách tích hợp dịch chuyển phụ tải nhiệt bằng AI, kiểm soát stoichiometric vòng kín và lớp phủ phát xạ cao, các nhà máy thép có thể giảm chi phí vận hành hơn **$9,000 mỗi tháng**. Dưới mô hình hợp tác Quản gia Năng lượng Zero CAPEX, những nâng cấp này không đòi hỏi vốn đầu tư ban đầu, cho phép bạn tài trợ hoàn toàn cho hiệu quả năng lượng từ chính số tiền tiết kiệm được. Cửa sổ chuẩn bị trước đợt nắng nóng mùa hè đang rất ngắn. Hãy liên hệ với South Technology ngay hôm nay để khóa khoản tiết kiệm theo mùa của bạn.
 
 ---
 

@@ -11,7 +11,7 @@ slug: "evn-decision-963-reheating-furnace-load-shifting"
 lang: "en"
 faq:
   - question: "How does the new EVN Decision No. 963/QD-BCT impact steel furnace operations?"
-    answer: "Decision 963 changes the cost structure by raising the peak rate to 3.640 VND/kWh. Traditional reheating furnaces operate on a 'continuous draw' model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows."
+    answer: "Decision 963 changes the cost structure by raising the peak rate to 3,266 VND/kWh. Traditional reheating furnaces operate on a 'continuous draw' model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows."
   - question: "Why does combustion optimization reduce fuel consumption in reheating furnaces?"
     answer: "Combustion optimization adjusts the air-fuel ratio in real-time across each burner zone, eliminating excess air that carries heat out through the flue. By maintaining optimal stoichiometric conditions, furnaces achieve 7-15% fuel savings while improving temperature uniformity and reducing surface oxidation (scale loss)."
   - question: "How does high-emissivity wall coating prevent thermal energy loss?"
@@ -22,11 +22,11 @@ faq:
     answer: "The fastest path is deploying AI-driven combustion control systems that monitor fuel consumption, air-fuel ratios, and flue gas composition in real-time across every burner zone. By linking fuel flow data directly to carbon emission calculations, these systems generate the granular, verifiable emissions reports required by EU auditors."
 ---
 
-It is 5:30 PM. The shift supervisor at a steel rolling mill in Hải Phòng checks the control panel. Under Vietnam’s newly implemented energy policy, **EVN Decision No. 963/QD-BCT**, this mark indicates the beginning of the evening peak electricity rate window. For the next five hours, the mill will pay **3,640 VND/kWh**—a staggering **3.3x multiplier** compared to off-peak periods. Operating a walking beam reheating furnace under traditional constant-throughput parameters during this peak window is no longer financially viable. It eats directly into the razor-thin margins of steel manufacturing.
+It is 5:30 PM. The shift supervisor at a steel rolling mill in Hải Phòng checks the control panel. Under Vietnam’s newly implemented energy policy, **EVN Decision No. 963/QD-BCT**, this mark indicates the beginning of the evening peak electricity rate window. For the next five hours, the mill will pay **3,266 VND/kWh**—a staggering **2.85x multiplier** compared to off-peak periods. Operating a walking beam reheating furnace under traditional constant-throughput parameters during this peak window is no longer financially viable. It eats directly into the razor-thin margins of steel manufacturing.
 
 For steel mill owners and energy engineers across Vietnam, the summer of 2026 represents a critical inflection point. As electricity demand rises by 12% nationwide, the Ministry of Industry and Trade (MoIT) is tightening grid regulations. Unoptimized reheating furnaces, which typically consume 60-70% of a rolling mill’s total energy, are the largest single contributor to bloated utility bills. 
 
-However, forward-thinking mills are not shutting down production. By leveraging AI-driven thermal load shifting and CISA T80-certified combustion efficiency technologies, early adopters are reducing monthly operating costs by **$10,000 to $15,000 per production line**—without sacrificing daily tonnage targets. This guide outlines the exact technical roadmap to survive Decision 963 and build a permanent cost advantage.
+However, forward-thinking mills are not shutting down production. By leveraging AI-driven thermal load shifting and CISA T80-certified combustion efficiency technologies, early adopters are reducing monthly operating costs by **$9,000 to $13,000 per production line**—without sacrificing daily tonnage targets. This guide outlines the exact technical roadmap to survive Decision 963 and build a permanent cost advantage.
 
 ---
 
@@ -34,11 +34,11 @@ However, forward-thinking mills are not shutting down production. By leveraging 
 
 | Operating Parameter | Traditional Mode (No Load Shifting) | AI-Optimized Mode (T80 Load Shifting) | Variance / Savings |
 | :--- | :---: | :---: | :---: |
-| **Peak Hour Tariff Rate** | 3,640 VND/kWh ($0.145) | 3,640 VND/kWh ($0.145) | — |
+| **Peak Hour Tariff Rate** | 3,266 VND/kWh ($0.130) | 3,266 VND/kWh ($0.130) | — |
 | **Peak Hour Energy Draw** | 2,400 kWh / hour | 720 kWh / hour | 🟢 -70% Peak Draw |
-| **Off-Peak Tariff Rate** | 1,094 VND/kWh ($0.044) | 1,094 VND/kWh ($0.044) | — |
+| **Off-Peak Tariff Rate** | 1,146 VND/kWh ($0.046) | 1,146 VND/kWh ($0.046) | — |
 | **Off-Peak Energy Draw** | 1,800 kWh / hour | 2,800 kWh / hour | 🔴 +55% Off-Peak Draw |
-| **Monthly Electricity Cost** | $28,400 / month | $18,100 / month | 🟢 $10,300 Saved (36%) |
+| **Monthly Electricity Cost** | $26,000 / month | $17,000 / month | 🟢 $9,000 Saved (35%) |
 | **Average Billet Scale Loss** | 1.15% (Surface Oxidation) | 0.72% (Stoichiometric Control) | 🟢 0.43% Yield Recovery |
 | **Carbon Certificate Cost** | €77.24 per Ton CO₂ | €77.24 per Ton CO₂ | — (EU CBAM Price) |
 | **Carbon Intensity** | 125 kg CO₂ / Ton Steel | 104 kg CO₂ / Ton Steel | 🟢 -17% Carbon Footprint |
@@ -51,25 +51,25 @@ The new regulations under **EVN Decision No. 963/QD-BCT** have moved the industr
 
 **How does the new EVN Decision No. 963/QD-BCT impact steel furnace operations?**
 
-Decision 963 changes the cost structure by raising the peak rate to 3,640 VND/kWh. Traditional reheating furnaces operate on a \"continuous draw\" model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows.
+Decision 963 changes the cost structure by raising the peak rate to 3,266 VND/kWh. Traditional reheating furnaces operate on a "continuous draw" model, keeping zone temperatures constant regardless of grid pricing. This results in maximum electrical power consumption for combustion air fans, hydraulic pumps, cooling systems, and induction pre-heaters during the most expensive hours. AI-optimized load shifting bypasses this by transforming the furnace into a thermal storage battery: over-charging the steel billets with heat during cheap rate periods and coasting during peak windows.
 
 ### Technical Principle: Predictive Thermal Inertia Control
 AI-driven load shifting relies on the thermodynamic concept of **thermal inertia**. A steel billet (typically 150mm x 150mm x 12000mm) possesses significant thermal mass. Our AI system monitors the rolling mill production schedule and predicts furnace heat demands 2 to 4 hours in advance. 
 
-1.  **Pre-Charging Zone (3:00 PM – 5:30 PM):** During the cheaper \"normal rate\" window, the AI adjusts the combustion zones to increase the core temperature of the billets to their upper metallurgical limits (e.g., 1,220°C).
-2.  **Peak Rate Shedding (5:30 PM – 10:30 PM):** Once the peak rate hits, the system lowers the furnace atmosphere temperature while maintaining billet core temperatures. The air fans and gas flow are reduced to minimum maintenance levels. The mill draws on the \"stored heat\" within the billets to feed the rolling stands, reducing electrical fan draws by up to 70%.
-3.  **Post-Peak Stabilization (10:30 PM onwards):** The system ramps back up to steady-state operations during the off-peak rate window (1,094 VND/kWh).
+1.  **Pre-Charging Zone (3:00 PM – 5:30 PM):** During the cheaper "normal rate" window, the AI adjusts the combustion zones to increase the core temperature of the billets to their upper metallurgical limits (e.g., 1,220°C).
+2.  **Peak Rate Shedding (5:30 PM – 10:30 PM):** Once the peak rate hits, the system lowers the furnace atmosphere temperature while maintaining billet core temperatures. The air fans and gas flow are reduced to minimum maintenance levels. The mill draws on the "stored heat" within the billets to feed the rolling stands, reducing electrical fan draws by up to 70%.
+3.  **Post-Peak Stabilization (10:30 PM onwards):** The system ramps back up to steady-state operations during the off-peak rate window (1,146 VND/kWh).
 
 ```
 [3:00 PM - 5:30 PM Normal Rate] -> Over-charge billets to 1,220°C (Store Thermal Energy)
 [5:30 PM - 10:30 PM Peak Rate]   -> Drop burner output, reduce fan speed, utilize stored heat
-[10:30 PM onwards Off-Peak]     -> Restore steady-state combustion at 1,094 VND/kWh tariff
+[10:30 PM onwards Off-Peak]     -> Restore steady-state combustion at 1,146 VND/kWh tariff
 ```
 
 ### Case Study: Shengli Steel (Hải Phòng)
-Shengli Steel deployed our AI Predictive Load Shifting software on their 500,000 TPY walking beam reheating furnace. By shifting 22% of their furnace-related electrical load from peak hours to off-peak periods, they achieved an immediate reduction of **$11,400 in their monthly electricity bill**, with zero impact on production throughput.
+Shengli Steel deployed our AI Predictive Load Shifting software on their 500,000 TPY walking beam reheating furnace. By shifting 22% of their furnace-related electrical load from peak hours to off-peak periods, they achieved an immediate reduction of **$9,500 in their monthly electricity bill**, with zero impact on production throughput.
 
-> \"Many engineers believe that changing furnace temperatures during a shift will create rolling defects. However, AI thermal modeling allows us to dynamically modulate heat zones while ensuring that the billet core temperature remains perfectly uniform when it hits the roughing stand.\"
+> "Many engineers believe that changing furnace temperatures during a shift will create rolling defects. However, AI thermal modeling allows us to dynamically modulate heat zones while ensuring that the billet core temperature remains perfectly uniform when it hits the roughing stand."
 > — Zhang Liang, Senior Process Engineer, South Technology
 
 ---
@@ -259,7 +259,7 @@ Prime Steel utilized our AI tracking system to verify emissions for a 20,000-ton
 
 The implementation of **EVN Decision No. 963/QD-BCT** is not a temporary hurdle; it is a permanent structural shift in Vietnam’s industrial energy pricing. Continuing to run high-temperature walking beam reheating furnaces without active load management and combustion optimization will render your operations uncompetitive.
 
-By integrating AI thermal load shifting, closed-loop stoichiometric combustion control, and high-emissivity coatings, steel mills can reduce operating costs by over **$10,000 per month**. Under the Zero CAPEX Energy Steward partnership, these upgrades require no upfront investment, allowing you to fund efficiency entirely out of recovered savings. The window to prepare for the summer heatwave is short. Contact South Technology today to lock in your seasonal savings.
+By integrating AI thermal load shifting, closed-loop stoichiometric combustion control, and high-emissivity coatings, steel mills can reduce operating costs by over **$9,000 per month**. Under the Zero CAPEX Energy Steward partnership, these upgrades require no upfront investment, allowing you to fund efficiency entirely out of recovered savings. The window to prepare for the summer heatwave is short. Contact South Technology today to lock in your seasonal savings.
 
 ---
 
