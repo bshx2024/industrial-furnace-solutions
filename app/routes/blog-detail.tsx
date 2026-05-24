@@ -30,14 +30,59 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
     if (!data) return [{ title: "Post Not Found" }];
 
-    return [
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": data.post.title,
+        "description": data.post.description,
+        "image": data.post.image,
+        "datePublished": data.post.date,
+        "author": {
+            "@type": "Person",
+            "name": data.post.author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "EcoReheating",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.ecoreheating.com/favicon.svg"
+            }
+        }
+    };
+
+    const faqSchema = data.post.faq ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": data.post.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
+
+    const metaTags: any[] = [
         { title: `${data.post.title} | EcoReheating` },
         { name: "description", content: data.post.description },
         { property: "og:title", content: data.post.title },
         { property: "og:description", content: data.post.description },
         { property: "og:image", content: data.post.image },
         { property: "og:type", content: "article" },
+        {
+            "script:ld+json": structuredData
+        }
     ];
+
+    if (faqSchema) {
+        metaTags.push({
+            "script:ld+json": faqSchema
+        });
+    }
+
+    return metaTags;
 };
 
 export default function BlogDetail() {
@@ -67,53 +112,8 @@ export default function BlogDetail() {
         return <div className="text-white pt-32 text-center">MDX Content not found.</div>;
     }
 
-    const structuredData = {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": post.title,
-        "description": post.description,
-        "image": post.image,
-        "datePublished": post.date,
-        "author": {
-            "@type": "Organization",
-            "name": "EcoReheating"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "EcoReheating",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "/logo.png"
-            }
-        }
-    };
-
-    const faqSchema = post.faq ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": post.faq.map(item => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer
-            }
-        }))
-    } : null;
-
     return (
         <article className="bg-[#0a0a0a] min-h-screen pt-24 pb-16">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-            />
-            {faqSchema && (
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-                />
-            )}
-
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
                 <Link
                     to={lang === "vi" ? "/vi/blog" : "/blog"}

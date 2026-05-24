@@ -470,6 +470,11 @@ export const translations = {
     'footer.privacy': 'Privacy',
     'footer.terms': 'Terms',
     'footer.compliance': 'T80 Compliance',
+    'contact.form.or_chat': 'Or chat directly via instant message:',
+    'contact.form.zalo': 'Zalo Chat',
+    'contact.form.whatsapp': 'WhatsApp',
+    'contact.form.cisa_verification': 'CISA T80 Verified Technology | Doc. No. 185',
+    'contact.form.cisa_sub': 'Turnkey energy steward service provided by South Technology. We invest, you save.',
   },
   vi: {
     // SEO
@@ -926,6 +931,11 @@ export const translations = {
     'footer.privacy': 'Quyền riêng tư',
     'footer.terms': 'Điều khoản',
     'footer.compliance': 'Đạt chuẩn CISA T80',
+    'contact.form.or_chat': 'Hoặc trò chuyện trực tiếp qua tin nhắn:',
+    'contact.form.zalo': 'Chat Zalo',
+    'contact.form.whatsapp': 'WhatsApp',
+    'contact.form.cisa_verification': 'Công nghệ đạt chứng nhận CISA T80 | Công văn số 185',
+    'contact.form.cisa_sub': 'Dịch vụ Quản gia năng lượng trọn gói cung cấp bởi South Technology. Tiết kiệm trước, thanh toán sau.',
   },
 };
 

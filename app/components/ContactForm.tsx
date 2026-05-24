@@ -106,6 +106,15 @@ const ContactForm: React.FC = () => {
                   <p className="text-xs text-gray-400">{t('contact.feature2.desc')}</p>
                 </div>
               </div>
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-furnace-500/10 border border-furnace-500/30">
+                <div className="bg-furnace-500 text-white p-2 rounded font-black text-xs shrink-0">
+                  T80
+                </div>
+                <div className="text-left">
+                  <h4 className="font-bold text-sm text-furnace-400">{t('contact.form.cisa_verification')}</h4>
+                  <p className="text-xs text-gray-300">{t('contact.form.cisa_sub')}</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -301,6 +310,34 @@ const ContactForm: React.FC = () => {
                     <>{t('contact.form.submit')} <Send size={20} /></>
                   )}
                 </button>
+
+                <div className="mt-8 pt-6 border-t border-slate-100 text-center">
+                  <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-4">
+                    {t('contact.form.or_chat')}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a
+                      href="https://zalo.me/84908888888"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0068ff] hover:bg-[#0052cc] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all shadow-md active:scale-98"
+                    >
+                      <span className="w-5 h-5 flex items-center justify-center bg-white text-[#0068ff] rounded-full font-black text-[10px]">Z</span>
+                      {t('contact.form.zalo')}
+                    </a>
+                    <a
+                      href="https://wa.me/84908888888"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#25d366] hover:bg-[#20ba5a] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all shadow-md active:scale-98"
+                    >
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.665.988 3.3 1.488 5.418 1.489 5.546 0 10.059-4.509 10.062-10.057.002-2.688-1.043-5.215-2.943-7.117C17.228 1.567 14.7.523 12.008.523c-5.55 0-10.063 4.512-10.066 10.06-.001 1.93.498 3.81 1.442 5.461l-.955 3.487 3.618-.949zm12.188-7.85c-.32-.16-1.89-.933-2.185-1.04-.294-.11-.51-.16-.723.16-.214.32-.828 1.04-.984 1.22-.156.18-.312.2-.63.04-.32-.16-1.343-.496-2.56-1.582-.947-.845-1.58-1.89-1.767-2.21-.186-.32-.02-.49.14-.65.14-.145.31-.34.47-.51.16-.17.21-.29.32-.48.11-.19.05-.36-.03-.52-.08-.16-.723-1.74-.99-2.39-.26-.62-.52-.54-.723-.55-.186-.01-.4-.01-.61-.01s-.55.07-.84.38c-.29.32-1.103 1.08-1.103 2.63s1.125 3.05 1.28 3.26c.156.21 2.214 3.38 5.36 4.74.75.32 1.33.52 1.79.66.756.24 1.444.2 1.99.12.607-.09 1.89-.77 2.155-1.48.266-.71.266-1.32.187-1.45-.08-.13-.294-.21-.614-.37z"/>
+                      </svg>
+                      {t('contact.form.whatsapp')}
+                    </a>
+                  </div>
+                </div>
 
                 <p className="text-[11px] text-center text-gray-500 mt-6 leading-relaxed">
                   {t('contact.form.footer_1')} <br />

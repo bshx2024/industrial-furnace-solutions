@@ -17,13 +17,19 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const lang = url.pathname.startsWith("/vi") ? "vi" : "en";
     const canonical = `https://www.ecoreheating.com${url.pathname === "/" ? "" : url.pathname}`;
 
-    return { lang, canonical };
+    const cleanPath = url.pathname.replace(/^\/vi(\/|$)/, "$1");
+    const enUrl = `https://www.ecoreheating.com${cleanPath === "/" ? "" : cleanPath}`;
+    const viUrl = `https://www.ecoreheating.com/vi${cleanPath === "/" ? "" : cleanPath}`;
+
+    return { lang, canonical, enUrl, viUrl };
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-    const data = useLoaderData() as { lang: string; canonical: string } | undefined;
+    const data = useLoaderData() as { lang: string; canonical: string; enUrl: string; viUrl: string } | undefined;
     const lang = data?.lang || "en";
     const canonical = data?.canonical || "https://www.ecoreheating.com";
+    const enUrl = data?.enUrl || "https://www.ecoreheating.com";
+    const viUrl = data?.viUrl || "https://www.ecoreheating.com/vi";
 
     return (
         <html lang={lang}>
@@ -33,9 +39,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
                 {/* SEO Metadata alternates */}
-                <link rel="alternate" hrefLang="en" href="https://www.ecoreheating.com/" />
-                <link rel="alternate" hrefLang="vi" href="https://www.ecoreheating.com/vi/" />
-                <link rel="alternate" hrefLang="x-default" href="https://www.ecoreheating.com/" />
+                <link rel="alternate" hrefLang="en" href={enUrl} />
+                <link rel="alternate" hrefLang="vi" href={viUrl} />
+                <link rel="alternate" hrefLang="x-default" href={enUrl} />
                 <link rel="canonical" href={canonical} />
 
                 <Meta />
