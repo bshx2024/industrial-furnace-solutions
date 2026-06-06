@@ -1,0 +1,201 @@
+---
+title: "Ngăn ngừa dừng máy: Kiểm toán tổn thất nhiệt trên các lò nung cũ"
+description: "Nhà máy thép của bạn đang lãng phí đến 15% nhiên liệu do rò rỉ nhiệt? Tìm hiểu cách kiểm toán tổn thất nhiệt và nâng cấp lớp lót chịu lửa với Zero CAPEX."
+date: "2026-06-06"
+author: "Dr. Chen Wei"
+authorTitle: "Kỹ sư trưởng Công nghệ Nhiệt, South Technology"
+authorBio: "Tiến sĩ Chen có hơn 15 năm kinh nghiệm trong tối ưu hóa lò công nghiệp, dẫn dắt các dự án nâng cấp hiệu suất năng lượng trên 300+ dây chuyền sản xuất toàn cầu, đặc biệt là tiêu chuẩn T80."
+faq:
+  - question: "Những dấu hiệu phổ biến nhất của tổn thất nhiệt nghiêm trọng trong lò nung công nghiệp là gì?"
+    answer: "Các chỉ số trực quan và nhiệt độ phổ biến nhất bao gồm các điểm nóng trên vỏ lò (vượt quá 85°C), ngọn lửa liếm xung quanh cửa lò, gió hút lạnh vào qua các cổng nạp liệu và lớp cách nhiệt của đường ống trượt làm mát bằng nước bị xuống cấp. Khảo sát bằng camera nhiệt có thể phát hiện các tổn thất này ngay lập tức."
+  - question: "Sự xâm nhập của không khí lạnh ảnh hưởng thế nào đến hiệu suất đốt cháy trong lò nung?"
+    answer: "Không khí lạnh lọt vào lò qua các đệm kín bị mòn làm giảm nhiệt độ cục bộ của vùng đốt. Để bù lại, các vòi đốt phải tiêu thụ nhiều nhiên liệu hơn để duy trì nhiệt độ cài đặt. Ngoài ra, oxy dư làm tăng tỷ lệ hao hụt vảy oxit sắt trên bề mặt phôi thép, làm giảm năng suất chung."
+  - question: "Nhà máy thép có thể nâng cấp lớp lót chịu lửa mà không cần dừng hoạt động trong nhiều tháng không?"
+    answer: "Có, bằng cách sử dụng các mô-đun sợi gốm được lắp ráp sẵn thay vì lớp lót bê tông chịu lửa truyền thống, thời gian lắp đặt được giảm tới 60%. Các nâng cấp này có thể được lên kế hoạch trong các kỳ bảo dưỡng định kỳ, giảm thiểu gián đoạn sản xuất."
+  - question: "Tại sao mô hình Hợp đồng năng lượng (Energy Steward) không vốn (Zero CAPEX) lại có lợi cho việc cải tạo lò cũ?"
+    answer: "Cải tạo lò nung cũ có thể yêu cầu khoản đầu tư từ 300,000 đến 600,000 USD. Dưới mô hình Energy Steward, EcoReheating đài thọ toàn bộ chi phí thiết bị, phần mềm, lắp đặt và kỹ thuật ban đầu. Nhà máy chỉ trả một phần trăm từ số tiền tiết kiệm năng lượng thực tế được xác minh, giúp dự án tự tài trợ ngay từ ngày đầu."
+tags: ["Kiểm toán lò nung", "Kiểm soát thất thoát nhiệt", "Zero CAPEX", "Lò nung lại", "Ngăn ngừa dừng máy"]
+image: "/tech-roof.png"
+slug: "preventing-downtime-auditing-heat-loss-legacy-furnaces"
+lang: "vi"
+---
+
+Vận hành một lò nung lại phôi thép cũ trong bối cảnh giá năng lượng tăng cao hiện nay là một thách thức lớn về chi phí ẩn. Tại các nhà máy thép thuộc các trung tâm công nghiệp lớn của Việt Nam—từ Bình Dương đến Hải Phòng—lò nung lại thường tiêu thụ từ **60% đến 70%** toàn bộ ngân sách năng lượng của nhà máy. Tuy nhiên, các đợt kiểm toán nhiệt động học cho thấy các lò nung đẩy hoặc lò dầm bước điều khiển bằng PLC thế hệ cũ đang lãng phí từ **10% đến 25%** tổng lượng nhiên liệu trực tiếp qua tổn thất cấu trúc, xâm nhập không khí lạnh và đường ống làm mát không được bảo ôn.
+
+Đồng thời, sự cố sập lớp lót chịu lửa hoặc biến dạng vỏ lò nung là nguyên nhân hàng đầu gây ra dừng máy ngoài kế hoạch ở các nhà máy cán nóng. Một ngày dừng máy khẩn cấp có thể khiến một nhà máy thép quy mô trung bình thiệt hại từ **50,000 USD đến 120,000 USD** chi phí sửa chữa và doanh thu sản xuất bị mất.
+
+Tài liệu kỹ thuật này, được biên soạn bởi **Tiến sĩ Chen Wei (Kỹ sư trưởng Công nghệ Nhiệt tại South Technology)**, hướng dẫn cách thực hiện kiểm toán tổn thất nhiệt một cách hệ thống trên các lò nung cũ. Tài liệu chi tiết hóa 5 con đường rò rỉ nhiệt động học chính và cách triển khai các giải pháp nâng cấp nhiệt hiện đại theo [mô hình Energy Steward không vốn đầu tư (Zero CAPEX)](/vi#energy-steward) để đạt mức **tiết kiệm nhiên liệu từ 7% đến 15%** đồng thời bảo vệ độ tin cậy vận hành.
+
+---
+
+## 1. Kiểm toán nhiệt động học: Xác định các con đường tổn thất nhiệt của lò
+
+Trước khi đầu tư vào bất kỳ nâng cấp vật lý nào, các nhà máy thép phải thiết lập một đường cơ sở (baseline) để xác định nơi nhiệt năng bị lãng phí. Trong một lò nung lý tưởng, năng lượng từ quá trình đốt cháy nhiên liệu được truyền hoàn toàn vào phôi thép. Trong các hệ thống cũ, một phần đáng kể năng lượng này bị thất thoát qua các con đường khác nhau.
+
+Bảng dưới đây minh họa sự phân bổ tổn thất nhiệt điển hình trong một lò nung dầm bước công suất 150 tấn/giờ chưa được tối ưu hóa:
+
+| Đường rò rỉ nhiệt | Tỷ lệ tổn thất năng lượng | Dấu hiệu vật lý điển hình | Giải pháp khắc phục theo chuẩn T80 | Hoàn vốn dự kiến (Zero CAPEX) |
+| :--- | :---: | :--- | :--- | :---: |
+| **Bức xạ tường & trần lò** | 4.0% – 8.0% | Nhiệt độ vỏ lò > 95°C, vỏ lò bị biến dạng | Mô-đun sợi gốm đa lớp + lớp phủ bức xạ cao | Ngay lập tức (Tự hoàn vốn) |
+| **Rò rỉ khí & gió lạnh lọt vào** | 5.0% – 12.0% | Ngọn lửa liếm cửa lò, áp suất âm hút gió, vảy oxit dày | Điều khiển áp suất tự động bằng AI + thay đệm kín cửa lò | Ngay lập tức (Tự hoàn vốn) |
+| **Đường ống trượt làm mát bằng nước** | 3.0% – 6.0% | Nhiệt độ nước làm mát đầu ra tăng cao | Bọc bảo ôn đường ống sợi gốm định hình hai lớp | Ngay lập tức (Tự hoàn vốn) |
+| **Hiệu suất đốt cháy của vòi đốt** | 4.0% – 10.0% | Ngọn lửa lệch trục, hàm lượng O₂ cao trong khói thải | Điều khiển tỷ lệ nhiên liệu/gió tối ưu bằng AI | Ngay lập tức (Tự hoàn vốn) |
+
+---
+
+![Lắp đặt mô-đun sợi gốm lắp ráp sẵn trên trần lò nung dầm bước nhằm giảm nhiệt độ vỏ lò và cắt giảm lượng gas tiêu thụ](/tech-roof.png)
+*Hình 1: Lắp đặt trần sợi gốm hiệu suất cao thay thế cho tường gạch chịu lửa bê tông nặng truyền thống*
+
+---
+
+## 2. Mô-đun kỹ thuật 1: Kiểm toán độ xuống cấp của lớp lót chịu lửa & lớp cách nhiệt
+
+### Vấn đề: Lão hóa bê tông chịu lửa và cầu nhiệt
+Các lò nung lại truyền thống sử dụng bê tông chịu lửa nặng hoặc gạch đất sét nung. Trải qua 3 đến 5 năm chu kỳ nhiệt liên tục (nung lên 1,250°C và làm nguội khi bảo dưỡng), các vật liệu này bị sốc nhiệt, dẫn đến nứt, bong tróc và cuối cùng là sập kết cấu lớp lót.
+
+Khi lớp chịu lửa xuống cấp, tốc độ truyền nhiệt qua tường lò tăng lên. Điều này dẫn đến:
+* Nhiệt độ vỏ lò tăng cao, đôi khi vượt quá 120°C (vượt xa giới hạn an toàn công nghiệp là 80°C).
+* Vỏ thép của lò bị oxy hóa nhanh và cong vênh, đòi hỏi chi phí sửa chữa cơ cấu rất lớn.
+* Môi trường làm việc cực kỳ khắc nghiệt và nóng bức cho người vận hành xung quanh.
+
+### Giải pháp T80: Mô-đun sợi gốm đa lớp & Lớp phủ bức xạ nhiệt cao
+Theo **Lộ trình Kỹ thuật T80**, chúng tôi thay thế bê tông đúc nặng bằng các **mô-đun sợi gốm lắp ráp sẵn** (được neo bằng hợp kim chịu nhiệt) kết hợp với **lớp phủ chức năng bức xạ cao** sơn trực tiếp lên mặt nóng của lò.
+
+Sợi gốm có độ dẫn nhiệt **thấp hơn 75%** so với gạch chịu lửa truyền thống. Lớp phủ bức xạ cao hoạt động như một tấm gương nhiệt, phản xạ bức xạ hồng ngoại trở lại buồng nung thay vì để nó truyền qua tường chịu lửa ra ngoài vỏ.
+
+> "Bằng cách thay thế gạch chịu lửa xuống cấp bằng mô-đun sợi gốm đa lớp, chúng tôi giảm 80% nhiệt dung (khả năng tích nhiệt) của tường lò. Điều này không chỉ cắt giảm tổn thất bức xạ mà còn giúp lò nâng nhiệt và hạ nhiệt nhanh hơn đáng kể, nâng cao tính linh hoạt vận hành."
+> — Dr. Chen Wei, Kỹ sư trưởng Công nghệ Nhiệt, South Technology
+
+**Tác động nhiệt động học:**
+Bằng cách nâng cấp trần và tường lò, nhiệt độ vỏ lò được đưa xuống dưới 75°C, giảm tổn thất nhiệt qua thành lò từ **45% đến 60%**. Điều này chuyển hóa trực tiếp thành mức **giảm 3.5% lượng gas tiêu thụ** đồng thời ngăn ngừa biến dạng vỏ thép của lò.
+
+---
+
+## 3. Mô-đun kỹ thuật 2: Xâm nhập gió lạnh, kiểm soát áp suất & mài mòn đệm kín cửa lò
+
+### Vấn đề: "Hiệu ứng ống khói" và suy giảm chất lượng đệm kín
+Cửa lò nung được mở ra và đóng lại hàng trăm lần mỗi ngày để nạp và ra phôi. Theo thời gian, các đệm cơ khí và rèm sợi gốm bị biến dạng do nhiệt độ cao và ma sát vật lý.
+
+Khi đệm kín bị hỏng, hai vấn đề nghiêm trọng sẽ xảy ra tùy thuộc vào áp suất trong lò:
+1. **Áp suất dương (Ngọn lửa liếm ra ngoài)**: Khí lò nóng thoát ra ngoài qua các khe hở, làm hỏng khung cửa, cáp cảm biến và cơ cấu nâng hạ cửa lò.
+2. **Áp suất âm (Gió lạnh lọt vào)**: Nếu van tiết lưu gió thải được mở quá lớn, không khí lạnh bên ngoài sẽ bị hút vào lò. Gió lạnh này làm giảm nhiệt độ của phôi và khí lò, buộc các vòi đốt phải hoạt động mạnh hơn để bù nhiệt.
+
+Hơn nữa, không khí lạnh đưa oxy dư vào, phản ứng với thép nóng để tạo ra **vảy oxit sắt**. Hao hụt vảy oxit không chỉ lãng phí thép thành phẩm (lên tới 1.5% trọng lượng phôi) mà còn làm hỏng sàn lò nung.
+
+### Giải pháp T80: Kiểm soát áp suất thông minh bằng AI và đệm kín chủ động
+Tiêu chuẩn T80 triển khai chiến lược khắc phục kép:
+* **Đệm kín cơ khí chủ động**: Sử dụng dây cáp sợi gốm đàn hồi cao và kẹp cửa ép bằng khí nén giúp duy trì độ kín ngay cả khi lò giãn nở nhiệt.
+* **Điều tiết áp suất bằng AI**: Sử dụng biến tần (VFD) trên quạt hút khói, được điều khiển bởi các cảm biến áp suất thời gian thực. AI duy trì áp suất dương cực nhỏ (+10 Pa đến +15 Pa) ở sàn lò, loại bỏ hoàn toàn sự xâm nhập của không khí lạnh.
+
+> "Chỉ cần áp suất lò lệch 5 Pascal có thể làm tăng 4% lượng tiêu thụ nhiên liệu. Hệ thống theo dõi áp suất bằng AI đảm bảo van tiết lưu điều chỉnh ngay lập tức theo chuyển động của cửa lò, giữ nhiệt lượng ở lại bên trong buồng nung."
+> — Zhang Liang, Kỹ sư quy trình cấp cao, South Technology
+
+---
+
+📋 **Tài nguyên chuyên ngành: Cẩm nang tối ưu hóa lò nung**
+Bạn đang gặp khó khăn trong việc cân bằng giữa hiệu suất nhiên liệu và hao hụt vảy oxit sắt trong nhà máy cán nóng? Tải ngay tài liệu hướng dẫn dành riêng cho các nhà máy thép:
+[**Tải Bảng kiểm tra kiểm toán lò nung miễn phí →**](/vi#assessment) | [**Xem các dự án thực tế T80 →**](/vi/hero-cases)
+
+---
+
+## 4. Mô-đun kỹ thuật 3: Rò rỉ năng lượng ở ống trượt làm mát bằng nước & Bảo ôn đường ống
+
+### Vấn đề: Nước làm mát hoạt động như một bể hấp thụ nhiệt
+Trong các lò nung dầm bước, các phôi thép được đỡ và di chuyển bằng một hệ thống ống trượt làm mát bằng nước. Do các ống thép này liên tục có nước lạnh tuần hoàn bên trong để tránh bị uốn cong dưới tải trọng nhiệt độ cao, chúng hoạt động như những bể hấp thụ nhiệt khổng lồ ngay bên trong lò nung 1,250°C.
+
+Nếu một mét ống trượt không được bảo ôn cách nhiệt hoặc nếu lớp bảo ôn bị bong tróc, tổn thất nhiệt vào nước làm mát là rất lớn. Một mét ống trượt trần có thể hấp thụ nhiều nhiệt hơn 10 mét vuông tường lò được bảo ôn tốt. Điều này dẫn đến:
+* Nhiệt lượng bị nước làm mát mang đi quá lớn, đòi hỏi hệ thống tháp giải nhiệt công suất cao hơn.
+* Tạo ra các "vết đen" hoặc "vết trượt" (cold spots / skid marks) ở mặt dưới phôi thép, gây ra lỗi cán và làm hỏng các giá cán của máy cán.
+
+### Giải pháp T80: Bảo ôn ống chịu lửa định hình hai lớp
+Chúng tôi áp dụng giải pháp **bảo ôn chịu lửa định hình hai lớp** được cố định bằng lưới thép hợp kim cao và các chốt neo chuyên dụng.
+
+Lớp bên trong gồm bông sợi gốm chịu nhiệt độ cao giúp giảm chấn và chống rung cho ống, trong khi lớp bên ngoài là khối bê tông chịu lửa cường độ cao giúp chống lại va đập vật lý từ vảy oxit và dòng khí lò từ vòi đốt.
+
+**Bảng kiểm tra bảo ôn ống trượt:**
+* **Tỷ lệ bao phủ**: Đảm bảo >98% bề mặt ống làm mát bằng nước được bọc bảo ôn.
+* **Độ bền của neo**: Kiểm tra các mối hàn của neo hợp kim trong mỗi đợt dừng lò bảo dưỡng hàng tháng.
+* **Theo dõi nhiệt độ nước ra**: Giám sát chênh lệch nhiệt độ nước vào/ra. Chênh lệch vượt quá 15°C là dấu hiệu lớp bảo ôn bị hỏng cục bộ.
+
+Việc triển khai bọc bảo ôn hai lớp giúp giảm tổn thất nhiệt vào nước làm mát **tới 85%**, giúp cải thiện độ đồng đều nhiệt độ phôi và tiết kiệm **2.5% đến 4.5% nhiên liệu**.
+
+---
+
+## 5. Mô-đun kỹ thuật 4: Hiệu suất cháy của vòi đốt & Lệch tỷ lệ gió-nhiên liệu
+
+### Vấn đề: Quá trình đốt cháy lệch chuẩn stoichiometric
+Các vòi đốt công nghiệp xuống cấp theo thời gian. Muội than, tạp chất trong khí gas và mỏi nhiệt gây mòn vòi phun, dẫn đến ngọn lửa bị lệch và tỷ lệ trộn khí-gió không tối ưu.
+
+Nếu tỷ lệ gió-nhiên liệu không chính xác:
+* **Thừa gió (Lãng phí nhiên liệu)**: Lượng gió dư không cần thiết bị đốt nóng lên 1,200°C rồi thải ra ngoài qua ống khói, mang theo một lượng nhiệt lớn.
+* **Thiếu gió (Nhiên liệu cháy không hết)**: Gây ra khí thải CO độc hại, khói đen và lãng phí năng lượng hóa học của gas.
+
+Hầu hết các nhà máy cũ vận hành dựa trên một đường cong gió-nhiên liệu cố định được thiết lập từ nhiều năm trước. Tuy nhiên, nhiệt trị của gas và nhiệt độ không khí thay đổi hàng ngày, nghĩa là đường cong cố định luôn chạy ở trạng thái không tối ưu.
+
+### Giải pháp T80: Tối ưu hóa stoichiometric dự đoán bằng AI
+Hệ thống **Tối ưu hóa đốt cháy thông minh** của chúng tôi sử dụng các máy phân tích khí thải bằng laser thời gian thực ($O_2$ và $CO$) lắp đặt tại các vùng chuyển tiếp của lò.
+
+Thuật toán AI liên tục tính toán lượng gió tối ưu cho từng vùng đốt dựa trên chất lượng gas thực tế và nhu cầu nhiệt lượng. Thay vì điều chỉnh thủ công, các vòng lặp điều khiển tự động điều chỉnh van gió mỗi 3 giây, duy trì hệ số dư gió ở mức cực thấp từ **1.05 đến 1.10**.
+
+Đối với các nhà máy xuất khẩu thép sang các khu vực áp thuế carbon, việc tối ưu hóa này là bắt buộc. Nó vừa giảm phát thải trực tiếp vừa tạo dữ liệu báo cáo chuẩn hóa theo cơ chế như [EU CBAM](https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en).
+
+---
+
+![Ứng dụng lớp phủ bức xạ cao bên trong buồng lò nung để cải thiện hiệu suất truyền nhiệt bức xạ và bảo vệ tường chịu lửa](/tech-coating.png)
+*Hình 2: Ứng dụng lớp phủ chịu lửa bức xạ cao bên trong buồng lò để tối ưu hóa truyền nhiệt bức xạ*
+
+---
+
+## 6. Mô-đun kỹ thuật 5: Camera nhiệt, Digital Twin & Kiểm toán năng lượng dự đoán
+
+### Vấn đề: Vận hành mù
+Các kỹ thuật viên lò nung truyền thống chỉ điều chỉnh nhiệt độ vùng dựa trên các cặp nhiệt điện (thermocouple) lắp ở trần lò. Tuy nhiên, cặp nhiệt điện chỉ đo nhiệt độ khí tại một điểm duy nhất; chúng không phản ánh lượng nhiệt phôi thép thực tế đã hấp thụ hay các điểm nóng rò rỉ trên vỏ lò.
+
+### Giải pháp T80: Hệ thống camera nhiệt hồng ngoại & Digital Twin
+Chúng tôi lắp đặt **hệ thống camera nhiệt hồng ngoại độ phân giải cao** bên trong buồng nung và bên ngoài vỏ lò. Dữ liệu hình ảnh nhiệt được truyền về **mô hình Digital Twin (bản sao số)** mô phỏng trường nhiệt độ của lò và ứng suất nhiệt của phôi thép theo thời gian thực.
+
+Hệ thống mang lại:
+* **Bản đồ tổn thất nhiệt vỏ lò**: Tự động cảnh báo khi nhiệt độ vỏ ngoài vượt quá 80°C, chỉ ra vị trí lớp chịu lửa bị xuống cấp.
+* **Độ đồng đều nhiệt độ phôi**: Theo dõi thời gian thực nhiệt độ bề mặt và lõi phôi để đảm bảo điều kiện cán tốt nhất mà không bị quá nhiệt.
+* **Bảo trì dự đoán**: Phát hiện các hư hỏng cấu trúc trước nhiều tuần trước khi xảy ra sự cố dừng máy, giúp sắp xếp sửa chữa trong các kỳ bảo dưỡng định kỳ.
+
+---
+
+<div class="my-8 border-l-4 border-orange-500 bg-gray-900 rounded-r-lg p-6">
+  <span class="text-xs font-bold uppercase tracking-wider text-orange-400">Định nghĩa</span>
+  <h4 class="mt-2 text-lg font-semibold text-white">Kiểm toán nhiệt lò nung</h4>
+  <p class="mt-2 text-gray-300">Là một quy trình kỹ thuật toàn diện nhằm đo lường tất cả năng lượng đầu vào và đầu ra của hệ thống nung công nghiệp. Bằng cách thực hiện các tính toán cân bằng vật chất và năng lượng, kiểm toán nhiệt xác định chính xác các con đường tổn thất nhiệt (bức xạ tường, enthalpy khói thải, nước làm mát mang đi, phản ứng tạo vảy oxit) và cung cấp lộ trình định lượng cho các cải tạo tiết kiệm năng lượng.</p>
+</div>
+
+---
+
+## 7. Mô hình Energy Steward không vốn đầu tư (Zero CAPEX): Loại bỏ rủi ro tài chính
+
+Nâng cấp lớp lót chịu lửa, bảo ôn ống trượt và hệ thống điều khiển đốt cháy của một lò nung đòi hỏi khoản chi phí đầu tư (CAPEX) khoảng **300,000 đến 600,000 USD**. Trong thị trường thép nhiều biến động, việc phê duyệt ngân sách cho các dự án tiết kiệm năng lượng thường gặp nhiều khó khăn.
+
+Mô hình **Energy Steward** của EcoReheating giải quyết triệt để rào cản này:
+1. **Đầu tư 100% chi phí ban đầu**: EcoReheating chi trả toàn bộ thiết bị, phần mềm, lắp đặt và kỹ thuật.
+2. **Thu hồi dựa trên hiệu quả thực tế**: Nhà máy thép không phải trả bất kỳ khoản phí nào trước. Khi hệ thống đi vào vận hành, lượng nhiên liệu tiết kiệm được sẽ được đo lường so với đường cơ sở ban đầu theo các tiêu chuẩn quốc tế (IPMVP).
+3. **Chia sẻ lợi ích tiết kiệm**: Nhà máy thanh toán cho EcoReheating một tỷ lệ phần trăm đã thỏa thuận từ số tiền tiết kiệm năng lượng thực tế được xác minh. Nếu không có tiết kiệm, nhà máy không phải trả tiền.
+
+Mô hình này giúp gắn kết lợi ích của hai bên. Chúng tôi chỉ thành công khi lò nung của bạn hoạt động hiệu quả và tin cậy hơn.
+
+> "Nhiều nhà máy thép trì hoãn việc bảo dưỡng lò nung vì rào cản CAPEX, để rồi phải trả giá gấp đôi bằng chi phí dừng máy khẩn cấp và hóa đơn nhiên liệu tăng vọt. Chương trình Energy Steward biến khoản lãng phí năng lượng đó thành nguồn vốn nâng cấp lò nung của bạn."
+> — Li Minghua, Giám đốc Dự án, South Technology
+
+---
+
+### Sẵn sàng loại bỏ lãng phí nhiệt của lò nung?
+
+Bạn chưa biết lò nung của mình đang lãng phí bao nhiêu năng lượng? Đội ngũ kỹ sư của chúng tôi sẽ phân tích lượng tiêu thụ nhiên liệu, công suất sản xuất và dữ liệu nhiệt độ vỏ lò để lập **Báo cáo kiểm toán hiệu suất lò nung** chi tiết — được tài trợ 100% bởi EcoReheating.
+
+[Đăng ký đánh giá hiệu suất nhiệt miễn phí →](/vi#assessment)
+
+*Không yêu cầu cam kết. Giới hạn 2 suất đánh giá mỗi tháng cho các nhà máy có công suất trên 100,000 tấn/năm.*
+
+---
+
+#### Dr. Chen Wei
+Kỹ sư trưởng Công nghệ Nhiệt, South Technology
+
+Tiến sĩ Chen có hơn 15 năm kinh nghiệm trong tối ưu hóa lò công nghiệp và đã dẫn dắt các dự án nâng cấp hiệu suất năng lượng trên 300+ dây chuyền sản xuất toàn cầu. Ông là người đóng góp chính cho tiêu chuẩn hiệu suất công nghiệp CISA T80.
