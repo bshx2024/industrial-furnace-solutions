@@ -14,10 +14,14 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const url = new URL(request.url);
-    const lang = url.pathname.startsWith("/vi") ? "vi" : "en";
-    const canonical = `https://www.ecoreheating.com${url.pathname === "/" ? "" : url.pathname}`;
+    let pathname = url.pathname;
+    if (pathname.endsWith("/") && pathname !== "/") {
+        pathname = pathname.slice(0, -1);
+    }
+    const lang = pathname.startsWith("/vi") ? "vi" : "en";
+    const canonical = `https://www.ecoreheating.com${pathname === "/" ? "" : pathname}`;
 
-    const cleanPath = url.pathname.replace(/^\/vi(\/|$)/, "$1");
+    const cleanPath = pathname.replace(/^\/vi(\/|$)/, "$1");
     const enUrl = `https://www.ecoreheating.com${cleanPath === "/" ? "" : cleanPath}`;
     const viUrl = `https://www.ecoreheating.com/vi${cleanPath === "/" ? "" : cleanPath}`;
 

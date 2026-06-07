@@ -963,7 +963,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLang
     }
 
     // Add /vi prefix if switching to Vietnamese
-    const newPath = lang === 'vi' ? `/vi${currentPath}` : currentPath;
+    let newPath = lang === 'vi' ? `/vi${currentPath}` : currentPath;
+
+    // Normalize trailing slash (remove it if not the root '/')
+    if (newPath.endsWith('/') && newPath !== '/') {
+      newPath = newPath.slice(0, -1);
+    }
 
     // Navigate to the new path
     navigate(newPath);
@@ -976,6 +981,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLang
   const l = (href: string): string => {
     if (language === 'en') return href;
     if (href.startsWith('/vi')) return href;
+    if (href.startsWith('/#')) return `/vi${href.substring(1)}`;
     return href === '/' ? '/vi' : `/vi${href}`;
   };
 

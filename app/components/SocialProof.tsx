@@ -1,9 +1,10 @@
 import React from 'react';
 import { Award, FileText, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const SocialProof: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, l } = useLanguage();
 
   return (
     <section id="recognition" className="py-24 bg-industrial-950 text-white overflow-hidden">
@@ -29,8 +30,8 @@ const SocialProof: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-furnace-500/30 transition-all group">
-              <div className="bg-furnace-600/10 p-4 rounded-xl text-furnace-500 group-hover:bg-furnace-600 group-hover:text-white transition-all">
+            <Link to={l('/case-studies')} className="flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-furnace-500/30 transition-all group block">
+              <div className="bg-furnace-600/10 p-4 rounded-xl text-furnace-500 group-hover:bg-furnace-600 group-hover:text-white transition-all shrink-0">
                 <CheckCircle size={32} />
               </div>
               <div>
@@ -39,7 +40,7 @@ const SocialProof: React.FC = () => {
                   {t('proof.item2.desc')}
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-6 relative">

@@ -6,7 +6,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
 
   const staticRoutes = [
-    { en: "/", vi: "/vi/", priority: "1.0", changefreq: "weekly" },
+    { en: "/", vi: "/vi", priority: "1.0", changefreq: "weekly" },
     { en: "/solutions", vi: "/vi/solutions", priority: "0.9", changefreq: "monthly" },
     { en: "/hero-cases", vi: "/vi/hero-cases", priority: "0.8", changefreq: "monthly" },
     { en: "/case-studies", vi: "/vi/case-studies", priority: "0.8", changefreq: "monthly" },
@@ -28,8 +28,19 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   // Static Routes
   staticRoutes.forEach(route => {
-    // EN version
-    xmlContent += `
+    if (route.en === route.vi) {
+      // Single language route
+      xmlContent += `
+  <url>
+    <loc>${baseUrl}${route.vi}</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="${baseUrl}${route.vi}" />
+    <lastmod>${today}</lastmod>
+    <priority>${route.priority}</priority>
+    <changefreq>${route.changefreq}</changefreq>
+  </url>`;
+    } else {
+      // EN version
+      xmlContent += `
   <url>
     <loc>${baseUrl}${route.en}</loc>
     <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}${route.en}" />
@@ -39,8 +50,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
     <priority>${route.priority}</priority>
     <changefreq>${route.changefreq}</changefreq>
   </url>`;
-    // VI version
-    xmlContent += `
+      // VI version
+      xmlContent += `
   <url>
     <loc>${baseUrl}${route.vi}</loc>
     <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}${route.en}" />
@@ -49,6 +60,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     <priority>${route.priority}</priority>
     <changefreq>${route.changefreq}</changefreq>
   </url>`;
+    }
   });
 
   // Blog Posts - EN
