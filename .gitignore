@@ -44,3 +44,9 @@ dist-ssr
 
 build
 .vite-react-ssg-temp
+
+# Google Search Console Raw Data
+gsc_data/
+gsc_data_20260606/
+*.zip
+
