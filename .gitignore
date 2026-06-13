@@ -47,6 +47,6 @@ build
 
 # Google Search Console Raw Data
 gsc_data/
-gsc_data_20260606/
+gsc_data_*/
 *.zip
 

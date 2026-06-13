@@ -115,8 +115,8 @@ export const translations = {
     'about.ipTitle': 'Intellectual Property & Certifications',
 
     // Solutions Page
-    'solutions.title': 'Integrated Energy-Saving Solutions',
-    'solutions.subtitle': 'Integrated energy-saving solutions for reheating furnaces and soaking pits in steel rolling mills, built around the Energy Steward Model pioneered with Jinnan Steel.',
+    'solutions.title': 'Steel Reheating Furnace Energy Saving Solutions | CISA T80 Verified',
+    'solutions.subtitle': 'Cut fuel costs by 7-15% and reduce carbon emissions with zero upfront investment. Learn more about our Energy Steward Model for reheating furnaces and soaking pits.',
     'solutions.processScope': 'Process Scope',
     'solutions.processDesc': 'Our solutions address the entire thermal journey of the steel product, ensuring consistency and efficiency from start to finish.',
     'solutions.scopeItem1': 'Continuous caster exit',
@@ -685,8 +685,8 @@ export const translations = {
     'about.globalOpsDesc': 'Trụ sở chính tại Thượng Hải, Trung Quốc, với trung tâm kỹ thuật toàn cầu phục vụ các nhà máy thép tại Châu Á và xa hơn nữa.',
 
     // Solutions Page
-    'solutions.title': 'Giải pháp Tiết kiệm Năng lượng Tích hợp',
-    'solutions.subtitle': 'Giải pháp tiết kiệm năng lượng tích hợp cho lò nung lại và lò ngâm trong các nhà máy cán thép, được xây dựng dựa trên Mô hình Quản gia Năng lượng tiên phong cùng với Thép Jinnan.',
+    'solutions.title': 'Giải Pháp Tiết Kiệm Năng Lượng Lò Nung Thép | Đạt Chuẩn CISA T80',
+    'solutions.subtitle': 'Cắt giảm 7-15% chi phí nhiên liệu lò nung dầm bước và lò ngâm thép với mô hình Quản gia Năng lượng đầu tư 0đ (Zero CAPEX). Đăng ký đánh giá ROI ngay!',
     'solutions.processScope': 'Phạm vi Quy trình',
     'solutions.processDesc': 'Giải pháp của chúng tôi giải quyết toàn bộ hành trình nhiệt của sản phẩm thép, đảm bảo tính nhất quán và hiệu quả từ đầu đến cuối.',
     'solutions.scopeItem1': 'Phía ra máy đúc liên tục',
