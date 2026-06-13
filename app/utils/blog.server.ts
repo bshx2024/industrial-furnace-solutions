@@ -23,7 +23,7 @@ export interface PostListItem extends Omit<Post, "content"> { }
 
 const BLOG_PATH = path.join(process.cwd(), "content/blog");
 
-export async function getAllPosts(lang: "en" | "vi"): Promise<PostListItem[]> {
+export async function getAllPosts(lang: string): Promise<PostListItem[]> {
     const langPath = path.join(BLOG_PATH, lang);
 
     if (!fs.existsSync(langPath)) {
@@ -49,7 +49,7 @@ export async function getAllPosts(lang: "en" | "vi"): Promise<PostListItem[]> {
     return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export async function getPostBySlug(slug: string, lang: "en" | "vi"): Promise<Post | null> {
+export async function getPostBySlug(slug: string, lang: string): Promise<Post | null> {
     const langPath = path.join(BLOG_PATH, lang);
     let fullPath = path.join(langPath, `${slug}.mdx`);
 
@@ -71,4 +71,9 @@ export async function getPostBySlug(slug: string, lang: "en" | "vi"): Promise<Po
         readingTime: stats.text,
         content,
     } as Post;
+}
+
+export function postExists(slug: string, lang: string): boolean {
+    const langPath = path.join(BLOG_PATH, lang);
+    return fs.existsSync(path.join(langPath, `${slug}.mdx`)) || fs.existsSync(path.join(langPath, `${slug}.md`));
 }

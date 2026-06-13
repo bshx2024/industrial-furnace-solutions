@@ -85,6 +85,10 @@ const Header: React.FC = () => {
 
     { code: 'vi', name: t('lang.vietnamese'), flag: '🇻🇳' },
 
+    { code: 'id', name: t('lang.indonesian'), flag: '🇮🇩' },
+
+    { code: 'pt-br', name: t('lang.portuguese'), flag: '🇧🇷' },
+
   ];
 
 

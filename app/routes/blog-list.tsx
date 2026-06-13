@@ -2,18 +2,33 @@ import { useLoaderData, Link } from "react-router";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { getAllPosts } from "../utils/blog.server";
 import type { PostListItem } from "../utils/blog.server";
+import type { Language } from "../contexts/LanguageContext";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const url = new URL(request.url);
-    const lang = url.pathname.startsWith("/vi") ? "vi" : "en";
+    let lang = "en";
+    if (url.pathname.startsWith("/vi")) lang = "vi";
+    else if (url.pathname.startsWith("/id")) lang = "id";
+    else if (url.pathname.startsWith("/pt-br")) lang = "pt-br";
     const posts = await getAllPosts(lang);
     return { posts, lang };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-    const title = data?.lang === "vi" ? "Bài viết | EcoReheating" : "Blog | EcoReheating";
+    const title = data?.lang === "vi" 
+        ? "Bài viết | EcoReheating" 
+        : data?.lang === "id"
+        ? "Blog | EcoReheating"
+        : data?.lang === "pt-br"
+        ? "Blog | EcoReheating"
+        : "Blog | EcoReheating";
+
     const description = data?.lang === "vi"
         ? "Khám phá các hướng dẫn kỹ thuật và giải pháp tiết kiệm năng lượng mới nhất cho lò nung thép."
+        : data?.lang === "id"
+        ? "Jelajahi panduan teknis terbaru dan solusi hemat energi untuk tungku reheating baja."
+        : data?.lang === "pt-br"
+        ? "Explore os guias técnicos e soluções de economia de energia mais recentes para fornos de reaquecimento de aço."
         : "Explore the latest technical guides and energy-saving solutions for steel reheating furnaces.";
 
     return [
@@ -23,12 +38,16 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export default function BlogList() {
-    const { posts, lang } = useLoaderData() as { posts: PostListItem[]; lang: "en" | "vi" };
+    const { posts, lang } = useLoaderData() as { posts: PostListItem[]; lang: Language };
 
     const t = {
         title: lang === "vi" ? "Bài viết" : "Blog",
-        readMore: lang === "vi" ? "Đọc thêm" : "Read More",
-        noPosts: lang === "vi" ? "Chưa có bài viết nào." : "No posts found.",
+        readMore: lang === "vi" ? "Đọc thêm" : lang === "id" ? "Baca Selengkapnya" : lang === "pt-br" ? "Ler Mais" : "Read More",
+        noPosts: lang === "vi" ? "Chưa có bài viết nào." : lang === "id" ? "Tidak ada artikel." : lang === "pt-br" ? "Nenhum artigo encontrado." : "No posts found.",
+    };
+
+    const getBlogLink = (slug: string) => {
+        return lang === "en" ? `/blog/${slug}` : `/${lang}/blog/${slug}`;
     };
 
     return (
@@ -51,7 +70,7 @@ export default function BlogList() {
                                 className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden flex flex-col hover:border-orange-600/50 transition-colors group"
                             >
                                 {post.image && (
-                                    <Link to={lang === "vi" ? `/vi/blog/${post.slug}` : `/blog/${post.slug}`} className="block overflow-hidden h-48">
+                                    <Link to={getBlogLink(post.slug)} className="block overflow-hidden h-48">
                                         <img
                                             src={post.image}
                                             alt={post.title}
@@ -66,7 +85,7 @@ export default function BlogList() {
                                         <span>{post.readingTime}</span>
                                     </div>
                                     <h2 className="text-xl font-bold text-white mb-3 group-hover:text-orange-500 transition-colors leading-tight">
-                                        <Link to={lang === "vi" ? `/vi/blog/${post.slug}` : `/blog/${post.slug}`}>
+                                        <Link to={getBlogLink(post.slug)}>
                                             {post.title}
                                         </Link>
                                     </h2>
@@ -81,7 +100,7 @@ export default function BlogList() {
                                         ))}
                                     </div>
                                     <Link
-                                        to={lang === "vi" ? `/vi/blog/${post.slug}` : `/blog/${post.slug}`}
+                                        to={getBlogLink(post.slug)}
                                         className="text-orange-500 font-bold uppercase tracking-widest text-xs hover:text-orange-400 inline-flex items-center"
                                     >
                                         {t.readMore}

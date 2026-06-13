@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
-export type Language = 'en' | 'vi';
+export type Language = 'en' | 'vi' | 'id' | 'pt-br';
 
 interface LanguageContextType {
   language: Language;
@@ -13,7 +13,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const translations = {
+export const translations: Record<Language, any> = {
   en: {
     // SEO
     'seo.home.title': 'Zero CAPEX Reheating Furnace Energy Saving | Save 7-15% Fuel',
@@ -33,6 +33,8 @@ export const translations = {
     // Language selector
     'lang.english': 'English',
     'lang.vietnamese': 'Tiếng Việt',
+    'lang.indonesian': 'Indonesian',
+    'lang.portuguese': 'Português (Brasil)',
 
     // Hero section
     'hero.badge': 'System Intelligence v4.2',
@@ -495,6 +497,8 @@ export const translations = {
     // Language selector
     'lang.english': 'English',
     'lang.vietnamese': 'Tiếng Việt',
+    'lang.indonesian': 'Tiếng Indonesia',
+    'lang.portuguese': 'Tiếng Bồ Đào Nha (Brazil)',
 
     // Hero section
     'hero.badge': 'Hệ thống Thông minh v4.2',
@@ -937,7 +941,164 @@ export const translations = {
     'contact.form.cisa_verification': 'Công nghệ đạt chứng nhận CISA T80 | Công văn số 185',
     'contact.form.cisa_sub': 'Dịch vụ Quản gia năng lượng trọn gói cung cấp bởi South Technology. Tiết kiệm trước, thanh toán sau.',
   },
+  id: {},
+  'pt-br': {},
 };
+
+const idTranslations = {
+  // SEO
+  'seo.home.title': 'Hemat Energi Tungku Reheating Zero CAPEX | Hemat Bahan Bakar 7-15%',
+  'seo.home.desc': 'Hentikan pemborosan bahan bakar. Model "Energy Steward" tervalidasi CISA T80 kami membutuhkan $0 investasi awal. Kami berinvestasi, Anda hemat. Dapatkan audit ROI gratis sekarang.',
+
+  // Navigation
+  'nav.home': 'BERANDA',
+  'nav.solutions': 'SOLUSI',
+  'nav.caseStudies': 'STUDI KASUS',
+  'nav.heroCases': 'PROYEK UNGGULAN',
+  'nav.about': 'TENTANG KAMI',
+  'nav.blog': 'BLOG',
+  'nav.vietnamSteel': 'BAJA VIETNAM (CBAM)',
+  'nav.summerCrisis': 'PERINGATAN ENERGI MUSIM PANAS',
+  'nav.freeAssessment': 'AUDIT GRATIS',
+
+  // Language selector
+  'lang.english': 'English',
+  'lang.vietnamese': 'Tiếng Việt',
+  'lang.indonesian': 'Bahasa Indonesia',
+  'lang.portuguese': 'Português (Brasil)',
+
+  // ContactForm
+  'contact.badge': 'Kesempatan Terbatas',
+  'contact.title': 'Klaim Audit Potensi ROI Gratis Anda',
+  'contact.desc': 'Cari tahu persis seberapa banyak yang dapat Anda hemat. Kami menyediakan penilaian baseline yang komprehensif dan proyeksi ROI tanpa biaya awal.',
+  'contact.avail.head': 'Ketersediaan Saat Ini',
+  'contact.avail.slot': 'SISA 1 SLOT',
+  'contact.avail.desc': 'Karena model kami padat modal, kami hanya menerima 2 proyek baru per bulan. Tersisa 1 slot untuk ',
+  'contact.feature1.title': 'Berbasis Data',
+  'contact.feature1.desc': 'Baseline ditetapkan melalui log produksi pabrik yang sebenarnya.',
+  'contact.feature2.title': 'Analisis Ahli',
+  'contact.feature2.desc': 'Tinjauan teknis tingkat T80 dari geometri proses Anda.',
+  'contact.success.title': 'Audit Diminta!',
+  'contact.success.desc': 'Terima kasih. Salah satu pengelola energi kami akan menghubungi Anda untuk mengumpulkan data produksi yang diperlukan untuk penilaian awal.',
+  'contact.success.btn': 'Kirim permintaan lain',
+  'contact.form.name': 'Nama',
+  'contact.form.name_placeholder': 'Nama lengkap Anda',
+  'contact.form.role': 'Peran/Jabatan',
+  'contact.form.role_placeholder': 'Pilih peran Anda...',
+  'contact.form.company': 'Perusahaan',
+  'contact.form.company_placeholder': 'Nama pabrik baja / Grup',
+  'contact.form.region': 'Negara / Wilayah',
+  'contact.form.region_placeholder': 'misalnya Indonesia, Vietnam, Brasil...',
+  'contact.form.email': 'Email Kerja',
+  'contact.form.email_placeholder': 'nama@perusahaan.com',
+  'contact.form.phone': 'Telepon / WhatsApp (Opsional)',
+  'contact.form.production': 'Produksi Tahunan',
+  'contact.form.production_placeholder': 'misalnya 2.5 MTPA',
+  'contact.form.furnace': 'Jenis Tungku',
+  'contact.form.furnace_placeholder': 'Pilih jenis...',
+  'contact.form.message': 'Pesan (Opsional)',
+  'contact.form.message_placeholder': 'Tantangan khusus atau detail proses...',
+  'contact.form.submit': 'Analisis ROI Saya Sekarang',
+  'contact.form.submitting': 'Menganalisis Data...',
+  'contact.form.footer_1': 'Bergabunglah dengan 15+ pabrik baja yang telah dioptimalkan oleh teknologi T80 kami.',
+  'contact.form.footer_2': 'Jaminan Privasi: Data Anda dilindungi oleh MNDA.',
+  'contact.role.plantManager': 'Manajer Pabrik',
+  'contact.role.energyManager': 'Manajer Energi',
+  'contact.role.maintenanceManager': 'Manajer Pemeliharaan',
+  'contact.role.other': 'Lainnya',
+  'contact.roi.title': 'Estimator ROI Cepat',
+  'contact.roi.production': 'Produksi Tahunan',
+  'contact.roi.savings': 'Perkiraan Penghematan Bahan Bakar Tahunan',
+  'contact.roi.cbam': 'Perkiraan Pengurangan Biaya CBAM',
+  'contact.furnace.walkingBeam': 'Walking Beam',
+  'contact.furnace.walkingHearth': 'Walking Hearth',
+  'contact.furnace.pusher': 'Pusher',
+  'contact.furnace.other': 'Lainnya',
+  'contact.form.or_chat': 'Atau chat langsung via pesan instan:',
+  'contact.form.zalo': 'Zalo Chat',
+  'contact.form.whatsapp': 'WhatsApp',
+  'contact.form.cisa_verification': 'Teknologi Terverifikasi CISA T80 | Dok. No. 185',
+  'contact.form.cisa_sub': 'Layanan pengelola energi siap pakai disediakan oleh South Technology. Kami berinvestasi, Anda hemat.',
+};
+
+const ptBrTranslations = {
+  // SEO
+  'seo.home.title': 'Economia de Energia em Forno de Reaquecimento Zero CAPEX | Economize 7-15% de Combustível',
+  'seo.home.desc': 'Pare de desperdiçar combustível. Nosso modelo "Energy Steward" verificado pela CISA T80 exige investimento inicial de $0. Nós investimos, você economiza. Obtenha uma auditoria de ROI gratuita agora.',
+
+  // Navigation
+  'nav.home': 'INÍCIO',
+  'nav.solutions': 'SOLUÇÕES',
+  'nav.caseStudies': 'CASOS DE SUCESSO',
+  'nav.heroCases': 'PROJETOS DESTAQUE',
+  'nav.about': 'SOBRE NÓS',
+  'nav.blog': 'BLOG',
+  'nav.vietnamSteel': 'AÇO VIETNÃ (CBAM)',
+  'nav.summerCrisis': 'ALERTA DE ENERGIA DE VERÃO',
+  'nav.freeAssessment': 'AVALIAÇÃO GRATUITA',
+
+  // Language selector
+  'lang.english': 'English',
+  'lang.vietnamese': 'Tiếng Việt',
+  'lang.indonesian': 'Bahasa Indonesia',
+  'lang.portuguese': 'Português (Brasil)',
+
+  // ContactForm
+  'contact.badge': 'Oportunidade Limitada',
+  'contact.title': 'Solicite sua Auditoria Gratuita de Potencial de ROI',
+  'contact.desc': 'Descubra exatamente quanto você pode economizar. Nós fornecemos uma avaliação de linha de base abrangente e projeção de ROI sem custo inicial.',
+  'contact.avail.head': 'Disponibilidade Atual',
+  'contact.avail.slot': 'RESTA 1 VAGA',
+  'contact.avail.desc': 'Devido à natureza de capital intensivo do nosso modelo, aceitamos apenas 2 novos projetos por mês. Resta 1 vaga para ',
+  'contact.feature1.title': 'Baseado em Dados',
+  'contact.feature1.desc': 'Linha de base estabelecida por meio de registros de produção reais da fábrica.',
+  'contact.feature2.title': 'Análise de Especialistas',
+  'contact.feature2.desc': 'Revisão técnica de nível T80 da geometria do seu processo.',
+  'contact.success.title': 'Avaliação Solicitada!',
+  'contact.success.desc': 'Obrigado. Um de nossos gestores de energia entrará em contato para coletar os dados de produção necessários para a avaliação preliminar.',
+  'contact.success.btn': 'Enviar outra solicitação',
+  'contact.form.name': 'Nome',
+  'contact.form.name_placeholder': 'Seu nome completo',
+  'contact.form.role': 'Cargo',
+  'contact.form.role_placeholder': 'Selecione seu cargo...',
+  'contact.form.company': 'Empresa',
+  'contact.form.company_placeholder': 'Nome da usina siderúrgica / Grupo',
+  'contact.form.region': 'País / Região',
+  'contact.form.region_placeholder': 'ex: Brasil, Vietnã, Indonésia...',
+  'contact.form.email': 'E-mail Corporativo',
+  'contact.form.email_placeholder': 'nome@empresa.com',
+  'contact.form.phone': 'Telefone / WhatsApp (Opcional)',
+  'contact.form.production': 'Produção Anual',
+  'contact.form.production_placeholder': 'ex: 2.5 MTPA',
+  'contact.form.furnace': 'Tipo de Forno',
+  'contact.form.furnace_placeholder': 'Selecione o tipo...',
+  'contact.form.message': 'Mensagem (Opcional)',
+  'contact.form.message_placeholder': 'Desafios específicos ou detalhes do processo...',
+  'contact.form.submit': 'Analisar meu ROI Agora',
+  'contact.form.submitting': 'Analisando Dados...',
+  'contact.form.footer_1': 'Junte-se a mais de 15 usinas siderúrgicas já otimizadas por nossa tecnologia T80.',
+  'contact.form.footer_2': 'Garantia de Privacidade: Seus dados estão protegidos por MNDA.',
+  'contact.role.plantManager': 'Diretor de Fábrica',
+  'contact.role.energyManager': 'Gerente de Energia',
+  'contact.role.maintenanceManager': 'Gerente de Manutenção',
+  'contact.role.other': 'Outro',
+  'contact.roi.title': 'Estimador de ROI Rápido',
+  'contact.roi.production': 'Produção Anual',
+  'contact.roi.savings': 'Economia Anual Estimada de Combustível',
+  'contact.roi.cbam': 'Redução Estimada de Custos CBAM',
+  'contact.furnace.walkingBeam': 'Viga Móvel (Walking Beam)',
+  'contact.furnace.walkingHearth': 'Sola Móvel (Walking Hearth)',
+  'contact.furnace.pusher': 'Empurrador (Pusher)',
+  'contact.furnace.other': 'Outro',
+  'contact.form.or_chat': 'Ou converse diretamente via mensagem instantânea:',
+  'contact.form.zalo': 'Zalo Chat',
+  'contact.form.whatsapp': 'WhatsApp',
+  'contact.form.cisa_verification': 'Tecnologia Verificada CISA T80 | Doc. Nº 185',
+  'contact.form.cisa_sub': 'Serviço de gestão de energia pronto para uso fornecido pela South Technology. Nós investimos, você economiza.',
+};
+
+translations.id = { ...translations.en, ...idTranslations };
+translations['pt-br'] = { ...translations.en, ...ptBrTranslations };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLanguage?: Language }> = ({ children, initialLanguage }) => {
   const [language, setLanguageState] = useState<Language>(initialLanguage || 'en');
@@ -957,13 +1118,24 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLang
     // Get current path without language prefix
     let currentPath = location.pathname;
 
-    // Remove /vi prefix if it exists
+    // Remove language prefixes if they exist
     if (currentPath.startsWith('/vi')) {
       currentPath = currentPath.substring(3) || '/';
+    } else if (currentPath.startsWith('/id')) {
+      currentPath = currentPath.substring(3) || '/';
+    } else if (currentPath.startsWith('/pt-br')) {
+      currentPath = currentPath.substring(6) || '/';
     }
 
-    // Add /vi prefix if switching to Vietnamese
-    let newPath = lang === 'vi' ? `/vi${currentPath}` : currentPath;
+    // Add prefix if switching to a localized language
+    let newPath = currentPath;
+    if (lang === 'vi') {
+      newPath = `/vi${currentPath}`;
+    } else if (lang === 'id') {
+      newPath = `/id${currentPath}`;
+    } else if (lang === 'pt-br') {
+      newPath = `/pt-br${currentPath}`;
+    }
 
     // Normalize trailing slash (remove it if not the root '/')
     if (newPath.endsWith('/') && newPath !== '/') {
@@ -980,9 +1152,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode; initialLang
 
   const l = (href: string): string => {
     if (language === 'en') return href;
-    if (href.startsWith('/vi')) return href;
-    if (href.startsWith('/#')) return `/vi${href.substring(1)}`;
-    return href === '/' ? '/vi' : `/vi${href}`;
+    if (href.startsWith('/vi') || href.startsWith('/id') || href.startsWith('/pt-br')) return href;
+    if (href.startsWith('/#')) return `/${language}${href.substring(1)}`;
+    return href === '/' ? `/${language}` : `/${language}${href}`;
   };
 
   return (

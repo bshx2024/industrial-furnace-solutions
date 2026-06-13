@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, AlertTriangle, Lightbulb } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, Lightbulb, Zap, Activity } from 'lucide-react';
 import { useLanguage, translations } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 

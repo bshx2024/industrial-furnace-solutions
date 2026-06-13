@@ -166,7 +166,7 @@ const VietnamSteelLP: React.FC = () => {
 
             setCalcResult({ cost: totalCost, savings });
             setIsCalculating(false);
-            trackEvent('calculator_result', 'engagement', 'hero_calc', Math.round(cost));
+            trackEvent('calculator_result', 'engagement', 'hero_calc', Math.round(totalCost));
         }, 800);
     };
 

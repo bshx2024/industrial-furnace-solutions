@@ -14,11 +14,13 @@ const ContactForm: React.FC = () => {
   const cbamFactor = 85; // EUR per ton CO2
   const co2PerTon = 0.052;
 
-  const estimatedSavings = (production * 1000000 * fuelCostPerTon * fuelSavingRate).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US', {
+  const locale = language === 'vi' ? 'vi-VN' : language === 'id' ? 'id-ID' : language === 'pt-br' ? 'pt-BR' : 'en-US';
+
+  const estimatedSavings = (production * 1000000 * fuelCostPerTon * fuelSavingRate).toLocaleString(locale, {
     maximumFractionDigits: 0
   });
 
-  const cbamSavings = (production * 1000000 * co2PerTon * cbamFactor).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US', {
+  const cbamSavings = (production * 1000000 * co2PerTon * cbamFactor).toLocaleString(locale, {
     maximumFractionDigits: 0
   });
 
@@ -48,7 +50,7 @@ const ContactForm: React.FC = () => {
   if (today.getDate() >= 15) {
     displayDate.setMonth(today.getMonth() + 1);
   }
-  const targetMonth = displayDate.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US', { month: 'long' });
+  const targetMonth = displayDate.toLocaleString(locale, { month: 'long' });
 
   return (
     <section id="assessment" className="py-24 bg-slate-50 relative scroll-mt-20">
@@ -63,8 +65,12 @@ const ContactForm: React.FC = () => {
             <h2 className="text-4xl font-heading font-bold mb-6 relative z-10">
               {language === 'en' ? (
                 <>Claim Your Free <br /><span className="text-furnace-500">ROI Potential Audit</span></>
-              ) : (
+              ) : language === 'vi' ? (
                 <>Nhận Đánh giá <br /><span className="text-furnace-500">Tiềm năng ROI Miễn phí</span></>
+              ) : language === 'id' ? (
+                <>Klaim Audit Potensi <br /><span className="text-furnace-500">ROI Gratis Anda</span></>
+              ) : (
+                <>Solicite sua Auditoria <br /><span className="text-furnace-500">de ROI Gratuita</span></>
               )}
             </h2>
             <p className="text-gray-400 mb-10 text-lg relative z-10 leading-relaxed">

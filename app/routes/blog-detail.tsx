@@ -3,6 +3,7 @@ import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { getPostBySlug, getAllPosts } from "../utils/blog.server";
 import type { Post } from "../utils/blog.server";
 import { MDXProvider } from "@mdx-js/react";
+import type { Language } from "../contexts/LanguageContext";
 
 // Import all MDX components
 const mdxComponents = import.meta.glob("../../content/blog/**/*.mdx", { eager: true });
@@ -10,7 +11,10 @@ const mdxComponents = import.meta.glob("../../content/blog/**/*.mdx", { eager: t
 export async function loader({ params, request }: LoaderFunctionArgs) {
     const { slug } = params;
     const url = new URL(request.url);
-    const lang = (url.pathname.startsWith("/vi") ? "vi" : "en") as "en" | "vi";
+    let lang = "en";
+    if (url.pathname.startsWith("/vi")) lang = "vi";
+    else if (url.pathname.startsWith("/id")) lang = "id";
+    else if (url.pathname.startsWith("/pt-br")) lang = "pt-br";
 
     const post = await getPostBySlug(slug!, lang);
 
@@ -79,7 +83,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export default function BlogDetail() {
     const { post, lang, relatedPosts } = useLoaderData() as {
         post: Post;
-        lang: "en" | "vi";
+        lang: Language;
         relatedPosts: any[]
     };
 
@@ -118,16 +122,20 @@ export default function BlogDetail() {
     } : null;
 
     const t = {
-        back: lang === "vi" ? "Quay lại" : "Back to Blog",
-        ctaTitle: lang === "vi" ? "Sẵn sàng tối ưu hóa lò nung của bạn?" : "Ready to optimize your furnace?",
+        back: lang === "vi" ? "Quay lại" : lang === "id" ? "Kembali ke Blog" : lang === "pt-br" ? "Voltar para o Blog" : "Back to Blog",
+        ctaTitle: lang === "vi" ? "Sẵn sàng tối ưu hóa lò nung của bạn?" : lang === "id" ? "Siap untuk mengoptimalkan tungku Anda?" : lang === "pt-br" ? "Pronto para otimizar seu forno?" : "Ready to optimize your furnace?",
         ctaDesc: lang === "vi"
             ? "Nhận bản đánh giá ROI miễn phí từ các chuyên gia của chúng tôi."
+            : lang === "id"
+            ? "Dapatkan audit ROI gratis dari pakar teknis kami."
+            : lang === "pt-br"
+            ? "Obtenha uma auditoria de ROI gratuita de nossos especialistas técnicos."
             : "Get a free ROI audit from our technical experts.",
-        ctaBtn: lang === "vi" ? "Yêu cầu đánh giá ROI ngay" : "Request ROI Audit",
-        relatedTitle: lang === "vi" ? "Bài viết liên quan" : "Related Posts",
-        author: lang === "vi" ? "Tác giả" : "Author",
-        published: lang === "vi" ? "Ngày đăng" : "Published",
-        faqTitle: lang === "vi" ? "Câu hỏi thường gặp" : "Frequently Asked Questions",
+        ctaBtn: lang === "vi" ? "Yêu cầu đánh giá ROI ngay" : lang === "id" ? "Minta Audit ROI" : lang === "pt-br" ? "Solicitar Auditoria de ROI" : "Request ROI Audit",
+        relatedTitle: lang === "vi" ? "Bài viết liên quan" : lang === "id" ? "Artikel Terkait" : lang === "pt-br" ? "Artigos Relacionados" : "Related Posts",
+        author: lang === "vi" ? "Tác giả" : lang === "id" ? "Penulis" : lang === "pt-br" ? "Autor" : "Author",
+        published: lang === "vi" ? "Ngày đăng" : lang === "id" ? "Diterbitkan" : lang === "pt-br" ? "Publicado" : "Published",
+        faqTitle: lang === "vi" ? "Câu hỏi thường gặp" : lang === "id" ? "Pertanyaan Sering Diajukan" : lang === "pt-br" ? "Perguntas Frequentes" : "Frequently Asked Questions",
     };
 
     // Resolve the MDX component
@@ -152,7 +160,7 @@ export default function BlogDetail() {
             )}
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
                 <Link
-                    to={lang === "vi" ? "/vi/blog" : "/blog"}
+                    to={lang === "en" ? "/blog" : `/${lang}/blog`}
                     className="text-orange-500 hover:text-orange-400 mb-8 inline-flex items-center text-sm uppercase tracking-widest font-bold"
                 >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,7 +265,7 @@ export default function BlogDetail() {
                     <h3 className="text-2xl font-bold text-white mb-4 uppercase font-oswald">{t.ctaTitle}</h3>
                     <p className="text-orange-50/90 mb-8 max-w-xl mx-auto">{t.ctaDesc}</p>
                     <Link
-                        to="/#assessment"
+                        to={lang === "en" ? "/#assessment" : `/${lang}/#assessment`}
                         className="inline-block bg-white text-orange-600 px-8 py-3 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-orange-50 transition-colors shadow-lg"
                     >
                         {t.ctaBtn}
@@ -285,7 +293,7 @@ export default function BlogDetail() {
                             {relatedPosts.map(p => (
                                 <Link
                                     key={p.slug}
-                                    to={lang === "vi" ? `/vi/blog/${p.slug}` : `/blog/${p.slug}`}
+                                    to={lang === "en" ? `/blog/${p.slug}` : `/${lang}/blog/${p.slug}`}
                                     className="group bg-zinc-900/50 border border-zinc-800 p-4 rounded-lg hover:border-orange-600/50 transition-colors"
                                 >
                                     <h4 className="text-white font-bold group-hover:text-orange-500 transition-colors line-clamp-2 mb-2">
