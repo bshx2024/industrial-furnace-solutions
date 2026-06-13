@@ -8,30 +8,31 @@ export const meta: MetaFunction = ({ location }) => {
     const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
     const t = translations[lang];
 
-    const aboutSchema = {
-        "@context": "https://schema.org",
-        "@type": "AboutPage",
-        "mainEntity": {
-            "@type": "Organization",
-            "name": "EcoReheating",
-            "description": t['about.subtitle']
-        }
-    };
-
     return [
         { title: `${t['about.title']} | EcoReheating` },
         { name: "description", content: t['about.subtitle'] },
-        {
-            "script:ld+json": aboutSchema,
-        }
     ];
 };
 
 const AboutContact: React.FC = () => {
     const { t } = useLanguage();
 
+    const aboutSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "EcoReheating",
+            "description": t('about.subtitle')
+        }
+    };
+
     return (
         <div className="bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+            />
 
             {/* Header */}
             <section className="pt-40 pb-20 bg-industrial-950 text-white">

@@ -70,17 +70,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         { property: "og:title", content: data.post.title },
         { property: "og:description", content: data.post.description },
         { property: "og:image", content: data.post.image },
-        { property: "og:type", content: "article" },
-        {
-            "script:ld+json": structuredData
-        }
+        { property: "og:type", content: "article" }
     ];
-
-    if (faqSchema) {
-        metaTags.push({
-            "script:ld+json": faqSchema
-        });
-    }
 
     return metaTags;
 };
@@ -91,6 +82,40 @@ export default function BlogDetail() {
         lang: "en" | "vi";
         relatedPosts: any[]
     };
+
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.description,
+        "image": post.image,
+        "datePublished": post.date,
+        "author": {
+            "@type": "Person",
+            "name": post.author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "EcoReheating",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.ecoreheating.com/favicon.svg"
+            }
+        }
+    };
+
+    const faqSchema = post.faq ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": post.faq.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+            }
+        }))
+    } : null;
 
     const t = {
         back: lang === "vi" ? "Quay lại" : "Back to Blog",
@@ -115,6 +140,16 @@ export default function BlogDetail() {
 
     return (
         <article className="bg-[#0a0a0a] min-h-screen pt-24 pb-16">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+            />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
                 <Link
                     to={lang === "vi" ? "/vi/blog" : "/blog"}

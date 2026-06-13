@@ -8,11 +8,21 @@ import BusinessModel from '../components/BusinessModel';
 import SocialProof from '../components/SocialProof';
 import LogoWall from '../components/LogoWall';
 import ContactForm from '../components/ContactForm';
-import { translations } from '../contexts/LanguageContext';
+import { translations, useLanguage } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = ({ location }) => {
     const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
+    const t = translations[lang];
+
+    return [
+        { title: `${t['seo.home.title']} | EcoReheating` },
+        { name: "description", content: t['seo.home.desc'] },
+    ];
+};
+
+const Home: React.FC = () => {
+    const { language: lang } = useLanguage();
     const t = translations[lang];
 
     const organizationSchema = {
@@ -33,18 +43,12 @@ export const meta: MetaFunction = ({ location }) => {
         }
     };
 
-    return [
-        { title: `${t['seo.home.title']} | EcoReheating` },
-        { name: "description", content: t['seo.home.desc'] },
-        {
-            "script:ld+json": organizationSchema,
-        },
-    ];
-};
-
-const Home: React.FC = () => {
     return (
         <div className="bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+            />
             <Hero />
             <ProjectPositioning />
             <Technologies />
