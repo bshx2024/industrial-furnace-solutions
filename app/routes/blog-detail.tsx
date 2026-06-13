@@ -102,6 +102,7 @@ export default function BlogDetail() {
         relatedTitle: lang === "vi" ? "Bài viết liên quan" : "Related Posts",
         author: lang === "vi" ? "Tác giả" : "Author",
         published: lang === "vi" ? "Ngày đăng" : "Published",
+        faqTitle: lang === "vi" ? "Câu hỏi thường gặp" : "Frequently Asked Questions",
     };
 
     // Resolve the MDX component
@@ -174,6 +175,31 @@ export default function BlogDetail() {
                         <MDXContent />
                     </MDXProvider>
                 </div>
+
+                {/* FAQ Section */}
+                {post.faq && post.faq.length > 0 && (
+                    <section className="mt-16 border-t border-zinc-800 pt-12">
+                        <h3 className="text-2xl font-bold text-white mb-8 uppercase font-oswald tracking-wider">
+                            {t.faqTitle}
+                        </h3>
+                        <div className="space-y-6">
+                            {post.faq.map((item, idx) => (
+                                <div 
+                                    key={idx} 
+                                    className="p-6 bg-zinc-900/30 border border-zinc-800/80 rounded-xl hover:border-zinc-700/50 transition-all"
+                                >
+                                    <h4 className="text-lg font-semibold text-white mb-3 flex gap-3 items-start">
+                                        <span className="text-orange-500 font-bold font-oswald">Q.</span>
+                                        {item.question}
+                                    </h4>
+                                    <p className="text-zinc-400 leading-relaxed text-sm md:text-base pl-6">
+                                        {item.answer}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 {/* Author Bio Section */}
                 {post.authorBio && (
