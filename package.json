@@ -12,7 +12,8 @@
     "vercel-build": "react-router build",
     "lint": "react-router typegen && tsc",
     "start": "react-router-serve ./build/server/index.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "blog:check": "node scripts/next_blog_task.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

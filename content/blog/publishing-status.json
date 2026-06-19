@@ -1,0 +1,25 @@
+﻿{
+  "completed": [
+    {
+      "slug": "evn-decision-963-reheating-furnace-load-shifting",
+      "languages": ["en", "vi"],
+      "publishedAt": "2026-05-21"
+    },
+    {
+      "slug": "small-medium-vietnam-steel-mills-combat-hoa-phat-power",
+      "languages": ["en", "vi"],
+      "publishedAt": "2026-05-28"
+    },
+    {
+      "slug": "preventing-downtime-auditing-heat-loss-legacy-furnaces",
+      "languages": ["en", "vi"],
+      "publishedAt": "2026-06-06"
+    },
+    {
+      "slug": "zero-capex-energy-retrofit-heavy-industry",
+      "languages": ["en", "vi"],
+      "publishedAt": "2026-06-13"
+    }
+  ],
+  "inProgress": []
+}

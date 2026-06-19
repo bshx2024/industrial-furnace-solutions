@@ -200,7 +200,7 @@ export default function BlogDetail() {
                     )}
                 </header>
 
-                <div className="prose prose-invert prose-lg max-w-none
+                <div className="prose prose-invert sm:prose-lg max-w-none
           prose-headings:text-white prose-headings:font-oswald prose-headings:uppercase
           prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-l-4 prose-h2:border-furnace-500 prose-h2:pl-4
           prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
