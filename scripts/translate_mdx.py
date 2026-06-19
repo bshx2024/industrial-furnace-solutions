@@ -75,13 +75,10 @@ def translate_batch_raw(batch, target_lang):
             data = json.loads(response.read().decode("utf-8"))
             translated_joined = "".join(segment[0] for segment in data[0] if segment[0])
             
-            # Split by the separator allowing variable whitespaces
             parts = re.split(r'\s*\[999\]\s*', translated_joined)
             cleaned_parts = [p.strip() for p in parts]
             
-            # If split got empty elements at end/start, filter them slightly but preserve length
             if len(cleaned_parts) != len(batch):
-                # If there's an extra empty string at end/start, clean it
                 if cleaned_parts and not cleaned_parts[-1]:
                     cleaned_parts.pop()
                 if cleaned_parts and not cleaned_parts[0]:
@@ -109,7 +106,6 @@ def translate_batch(texts, target_lang):
     separator = "\n[999]\n"
     
     for text in texts:
-        # Limit batch size to ~4000 characters to stay within safety limits
         if current_length + len(text) + len(separator) > 3500:
             translated_texts.extend(translate_batch_raw(current_batch, target_lang))
             current_batch = []
@@ -123,55 +119,130 @@ def translate_batch(texts, target_lang):
         
     return translated_texts
 
-def process_rich_text_segment(text, segments):
+def is_asset_url(url):
     """
-    Extracts translateable text parts from a paragraph, protecting HTML/MDX tags.
+    Checks if a URL points to a static asset (image, document) rather than a route.
     """
-    # 1. Extract HTML/MDX components
-    html_components = []
-    def html_replacer(match):
-        placeholder = f"__HTML_{len(html_components)}__"
-        html_components.append(match.group(0))
-        return placeholder
-    text_with_html = re.sub(r'<[^>]+>', html_replacer, text)
+    lower_url = url.lower()
+    return any(lower_url.endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".gif", ".svg", ".pdf", ".webp", ".ico"])
+
+def adjust_url(url, target_lang):
+    """
+    Prepends language prefix to internal routes, leaving asset URLs and external links untouched.
+    """
+    if target_lang == "en":
+        return url
+    if url.startswith("/") and not url.startswith(f"/{target_lang}/") and url != f"/{target_lang}":
+        if not is_asset_url(url):
+            return f"/{target_lang}{url}"
+    return url
+
+def parse_rich_text(text):
+    """
+    Splits a rich text paragraph into structured parts (text, html tags, markdown links)
+    to protect them from translation mangling.
+    """
+    # Pattern to match HTML tags or markdown links
+    pattern = re.compile(r'(<[^>]+>|\[[^\]]+\]\([^)]+\))')
     
-    # 2. Extract Markdown links, extracting the link text as translateable segment
-    md_links = []
-    def link_replacer(match):
-        link_text = match.group(1).strip()
-        link_url = match.group(2).strip()
-        
-        seg_idx = len(segments)
-        segments.append(link_text)
-        
-        placeholder = f"__LINK_{len(md_links)}__"
-        md_links.append((seg_idx, link_url))
-        return placeholder
-    text_with_links = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link_replacer, text_with_html)
+    parts = []
+    last_idx = 0
     
-    # 3. Protect bold and code snippets inside paragraph if they shouldn't be parsed
-    # Actually, Google Translate handles `code` and **bold** fine.
-    if text_with_links.strip():
-        seg_idx = len(segments)
-        segments.append(text_with_links.strip())
-        final_template = f"__SEG_{seg_idx}__"
-    else:
-        final_template = text_with_links
+    for match in pattern.finditer(text):
+        start, end = match.span()
+        if start > last_idx:
+            parts.append(("text", text[last_idx:start]))
+            
+        matched_str = match.group(0)
+        if matched_str.startswith("<"):
+            parts.append(("html", matched_str))
+        else:
+            # Markdown link: [link text](url)
+            link_match = re.match(r'\[([^\]]+)\]\(([^)]+)\)', matched_str)
+            if link_match:
+                link_text = link_match.group(1)
+                link_url = link_match.group(2)
+                parts.append(("link", link_text, link_url))
+            else:
+                parts.append(("text", matched_str))
+                
+        last_idx = end
         
-    # Rebuild template with placeholders
-    for idx, (seg_idx, url) in enumerate(md_links):
-        placeholder = f"__LINK_{idx}__"
-        final_template = final_template.replace(placeholder, f"[__SEG_{seg_idx}__]({url})")
+    if last_idx < len(text):
+        parts.append(("text", text[last_idx:]))
         
-    for idx, html_tag in enumerate(html_components):
-        placeholder = f"__HTML_{idx}__"
-        final_template = final_template.replace(placeholder, html_tag)
-        
-    return final_template
+    return parts
+
+def process_rich_text_segment(text, segments_to_translate):
+    """
+    Parses a rich text block, registers translateable texts, and returns structured template parts.
+    """
+    parts = parse_rich_text(text)
+    template_parts = []
+    
+    for part in parts:
+        part_type = part[0]
+        if part_type == "text":
+            val = part[1]
+            if val.strip():
+                seg_idx = len(segments_to_translate)
+                segments_to_translate.append(val)
+                template_parts.append(("text", seg_idx))
+            else:
+                template_parts.append(("raw", val))
+        elif part_type == "html":
+            template_parts.append(("html", part[1]))
+        elif part_type == "link":
+            link_text = part[1]
+            link_url = part[2]
+            if link_text.strip():
+                seg_idx = len(segments_to_translate)
+                segments_to_translate.append(link_text)
+                template_parts.append(("link", seg_idx, link_url))
+            else:
+                template_parts.append(("link_raw", link_text, link_url))
+                
+    return template_parts
+
+def reconstruct_rich_text(template_parts, translated_segments, target_lang, is_tags=False):
+    """
+    Reconstructs the translated rich text from templates and translated segments.
+    """
+    result_parts = []
+    for part in template_parts:
+        part_type = part[0]
+        if part_type == "raw":
+            result_parts.append(part[1])
+        elif part_type == "text":
+            idx = part[1]
+            val = translated_segments[idx]
+            if is_tags:
+                val = val.strip().lower().replace(".", "")
+            result_parts.append(val)
+        elif part_type == "html":
+            html_tag = part[1]
+            # Adjust internal links in HTML tags if applicable (e.g. href="/solutions")
+            if target_lang != "en" and 'href="' in html_tag:
+                def href_adjuster(match):
+                    url = match.group(1)
+                    return f'href="{adjust_url(url, target_lang)}"'
+                html_tag = re.sub(r'href="([^"]+)"', href_adjuster, html_tag)
+            result_parts.append(html_tag)
+        elif part_type == "link":
+            idx = part[1]
+            url = part[2]
+            txt = translated_segments[idx]
+            result_parts.append(f"[{txt}]({adjust_url(url, target_lang)})")
+        elif part_type == "link_raw":
+            txt = part[1]
+            url = part[2]
+            result_parts.append(f"[{txt}]({adjust_url(url, target_lang)})")
+            
+    return "".join(result_parts)
 
 def process_mdx(content, target_lang):
     """
-    Parses MDX into translateable segments and template structures.
+    Parses MDX into structured templates and translateable segments.
     """
     parts = content.split("---")
     if len(parts) < 3:
@@ -191,12 +262,12 @@ def process_mdx(content, target_lang):
     for line in fm_lines:
         stripped = line.strip()
         if not stripped:
-            fm_output_templates.append((line, False))
+            fm_output_templates.append((line, "raw", False))
             continue
             
         if stripped.startswith("lang:"):
             indent = line[:line.index("lang:")]
-            fm_output_templates.append((f'{indent}lang: "{target_lang}"', False))
+            fm_output_templates.append((f'{indent}lang: "{target_lang}"', "raw", False))
             continue
             
         if stripped.startswith("title:"):
@@ -217,11 +288,11 @@ def process_mdx(content, target_lang):
                 seg_idx_rest = len(segments)
                 segments.append(rest)
                 
-                fm_output_templates.append((f'{indent}title: {quotes}__SEG_{seg_idx_pref}__ __SEG_{seg_idx_rest}__{quotes}', False))
+                fm_output_templates.append((f'{indent}title: {quotes}__SEG_{seg_idx_pref}__ __SEG_{seg_idx_rest}__{quotes}', "raw_substituted", False))
             else:
                 seg_idx = len(segments)
                 segments.append(val)
-                fm_output_templates.append((f'{indent}title: {quotes}__SEG_{seg_idx}__{quotes}', False))
+                fm_output_templates.append((f'{indent}title: {quotes}__SEG_{seg_idx}__{quotes}', "raw_substituted", False))
             continue
             
         if stripped.startswith("description:") or stripped.startswith("authorTitle:") or stripped.startswith("authorBio:"):
@@ -234,12 +305,12 @@ def process_mdx(content, target_lang):
                 val = val[1:-1]
             seg_idx = len(segments)
             segments.append(val)
-            fm_output_templates.append((f'{indent}{key}: {quotes}__SEG_{seg_idx}__{quotes}', False))
+            fm_output_templates.append((f'{indent}{key}: {quotes}__SEG_{seg_idx}__{quotes}', "raw_substituted", False))
             continue
             
         if stripped.startswith("faq:"):
             in_faq = True
-            fm_output_templates.append((line, False))
+            fm_output_templates.append((line, "raw", False))
             continue
             
         if in_faq:
@@ -261,7 +332,7 @@ def process_mdx(content, target_lang):
                     
                     seg_idx = len(segments)
                     segments.append(val)
-                    fm_output_templates.append((f'{indent}{prefix}question: {quotes}__SEG_{seg_idx}__{quotes}', False))
+                    fm_output_templates.append((f'{indent}{prefix}question: {quotes}__SEG_{seg_idx}__{quotes}', "raw_substituted", False))
                     continue
                 elif "answer:" in stripped:
                     val = stripped[stripped.index("answer:") + 7:].strip()
@@ -273,7 +344,7 @@ def process_mdx(content, target_lang):
                     
                     seg_idx = len(segments)
                     segments.append(val)
-                    fm_output_templates.append((f'{indent}answer: {quotes}__SEG_{seg_idx}__{quotes}', False))
+                    fm_output_templates.append((f'{indent}answer: {quotes}__SEG_{seg_idx}__{quotes}', "raw_substituted", False))
                     continue
                     
         if stripped.startswith("tags:"):
@@ -288,12 +359,12 @@ def process_mdx(content, target_lang):
                         seg_idx = len(segments)
                         segments.append(t_clean)
                         tags_segs.append(f'"__SEG_{seg_idx}__"')
-                fm_output_templates.append((f'{indent}tags: [{", ".join(tags_segs)}]', True))
+                fm_output_templates.append((f'{indent}tags: [{", ".join(tags_segs)}]', "raw_substituted", True))
             else:
-                fm_output_templates.append((line, False))
+                fm_output_templates.append((line, "raw", False))
             continue
             
-        fm_output_templates.append((line, False))
+        fm_output_templates.append((line, "raw", False))
         
     # ------------------ Process Body ------------------
     body_lines = body.splitlines()
@@ -307,17 +378,17 @@ def process_mdx(content, target_lang):
         
         if line.strip().startswith("```") or line.strip().startswith("````"):
             in_code_block = not in_code_block
-            body_output_templates.append((line, False))
+            body_output_templates.append((line, "raw"))
             i += 1
             continue
             
         if in_code_block:
-            body_output_templates.append((line, False))
+            body_output_templates.append((line, "raw"))
             i += 1
             continue
             
         if not line.strip():
-            body_output_templates.append((line, False))
+            body_output_templates.append((line, "raw"))
             i += 1
             continue
             
@@ -330,10 +401,9 @@ def process_mdx(content, target_lang):
                 if not cell_strip or re.match(r'^[-:]+$', cell_strip):
                     output_cells.append(cell)
                 else:
-                    seg_idx = len(segments)
-                    segments.append(cell_strip)
-                    output_cells.append(f" __SEG_{seg_idx}__ ")
-            body_output_templates.append(("|".join(output_cells), False))
+                    template_parts = process_rich_text_segment(cell_strip, segments)
+                    output_cells.append(("template", template_parts))
+            body_output_templates.append((output_cells, "table"))
             i += 1
             continue
             
@@ -343,8 +413,8 @@ def process_mdx(content, target_lang):
             prefix = heading_match.group(1)
             content = heading_match.group(2)
             
-            line_template = process_rich_text_segment(content, segments)
-            body_output_templates.append((f"{prefix} {line_template}", False))
+            template_parts = process_rich_text_segment(content, segments)
+            body_output_templates.append(( (prefix, template_parts), "heading"))
             i += 1
             continue
             
@@ -354,64 +424,82 @@ def process_mdx(content, target_lang):
             prefix = list_match.group(1)
             content = list_match.group(2)
             
-            line_template = process_rich_text_segment(content, segments)
-            body_output_templates.append((f"{prefix} {line_template}", False))
+            template_parts = process_rich_text_segment(content, segments)
+            body_output_templates.append(( (prefix, template_parts), "list_item"))
+            i += 1
+            continue
+            
+        # HTML/JSX tags lines - must be processed individually to preserve line structure
+        if "<" in line or ">" in line:
+            template_parts = process_rich_text_segment(line, segments)
+            body_output_templates.append((template_parts, "line"))
             i += 1
             continue
             
         # Paragraphs - gather lines
         paragraph_lines = [line]
-        while i + 1 < len(body_lines) and body_lines[i+1].strip() and not body_lines[i+1].strip().startswith("```") and not body_lines[i+1].strip().startswith("|") and not re.match(r'^(#+)\s*', body_lines[i+1]) and not re.match(r'^(\s*[-*]|\s*\d+\.)\s*', body_lines[i+1]):
+        while (i + 1 < len(body_lines) 
+               and body_lines[i+1].strip() 
+               and not body_lines[i+1].strip().startswith("```") 
+               and not body_lines[i+1].strip().startswith("|") 
+               and not re.match(r'^(#+)\s*', body_lines[i+1]) 
+               and not re.match(r'^(\s*[-*]|\s*\d+\.)\s*', body_lines[i+1])
+               and "<" not in body_lines[i+1] 
+               and ">" not in body_lines[i+1]):
             i += 1
             paragraph_lines.append(body_lines[i])
             
         paragraph_text = " ".join(paragraph_lines)
-        para_template = process_rich_text_segment(paragraph_text, segments)
-        body_output_templates.append((para_template, False))
+        template_parts = process_rich_text_segment(paragraph_text, segments)
+        body_output_templates.append((template_parts, "paragraph"))
         i += 1
         
     return segments, fm_output_templates, body_output_templates
 
-def substitute_and_adjust(templates_with_meta, translated_segments, target_lang):
+def reconstruct_mdx(fm_templates, body_templates, translated_segments, target_lang):
     """
-    Substitutes segments and cleans up URLs and tags.
+    Reconstructs frontmatter and body with translated segments.
     """
-    output_lines = []
-    
-    for template, is_tags in templates_with_meta:
-        # Match placeholder __SEG_{idx}__
-        def seg_replacer(match):
-            idx = int(match.group(1))
-            val = translated_segments[idx]
-            if is_tags:
-                # Clean tags: lowercase, strip periods
-                return val.strip().lower().replace(".", "")
-            return val
+    # 1. Reconstruct Frontmatter
+    fm_lines = []
+    for line_template, template_type, is_tags in fm_templates:
+        if template_type == "raw":
+            fm_lines.append(line_template)
+        elif template_type == "raw_substituted":
+            # Direct substitution
+            def seg_replacer(match):
+                idx = int(match.group(1))
+                val = translated_segments[idx]
+                if is_tags:
+                    return val.strip().lower().replace(".", "")
+                return val
+            res = re.sub(r'__SEG_(\d+)__', seg_replacer, line_template)
+            fm_lines.append(res)
             
-        line_result = re.sub(r'__SEG_(\d+)__', seg_replacer, template)
-        
-        # Adjust internal links for target languages
-        if target_lang != "en":
-            # 1. Adjust markdown links: e.g. [text](/solutions) -> [text](/vi/solutions)
-            def link_adjuster(match):
-                text = match.group(1)
-                url = match.group(2)
-                if url.startswith("/") and not url.startswith(f"/{target_lang}/") and url != f"/{target_lang}":
-                    return f"[{text}](/{target_lang}{url})"
-                return match.group(0)
-            line_result = re.sub(r'\[([^\]]+)\]\((/[^)]+)\)', link_adjuster, line_result)
+    # 2. Reconstruct Body
+    body_lines = []
+    for item, template_type in body_templates:
+        if template_type == "raw":
+            body_lines.append(item)
+        elif template_type == "paragraph" or template_type == "line":
+            rebuilt = reconstruct_rich_text(item, translated_segments, target_lang)
+            body_lines.append(rebuilt)
+        elif template_type == "heading" or template_type == "list_item":
+            prefix, template_parts = item
+            rebuilt = reconstruct_rich_text(template_parts, translated_segments, target_lang)
+            body_lines.append(f"{prefix} {rebuilt}")
+        elif template_type == "table":
+            row_parts = []
+            for cell in item:
+                if isinstance(cell, str):
+                    row_parts.append(cell)
+                else:
+                    template_parts = cell[1]
+                    rebuilt = reconstruct_rich_text(template_parts, translated_segments, target_lang)
+                    row_parts.append(f" {rebuilt} ")
+            body_lines.append("|".join(row_parts))
             
-            # 2. Adjust HTML/MDX hrefs: href="/solutions" -> href="/vi/solutions"
-            def href_adjuster(match):
-                url = match.group(1)
-                if url.startswith("/") and not url.startswith(f"/{target_lang}/") and url != f"/{target_lang}":
-                    return f'href="/{target_lang}{url}"'
-                return match.group(0)
-            line_result = re.sub(r'href="(/[^"]+)"', href_adjuster, line_result)
-            
-        output_lines.append(line_result)
-        
-    return "\n".join(output_lines)
+    return "\n".join(fm_lines), "\n".join(body_lines)
 
 def translate_mdx_file(file_path, target_lang):
     """
@@ -430,6 +518,8 @@ def translate_mdx_file(file_path, target_lang):
         segments, fm_templates, body_templates = process_mdx(content, target_lang)
     except Exception as e:
         print(f"Failed to parse MDX: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
         return False
         
     print(f"Extracted {len(segments)} segments to translate.")
@@ -438,15 +528,11 @@ def translate_mdx_file(file_path, target_lang):
     translated_segments = translate_batch(segments, target_lang)
     
     print("Rebuilding translated MDX content...")
-    translated_frontmatter = substitute_and_adjust(fm_templates, translated_segments, target_lang)
-    
-    # We pass false for tag list flag in body templates
-    body_templates_with_meta = [(line, False) for line, _ in body_templates]
-    translated_body = substitute_and_adjust(body_templates_with_meta, translated_segments, target_lang)
+    translated_frontmatter, translated_body = reconstruct_mdx(fm_templates, body_templates, translated_segments, target_lang)
     
     translated_content = f"---\n{translated_frontmatter}\n---\n{translated_body}"
     
-    # Escape raw '<' character that are not part of an HTML/JSX tag to prevent MDX build failures
+    # Escape raw '<' characters that are not part of an HTML/JSX tag to prevent MDX build failures
     translated_content = re.sub(r'<(?![a-zA-Z/!?_])', '&lt;', translated_content)
     
     # Save translated file
