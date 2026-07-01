@@ -22,7 +22,7 @@ from pathlib import Path
 from collections import defaultdict
 
 # 配置
-VI_DIR = Path(r"E:\ai_coding\industrial-furnace-solutions\build\client\vi")
+VI_DIR = Path(__file__).parent / "build" / "client" / "vi"
 
 # 必须存在的越南语术语（质量检查）
 REQUIRED_VIETNAMESE_TERMS = [
