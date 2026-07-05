@@ -7,6 +7,14 @@ const ContactForm: React.FC = () => {
   const { t, language } = useLanguage();
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [production, setProduction] = useState<number>(2.5);
+  const [isRoiImported, setIsRoiImported] = useState<boolean>(false);
+  const [utmParams, setUtmParams] = useState({
+    utm_source: '',
+    utm_medium: '',
+    utm_campaign: '',
+    utm_term: '',
+    utm_content: ''
+  });
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -16,8 +24,20 @@ const ContactForm: React.FC = () => {
         const parsed = parseFloat(prodParam);
         if (!isNaN(parsed) && parsed >= 0.5 && parsed <= 6.0) {
           setProduction(parsed);
+          setIsRoiImported(true);
         }
       }
+
+      // Capture UTM parameters from URL or sessionStorage fallback
+      const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'] as const;
+      const newUtms = { ...utmParams };
+      utms.forEach(utm => {
+        const val = params.get(utm) || sessionStorage.getItem(utm);
+        if (val) {
+          newUtms[utm] = val;
+        }
+      });
+      setUtmParams(newUtms);
     }
   }, []);
 
@@ -49,6 +69,14 @@ const ContactForm: React.FC = () => {
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.currentTarget, PUBLIC_KEY)
       .then(() => {
         setFormState('success');
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'generate_lead', {
+            event_category: 'conversion',
+            event_label: 'contact_form_submission_success',
+            production_value: production,
+            ...utmParams
+          });
+        }
       })
       .catch((error) => {
         console.error('FAILED...', error);
@@ -192,7 +220,40 @@ const ContactForm: React.FC = () => {
                   </div>
                 </div>
 
+                {isRoiImported && (
+                  <div className="p-4 bg-orange-50 border border-orange-200 rounded-xl text-left text-sm text-orange-850 flex items-center justify-between shadow-sm animate-fade-in mb-6">
+                    <span className="leading-relaxed">
+                      {language === 'vi' ? (
+                        <>💡 <strong>Dữ liệu tính toán ROI đã nhập:</strong> Đã tự động điền sản lượng ước tính <strong>{production} Mtpa</strong> (Tiết kiệm dự kiến: <strong>${estimatedSavings} USD/năm</strong>).</>
+                      ) : language === 'id' ? (
+                        <>💡 <strong>Kalkulasi ROI Diimpor:</strong> Terisi otomatis dengan <strong>{production} Mtpa</strong> (Potensi hemat: <strong>${estimatedSavings} USD/tahun</strong>).</>
+                      ) : language === 'pt-br' ? (
+                        <>💡 <strong>Cálculo de ROI Importado:</strong> Preenchido com <strong>{production} Mtpa</strong> (Economia potencial: <strong>${estimatedSavings} USD/ano</strong>).</>
+                      ) : (
+                        <>💡 <strong>ROI Calculation Connected:</strong> Prefilled with <strong>{production} Mtpa</strong> (Estimated savings: <strong>${estimatedSavings} USD/year</strong>).</>
+                      )}
+                    </span>
+                    <button 
+                      type="button" 
+                      onClick={() => setIsRoiImported(false)}
+                      className="text-orange-500 hover:text-orange-700 font-bold ml-3 text-lg focus:outline-none shrink-0"
+                      aria-label="Dismiss"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Hidden inputs for UTM tracking and ROI parameters */}
+                  <input type="hidden" name="utm_source" value={utmParams.utm_source} />
+                  <input type="hidden" name="utm_medium" value={utmParams.utm_medium} />
+                  <input type="hidden" name="utm_campaign" value={utmParams.utm_campaign} />
+                  <input type="hidden" name="utm_term" value={utmParams.utm_term} />
+                  <input type="hidden" name="utm_content" value={utmParams.utm_content} />
+                  <input type="hidden" name="roi_production" value={production} />
+                  <input type="hidden" name="roi_estimated_savings" value={estimatedSavings} />
+                  <input type="hidden" name="roi_cbam_savings" value={cbamSavings} />
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-black text-industrial-900 uppercase tracking-widest mb-2 text-left">
@@ -284,8 +345,16 @@ const ContactForm: React.FC = () => {
                     </label>
                     <input
                       required
-                      type="text"
+                      type="number"
+                      step="0.1"
                       name="user_production"
+                      value={production}
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        if (!isNaN(val)) {
+                          setProduction(val);
+                        }
+                      }}
                       className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-furnace-500 focus:ring-4 focus:ring-furnace-500/10 outline-none transition-all"
                       placeholder={t('contact.form.production_placeholder')}
                     />

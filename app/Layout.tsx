@@ -49,6 +49,20 @@ const ScrollToHashElement = () => {
 
 
 const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+    const location = useLocation();
+
+    React.useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(location.search);
+        const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        utms.forEach(utm => {
+            const val = params.get(utm);
+            if (val) {
+                sessionStorage.setItem(utm, val);
+            }
+        });
+    }, [location.search]);
+
     return (
         <div className="font-sans antialiased text-gray-900 bg-white selection:bg-furnace-500 selection:text-white flex flex-col min-h-screen">
             <ScrollToHashElement />

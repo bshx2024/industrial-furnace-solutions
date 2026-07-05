@@ -277,7 +277,7 @@ export default function BlogDetail() {
                 </div>
 
                 {/* Inline ROI Estimator */}
-                <InlineRoiCalculator language={lang} />
+                <InlineRoiCalculator language={lang} slug={post.slug} />
 
                 {/* FAQ Section */}
                 {post.faq && post.faq.length > 0 && (

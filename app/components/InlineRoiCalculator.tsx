@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flame, ArrowRight } from 'lucide-react';
 import type { Language } from '../contexts/LanguageContext';
 
 interface InlineRoiCalculatorProps {
   language: Language;
+  slug?: string;
 }
 
-const InlineRoiCalculator: React.FC<InlineRoiCalculatorProps> = ({ language }) => {
+const InlineRoiCalculator: React.FC<InlineRoiCalculatorProps> = ({ language, slug }) => {
   const [production, setProduction] = useState<number>(2.5);
+
+  // Debounced GA4 tracking for slider value change
+  useEffect(() => {
+    if (typeof window === 'undefined' || !(window as any).gtag) return;
+    const handler = setTimeout(() => {
+      (window as any).gtag('event', 'roi_slider_change', {
+        event_category: 'engagement',
+        event_label: `production_value_${production}`,
+        value: production,
+        page_location: window.location.href,
+        blog_slug: slug
+      });
+    }, 1000);
+
+    return () => clearTimeout(handler);
+  }, [production, slug]);
+
+  const handleCtaClick = () => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'roi_cta_click', {
+        event_category: 'conversion',
+        event_label: `redirect_to_assessment_from_${slug || 'unknown'}`,
+        production_value: production,
+        blog_slug: slug
+      });
+    }
+  };
 
   // ROI Logic (matching ContactForm.tsx)
   const fuelSavingRate = 0.11;
@@ -67,8 +95,8 @@ const InlineRoiCalculator: React.FC<InlineRoiCalculatorProps> = ({ language }) =
   const currentT = t[language] || t.en;
 
   const redirectUrl = language === 'en' 
-    ? `/?production=${production}#assessment` 
-    : `/${language}/?production=${production}#assessment`;
+    ? `/?production=${production}${slug ? `&utm_source=blog_roi&utm_medium=internal&utm_campaign=${slug}` : ''}#assessment` 
+    : `/${language}/?production=${production}${slug ? `&utm_source=blog_roi&utm_medium=internal&utm_campaign=${slug}` : ''}#assessment`;
 
   return (
     <div className="my-12 p-8 bg-zinc-900/40 border border-zinc-800 rounded-2xl relative overflow-hidden backdrop-blur-sm">
@@ -122,6 +150,7 @@ const InlineRoiCalculator: React.FC<InlineRoiCalculatorProps> = ({ language }) =
             <p className="text-[10px] text-zinc-500 italic max-w-xs">{currentT.note}</p>
             <a
               href={redirectUrl}
+              onClick={handleCtaClick}
               className="inline-flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs uppercase tracking-widest py-3 px-6 rounded-lg transition-all group shrink-0"
             >
               {currentT.cta}
