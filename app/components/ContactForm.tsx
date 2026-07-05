@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -7,6 +7,19 @@ const ContactForm: React.FC = () => {
   const { t, language } = useLanguage();
   const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [production, setProduction] = useState<number>(2.5);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const prodParam = params.get('production');
+      if (prodParam) {
+        const parsed = parseFloat(prodParam);
+        if (!isNaN(parsed) && parsed >= 0.5 && parsed <= 6.0) {
+          setProduction(parsed);
+        }
+      }
+    }
+  }, []);
 
   // ROI Logic
   const fuelSavingRate = 0.11;

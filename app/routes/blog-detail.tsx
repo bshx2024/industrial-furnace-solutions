@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useLoaderData, Link } from "react-router";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
-import { getPostBySlug, getAllPosts } from "../utils/blog.server";
+import { getPostBySlug, getAllPosts, postExists } from "../utils/blog.server";
 import type { Post } from "../utils/blog.server";
 import { MDXProvider } from "@mdx-js/react";
 import type { Language } from "../contexts/LanguageContext";
+import { Share2, Check } from "lucide-react";
+import SmartLanguageBanner from "../components/SmartLanguageBanner";
+import InlineRoiCalculator from "../components/InlineRoiCalculator";
 
 // Import all MDX components
 const mdxComponents = import.meta.glob("../../content/blog/**/*.mdx", { eager: true });
@@ -22,13 +26,20 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
         throw new Response("Post Not Found", { status: 404 });
     }
 
+    const availableLangs = {
+        en: postExists(slug!, "en"),
+        vi: postExists(slug!, "vi"),
+        id: postExists(slug!, "id"),
+        "pt-br": postExists(slug!, "pt-br")
+    };
+
     // Find related posts (same tags, different slug)
     const allPosts = await getAllPosts(lang);
     const relatedPosts = allPosts
         .filter(p => p.slug !== slug && p.tags.some(tag => post.tags.includes(tag)))
         .slice(0, 3);
 
-    return { post, lang, relatedPosts };
+    return { post, lang, relatedPosts, availableLangs };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -81,10 +92,27 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export default function BlogDetail() {
-    const { post, lang, relatedPosts } = useLoaderData() as {
+    const { post, lang, relatedPosts, availableLangs } = useLoaderData() as {
         post: Post;
         lang: Language;
-        relatedPosts: any[]
+        relatedPosts: any[];
+        availableLangs: {
+            en: boolean;
+            vi: boolean;
+            id: boolean;
+            'pt-br': boolean;
+        };
+    };
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyLink = () => {
+        if (typeof window === "undefined") return;
+        const shareUrl = `${window.location.origin}${window.location.pathname}?utm_source=user_share&utm_medium=referral&utm_campaign=${post.slug}`;
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        });
     };
 
     const structuredData = {
@@ -136,6 +164,8 @@ export default function BlogDetail() {
         author: lang === "vi" ? "Tác giả" : lang === "id" ? "Penulis" : lang === "pt-br" ? "Autor" : "Author",
         published: lang === "vi" ? "Ngày đăng" : lang === "id" ? "Diterbitkan" : lang === "pt-br" ? "Publicado" : "Published",
         faqTitle: lang === "vi" ? "Câu hỏi thường gặp" : lang === "id" ? "Pertanyaan Sering Diajukan" : lang === "pt-br" ? "Perguntas Frequentes" : "Frequently Asked Questions",
+        share: lang === "vi" ? "Chia sẻ" : lang === "id" ? "Bagikan" : lang === "pt-br" ? "Compartilhar" : "Share Link",
+        copied: lang === "vi" ? "Đã sao chép!" : lang === "id" ? "Tersalin!" : lang === "pt-br" ? "Copiado!" : "Copied!",
     };
 
     // Resolve the MDX component
@@ -159,9 +189,16 @@ export default function BlogDetail() {
                 />
             )}
             <div className="max-w-4xl mx-auto px-4 sm:px-6">
+                {/* Smart Language Recommendation Banner */}
+                <SmartLanguageBanner
+                    currentLang={lang}
+                    slug={post.slug}
+                    availableLangs={availableLangs}
+                />
+
                 <Link
                     to={lang === "en" ? "/blog" : `/${lang}/blog`}
-                    className="text-orange-500 hover:text-orange-400 mb-8 inline-flex items-center text-sm uppercase tracking-widest font-bold"
+                    className="text-orange-500 hover:text-orange-400 mb-8 inline-flex items-center text-sm uppercase tracking-widest font-bold font-oswald"
                 >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -174,21 +211,41 @@ export default function BlogDetail() {
                         {post.title}
                     </h1>
 
-                    <div className="flex flex-wrap items-center gap-6 text-zinc-400 text-sm border-y border-zinc-800 py-4 mb-8">
-                        <div className="flex items-center">
-                            <span className="text-zinc-500 mr-2">{t.author}:</span>
-                            <span className="text-white font-medium">{post.author}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-6 text-zinc-400 text-sm border-y border-zinc-800 py-4 mb-8">
+                        <div className="flex flex-wrap items-center gap-6">
+                            <div className="flex items-center">
+                                <span className="text-zinc-500 mr-2">{t.author}:</span>
+                                <span className="text-white font-medium">{post.author}</span>
+                            </div>
+                            <div className="flex items-center">
+                                <span className="text-zinc-500 mr-2">{t.published}:</span>
+                                <span className="text-white">{post.date}</span>
+                            </div>
+                            <div className="flex items-center">
+                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {post.readingTime}
+                            </div>
                         </div>
-                        <div className="flex items-center">
-                            <span className="text-zinc-500 mr-2">{t.published}:</span>
-                            <span className="text-white">{post.date}</span>
-                        </div>
-                        <div className="flex items-center">
-                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            {post.readingTime}
-                        </div>
+
+                        {/* Direct share button with UTM parameters */}
+                        <button
+                            onClick={handleCopyLink}
+                            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-orange-500 hover:text-orange-400 transition-colors border border-orange-500/20 hover:border-orange-500/40 bg-orange-500/5 px-4 py-2 rounded-lg cursor-pointer font-oswald"
+                        >
+                            {copied ? (
+                                <>
+                                    <Check size={14} className="text-green-500 animate-bounce" />
+                                    <span>{t.copied}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Share2 size={14} />
+                                    <span>{t.share}</span>
+                                </>
+                            )}
+                        </button>
                     </div>
 
                     {post.image && (
@@ -218,6 +275,9 @@ export default function BlogDetail() {
                         <MDXContent />
                     </MDXProvider>
                 </div>
+
+                {/* Inline ROI Estimator */}
+                <InlineRoiCalculator language={lang} />
 
                 {/* FAQ Section */}
                 {post.faq && post.faq.length > 0 && (

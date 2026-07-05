@@ -253,6 +253,15 @@ build/client/
 
 ---
 
+## 📈 推广追踪与 UTM 参数规范 | UTM Tracking Standards
+
+海外社媒（如 LinkedIn）或邮件推广博文时，务必使用以下 UTM 规范以防止流量被 GA4 错误地归入 "Direct" 访问：
+- **LinkedIn 推广**：`?utm_source=linkedin&utm_medium=social&utm_campaign={slug}`
+- **邮件/Newsletter 推广**：`?utm_source=newsletter&utm_medium=email&utm_campaign={slug}`
+- **Twitter/X 推广**：`?utm_source=twitter&utm_medium=social&utm_campaign={slug}`
+
+---
+
 ## 📞 资源链接 | Resources
 
 - **完整翻译指南**: `VIETNAMESE_TRANSLATION_GUIDE.md`
