@@ -13,6 +13,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
     { en: "/about", vi: "/vi/about", id: "/id/about", "pt-br": "/pt-br/about", priority: "0.7", changefreq: "monthly" },
     { en: "/blog", vi: "/vi/blog", id: "/id/blog", "pt-br": "/pt-br/blog", priority: "0.8", changefreq: "daily" },
     { en: "/vi/lp/cbam-steel-vietnam", vi: "/vi/lp/cbam-steel-vietnam", id: null, "pt-br": null, priority: "0.8", changefreq: "weekly" }, // LP has no EN/ID/PT-BR version, mapping to itself for simple logic
+    
+    // New B2B Technical Routes
+    { en: "/calculators", vi: "/vi/calculators", id: "/id/calculators", "pt-br": "/pt-br/calculators", priority: "0.8", changefreq: "weekly" },
+    { en: "/calculators/walking-beam-furnace-efficiency-calculator", vi: "/vi/calculators/walking-beam-furnace-efficiency-calculator", id: "/id/calculators/walking-beam-furnace-efficiency-calculator", "pt-br": "/pt-br/calculators/walking-beam-furnace-efficiency-calculator", priority: "0.8", changefreq: "weekly" },
+    { en: "/calculators/reheating-furnace-heat-balance", vi: "/vi/calculators/reheating-furnace-heat-balance", id: "/id/calculators/reheating-furnace-heat-balance", "pt-br": "/pt-br/calculators/reheating-furnace-heat-balance", priority: "0.8", changefreq: "weekly" },
+    { en: "/furnaces/walking-beam-reheating-furnace", vi: "/vi/furnaces/walking-beam-reheating-furnace", id: "/id/furnaces/walking-beam-reheating-furnace", "pt-br": "/pt-br/furnaces/walking-beam-reheating-furnace", priority: "0.8", changefreq: "weekly" },
+    { en: "/optimization/furnace-efficiency-upgrades", vi: "/vi/optimization/furnace-efficiency-upgrades", id: "/id/optimization/furnace-efficiency-upgrades", "pt-br": "/pt-br/optimization/furnace-efficiency-upgrades", priority: "0.8", changefreq: "weekly" },
+    { en: "/resources/reheating-furnace-shutdown-maintenance-checklist", vi: "/vi/resources/reheating-furnace-shutdown-maintenance-checklist", id: "/id/resources/reheating-furnace-shutdown-maintenance-checklist", "pt-br": "/pt-br/resources/reheating-furnace-shutdown-maintenance-checklist", priority: "0.8", changefreq: "weekly" },
   ];
 
   const enPosts = await getAllPosts("en");
