@@ -31,8 +31,8 @@ const SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
 
 // 需要提交的新博文 URL
 const NEW_URLS = [
-    `${SITE_URL}/blog/vietnam-steel-2026-six-pressures-competitive-advantage`,
-    `${SITE_URL}/vi/blog/vietnam-steel-2026-six-pressures-competitive-advantage`,
+    `${SITE_URL}/blog/cbam-billet-production-optimizing-reheating-furnace-emissions-for-export-markets`,
+    `${SITE_URL}/vi/blog/cbam-billet-production-optimizing-reheating-furnace-emissions-for-export-markets`,
 ];
 
 // ============================================================
