@@ -289,7 +289,7 @@ export default function BlogDetail() {
           "
                 >
                     <MDXProvider components={{ IndonesiaAuditCTA }}>
-                        <MDXContent />
+                        <MDXContent components={{ IndonesiaAuditCTA }} />
                     </MDXProvider>
                 </div>
 
