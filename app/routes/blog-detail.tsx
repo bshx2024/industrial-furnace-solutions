@@ -79,13 +79,25 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         }))
     } : null;
 
+    const pageUrl = `https://www.ecoreheating.com/blog/${data.post.slug}`;
+    const fullImageUrl = data.post.image.startsWith('http') ? data.post.image : `https://www.ecoreheating.com${data.post.image}`;
+    const fullTitle = `${data.post.title} | EcoReheating`;
+
     const metaTags: any[] = [
-        { title: `${data.post.title} | EcoReheating` },
+        { title: fullTitle },
         { name: "description", content: data.post.description },
-        { property: "og:title", content: data.post.title },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: pageUrl },
+        { property: "og:site_name", content: "EcoReheating" },
+        { property: "og:title", content: fullTitle },
         { property: "og:description", content: data.post.description },
-        { property: "og:image", content: data.post.image },
-        { property: "og:type", content: "article" }
+        { property: "og:image", content: fullImageUrl },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: fullTitle },
+        { name: "twitter:description", content: data.post.description },
+        { name: "twitter:image", content: fullImageUrl }
     ];
 
     return metaTags;
@@ -252,6 +264,10 @@ export default function BlogDetail() {
                         <img
                             src={post.image}
                             alt={post.title}
+                            width={1200}
+                            height={630}
+                            loading="eager"
+                            decoding="async"
                             className="w-full h-auto rounded-lg shadow-2xl border border-zinc-800"
                         />
                     )}
