@@ -265,7 +265,7 @@ const Technologies: React.FC = () => {
                 <div className="flex items-start gap-4">
                   <ShieldCheck className="text-furnace-600 shrink-0 mt-1" size={24} />
                   <div>
-                    <h5 className="text-industrial-900 font-bold text-lg mb-2">{t('tech.ipTitle')}</h5>
+                    <p className="text-industrial-900 font-bold text-lg mb-2">{t('tech.ipTitle')}</p>
                     <p className="text-gray-600 text-sm leading-relaxed italic">
                       {t('tech.ipQuote')}
                     </p>
@@ -365,7 +365,7 @@ const Technologies: React.FC = () => {
                     </div>
 
                     <div className="space-y-6 text-gray-300 font-serif leading-relaxed">
-                      <h4 className="text-white font-bold text-lg text-center px-4">{t('tech.dossierNoticeTitle')}</h4>
+                      <p className="text-white font-bold text-lg text-center px-4">{t('tech.dossierNoticeTitle')}</p>
                       <p className="font-bold text-gray-400 italic">{t('tech.dossierNoticeGreeting')}</p>
                       <p className="text-sm">
                         {t('tech.dossierNoticeP1')}
@@ -400,11 +400,11 @@ const Technologies: React.FC = () => {
                               {t('tech.profile')}
                             </div>
                           </div>
-                          <h5 className="text-white font-bold leading-tight group-hover:text-furnace-500 transition-colors text-left w-full">
+                          <p className="text-white font-bold leading-tight group-hover:text-furnace-500 transition-colors text-left w-full">
                             {id === 47 ? t('tech.item47Title') :
                               id === 51 ? t('tech.item51Title') :
                                 t('tech.item52Title')}
-                          </h5>
+                          </p>
 
                           {activeDetail === id && (
                             <div className="mt-6 pt-6 border-t border-white/5 animate-in fade-in zoom-in-95 duration-500">
@@ -420,7 +420,7 @@ const Technologies: React.FC = () => {
                                     </p>
                                   </div>
                                   <div className="bg-industrial-900/50 p-4 rounded-xl border border-blue-500/20">
-                                    <h6 className="text-white text-xs font-bold mb-2 uppercase tracking-tight text-left">{t('tech.benchmarks')}</h6>
+                                    <p className="text-white text-xs font-bold mb-2 uppercase tracking-tight text-left">{t('tech.benchmarks')}</p>
                                     <div className="grid grid-cols-2 gap-y-3">
                                       <div>
                                         <p className="text-[10px] text-gray-500 uppercase text-left">{t('tech.tempPrecision')}</p>

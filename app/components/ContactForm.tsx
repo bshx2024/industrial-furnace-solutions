@@ -140,7 +140,7 @@ const ContactForm: React.FC = () => {
                   <CheckCircle size={20} />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-bold text-sm">{t('contact.feature1.title')}</h4>
+                  <p className="font-bold text-sm">{t('contact.feature1.title')}</p>
                   <p className="text-xs text-gray-400">{t('contact.feature1.desc')}</p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ const ContactForm: React.FC = () => {
                   <CheckCircle size={20} />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-bold text-sm">{t('contact.feature2.title')}</h4>
+                  <p className="font-bold text-sm">{t('contact.feature2.title')}</p>
                   <p className="text-xs text-gray-400">{t('contact.feature2.desc')}</p>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const ContactForm: React.FC = () => {
                   T80
                 </div>
                 <div className="text-left">
-                  <h4 className="font-bold text-sm text-furnace-400">{t('contact.form.cisa_verification')}</h4>
+                  <p className="font-bold text-sm text-furnace-400">{t('contact.form.cisa_verification')}</p>
                   <p className="text-xs text-gray-300">{t('contact.form.cisa_sub')}</p>
                 </div>
               </div>

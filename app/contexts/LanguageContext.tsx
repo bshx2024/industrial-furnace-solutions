@@ -16,8 +16,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations: Record<Language, any> = {
   en: {
     // SEO
-    'seo.home.title': 'Industrial Reheating Furnace Solutions & Revamping (15% Fuel Cut)',
-    'seo.home.desc': 'Cut steel reheating furnace fuel use by 7-15% with zero upfront CAPEX. CISA T80 certified walking beam retrofits, AI combustion control, and turnkey EPC solutions.',
+    'seo.home.title': 'Reheating Furnace Solutions & Revamping',
+    'seo.home.desc': 'Cut steel reheating furnace fuel use by 7-15% with zero CAPEX. CISA T80 walking beam retrofits, AI combustion control, and turnkey industrial EPC solutions.',
 
     // Navigation
     'nav.home': 'HOME',
