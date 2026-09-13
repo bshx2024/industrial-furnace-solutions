@@ -6,8 +6,8 @@ import { ShieldAlert, RefreshCw } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
     return [
-        { title: "Industrial Reheating Furnace Heat Balance Calculator | EcoReheating" },
-        { name: "description", content: "Interactive thermal balance calculator for steel reheating furnaces. Map heat distribution, flue gas losses, and shell radiation." },
+        { title: "Reheating Furnace Heat Balance Calculator (Free Tool) | EcoReheating" },
+        { name: "description", content: "Calculate combustion efficiency, stack thermal losses, and fuel savings for steel reheating furnaces in minutes. Free industrial engineering tool by EcoReheating." },
     ];
 };
 
@@ -81,8 +81,9 @@ const HeatBalanceCalc: React.FC = () => {
             wallLoss: "Wall Radiation & Openings Loss",
             otherLoss: "Other Unaccounted Loss",
             modelDisclaimer: "Disclaimer: This model is for technical planning and baseline estimation. Exact heat balance parameters require dynamic gas chromatography and pressure profiling during physical site audits.",
-            requestAudit: "Request Complete Heat Balance Site Audit →",
+            requestAudit: "Get Customized Heat Loss Audit & ROI Feasibility Study →",
             back: "← Back to Calculators",
+            guideLinkText: "Explore Walking Beam Furnace Revamping Solutions →",
         },
         vi: {
             title: "Tính Toán Cân Bằng Nhiệt Lò Nung",
@@ -99,8 +100,9 @@ const HeatBalanceCalc: React.FC = () => {
             wallLoss: "Tổn thất bức xạ vỏ & khe hở",
             otherLoss: "Tổn thất không tính được khác",
             modelDisclaimer: "Lưu ý: Mô hình này phục vụ lập kế hoạch kỹ thuật. Việc tính toán cân bằng nhiệt chính xác cần thực hiện đo đạc khí thải và áp suất trực tiếp tại nhà máy.",
-            requestAudit: "Đăng ký kiểm toán cân bằng nhiệt toàn diện →",
+            requestAudit: "Đăng Ký Khảo Sát Tổn Thất Nhiệt & Báo Cáo ROI Cho Nhà Máy →",
             back: "← Quay lại danh sách công cụ",
+            guideLinkText: "Xem Giải Pháp Cải Tạo Lò Nung Dầm Bước →",
         },
         id: {
             title: "Kalkulator Keseimbangan Panas Tungku",
@@ -117,8 +119,9 @@ const HeatBalanceCalc: React.FC = () => {
             wallLoss: "Kehilangan Radiasi Dinding & Celah",
             otherLoss: "Kehilangan Lainnya",
             modelDisclaimer: "Catatan: Model ini untuk perencanaan teknis. Parameter keseimbangan panas yang tepat memerlukan profil kromatografi gas dinamis selama audit fisik.",
-            requestAudit: "Minta Audit Keseimbangan Panas Lengkap →",
+            requestAudit: "Dapatkan Audit Kehilangan Panas & Studi Kelayakan ROI Pabrik →",
             back: "← Kembali ke Kalkulator",
+            guideLinkText: "Jelajahi Solusi Retrofit Tungku Walking Beam →",
         },
         "pt-br": {
             title: "Calculadora de Balanço Térmico de Fornos",
@@ -135,8 +138,9 @@ const HeatBalanceCalc: React.FC = () => {
             wallLoss: "Perda por Radiação das Paredes e Aberturas",
             otherLoss: "Outras Perdas Não Contabilizadas",
             modelDisclaimer: "Nota: Este modelo serve para fins de planejamento técnico. O balanço térmico exato requer medições dinâmicas de cromatografia e pressão em campo.",
-            requestAudit: "Solicitar Auditoria de Balanço Térmico →",
+            requestAudit: "Solicitar Auditoria de Perdas Térmicas e Estudo de ROI →",
             back: "← Voltar para Calculadoras",
+            guideLinkText: "Conheça Soluções de Reforma para Fornos de Vigas Caminhantes →",
         }
     };
 
@@ -144,9 +148,28 @@ const HeatBalanceCalc: React.FC = () => {
     const locale = lang === 'vi' ? 'vi-VN' : lang === 'id' ? 'id-ID' : lang === 'pt-br' ? 'pt-BR' : 'en-US';
 
     const auditLink = lang === 'en' ? '/about#assessment' : `/${lang}/about#assessment`;
+    const guideLink = lang === 'en' ? '/furnaces/walking-beam-reheating-furnace' : `/${lang}/furnaces/walking-beam-reheating-furnace`;
+
+    const webAppSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Reheating Furnace Heat Balance Calculator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Interactive thermodynamic balance tool for calculating steel reheat furnace combustion efficiency, stack loss, and fuel savings."
+    };
 
     return (
         <div className="bg-slate-950 min-h-screen text-slate-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+            />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.12),transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 carbon-pattern pointer-events-none" />
 
@@ -329,10 +352,18 @@ const HeatBalanceCalc: React.FC = () => {
                             </div>
                             <Link
                                 to={auditLink}
-                                className="w-full inline-flex items-center justify-center py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider border border-slate-700"
+                                className="w-full inline-flex items-center justify-center py-3 px-4 bg-furnace-500 hover:bg-furnace-600 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-furnace-500/20"
                             >
                                 {currentT.requestAudit}
                             </Link>
+                            <div className="pt-2 text-center">
+                                <Link
+                                    to={guideLink}
+                                    className="text-xs text-furnace-400 hover:text-furnace-300 font-medium underline underline-offset-4"
+                                >
+                                    {(currentT as any).guideLinkText}
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

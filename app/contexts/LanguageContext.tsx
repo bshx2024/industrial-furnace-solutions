@@ -16,8 +16,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations: Record<Language, any> = {
   en: {
     // SEO
-    'seo.home.title': 'Zero CAPEX Reheating Furnace Energy Saving | Save 7-15% Fuel',
-    'seo.home.desc': 'Stop wasting fuel. Our CISA T80 verified "Energy Steward" model requires $0 upfront investment. We invest, you save. Get a free ROI audit now.',
+    'seo.home.title': 'Industrial Reheating Furnace Revamping & Zero-CAPEX Retrofit',
+    'seo.home.desc': 'Cut steel rolling reheating fuel consumption by 7-15% with zero upfront capital. Turnkey walking beam furnace engineering, CBAM-ready audits, and retrofit solutions.',
 
     // Navigation
     'nav.home': 'HOME',
@@ -480,8 +480,8 @@ export const translations: Record<Language, any> = {
   },
   vi: {
     // SEO
-    'seo.home.title': 'Tiết kiệm 7-15% Nhiên liệu Lò nung | Giải pháp Zero CAPEX',
-    'seo.home.desc': 'Ngừng lãng phí năng lượng. Công nghệ xác thực CISA T80 giúp giảm 7-15% tiêu thụ gas. Không cần vốn đầu tư ban đầu. Đăng ký đánh giá ROI miễn phí.',
+    'seo.home.title': 'Cải Tạo Lò Nung Phôi & Tiết Kiệm Năng Lượng Zero-CAPEX',
+    'seo.home.desc': 'Giảm 7-15% tiêu thụ khí đốt lò nung dầm bước không cần vốn đầu tư. Giải pháp cải tạo kỹ thuật chìa khóa trao tay và kiểm toán CBAM cho nhà máy cán thép.',
 
     // Navigation
     'nav.home': 'TRANG CHỦ',
@@ -689,8 +689,8 @@ export const translations: Record<Language, any> = {
     'about.globalOpsDesc': 'Trụ sở chính tại Thượng Hải, Trung Quốc, với trung tâm kỹ thuật toàn cầu phục vụ các nhà máy thép tại Châu Á và xa hơn nữa.',
 
     // Solutions Page
-    'solutions.title': 'Giải Pháp Tiết Kiệm Năng Lượng Lò Nung Thép | Đạt Chuẩn CISA T80',
-    'solutions.subtitle': 'Cắt giảm 7-15% chi phí nhiên liệu lò nung dầm bước và lò ngâm thép với mô hình Quản gia Năng lượng đầu tư 0đ (Zero CAPEX). Đăng ký đánh giá ROI ngay!',
+    'solutions.title': 'Giải Pháp Tiết Kiệm Lò Nung Thép | Chuẩn CISA T80',
+    'solutions.subtitle': 'Giảm 7-15% tiêu hao gas với giải pháp Zero CAPEX cho lò nung dầm bước và lò ngâm thép đạt chuẩn CISA T80. Đăng ký nhận đánh giá ROI miễn phí ngay!',
     'solutions.processScope': 'Phạm vi Quy trình',
     'solutions.processDesc': 'Giải pháp của chúng tôi giải quyết toàn bộ hành trình nhiệt của sản phẩm thép, đảm bảo tính nhất quán và hiệu quả từ đầu đến cuối.',
     'solutions.scopeItem1': 'Phía ra máy đúc liên tục',
@@ -947,8 +947,8 @@ export const translations: Record<Language, any> = {
 
 const idTranslations = {
   // SEO
-  'seo.home.title': 'Hemat Energi Tungku Reheating Zero CAPEX | Hemat Bahan Bakar 7-15%',
-  'seo.home.desc': 'Hentikan pemborosan bahan bakar. Model "Energy Steward" tervalidasi CISA T80 kami membutuhkan $0 investasi awal. Kami berinvestasi, Anda hemat. Dapatkan audit ROI gratis sekarang.',
+  'seo.home.title': 'Retrofit Tungku Reheating Industri & Hemat Energi Zero-CAPEX',
+  'seo.home.desc': 'Kurangi konsumsi bahan bakar tungku reheating hingga 7-15% tanpa modal awal. Rekayasa tungku walking beam turnkey dan audit kesiapan CBAM untuk pabrik baja.',
 
   // Navigation
   'nav.home': 'BERANDA',
@@ -1023,8 +1023,8 @@ const idTranslations = {
 
 const ptBrTranslations = {
   // SEO
-  'seo.home.title': 'Economia de Energia em Forno de Reaquecimento Zero CAPEX | Economize 7-15% de Combustível',
-  'seo.home.desc': 'Pare de desperdiçar combustível. Nosso modelo "Energy Steward" verificado pela CISA T80 exige investimento inicial de $0. Nós investimos, você economiza. Obtenha uma auditoria de ROI gratuita agora.',
+  'seo.home.title': 'Reforma de Forno de Reaquecimento Industrial & Zero-CAPEX',
+  'seo.home.desc': 'Reduza o consumo de combustível em fornos de reaquecimento em 7-15% sem investimento inicial. Soluções turnkey de engenharia e adequação CBAM para laminação de aço.',
 
   // Navigation
   'nav.home': 'INÍCIO',

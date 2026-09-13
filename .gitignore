@@ -50,3 +50,8 @@ gsc_data/
 gsc_data_*/
 *.zip
 
+# Scratch and agent temp files
+scratch/
+active_tab_data.json
+elements.json
+
