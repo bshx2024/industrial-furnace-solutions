@@ -16,7 +16,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations: Record<Language, any> = {
   en: {
     // SEO
-    'seo.home.title': 'Reheating Furnace Solutions & Revamping',
+    'seo.home.title': 'Industrial Furnace Energy Savings — Zero CAPEX, Pay From Savings',
     'seo.home.desc': 'Cut steel reheating furnace fuel use by 7-15% with zero CAPEX. CISA T80 walking beam retrofits, AI combustion control, and turnkey industrial EPC solutions.',
 
     // Navigation
@@ -53,6 +53,7 @@ export const translations: Record<Language, any> = {
 
     // ROI Calculator
     'calc.title': 'ROI Calculator',
+    'calc.subtitle': "See your plant's savings in 30 seconds",
     'calc.production': 'Annual Production',
     'calc.adjust': 'Adjust Capacity',
     'calc.value': 'Annual Value',
@@ -72,16 +73,26 @@ export const translations: Record<Language, any> = {
     'stat.status': 'Control Status',
     'stat.optimized': 'Optimized',
 
-    // Why Choose section
-    'why.title': 'Why Choose the Energy Steward Solution?',
-    'why.p1': 'EcoReheating provides Zero CAPEX reheating furnace optimization using CISA T80 verified technologies like narrow window temperature control and full-fiber roofs, helping steel mills reduce fuel consumption by 7-15%.',
-    'why.p2': 'Developed by South Technology, this industry-defining solution — now a national benchmark — optimizes the entire thermal journey from continuous caster exit to reheating furnace exit.',
-    'why.item1.title': 'Maximize Heating Capacity',
-    'why.item1.desc': 'Eliminate bottlenecks in the reheating process to ensure peak production throughput.',
-    'why.item2.title': 'Optimize Reheating Process',
-    'why.item2.desc': 'Advanced AI and process simulation to achieve precise thermal curves and minimum fuel usage.',
-    'why.item3.title': 'Zero-Downtime Reliability',
-    'why.item3.desc': 'Long-term expert steward service ensuring equipment longevity and consistent performance.',
+    // Why Choose section / How It Works
+    'why.badge': 'HOW IT WORKS',
+    'why.title': 'How It Works: 3 Steps to Zero CAPEX Furnace Savings',
+    'why.p1': 'EcoReheating eliminates furnace fuel waste with zero upfront balance-sheet risk. We finance and engineer the entire retrofit, recovering investment exclusively from verified fuel and yield savings.',
+    'why.p2': 'From baseline thermal audit to turnkey installation and AI combustion stewardship, we deliver a guaranteed 7–15% fuel reduction.',
+    'why.step1.badge': 'Step 01',
+    'why.step1.title': 'Baseline Thermal Audit (Free)',
+    'why.step1.desc': 'Comprehensive on-site thermal inspection, heat balance calculation, and fuel loss gap analysis with zero cost or commitment.',
+    'why.step2.badge': 'Step 02',
+    'why.step2.title': 'Turnkey Engineering Retrofit ($0 Upfront CAPEX)',
+    'why.step2.desc': 'We fully fund and engineer the retrofit — full-fiber roof, AI combustion controls, and recuperator upgrades during scheduled maintenance.',
+    'why.step3.badge': 'Step 03',
+    'why.step3.title': 'Pay Strictly From Verified Fuel Savings',
+    'why.step3.desc': 'Repay strictly from actual fuel savings and recovered steel yield. If your furnace does not achieve the target fuel cut, you owe nothing.',
+    'why.item1.title': '1. Baseline Thermal Audit (Free)',
+    'why.item1.desc': 'Comprehensive on-site thermal inspection, heat balance calculation, and fuel loss gap analysis with zero cost or commitment.',
+    'why.item2.title': '2. Turnkey Retrofit ($0 Upfront CAPEX)',
+    'why.item2.desc': 'We fully fund and engineer the retrofit — full-fiber roof, AI combustion controls, and recuperator upgrades during scheduled maintenance.',
+    'why.item3.title': '3. Pay From Verified Fuel Savings',
+    'why.item3.desc': 'Repay strictly from actual fuel savings and recovered steel yield. If your furnace does not achieve the target fuel cut, you owe nothing.',
 
     // Common
     'common.learnMore': 'Learn More',
@@ -272,6 +283,7 @@ export const translations: Record<Language, any> = {
     // Technologies Component
     'tech.badge': 'Our Expertise',
     'tech.title': 'Core Technologies for Furnace Conservation',
+    'tech.subtitle': 'No upfront investment required — we fund 100% of the furnace retrofit.',
     'tech.detail': 'Technical Detail',
     'tech.kpi': 'Key Performance Indicators:',
     'tech.verifiedBadge': 'Officially Verified: The "Extreme Efficiency" Selection',
@@ -355,18 +367,22 @@ export const translations: Record<Language, any> = {
     'process.phase4Desc': 'Intelligent mill-pacing integration for optimized entry temperature.',
 
     // BenefitsSection
-    'benefits.badge': 'Verified Revamp Projects',
-    'benefits.title': 'Proven Results from Reheating Furnace Revamp Projects',
-    'benefits.subtitle': 'Our engineering benchmarks are based on CISA T80 extreme efficiency standards and real-world results from comprehensive furnace revamp projects.',
-    'benefits.card1.label': 'Fuel Consumption',
-    'benefits.card1.desc': 'Typical reduction range in fuel used per ton of steel after comprehensive upgrade.',
-    'benefits.card2.label': 'Oxidation Scale',
-    'benefits.card2.desc': 'Significant reduction in surface oxidation loss during the reheating process.',
-    'benefits.card3.label': 'Yield Improvement',
-    'benefits.card3.desc': 'Overall increase in saleable product through optimized thermal management.',
-    'benefits.card4.label': 'Payback Period',
-    'benefits.card4.desc': 'Typical ROI timeframe under performance-based energy steward contracts.',
-    'benefits.footer.title': "The exact performance depends on each plant's baseline and process, but our projects are engineered to achieve T80-level benchmarks.",
+    'benefits.badge': 'VERIFIED FIELD DATA',
+    'benefits.title': 'Proven Results from Reheating Furnace Modernization',
+    'benefits.subtitle': 'Real-world operational benchmarks across steel rolling mills — zero upfront investment, fully funded by energy performance.',
+    'benefits.card1.range': '7%–15%',
+    'benefits.card1.label': 'Fuel Consumption Cut',
+    'benefits.card1.desc': 'Verified 7% to 15% reduction in natural gas, blast furnace gas, or fuel oil consumption per ton of steel.',
+    'benefits.card2.range': '0.2%–0.5%',
+    'benefits.card2.label': 'Oxidation Scale Reduction',
+    'benefits.card2.desc': 'Cuts high-temperature oxidation burn loss, recovering $1M–$3M per year in prime marketable steel.',
+    'benefits.card3.range': '100+ Lines',
+    'benefits.card3.label': 'Modernized Production Lines',
+    'benefits.card3.desc': '100+ walking beam, walking hearth, and pusher furnaces successfully revamped and verified worldwide.',
+    'benefits.card4.range': '$0 Upfront',
+    'benefits.card4.label': 'Zero-CAPEX Model',
+    'benefits.card4.desc': '100% financed by performance savings — pay strictly from verified fuel reduction with zero balance sheet liability.',
+    'benefits.footer.title': 'Verified Across 100+ Production Lines: Typical 7–15% Fuel Cut & $1M–$3M/Year in Steel Yield Recovery.',
     'benefits.footer.badge': 'EXTREME EFFICIENCY LIST',
     'benefits.footer.standards': 'CISA T80 STANDARDS COMPLIANT',
 
@@ -382,21 +398,29 @@ export const translations: Record<Language, any> = {
     'model.step1.title': 'Assessment & Collection',
     'model.step1.desc': 'Pre-assessment & data collection for reheating furnace and soaking pits baseline establishment.',
     'model.step2.title': 'Technical Solution',
-    'model.step2.desc': 'Full-fiber roof, intelligent reheating, high-emissivity coatings, and advanced controls integration.',
-    'model.step3.title': 'Retrofit & AI Tuning',
-    'model.step3.desc': 'On-site retrofitting, commissioning, and AI-enabled process optimization for maximum efficiency.',
-    'model.step4.title': 'Long-term Steward',
-    'model.step4.desc': 'Continuous maintenance and expert services with shared energy savings as compensation.',
+    'model.step2.desc': 'Customized furnace energy saving project solution tailored to plant operational parameters.',
+    'model.step3.title': 'Zero CAPEX Contract',
+    'model.step3.desc': 'Transparent energy performance contract where investment is repaid from verified energy savings.',
+    'model.step4.title': 'Engineering & Installation',
+    'model.step4.desc': 'Turnkey implementation with minimal downtime, fully coordinated with mill maintenance schedules.',
+    'model.step5.title': 'Stewardship & Measurement',
+    'model.step5.desc': 'Continuous AI optimization and shared fuel savings over the contract lifetime.',
 
-    // SocialProof
-    'proof.badge': 'Industry Recognition',
-    'proof.title': 'Recognized by Leading Steel Industry Bodies',
-    'proof.item1.title': 'T80 Extreme Efficiency Listed',
-    'proof.item1.desc': 'Listed in the 2024 Extreme Energy Efficiency Technologies (T80) of China Iron and Steel Association for full-fiber furnace roof, intelligent reheating, and high-emissivity coatings.',
-    'proof.item2.title': 'Jinnan Steel Demonstration Project',
-    'proof.item2.desc': 'Project launched at JINNAN STEEL GROUP as a green, low-carbon demonstration and high-efficiency resource utilization benchmark.',
-    'proof.doc1': 'T80 Extreme Efficiency Technology Catalogue',
-    'proof.doc2': 'Jinnan Steel Demonstration Site',
+    // Social Proof
+    'proof.badge': 'PROVEN ACROSS INDUSTRY LEADERS',
+    'proof.title': 'Trusted by Leading Steel Manufacturers',
+    'proof.subtitle': 'Our energy steward solutions deliver measurable, certified fuel savings across large-scale steel operations.',
+    'proof.quote': '"Working with EcoReheating helped us reduce reheating furnace gas consumption by 11.2% while improving heating uniformity across billets. Zero CAPEX made the decision immediate."',
+    'proof.author': 'Operations Director',
+    'proof.company': 'Major Integrated Steel Producer',
+    'proof.metric1.val': '300+',
+    'proof.metric1.label': 'Furnace Projects Delivered',
+    'proof.metric2.val': '7-15%',
+    'proof.metric2.label': 'Verified Fuel Savings',
+    'proof.metric3.val': '3',
+    'proof.metric3.label': 'CISA T80 Technologies',
+    'proof.metric4.val': '$0',
+    'proof.metric4.label': 'Upfront Capital Required',
 
     // LogoWall
     'wall.badge': 'Global Partner Network',
@@ -407,23 +431,23 @@ export const translations: Record<Language, any> = {
     'wall.subtitle_4': '>200 Million Tons/Year',
     'wall.footer': 'Including Tier-1 Global technical giants and major regional industry leaders',
 
-    // ContactForm
-    'contact.badge': 'Limited Opportunity',
+    // Contact Form
+    'contact.badge': 'Limited Availability',
     'contact.title': 'Claim Your Free ROI Potential Audit',
-    'contact.desc': 'Find out exactly how much you can save. We provide a comprehensive baseline assessment and ROI projection at no upfront cost.',
+    'contact.desc': 'Find out exactly how much your mill can save. We provide a comprehensive baseline assessment and ROI projection at zero upfront cost.',
     'contact.avail.head': 'Current Availability',
-    'contact.avail.slot': '1 SLOT LEFT',
-    'contact.avail.desc': 'Due to the capital-heavy nature of our model, we only accept 2 new projects per month. 1 slot remaining for ',
-    'contact.feature1.title': 'Data Driven',
-    'contact.feature1.desc': 'Baseline established via actual mill production logs.',
+    'contact.avail.slot': '1 SLOT REMAINING',
+    'contact.avail.desc': 'Due to our capital-intensive model, we onboard only 2 new projects per month. Remaining for ',
+    'contact.feature1.title': 'Data-Driven',
+    'contact.feature1.desc': 'Baseline established from actual plant production logs.',
     'contact.feature2.title': 'Expert Analysis',
     'contact.feature2.desc': 'T80-level engineering review of your process geometry.',
-    'contact.success.title': 'Assessment Requested!',
-    'contact.success.desc': 'Thank you. One of our energy stewards will contact you to collect the necessary production data for the preliminary assessment.',
+    'contact.success.title': 'Audit Requested!',
+    'contact.success.desc': 'Thank you. One of our energy stewards will contact you to gather the necessary operational data for your preliminary assessment.',
     'contact.success.btn': 'Submit another request',
     'contact.form.name': 'Name',
     'contact.form.name_placeholder': 'Your full name',
-    'contact.form.role': 'Role',
+    'contact.form.role': 'Role/Position',
     'contact.form.role_placeholder': 'Select your role...',
     'contact.form.company': 'Company',
     'contact.form.company_placeholder': 'Steel mill / Group name',
@@ -438,7 +462,7 @@ export const translations: Record<Language, any> = {
     'contact.form.furnace_placeholder': 'Select type...',
     'contact.form.message': 'Message (Optional)',
     'contact.form.message_placeholder': 'Specific challenges or process details...',
-    'contact.form.submit': 'Analyze My ROI Now',
+    'contact.form.submit': 'Get a Free Furnace Audit →',
     'contact.form.submitting': 'Analyzing Data...',
     'contact.form.footer_1': 'Join 15+ steel mills already optimized by our T80 technology.',
     'contact.form.footer_2': 'Privacy Guarantee: Your data is protected by MNDA.',
@@ -480,7 +504,7 @@ export const translations: Record<Language, any> = {
   },
   vi: {
     // SEO
-    'seo.home.title': 'Cải Tạo Lò Nung Phôi & Tiết Kiệm Năng Lượng Zero-CAPEX',
+    'seo.home.title': 'Tiết Kiệm Năng Lượng Lò Nung Công Nghiệp — Không CAPEX, Trả Từ Năng Lượng Tiết Kiệm',
     'seo.home.desc': 'Giảm 7-15% tiêu thụ khí đốt lò nung dầm bước không cần vốn đầu tư. Giải pháp cải tạo kỹ thuật chìa khóa trao tay và kiểm toán CBAM cho nhà máy cán thép.',
 
     // Navigation
@@ -517,6 +541,7 @@ export const translations: Record<Language, any> = {
 
     // ROI Calculator
     'calc.title': 'Tính Toán ROI',
+    'calc.subtitle': 'Xem mức tiết kiệm của nhà máy chỉ trong 30 giây',
     'calc.production': 'Sản lượng hàng năm (MTPA)',
     'calc.adjust': 'Điều chỉnh công suất',
     'calc.value': 'Giá trị hàng năm',
@@ -536,16 +561,26 @@ export const translations: Record<Language, any> = {
     'stat.status': 'Trạng thái điều khiển',
     'stat.optimized': 'Tối ưu hóa',
 
-    // Why Choose section
-    'why.title': 'Tại sao chọn Giải pháp Quản gia năng lượng?',
-    'why.p1': 'EcoReheating cung cấp tối ưu hóa lò nung lại Zero CAPEX sử dụng công nghệ được xác thực chuẩn CISA T80 như kiểm soát nhiệt độ trong phạm vi hẹp và mái lò toàn sợi, giúp các nhà máy thép giảm tiêu thụ nhiên liệu 7-15%.',
-    'why.p2': 'Được phát triển bởi South Technology, giải pháp tiên phong ngành này — hiện là tiêu chuẩn quốc gia — tối ưu hóa toàn bộ hành trình nhiệt từ phía ra máy đúc liên tục đến phía ra lò nung lại.',
-    'why.item1.title': 'Tăng tối đa Công suất Gia nhiệt',
-    'why.item1.desc': 'Loại bỏ nghẽn cổ chai trong quy trình gia nhiệt để đảm bảo công suất sản xuất đỉnh cao.',
-    'why.item2.title': 'Tối ưu hóa Quy trình Gia nhiệt',
-    'why.item2.desc': 'AI tiên tiến và mô phỏng quy trình để đạt được đường cong nhiệt chính xác và mức tiêu thụ nhiên liệu tối thiểu.',
-    'why.item3.title': 'Độ tin cậy Không ngừng hoạt động',
-    'why.item3.desc': 'Dịch vụ quản gia chuyên gia dài hạn đảm bảo tuổi thọ thiết bị và hiệu suất ổn định.',
+    // Why Choose section / How It Works
+    'why.badge': 'CÁCH THỨC HOẠT ĐỘNG',
+    'why.title': 'Quy trình 3 bước: Tiết kiệm năng lượng lò nung Zero CAPEX',
+    'why.p1': 'EcoReheating loại bỏ lãng phí nhiên liệu lò nung mà không có rủi ro tài chính ban đầu. Chúng tôi tài trợ và thi công toàn bộ việc cải tạo, thu hồi vốn độc quyền từ mức tiết kiệm nhiên liệu thực tế.',
+    'why.p2': 'Từ kiểm toán cân bằng nhiệt đến lắp đặt trọn gói và điều khiển đốt AI, chúng tôi đảm bảo giảm 7–15% mức tiêu thụ nhiên liệu.',
+    'why.step1.badge': 'Bước 01',
+    'why.step1.title': 'Kiểm toán Nhiệt Ban đầu (Miễn phí)',
+    'why.step1.desc': 'Khảo sát nhiệt toàn diện tại chỗ, tính toán cân bằng nhiệt và phân tích thất thoát nhiên liệu hoàn toàn miễn phí.',
+    'why.step2.badge': 'Bước 02',
+    'why.step2.title': 'Cải tạo Kỹ thuật Trọn gói (0đ Đầu tư Ban đầu)',
+    'why.step2.desc': 'Chúng tôi tài trợ 100% và thực hiện cải tạo — mái sợi toàn phần, điều khiển đốt AI và thu hồi nhiệt thừa trong kỳ bảo trì định kỳ.',
+    'why.step3.badge': 'Bước 03',
+    'why.step3.title': 'Chia sẻ Từ Nhiên Liệu Tiết Kiệm Được',
+    'why.step3.desc': 'Hoàn vốn hoàn toàn từ nhiên liệu tiết kiệm và sản lượng thép thu hồi. Nếu không đạt mục tiêu cam kết, quý nhà máy không phải trả chi phí.',
+    'why.item1.title': '1. Kiểm toán Nhiệt Ban đầu (Miễn phí)',
+    'why.item1.desc': 'Khảo sát nhiệt toàn diện tại chỗ, tính toán cân bằng nhiệt và phân tích thất thoát nhiên liệu hoàn toàn miễn phí.',
+    'why.item2.title': '2. Cải tạo Kỹ thuật Trọn gói (0đ Đầu tư Ban đầu)',
+    'why.item2.desc': 'Chúng tôi tài trợ 100% và thực hiện cải tạo — mái sợi toàn phần, điều khiển đốt AI và thu hồi nhiệt thừa trong kỳ bảo trì định kỳ.',
+    'why.item3.title': '3. Chia sẻ Từ Nhiên Liệu Tiết Kiệm Được',
+    'why.item3.desc': 'Hoàn vốn hoàn toàn từ nhiên liệu tiết kiệm và sản lượng thép thu hồi. Nếu không đạt mục tiêu cam kết, quý nhà máy không phải trả chi phí.',
 
     'case.noteTitle': 'Lưu ý về hiệu suất:',
     'case.noteDesc': 'Hiệu suất chính xác phụ thuộc vào cơ sở và quy trình của từng nhà máy, nhưng dự án được thiết kế và triển khai để đáp ứng hoặc vượt qua các chuẩn mực hiệu suất cấp T80.',
@@ -735,6 +770,7 @@ export const translations: Record<Language, any> = {
     // Technologies Component
     'tech.badge': 'Chuyên môn của Chúng tôi',
     'tech.title': 'Các Công nghệ Cốt lõi cho Tiết kiệm Lò nung',
+    'tech.subtitle': 'Không yêu cầu vốn đầu tư ban đầu — Chúng tôi tài trợ 100% chi phí cải tạo lò.',
     'tech.detail': 'Chi tiết Kỹ thuật',
     'tech.kpi': 'Chỉ số Hiệu suất Chính:',
     'tech.verifiedBadge': 'Đạt chuẩn CISA T80',
@@ -813,18 +849,22 @@ export const translations: Record<Language, any> = {
     'process.phase4Desc': 'Tích hợp nhịp máy cán thông minh để tối ưu hóa nhiệt độ lối vào.',
 
     // BenefitsSection
-    'benefits.badge': 'Hiệu suất Đã được Chứng minh',
-    'benefits.title': 'Kết quả Điển hình từ việc Nâng cấp Lò nung lại cấp T80',
-    'benefits.subtitle': 'Các chuẩn mực của chúng tôi dựa trên danh sách hiệu suất cực cao T80 của Hiệp hội Sắt thép Trung Quốc và kết quả thực tế từ dự án Thép Jinnan.',
-    'benefits.card1.label': 'TIÊU THỤ NHIÊN LIỆU',
-    'benefits.card1.desc': 'Phạm vi giảm điển hình lượng nhiên liệu sử dụng trên mỗi tấn thép sau khi nâng cấp toàn diện.',
-    'benefits.card2.label': 'LỚP VẢY OXIT',
-    'benefits.card2.desc': 'Giảm đáng kể hao hụt lớp vảy oxit bề mặt trong quá trình gia nhiệt lại.',
-    'benefits.card3.label': 'Cải thiện Năng suất',
-    'benefits.card3.desc': 'Tăng tổng thể sản phẩm có thể bán được thông qua quản lý nhiệt tối ưu.',
-    'benefits.card4.label': 'Thời gian Hoàn vốn',
-    'benefits.card4.desc': 'Khung thời gian ROI điển hình theo các hợp đồng quản gia năng lượng dựa trên hiệu suất.',
-    'benefits.footer.title': 'Hiệu suất chính xác phụ thuộc vào cơ sở và quy trình của từng nhà máy, nhưng các dự án của chúng tôi được thiết kế để đạt được các chuẩn mực cấp T80.',
+    'benefits.badge': 'DỮ LIỆU THỰC TẾ ĐÃ XÁC THỰC',
+    'benefits.title': 'Kết quả Điển hình từ việc Hiện đại hóa Lò nung',
+    'benefits.subtitle': 'Hiệu quả thực tế từ các nhà máy cán thép — 0 vốn đầu tư ban đầu, hoàn vốn hoàn toàn từ hiệu quả tiết kiệm nhiên liệu.',
+    'benefits.card1.range': '7%–15%',
+    'benefits.card1.label': 'GIẢM TIÊU THỤ NHIÊN LIỆU',
+    'benefits.card1.desc': 'Phạm vi giảm điển hình 7%–15% lượng khí đốt hoặc dầu FO sử dụng trên mỗi tấn thép sau cải tạo.',
+    'benefits.card2.range': '0.2%–0.5%',
+    'benefits.card2.label': 'GIẢM HAO HỤT CHÁY OXY HÓA',
+    'benefits.card2.desc': 'Giảm tổn thất oxy hóa bề mặt phôi, thu hồi 1–3 triệu USD giá trị thép thành phẩm mỗi năm.',
+    'benefits.card3.range': '100+ Dây Chuyền',
+    'benefits.card3.label': 'DÂY CHUYỀN ĐÃ CẢI TẠO',
+    'benefits.card3.desc': 'Hơn 100 lò dầm bước, đáy bước và lò đẩy đã được cải tạo thành công trên toàn cầu.',
+    'benefits.card4.range': '0đ Đầu Tư',
+    'benefits.card4.label': 'MÔ HÌNH ZERO-CAPEX',
+    'benefits.card4.desc': '100% chi phí được tài trợ từ hiệu quả tiết kiệm — trả từ nhiên liệu tiết kiệm thực tế, không nợ bảng cân đối kế toán.',
+    'benefits.footer.title': 'Kiểm Chứng Trên 100+ Dây Chuyền: Giảm 7–15% Nhiên Liệu & Thu Hồi 1–3 Triệu USD Thép Mỗi Năm.',
     'benefits.footer.badge': 'DANH SÁCH HIỆU SUẤT CỰC CAO',
     'benefits.footer.standards': 'TUÂN THỦ TIÊU CHUẨN CISA T80',
 
@@ -896,7 +936,7 @@ export const translations: Record<Language, any> = {
     'contact.form.furnace_placeholder': 'Chọn loại lò...',
     'contact.form.message': 'Tin nhắn (Không bắt buộc)',
     'contact.form.message_placeholder': 'Thách thức cụ thể hoặc chi tiết quy trình...',
-    'contact.form.submit': 'PHÂN TÍCH ROI CỦA TÔI NGAY',
+    'contact.form.submit': 'Nhận Đánh Giá Kiểm Toán Lò Miễn Phí →',
     'contact.form.submitting': 'Đang Phân tích Dữ liệu...',
     'contact.form.footer_1': 'Tham gia cùng hơn 15 nhà máy thép đã được tối ưu hóa bằng công nghệ T80 của chúng tôi.',
     'contact.form.footer_2': 'Cam kết Bảo mật: Dữ liệu của bạn được bảo vệ bởi MNDA.',
@@ -947,7 +987,7 @@ export const translations: Record<Language, any> = {
 
 const idTranslations = {
   // SEO
-  'seo.home.title': 'Retrofit Tungku Reheating Industri & Hemat Energi Zero-CAPEX',
+  'seo.home.title': 'Hemat Energi Tungku Industri — Zero CAPEX, Bayar dari Penghematan',
   'seo.home.desc': 'Kurangi konsumsi bahan bakar tungku reheating hingga 7-15% tanpa modal awal. Rekayasa tungku walking beam turnkey dan audit kesiapan CBAM untuk pabrik baja.',
 
   // Navigation
@@ -966,6 +1006,51 @@ const idTranslations = {
   'lang.vietnamese': 'Tiếng Việt',
   'lang.indonesian': 'Bahasa Indonesia',
   'lang.portuguese': 'Português (Brasil)',
+
+  // ROI Calculator
+  'calc.subtitle': 'Lihat penghematan pabrik Anda dalam 30 detik',
+
+  // How It Works
+  'why.badge': 'CARA KERJA',
+  'why.title': 'Cara Kerja: 3 Langkah Menuju Hemat Energi Tanpa CAPEX',
+  'why.p1': 'EcoReheating mengatasi pemborosan bahan bakar tungku reheating tanpa risiko neraca keuangan. Kami mendanai dan merekayasa seluruh retrofit, dan pengembalian modal sepenuhnya berasal dari penghematan bahan bakar yang terverifikasi.',
+  'why.p2': 'Dari audit neraca termal hingga pemasangan turnkey dan tata kelola pembakaran AI, kami memberikan jaminan pemotongan bahan bakar 7–15%.',
+  'why.step1.badge': 'Langkah 01',
+  'why.step1.title': 'Audit Termal Baseline (Gratis)',
+  'why.step1.desc': 'Inspeksi teknis di lokasi, perhitungan neraca panas, dan analisis kesenjangan kehilangan bahan bakar tanpa biaya apa pun.',
+  'why.step2.badge': 'Langkah 02',
+  'why.step2.title': 'Retrofit Rekayasa Turnkey ($0 CAPEX Awal)',
+  'why.step2.desc': 'Kami mendanai dan melaksanakan retrofit secara penuh — atap full-fiber, kontrol pembakaran AI, dan pemulihan panas terbuang selama pemeliharaan terjadwal.',
+  'why.step3.badge': 'Langkah 03',
+  'why.step3.title': 'Bayar dari Penghematan Bahan Bakar Terverifikasi',
+  'why.step3.desc': 'Pelunasan hanya dari penghematan bahan bakar aktual dan hasil baja yang diselamatkan. Jika tungku Anda tidak mencapai target penghematan, Anda tidak membayar apa pun.',
+  'why.item1.title': '1. Audit Termal Baseline (Gratis)',
+  'why.item1.desc': 'Inspeksi teknis di lokasi, perhitungan neraca panas, dan analisis kesenjangan kehilangan bahan bakar tanpa biaya apa pun.',
+  'why.item2.title': '2. Retrofit Rekayasa Turnkey ($0 CAPEX Awal)',
+  'why.item2.desc': 'Kami mendanai dan melaksanakan retrofit secara penuh — atap full-fiber, kontrol pembakaran AI, dan pemulihan panas terbuang selama pemeliharaan terjadwal.',
+  'why.item3.title': '3. Bayar dari Penghematan Bahan Bakar Terverifikasi',
+  'why.item3.desc': 'Pelunasan hanya dari penghematan bahan bakar aktual dan hasil baja yang diselamatkan. Jika tungku Anda tidak mencapai target penghematan, Anda tidak membayar apa pun.',
+
+  // Technologies
+  'tech.subtitle': 'Tidak memerlukan modal awal — kami mendanai 100% retrofit tungku.',
+
+  // Benefits
+  'benefits.badge': 'DATA LAPANGAN TERVERIFIKASI',
+  'benefits.title': 'Hasil Terbukti dari Modernisasi Tungku Reheating',
+  'benefits.subtitle': 'Tolok ukur operasional nyata di seluruh pabrik penggilingan baja — tanpa investasi awal, didanai penuh dari kinerja energi.',
+  'benefits.card1.range': '7%–15%',
+  'benefits.card1.label': 'PENGURANGAN BAHAN BAKAR',
+  'benefits.card1.desc': 'Penurunan terverifikasi 7% hingga 15% dalam konsumsi gas alam, gas buang tanur tiup, atau minyak bahan bakar per ton baja.',
+  'benefits.card2.range': '0.2%–0.5%',
+  'benefits.card2.label': 'PENGURANGAN KERAK OKSIDASI',
+  'benefits.card2.desc': 'Memangkas kehilangan bakar oksidasi suhu tinggi, memulihkan $1M–$3M per tahun dalam produk baja prima.',
+  'benefits.card3.range': '100+ Lini',
+  'benefits.card3.label': 'LINI PRODUKSI DIMODERNISASI',
+  'benefits.card3.desc': '100+ tungku walking beam, walking hearth, dan pusher berhasil dirombak dan terverifikasi di seluruh dunia.',
+  'benefits.card4.range': '$0 di Awal',
+  'benefits.card4.label': 'MODEL ZERO-CAPEX',
+  'benefits.card4.desc': '100% didanai dari penghematan kinerja — bayar murni dari pengurangan bahan bakar terverifikasi tanpa kewajiban neraca.',
+  'benefits.footer.title': 'Terbukti di 100+ Lini Produksi: Pengurangan 7–15% Bahan Bakar & Pemulihan Hasil Baja $1M–$3M/Tahun.',
 
   // ContactForm
   'contact.badge': 'Kesempatan Terbatas',
@@ -998,7 +1083,7 @@ const idTranslations = {
   'contact.form.furnace_placeholder': 'Pilih jenis...',
   'contact.form.message': 'Pesan (Opsional)',
   'contact.form.message_placeholder': 'Tantangan khusus atau detail proses...',
-  'contact.form.submit': 'Analisis ROI Saya Sekarang',
+  'contact.form.submit': 'Dapatkan Audit Tungku Gratis →',
   'contact.form.submitting': 'Menganalisis Data...',
   'contact.form.footer_1': 'Bergabunglah dengan 15+ pabrik baja yang telah dioptimalkan oleh teknologi T80 kami.',
   'contact.form.footer_2': 'Jaminan Privasi: Data Anda dilindungi oleh MNDA.',
@@ -1023,7 +1108,7 @@ const idTranslations = {
 
 const ptBrTranslations = {
   // SEO
-  'seo.home.title': 'Reforma de Forno de Reaquecimento Industrial & Zero-CAPEX',
+  'seo.home.title': 'Economia de Energia em Fornos Industriais — Zero CAPEX, Pague com a Economia',
   'seo.home.desc': 'Reduza o consumo de combustível em fornos de reaquecimento em 7-15% sem investimento inicial. Soluções turnkey de engenharia e adequação CBAM para laminação de aço.',
 
   // Navigation
@@ -1042,6 +1127,51 @@ const ptBrTranslations = {
   'lang.vietnamese': 'Tiếng Việt',
   'lang.indonesian': 'Bahasa Indonesia',
   'lang.portuguese': 'Português (Brasil)',
+
+  // ROI Calculator
+  'calc.subtitle': 'Veja a economia da sua usina em 30 segundos',
+
+  // How It Works
+  'why.badge': 'COMO FUNCIONA',
+  'why.title': 'Como Funciona: 3 Etapas para Economia no Forno com Zero CAPEX',
+  'why.p1': 'A EcoReheating elimina o desperdício de combustível sem risco financeiro inicial. Financiamos e executamos toda a modernização, recuperando o investimento exclusivamente através da economia de combustível comprovada.',
+  'why.p2': 'Da auditoria de balanço térmico à instalação turnkey e gestão de combustão por IA, entregamos uma redução garantida de 7–15% no combustível.',
+  'why.step1.badge': 'Etapa 01',
+  'why.step1.title': 'Auditoria Térmica Inicial (Gratuita)',
+  'why.step1.desc': 'Inspeção técnica completa no local, cálculo de balanço térmico e análise de perdas de combustível sem custo ou compromisso.',
+  'why.step2.badge': 'Etapa 02',
+  'why.step2.title': 'Modernização Turnkey (Zero CAPEX Inicial)',
+  'why.step2.desc': 'Financiamos e implementamos 100% da reforma — teto de fibra cerâmica, controles de combustão por IA e recuperação de calor.',
+  'why.step3.badge': 'Etapa 03',
+  'why.step3.title': 'Pague com a Economia de Combustível Comprovada',
+  'why.step3.desc': 'Reembolso estritamente baseado no combustível economizado e no rendimento de aço recuperado. Sem economia, sem custo.',
+  'why.item1.title': '1. Auditoria Térmica Inicial (Gratuita)',
+  'why.item1.desc': 'Inspeção técnica completa no local, cálculo de balanço térmico e análise de perdas de combustível sem custo ou compromisso.',
+  'why.item2.title': '2. Modernização Turnkey (Zero CAPEX Inicial)',
+  'why.item2.desc': 'Financiamos e implementamos 100% da reforma — teto de fibra cerâmica, controles de combustão por IA e recuperação de calor.',
+  'why.item3.title': '3. Pague com a Economia de Combustível Comprovada',
+  'why.item3.desc': 'Reembolso estritamente baseado no combustível economizado e no rendimento de aço recuperado. Sem economia, sem custo.',
+
+  // Technologies
+  'tech.subtitle': 'Sem investimento inicial necessário — financiamos 100% da modernização.',
+
+  // Benefits
+  'benefits.badge': 'DADOS DE CAMPO COMPROVADOS',
+  'benefits.title': 'Resultados Comprovados da Modernização de Fornos de Reaquecimento',
+  'benefits.subtitle': 'Parâmetros operacionais reais em usinas de laminação de aço — sem investimento inicial, 100% financiado pelo desempenho energético.',
+  'benefits.card1.range': '7%–15%',
+  'benefits.card1.label': 'CORTE NO CONSUMO DE COMBUSTÍVEL',
+  'benefits.card1.desc': 'Redução comprovada de 7% a 15% no consumo de gás natural ou óleo combustível por tonelada de aço.',
+  'benefits.card2.range': '0.2%–0.5%',
+  'benefits.card2.label': 'REDUÇÃO DE PERDA POR OXIDAÇÃO (CAREPA)',
+  'benefits.card2.desc': 'Diminui a queima por oxidação em alta temperatura, recuperando $1M–$3M por ano em aço de alta qualidade.',
+  'benefits.card3.range': '100+ Linhas',
+  'benefits.card3.label': 'LINHAS DE PRODUÇÃO MODERNIZADAS',
+  'benefits.card3.desc': 'Mais de 100 fornos walking beam, walking hearth e pusher reformados com sucesso no mundo todo.',
+  'benefits.card4.range': '$0 Inicial',
+  'benefits.card4.label': 'MODELO ZERO-CAPEX',
+  'benefits.card4.desc': '100% financiado pela economia de desempenho — pague apenas pelo combustível economizado, sem endividamento.',
+  'benefits.footer.title': 'Comprovado em 100+ Linhas de Produção: Corte de 7–15% no Combustível e Recuperação de $1M–$3M/Ano em Aço.',
 
   // ContactForm
   'contact.badge': 'Oportunidade Limitada',
@@ -1074,7 +1204,7 @@ const ptBrTranslations = {
   'contact.form.furnace_placeholder': 'Selecione o tipo...',
   'contact.form.message': 'Mensagem (Opcional)',
   'contact.form.message_placeholder': 'Desafios específicos ou detalhes do processo...',
-  'contact.form.submit': 'Analisar meu ROI Agora',
+  'contact.form.submit': 'Solicitar Auditoria de Forno Gratuita →',
   'contact.form.submitting': 'Analisando Dados...',
   'contact.form.footer_1': 'Junte-se a mais de 15 usinas siderúrgicas já otimizadas por nossa tecnologia T80.',
   'contact.form.footer_2': 'Garantia de Privacidade: Seus dados estão protegidos por MNDA.',

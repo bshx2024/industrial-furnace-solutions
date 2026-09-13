@@ -1,5 +1,5 @@
 import React from 'react';
-import { Percent, TrendingDown, Clock, BarChart3, ArrowRight } from 'lucide-react';
+import { TrendingDown, Percent, Factory, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -8,7 +8,7 @@ const BenefitCard: React.FC<{ icon: React.ReactNode; range: string; label: strin
         <div className="mb-6 p-4 rounded-full bg-slate-50 text-furnace-600 group-hover:bg-furnace-600 group-hover:text-white transition-colors">
             {icon}
         </div>
-        <div className="text-4xl font-heading font-black text-industrial-950 mb-2">
+        <div className="text-3xl lg:text-4xl font-heading font-black text-industrial-950 mb-2 tracking-tight">
             {range}
         </div>
         <div className="text-furnace-600 font-bold uppercase tracking-widest text-xs mb-4">
@@ -28,10 +28,10 @@ const BenefitsSection: React.FC = () => {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <span className="text-furnace-600 font-black tracking-[0.3em] uppercase text-xs mb-4 block">{t('benefits.badge')}</span>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-8">
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-6">
                         {t('benefits.title')}
                     </h2>
-                    <p className="text-gray-500 text-lg">
+                    <p className="text-gray-600 text-lg">
                         {t('benefits.subtitle')}
                     </p>
                 </div>
@@ -39,25 +39,25 @@ const BenefitsSection: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <BenefitCard
                         icon={<TrendingDown size={32} />}
-                        range={`${language === 'vi' ? 'GIẢM ' : ''}7-15%`}
+                        range={t('benefits.card1.range')}
                         label={t('benefits.card1.label')}
                         description={t('benefits.card1.desc')}
                     />
                     <BenefitCard
                         icon={<Percent size={32} />}
-                        range={`${language === 'vi' ? 'GIẢM ' : ''}5-15%`}
+                        range={t('benefits.card2.range')}
                         label={t('benefits.card2.label')}
                         description={t('benefits.card2.desc')}
                     />
                     <BenefitCard
-                        icon={<BarChart3 size={32} />}
-                        range="0.1-0.3%"
+                        icon={<Factory size={32} />}
+                        range={t('benefits.card3.range')}
                         label={t('benefits.card3.label')}
                         description={t('benefits.card3.desc')}
                     />
                     <BenefitCard
-                        icon={<Clock size={32} />}
-                        range="1-2 Years"
+                        icon={<ShieldCheck size={32} />}
+                        range={t('benefits.card4.range')}
                         label={t('benefits.card4.label')}
                         description={t('benefits.card4.desc')}
                     />
@@ -65,7 +65,7 @@ const BenefitsSection: React.FC = () => {
 
                 <div className="mt-16 p-8 rounded-2xl bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="max-w-xl">
-                        <h3 className="text-2xl font-heading font-bold mb-2 italic">{t('benefits.footer.title')}</h3>
+                        <h3 className="text-2xl font-heading font-bold mb-2 italic leading-snug">{t('benefits.footer.title')}</h3>
                         <p className="text-gray-400 text-sm">
                             {language === 'vi'
                                 ? 'Định lượng mức tiết kiệm nhiên liệu tiềm năng và giảm phát thải CBAM trực tuyến bằng công cụ phân tích nhiệt.'

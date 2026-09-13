@@ -94,9 +94,12 @@ const Technologies: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-furnace-600 font-bold tracking-widest uppercase text-sm mb-2 block">{t('tech.badge')}</span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-industrial-900 mb-4">
             {t('tech.title')}
           </h2>
+          <p className="text-lg text-gray-600 font-medium max-w-2xl mx-auto">
+            {t('tech.subtitle')}
+          </p>
         </div>
 
         <div className="divide-y divide-gray-100">

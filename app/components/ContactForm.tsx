@@ -392,11 +392,9 @@ const ContactForm: React.FC = () => {
                 <button
                   type="submit"
                   disabled={formState === 'submitting'}
-                  className={`w-full bg-furnace-600 text-white font-bold text-lg py-5 rounded-xl uppercase tracking-widest hover:bg-furnace-700 transition-all shadow-xl flex items-center justify-center gap-3 ${formState === 'submitting' ? 'opacity-75 cursor-wait' : ''}`}
+                  className={`w-full bg-furnace-600 text-white font-bold text-lg py-5 rounded-xl uppercase tracking-widest hover:bg-furnace-700 transition-all shadow-xl flex items-center justify-center gap-3 active:scale-[0.99] ${formState === 'submitting' ? 'opacity-75 cursor-wait' : ''}`}
                 >
-                  {formState === 'submitting' ? t('contact.form.submitting') : (
-                    <>{t('contact.form.submit')} <Send size={20} /></>
-                  )}
+                  {formState === 'submitting' ? t('contact.form.submitting') : t('contact.form.submit')}
                 </button>
 
                 <div className="mt-8 pt-6 border-t border-slate-100 text-center">
