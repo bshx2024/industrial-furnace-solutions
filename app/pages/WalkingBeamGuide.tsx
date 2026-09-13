@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
-import { Flame, Calculator, ShieldCheck, ArrowRight, CheckCircle2, Wrench, Layers, HelpCircle, Activity, BarChart3, Settings, ShieldAlert } from 'lucide-react';
+import { Flame, Calculator, ShieldCheck, ArrowRight, CheckCircle2, Wrench, Layers, HelpCircle, Activity, BarChart3, Settings, ShieldAlert, BookOpen } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
     const title = "Walking Beam Furnace Revamping & Retrofit | EcoReheating";
@@ -360,6 +360,58 @@ const WalkingBeamGuide: React.FC = () => {
                                 <h4 className="font-semibold text-white mb-2">Q: What are furnace revamping solutions under the zero CAPEX model?</h4>
                                 <p className="text-sm text-slate-400">A: Furnace revamping solutions under the zero CAPEX model allow steel mills to execute turnkey walking beam upgrades with $0 upfront investment. The engineering provider finances all hardware, materials, and labor, recovering capital solely through a verified share of monthly fuel and scale savings.</p>
                             </div>
+                        </div>
+                    </section>
+
+                    {/* Related Engineering Deep Dives & Topic Cluster */}
+                    <section className="border-t border-slate-800 pt-10 my-10">
+                        <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <BookOpen className="text-furnace-500" size={20} />
+                            Related Rolling Mill & Thermal Engineering Guides
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <Link
+                                to="/blog/hot-rolling-mill-energy-efficiency"
+                                className="p-5 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-furnace-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-xs uppercase font-bold tracking-wider text-furnace-400 block mb-1">
+                                    Mill-Wide Energy Guide
+                                </span>
+                                <h4 className="text-sm font-bold text-white group-hover:text-furnace-400 transition-colors">
+                                    Hot Rolling Mill Energy Efficiency →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-2 line-clamp-3">
+                                    Comprehensive guide covering scale loss reduction, mill pacing synchronization, and finishing stand power optimization.
+                                </p>
+                            </Link>
+                            <Link
+                                to="/blog/energy-efficiency-for-indonesian-steel-rolling-mills-reheating-furnace-audit-and-roi"
+                                className="p-5 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-furnace-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-xs uppercase font-bold tracking-wider text-furnace-400 block mb-1">
+                                    On-Site Field Audit
+                                </span>
+                                <h4 className="text-sm font-bold text-white group-hover:text-furnace-400 transition-colors">
+                                    Reheating Furnace Audit in Indonesia →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-2 line-clamp-3">
+                                    Field audit methodologies, thermal loss mapping, and zero-CAPEX retrofitting for Cilegon and Surabaya rolling lines.
+                                </p>
+                            </Link>
+                            <Link
+                                to="/blog/reheating-furnace-fuel-saving-guide"
+                                className="p-5 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-furnace-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-xs uppercase font-bold tracking-wider text-furnace-400 block mb-1">
+                                    Fuel Saving Guide
+                                </span>
+                                <h4 className="text-sm font-bold text-white group-hover:text-furnace-400 transition-colors">
+                                    Reheating Furnace Fuel Saving Guide →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-2 line-clamp-3">
+                                    Tactical interventions to cut gas consumption by 15-20% through oxygen trim, recuperators, and fiber linings.
+                                </p>
+                            </Link>
                         </div>
                     </section>
                 </div>
