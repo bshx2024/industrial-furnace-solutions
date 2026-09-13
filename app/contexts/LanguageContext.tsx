@@ -49,7 +49,7 @@ export const translations: Record<Language, any> = {
     'hero.summerAlert': 'URGENT: EVN Decision 963 Impact - High Peak Prices are here. Optimize now.',
     'hero.summerCta': 'Summer Survival Roadmap',
     'hero.btnRoi': 'Get Free ROI Audit',
-    'hero.btnCases': 'View Case Studies',
+    'hero.btnCases': 'View Revamp Projects',
 
     // ROI Calculator
     'calc.title': 'ROI Calculator',
@@ -355,9 +355,9 @@ export const translations: Record<Language, any> = {
     'process.phase4Desc': 'Intelligent mill-pacing integration for optimized entry temperature.',
 
     // BenefitsSection
-    'benefits.badge': 'Proven Performance',
-    'benefits.title': 'Typical Results from T80-level Reheating Furnace Upgrades',
-    'benefits.subtitle': 'Our benchmarks are based on the China Iron and Steel Association T80 extreme efficiency list and real-world results from the Jinnan Steel project.',
+    'benefits.badge': 'Verified Revamp Projects',
+    'benefits.title': 'Proven Results from Reheating Furnace Revamp Projects',
+    'benefits.subtitle': 'Our engineering benchmarks are based on CISA T80 extreme efficiency standards and real-world results from comprehensive furnace revamp projects.',
     'benefits.card1.label': 'Fuel Consumption',
     'benefits.card1.desc': 'Typical reduction range in fuel used per ton of steel after comprehensive upgrade.',
     'benefits.card2.label': 'Oxidation Scale',
@@ -371,11 +371,11 @@ export const translations: Record<Language, any> = {
     'benefits.footer.standards': 'CISA T80 STANDARDS COMPLIANT',
 
     // BusinessModel
-    'model.badge': 'Our Model',
-    'model.title': 'The Shared Savings Model',
-    'model.subtitle': 'Contract Energy Management (CEM)',
+    'model.badge': 'Zero CAPEX Model',
+    'model.title': 'Zero CAPEX Model for Reheating Furnace Retrofits',
+    'model.subtitle': 'Energy Performance Contracting (EMC) & Energy Steward Program',
     'model.quote': '"Performance First. Payment Second." A win-win philosophy proven across over 300 production lines.',
-    'model.desc': 'We eliminate CAPEX barriers. SOUTH TECHNOLOGY invests in the technology and equipment; we share the value created by verified fuel savings.',
+    'model.desc': 'What is the Zero CAPEX model? We eliminate upfront investment barriers completely. EcoReheating invests 100% upfront in equipment, engineering, and AI combustion tuning; compensation is funded entirely by verified fuel savings.',
     'model.check1': 'Zero Initial Investment',
     'model.check2': 'Performance-Based Sharing',
     'model.check3': 'Turnkey Energy Stewardship',

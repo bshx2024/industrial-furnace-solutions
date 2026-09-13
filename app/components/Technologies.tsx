@@ -212,9 +212,9 @@ const Technologies: React.FC = () => {
                       <span className="font-heading font-black text-white text-lg">47</span>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
+                      <h3 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
                         {t('tech.item47Title')}
-                      </h4>
+                      </h3>
                       <p className="text-gray-500 text-sm leading-relaxed">
                         <span className="text-furnace-600 font-bold uppercase text-[10px] tracking-wider block mb-1">Benefit</span>
                         {t('tech.item47Benefit')}
@@ -229,9 +229,9 @@ const Technologies: React.FC = () => {
                       <span className="font-heading font-black text-white text-lg">51</span>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
+                      <h3 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
                         {t('tech.item51Title')}
-                      </h4>
+                      </h3>
                       <p className="text-gray-500 text-sm leading-relaxed">
                         <span className="text-furnace-600 font-bold uppercase text-[10px] tracking-wider block mb-1">Benefit</span>
                         {t('tech.item51Benefit')}
@@ -246,9 +246,9 @@ const Technologies: React.FC = () => {
                       <span className="font-heading font-black text-white text-lg">52</span>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
+                      <h3 className="text-industrial-900 font-heading font-bold text-xl leading-tight text-furnace-600 underline underline-offset-4 decoration-furnace-200">
                         {t('tech.item52Title')}
-                      </h4>
+                      </h3>
                       <p className="text-gray-500 text-sm leading-relaxed">
                         <span className="text-furnace-600 font-bold uppercase text-[10px] tracking-wider block mb-1">Benefit</span>
                         {t('tech.item52Benefit')}
