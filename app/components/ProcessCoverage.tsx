@@ -39,19 +39,19 @@ const ProcessCoverage: React.FC = () => {
 
                 <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <h4 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase1')}</h4>
+                        <h3 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase1')}</h3>
                         <p className="text-sm text-gray-300">{t('process.phase1Desc')}</p>
                     </div>
                     <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <h4 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase2')}</h4>
+                        <h3 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase2')}</h3>
                         <p className="text-sm text-gray-300">{t('process.phase2Desc')}</p>
                     </div>
                     <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <h4 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase3')}</h4>
+                        <h3 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase3')}</h3>
                         <p className="text-sm text-gray-300">{t('process.phase3Desc')}</p>
                     </div>
                     <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <h4 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase4')}</h4>
+                        <h3 className="text-furnace-400 font-bold mb-3 uppercase tracking-widest text-xs">{t('process.phase4')}</h3>
                         <p className="text-sm text-gray-300">{t('process.phase4Desc')}</p>
                     </div>
                 </div>

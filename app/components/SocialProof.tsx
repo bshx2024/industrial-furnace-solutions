@@ -23,7 +23,7 @@ const SocialProof: React.FC = () => {
                 <Award size={32} />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">{t('proof.item1.title')}</h4>
+                <h3 className="text-xl font-bold mb-2">{t('proof.item1.title')}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {t('proof.item1.desc')}
                 </p>
@@ -35,7 +35,7 @@ const SocialProof: React.FC = () => {
                 <CheckCircle size={32} />
               </div>
               <div>
-                <h4 className="text-xl font-bold mb-2">{t('proof.item2.title')}</h4>
+                <h3 className="text-xl font-bold mb-2">{t('proof.item2.title')}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {t('proof.item2.desc')}
                 </p>

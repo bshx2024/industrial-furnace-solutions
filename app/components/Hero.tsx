@@ -114,10 +114,10 @@ const Hero: React.FC = () => {
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <Calculator size={80} className="text-white" />
             </div>
-            <h3 className="text-xl font-heading font-bold text-white mb-8 flex items-center gap-3">
+            <h2 className="text-xl font-heading font-bold text-white mb-8 flex items-center gap-3">
               <span className="w-1 h-6 bg-furnace-500 rounded-full"></span>
               {t('calc.title')}
-            </h3>
+            </h2>
 
             <div className="space-y-10">
               <div>
