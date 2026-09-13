@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">{t('nav.solutions')}</h4>
+            <p className="text-white font-bold uppercase tracking-widest text-xs mb-6">{t('nav.solutions')}</p>
             <ul className="space-y-4 text-sm">
               <li><Link to={l('/')} className="hover:text-furnace-500 transition-colors">{t('nav.home')}</Link></li>
               <li><Link to={l('/solutions')} className="hover:text-furnace-500 transition-colors">{t('nav.solutions')}</Link></li>
@@ -41,12 +41,12 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
+            <p className="text-white font-bold uppercase tracking-widest text-xs mb-6">
               {language === 'vi' ? 'Kỹ thuật & Công cụ' : 
                language === 'id' ? 'Rekayasa & Alat' : 
                language === 'pt-br' ? 'Engenharia & Ferramentas' : 
                'Engineering & Tools'}
-            </h4>
+            </p>
             <ul className="space-y-4 text-sm">
               <li>
                 <Link to={l('/furnaces/walking-beam-reheating-furnace')} className="hover:text-furnace-500 transition-colors">
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">{t('common.contactUs')}</h4>
+            <p className="text-white font-bold uppercase tracking-widest text-xs mb-6">{t('common.contactUs')}</p>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-furnace-500" />

@@ -82,7 +82,8 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     const pageUrl = `https://www.ecoreheating.com/blog/${data.post.slug}`;
     const fullImageUrl = data.post.image.startsWith('http') ? data.post.image : `https://www.ecoreheating.com${data.post.image}`;
-    const fullTitle = `${data.post.title} | EcoReheating`;
+    const cleanTitle = data.post.title.replace(/\s*\|\s*EcoReheating.*$/i, '').trim();
+    const fullTitle = `${cleanTitle} | EcoReheating`;
 
     const metaTags: any[] = [
         { title: fullTitle },
@@ -299,19 +300,19 @@ export default function BlogDetail() {
                 {/* FAQ Section */}
                 {post.faq && post.faq.length > 0 && (
                     <section className="mt-16 border-t border-zinc-800 pt-12">
-                        <h3 className="text-2xl font-bold text-white mb-8 uppercase font-oswald tracking-wider">
+                        <h2 className="text-2xl font-bold text-white mb-8 uppercase font-oswald tracking-wider border-l-4 border-orange-500 pl-4">
                             {t.faqTitle}
-                        </h3>
+                        </h2>
                         <div className="space-y-6">
                             {post.faq.map((item, idx) => (
                                 <div 
                                     key={idx} 
                                     className="p-6 bg-zinc-900/30 border border-zinc-800/80 rounded-xl hover:border-zinc-700/50 transition-all"
                                 >
-                                    <h4 className="text-lg font-semibold text-white mb-3 flex gap-3 items-start">
+                                    <h3 className="text-lg font-semibold text-white mb-3 flex gap-3 items-start">
                                         <span className="text-orange-500 font-bold font-oswald">Q.</span>
                                         {item.question}
-                                    </h4>
+                                    </h3>
                                     <p className="text-zinc-400 leading-relaxed text-sm md:text-base pl-6">
                                         {item.answer}
                                     </p>
@@ -328,7 +329,7 @@ export default function BlogDetail() {
                             {post.author.charAt(0)}
                         </div>
                         <div className="flex-1 text-center md:text-left">
-                            <h4 className="text-white font-bold text-xl mb-1">{post.author}</h4>
+                            <p className="text-white font-bold text-xl mb-1">{post.author}</p>
                             {post.authorTitle && <p className="text-orange-500 text-sm font-medium uppercase tracking-wider mb-4">{post.authorTitle}</p>}
                             <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
                                 {post.authorBio}
@@ -339,7 +340,7 @@ export default function BlogDetail() {
 
                 {/* CTA Section */}
                 <div className="mt-16 p-8 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg text-center shadow-xl">
-                    <h3 className="text-2xl font-bold text-white mb-4 uppercase font-oswald">{t.ctaTitle}</h3>
+                    <div className="text-2xl font-bold text-white mb-4 uppercase font-oswald">{t.ctaTitle}</div>
                     <p className="text-orange-50/90 mb-8 max-w-xl mx-auto">{t.ctaDesc}</p>
                     <Link
                         to={lang === "en" ? "/#assessment" : `/${lang}/#assessment`}
@@ -363,9 +364,9 @@ export default function BlogDetail() {
                 {/* Related Posts */}
                 {relatedPosts.length > 0 && (
                     <section className="mt-16">
-                        <h3 className="text-2xl font-bold text-white mb-8 border-b border-zinc-800 pb-4 uppercase font-oswald tracking-wider">
+                        <h2 className="text-2xl font-bold text-white mb-8 border-b border-zinc-800 pb-4 uppercase font-oswald tracking-wider border-l-4 border-orange-500 pl-4">
                             {t.relatedTitle}
-                        </h3>
+                        </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {relatedPosts.map(p => (
                                 <Link
@@ -373,9 +374,9 @@ export default function BlogDetail() {
                                     to={lang === "en" ? `/blog/${p.slug}` : `/${lang}/blog/${p.slug}`}
                                     className="group bg-zinc-900/50 border border-zinc-800 p-4 rounded-lg hover:border-orange-600/50 transition-colors"
                                 >
-                                    <h4 className="text-white font-bold group-hover:text-orange-500 transition-colors line-clamp-2 mb-2">
+                                    <h3 className="text-white font-bold group-hover:text-orange-500 transition-colors line-clamp-2 mb-2">
                                         {p.title}
-                                    </h4>
+                                    </h3>
                                     <div className="text-zinc-500 text-xs">{p.date}</div>
                                 </Link>
                             ))}

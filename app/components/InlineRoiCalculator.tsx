@@ -108,7 +108,7 @@ const InlineRoiCalculator: React.FC<InlineRoiCalculatorProps> = ({ language, slu
             <Flame size={20} />
           </div>
           <div>
-            <h4 className="text-lg font-bold text-white font-oswald uppercase tracking-wider">{currentT.title}</h4>
+            <div className="text-lg font-bold text-white font-oswald uppercase tracking-wider">{currentT.title}</div>
             <p className="text-xs text-zinc-400">{currentT.subtitle}</p>
           </div>
         </div>
