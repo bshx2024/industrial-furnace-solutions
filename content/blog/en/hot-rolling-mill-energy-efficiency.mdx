@@ -70,6 +70,18 @@ Simultaneously, applying nano-ceramic **high-emissivity coatings** onto furnace 
 ### Closed-Loop AI Combustion Control
 Fluctuating gas calorific values and ambient draft changes lead to excess oxygen in the furnace atmosphere, driving up gas usage and increasing oxidation scale formation. Implementing AI-driven dynamic combustion control keeps the air-fuel equivalence ratio within a tight stoichiometric window, saving **3% to 6% in fuel** while preventing product scale loss.
 
+### Mitigating Oxidation Scale Loss (氧化烧损) & Maximizing Billet Yield
+In steel hot rolling mills, thermal efficiency and material yield are intrinsically linked. High furnace temperatures (>1,150°C), excess free oxygen in the combustion chamber, and extended residence times cause surface steel to oxidize into iron oxides (FeO, Fe₃O₄, Fe₂O₃), resulting in severe **oxidation scale loss**:
+* **The Economic Toll:** Typical unoptimized mills lose **1.5% to 2.5% of total steel throughput** to oxidation scale. On a 1,000,000-tonne-per-year hot rolling line, reducing scale loss by just **0.5%** preserves **5,000 tonnes of prime billet steel annually**—delivering over **$3,000,000 USD** in direct recovered margin.
+* **Low-Oxygen Soaking Atmosphere:** By deploying precision continuous ZrO₂ flue oxygen sensors and modulating burner air-fuel ratios in the soaking zone down to stoichiometric equilibrium (&lt; 1.5% excess O₂), the rate of oxidation is suppressed by up to 35%.
+* **Dual Benefit for Descaling & Roll Wear:** Thinner, uniform primary scale requires lower hydraulic descaling pressure, reducing descaling motor electricity and minimizing abrasive mechanical wear on roughing and intermediate rolls.
+
+### Mill Pacing & Billet Extraction Rhythm (轧机节奏与炉机协同)
+One of the largest hidden drivers of energy waste in hot rolling mills is the synchronization disconnect between the reheating furnace and the rolling line:
+* **The Delay Penalty:** When micro-stoppages occur downstream (such as sizing changes, inter-stand cobbles, or guide adjustments), billets sit stationary in the high-heat soaking zone. Prolonged holding causes specific fuel consumption (SFC) to spike and creates deep surface decarburization and excessive scale buildup.
+* **Dynamic Mill Pacing Automation:** Modern hot rolling mill energy efficiency architectures deploy closed-loop **mill pacing algorithms**. The automation system continuously monitors roll stand cycle times, bar travel velocities, and rougher entry schedules, dynamically commanding the walking beam extraction mechanism.
+* **Automated Delay Holding Modes:** If mill rhythm telemetry indicates a delay exceeding 180 seconds, the furnace control system automatically ramps down burner firing in the preheat and heating zones while throttling stack dampers. This maintains core billet temperature at rolling threshold without burning excess fuel or over-scaling billet surfaces.
+
 ---
 
 ## 3. Area 2: High-Pressure Hydraulic Descaling Power Optimization
