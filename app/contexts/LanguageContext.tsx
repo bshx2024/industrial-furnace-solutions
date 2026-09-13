@@ -16,7 +16,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations: Record<Language, any> = {
   en: {
     // SEO
-    'seo.home.title': 'Industrial Furnace Energy Savings — Zero CAPEX, Pay From Savings',
+    'seo.home.title': 'Reheating Furnace Energy Savings: Zero CAPEX',
     'seo.home.desc': 'Cut steel reheating furnace fuel use by 7-15% with zero CAPEX. CISA T80 walking beam retrofits, AI combustion control, and turnkey industrial EPC solutions.',
 
     // Navigation
@@ -504,7 +504,7 @@ export const translations: Record<Language, any> = {
   },
   vi: {
     // SEO
-    'seo.home.title': 'Tiết Kiệm Năng Lượng Lò Nung Công Nghiệp — Không CAPEX, Trả Từ Năng Lượng Tiết Kiệm',
+    'seo.home.title': 'Tiết Kiệm Năng Lượng Lò Nung Phôi: Zero CAPEX',
     'seo.home.desc': 'Giảm 7-15% tiêu thụ khí đốt lò nung dầm bước không cần vốn đầu tư. Giải pháp cải tạo kỹ thuật chìa khóa trao tay và kiểm toán CBAM cho nhà máy cán thép.',
 
     // Navigation
@@ -987,7 +987,7 @@ export const translations: Record<Language, any> = {
 
 const idTranslations = {
   // SEO
-  'seo.home.title': 'Hemat Energi Tungku Industri — Zero CAPEX, Bayar dari Penghematan',
+  'seo.home.title': 'Hemat Energi Tungku Reheating: Zero CAPEX',
   'seo.home.desc': 'Kurangi konsumsi bahan bakar tungku reheating hingga 7-15% tanpa modal awal. Rekayasa tungku walking beam turnkey dan audit kesiapan CBAM untuk pabrik baja.',
 
   // Navigation
@@ -1108,7 +1108,7 @@ const idTranslations = {
 
 const ptBrTranslations = {
   // SEO
-  'seo.home.title': 'Economia de Energia em Fornos Industriais — Zero CAPEX, Pague com a Economia',
+  'seo.home.title': 'Economia em Forno de Reaquecimento: Zero CAPEX',
   'seo.home.desc': 'Reduza o consumo de combustível em fornos de reaquecimento em 7-15% sem investimento inicial. Soluções turnkey de engenharia e adequação CBAM para laminação de aço.',
 
   // Navigation

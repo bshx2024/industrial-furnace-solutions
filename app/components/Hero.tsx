@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 space-y-4">
                 <Link
                   to={l('/#assessment')}
                   className="block w-full bg-furnace-600 hover:bg-furnace-500 text-white font-bold py-4 rounded-lg transition-all shadow-xl text-center uppercase tracking-widest text-xs active:scale-[0.98] flex items-center justify-center gap-2"
@@ -202,7 +202,22 @@ const Hero: React.FC = () => {
                   {t('calc.btn')}
                   <ArrowRight size={14} />
                 </Link>
-                <p className="text-[9px] text-white/20 mt-4 text-center uppercase tracking-[0.3em] font-black">
+
+                <div className="pt-2 border-t border-white/5 text-center">
+                  <Link
+                    to={l('/calculators/reheating-furnace-heat-balance')}
+                    className="inline-flex items-center gap-1.5 text-xs text-furnace-400 hover:text-furnace-300 font-bold transition-colors group"
+                  >
+                    <span>
+                      {language === 'vi' ? 'Cần tính toán kỹ thuật chuyên sâu? Mở Công cụ Cân bằng nhiệt →' : 
+                       language === 'id' ? 'Butuh presisi teknis? Buka Alat Neraca Panas →' :
+                       language === 'pt-br' ? 'Precisa de precisão técnica? Abrir Calculadora Térmica →' :
+                       'Want engineering precision? Open Heat Balance Tool →'}
+                    </span>
+                  </Link>
+                </div>
+
+                <p className="text-[9px] text-white/20 text-center uppercase tracking-[0.3em] font-black">
                   {t('calc.footer')}
                 </p>
               </div>
