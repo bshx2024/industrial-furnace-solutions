@@ -15,6 +15,8 @@ const TechCard: React.FC<TechCardProps> = ({ id, title, description, keywords, i
           <img
             src={imageSrc}
             alt={title}
+            width={800}
+            height={450}
             loading="lazy"
             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
           />
@@ -178,6 +180,8 @@ const Technologies: React.FC = () => {
                 <img
                   src="/cisa-cover.jpg"
                   alt="CISA T80 Certification Document"
+                  width={600}
+                  height={850}
                   loading="lazy"
                   className="w-full h-auto transform group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                 />
@@ -319,17 +323,17 @@ const Technologies: React.FC = () => {
                 <div className="absolute inset-0 bg-slate-100/50 pointer-events-none"></div>
 
                 {currentPage === 0 ? (
-                  <img src="/cisa-cover.jpg" loading="lazy" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-left duration-700" alt="CISA T80 Verified Technology Certificate Cover" />
+                  <img src="/cisa-cover.jpg" width={600} height={850} loading="lazy" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-left duration-700" alt="CISA T80 Verified Technology Certificate Cover" />
                 ) : (
                   <div className="relative h-[95%] w-[95%] flex flex-col items-center justify-center">
                     {activeDetail === 47 ? (
-                      <img src="/item47.png" key="item47" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 47: Heat Absorption Rate Method Technical Detail" />
+                      <img src="/item47.png" key="item47" width={800} height={600} className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 47: Heat Absorption Rate Method Technical Detail" />
                     ) : activeDetail === 51 ? (
-                      <img src="/item51.png" key="item51" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 51: High-Emissivity Nano-Coating Technical Detail" />
+                      <img src="/item51.png" key="item51" width={800} height={600} className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 51: High-Emissivity Nano-Coating Technical Detail" />
                     ) : activeDetail === 52 ? (
-                      <img src="/item52.png" key="item52" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 52: Ceramic Fiber Block Roof Structure Technical Detail" />
+                      <img src="/item52.png" key="item52" width={800} height={600} className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in zoom-in-95 duration-700" alt="Item 52: Ceramic Fiber Block Roof Structure Technical Detail" />
                     ) : (
-                      <img src="/cisa-directory.png" key="directory" className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-right duration-700" alt="CISA Technology Verified Directory Table of Contents" />
+                      <img src="/cisa-directory.png" key="directory" width={800} height={600} className="h-[95%] w-auto object-contain shadow-2xl animate-in fade-in slide-in-from-right duration-700" alt="CISA Technology Verified Directory Table of Contents" />
                     )}
                   </div>
                 )}

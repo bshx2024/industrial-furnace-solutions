@@ -5,9 +5,21 @@ import type { MetaFunction } from 'react-router';
 import { Flame, Calculator, ShieldCheck, ArrowRight, CheckCircle2, Wrench } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
+    const title = "Walking Beam Reheating Furnace Design, Revamping & Energy Retrofit | EcoReheating";
+    const description = "Complete engineering guide and turnkey revamping solutions for walking beam reheating furnaces. Cut fuel consumption by 15-25% with zero upfront CAPEX.";
+    const image = "https://www.ecoreheating.com/hero-bg.png";
+
     return [
-        { title: "Walking Beam Reheating Furnace Design, Revamping & Energy Retrofit | EcoReheating" },
-        { name: "description", content: "Complete engineering guide and turnkey revamping solutions for walking beam reheating furnaces. Cut fuel consumption by 15-25% with zero upfront CAPEX." },
+        { title },
+        { name: "description", content: description },
+        { property: "og:type", content: "article" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:image", content: image },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
     ];
 };
 

@@ -16,8 +16,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const translations: Record<Language, any> = {
   en: {
     // SEO
-    'seo.home.title': 'Industrial Reheating Furnace Revamping & Zero-CAPEX Retrofit',
-    'seo.home.desc': 'Cut steel rolling reheating fuel consumption by 7-15% with zero upfront capital. Turnkey walking beam furnace engineering, CBAM-ready audits, and retrofit solutions.',
+    'seo.home.title': 'Reheating Furnace Revamping & Zero-CAPEX Retrofit',
+    'seo.home.desc': 'Cut reheating fuel consumption by 7-15% with zero upfront capital. Turnkey walking beam furnace revamping, CBAM audits, and industrial retrofit solutions.',
 
     // Navigation
     'nav.home': 'HOME',

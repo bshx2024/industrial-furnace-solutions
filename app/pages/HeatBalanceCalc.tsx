@@ -5,9 +5,21 @@ import type { MetaFunction } from 'react-router';
 import { ShieldAlert, RefreshCw } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
+    const title = "Reheating Furnace Heat Balance Calculator (Free Tool) | EcoReheating";
+    const description = "Calculate combustion efficiency, stack thermal losses, and fuel savings for steel reheating furnaces in minutes. Free industrial engineering tool by EcoReheating.";
+    const image = "https://www.ecoreheating.com/hero-bg.png";
+
     return [
-        { title: "Reheating Furnace Heat Balance Calculator (Free Tool) | EcoReheating" },
-        { name: "description", content: "Calculate combustion efficiency, stack thermal losses, and fuel savings for steel reheating furnaces in minutes. Free industrial engineering tool by EcoReheating." },
+        { title },
+        { name: "description", content: description },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:image", content: image },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
     ];
 };
 
