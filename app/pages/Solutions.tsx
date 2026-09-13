@@ -4,11 +4,33 @@ import { useLanguage, translations } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = ({ location }) => {
-    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
-    const t = translations[lang];
+    let lang = 'en';
+    if (location.pathname.startsWith('/vi')) lang = 'vi';
+    else if (location.pathname.startsWith('/id')) lang = 'id';
+    else if (location.pathname.startsWith('/pt-br')) lang = 'pt-br';
+
+    const titles: Record<string, string> = {
+        en: "Steel Reheating Furnace Solutions & Revamping (7-15% Fuel Cut) | EcoReheating",
+        vi: "Giải Pháp Tiết Kiệm Năng Lượng Lò Nung Thép Chuẩn CISA T80 | EcoReheating",
+        id: "Solusi Efisiensi Energi Tungku Baja Standar CISA T80 | EcoReheating",
+        'pt-br': "Soluções de Eficiência Energética para Fornos de Reaquecimento | EcoReheating"
+    };
+
+    const descriptions: Record<string, string> = {
+        en: "Turnkey industrial furnace revamping solutions: full-fiber roofs, AI smart combustion control, and walking beam retrofits delivering 7-15% verified fuel savings.",
+        vi: "Giải pháp cải tạo lò nung công nghiệp chìa khóa trao tay: mái lò toàn sợi, điều khiển đốt thông minh AI và giảm 7-15% tiêu thụ khí đốt với Zero CAPEX.",
+        id: "Solusi perbaikan tungku industri turnkey: atap full-fiber, kontrol pembakaran cerdas AI, dan retrofit walking beam menghemat bahan bakar 7-15%.",
+        'pt-br': "Soluções completas de modernização de fornos: teto de fibra cerâmica, combustão inteligente com IA e economia de combustível de 7 a 15%."
+    };
+
+    const title = titles[lang] || titles.en;
+    const description = descriptions[lang] || descriptions.en;
+
     return [
-        { title: `${t['solutions.title']} | EcoReheating` },
-        { name: "description", content: t['solutions.subtitle'] },
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
     ];
 };
 

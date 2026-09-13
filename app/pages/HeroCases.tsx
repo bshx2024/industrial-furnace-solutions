@@ -6,11 +6,33 @@ import { useLanguage, translations } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = ({ location }) => {
-    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
-    const t = translations[lang];
+    let lang = 'en';
+    if (location.pathname.startsWith('/vi')) lang = 'vi';
+    else if (location.pathname.startsWith('/id')) lang = 'id';
+    else if (location.pathname.startsWith('/pt-br')) lang = 'pt-br';
+
+    const titles: Record<string, string> = {
+        en: "Steel Mill Reheating Furnace Case Studies & ROI (12-25% Gas Cut) | EcoReheating",
+        vi: "Dự Án Tiêu Biểu: Nâng Cấp Lò Nung Thép Giảm 12-25% Khí Đốt | EcoReheating",
+        id: "Studi Kasus Retrofit Tungku Reheating Hemat Gas 12-25% | EcoReheating",
+        'pt-br': "Estudos de Caso de Modernização de Fornos de Reaquecimento | EcoReheating"
+    };
+
+    const descriptions: Record<string, string> = {
+        en: "Explore verified industrial case studies for Desheng, Binxin, Fangda & Jincheng steel mills: 12-25% natural gas reduction, oxidation scale control, and CISA T80 ROI.",
+        vi: "Dự án thực tế từ Desheng, Binxin, Fangda & Jincheng: giảm 12-25% tiêu thụ khí đốt, giảm cháy hao oxit và hoàn vốn nhanh theo tiêu chuẩn CISA T80.",
+        id: "Studi kasus industri terverifikasi di pabrik baja Desheng, Binxin, Fangda & Jincheng: reduksi gas 12-25%, pengendalian scale loss, dan ROI standar CISA T80.",
+        'pt-br': "Estudos de caso industriais comprovados em usinas siderúrgicas: redução de gás natural de 12-25%, controle de carepa e retorno CISA T80."
+    };
+
+    const title = titles[lang] || titles.en;
+    const description = descriptions[lang] || descriptions.en;
+
     return [
-        { title: `${t['nav.heroCases']} | EcoReheating` },
-        { name: "description", content: t['cases.subtitle'] },
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
     ];
 };
 
@@ -325,6 +347,25 @@ const HeroCases: React.FC = () => {
                         image="/jincheng.png"
                         onOpenDossier={() => setDossierClient("Fogang Jincheng")}
                     />
+                </div>
+
+                {/* Featured In-Depth Case Study: Jinnan Steel Group */}
+                <div className="max-w-5xl mx-auto px-4 my-16">
+                    <div className="p-8 md:p-10 bg-gradient-to-r from-industrial-950 via-slate-900 to-industrial-950 border border-furnace-500/30 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+                        <div className="space-y-2 text-left">
+                            <span className="text-xs font-bold uppercase tracking-widest text-furnace-400">Featured Energy Steward Case Study</span>
+                            <h3 className="text-2xl font-bold font-heading">Jinnan Steel Group: Zero-CAPEX Thermal Demonstration</h3>
+                            <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
+                                Integrated steel mill reheating furnace and 5th caster soaking pit revamp achieving verified &ge;15% fuel reduction and continuous oxidation control under full AI management.
+                            </p>
+                        </div>
+                        <Link
+                            to={l('/case-studies')}
+                            className="px-6 py-3.5 bg-furnace-500 hover:bg-furnace-600 text-white font-bold rounded-xl transition-all text-sm shrink-0 shadow-lg shadow-furnace-500/20 whitespace-nowrap"
+                        >
+                            Read Full Project Report →
+                        </Link>
+                    </div>
                 </div>
             </section>
 

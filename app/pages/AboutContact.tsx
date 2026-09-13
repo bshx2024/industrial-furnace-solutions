@@ -5,12 +5,33 @@ import { useLanguage, translations } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = ({ location }) => {
-    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
-    const t = translations[lang];
+    let lang = 'en';
+    if (location.pathname.startsWith('/vi')) lang = 'vi';
+    else if (location.pathname.startsWith('/id')) lang = 'id';
+    else if (location.pathname.startsWith('/pt-br')) lang = 'pt-br';
+
+    const titles: Record<string, string> = {
+        en: "About EcoReheating | Industrial Reheating Furnace Engineering & EPC Team",
+        vi: "Về EcoReheating | Đội Ngũ Kỹ Thuật Lò Nung Công Nghiệp & Tổng Thầu EPC",
+        id: "Tentang EcoReheating | Tim Rekayasa Tungku Industri & EPC Global",
+        'pt-br': "Sobre a EcoReheating | Engenharia de Fornos Industriais & Equipe EPC"
+    };
+
+    const descriptions: Record<string, string> = {
+        en: "Learn about EcoReheating & South Technology: over 300 industrial furnace retrofits globally, British FCS thermal engineering heritage, and CISA T80 verified energy efficiency.",
+        vi: "Tìm hiểu về EcoReheating & South Technology: hơn 300 dây chuyền lò nung công nghiệp toàn cầu, công nghệ nhiệt FCS Anh Quốc và tiêu chuẩn hiệu suất CISA T80.",
+        id: "Pelajari tentang EcoReheating & South Technology: lebih dari 300 proyek tungku industri global, teknologi termal FCS Inggris, dan sertifikasi efisiensi CISA T80.",
+        'pt-br': "Conheça a EcoReheating & South Technology: mais de 300 modernizações de fornos industriais no mundo e eficiência energética certificada CISA T80."
+    };
+
+    const title = titles[lang] || titles.en;
+    const description = descriptions[lang] || descriptions.en;
 
     return [
-        { title: `${t['about.title']} | EcoReheating` },
-        { name: "description", content: t['about.subtitle'] },
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
     ];
 };
 

@@ -1,14 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { Target, CheckCircle, Database, BarChart4 } from 'lucide-react';
 import { useLanguage, translations } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = ({ location }) => {
-    const lang = location.pathname.startsWith('/vi') ? 'vi' : 'en';
-    const t = translations[lang];
+    let lang = 'en';
+    if (location.pathname.startsWith('/vi')) lang = 'vi';
+    else if (location.pathname.startsWith('/id')) lang = 'id';
+    else if (location.pathname.startsWith('/pt-br')) lang = 'pt-br';
+
+    const titles: Record<string, string> = {
+        en: "Jinnan Steel Reheating Furnace Case Study & Energy Steward | EcoReheating",
+        vi: "Dự Án Jinnan Steel: Nghiên Cứu Điển Hình Quản Lý Năng Lượng Lò Nung | EcoReheating",
+        id: "Studi Kasus Efisiensi Tungku Baja Jinnan Steel Group | EcoReheating",
+        'pt-br': "Estudo de Caso do Forno de Reaquecimento da Jinnan Steel | EcoReheating"
+    };
+
+    const descriptions: Record<string, string> = {
+        en: "Engineering case study on Jinnan Steel Group's reheating furnace revamp: 15%+ fuel cut, AI thermal management, and zero CAPEX energy steward deployment.",
+        vi: "Báo cáo kỹ thuật dự án lò nung Tập đoàn Thép Jinnan: tiết kiệm trên 15% nhiên liệu, quản lý nhiệt AI và mô hình quản lý năng lượng không CAPEX.",
+        id: "Laporan rekayasa teknis proyek tungku reheating Jinnan Steel Group: hemat gas >15%, manajemen termal AI, dan model energy steward tanpa CAPEX.",
+        'pt-br': "Estudo de caso de engenharia sobre a modernização do forno da Jinnan Steel: economia de mais de 15% de combustível e gestão térmica com IA."
+    };
+
+    const title = titles[lang] || titles.en;
+    const description = descriptions[lang] || descriptions.en;
+
     return [
-        { title: `${t['nav.caseStudies']} | EcoReheating` },
-        { name: "description", content: t['case.subtitle'] },
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
     ];
 };
 
@@ -135,12 +158,18 @@ const CaseStudies: React.FC = () => {
                             <div className="bg-furnace-100 p-6 rounded-2xl">
                                 <Database className="text-furnace-600" size={48} />
                             </div>
-                            <div>
+                            <div className="flex-1">
                                 <h4 className="text-industrial-950 font-bold text-xl mb-2 uppercase tracking-tight">{t('case.noteTitle')}</h4>
                                 <p className="text-gray-500 leading-relaxed italic">
                                     {t('case.noteDesc')}
                                 </p>
                             </div>
+                            <Link
+                                to="/hero-cases"
+                                className="px-6 py-3 bg-industrial-950 hover:bg-furnace-600 text-white font-bold text-sm rounded-xl transition-all shrink-0"
+                            >
+                                View All 100+ Track Records →
+                            </Link>
                         </div>
                     </div>
                 </div>
