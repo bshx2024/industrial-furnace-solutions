@@ -1,5 +1,6 @@
 import React from 'react';
-import { Percent, TrendingDown, Clock, BarChart3 } from 'lucide-react';
+import { Percent, TrendingDown, Clock, BarChart3, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const BenefitCard: React.FC<{ icon: React.ReactNode; range: string; label: string; description: string }> = ({ icon, range, label, description }) => (
@@ -20,7 +21,7 @@ const BenefitCard: React.FC<{ icon: React.ReactNode; range: string; label: strin
 );
 
 const BenefitsSection: React.FC = () => {
-    const { t, language } = useLanguage();
+    const { t, language, l } = useLanguage();
 
     return (
         <section className="py-24 bg-white">
@@ -64,11 +65,34 @@ const BenefitsSection: React.FC = () => {
 
                 <div className="mt-16 p-8 rounded-2xl bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="max-w-xl">
-                        <h3 className="text-2xl font-heading font-bold mb-4 italic">{t('benefits.footer.title')}</h3>
+                        <h3 className="text-2xl font-heading font-bold mb-2 italic">{t('benefits.footer.title')}</h3>
+                        <p className="text-gray-400 text-sm">
+                            {language === 'vi'
+                                ? 'Định lượng mức tiết kiệm nhiên liệu tiềm năng và giảm phát thải CBAM trực tuyến bằng công cụ phân tích nhiệt.'
+                                : language === 'id'
+                                ? 'Kuantifikasi potensi penghematan bahan bakar dan penurunan emisi CBAM dengan kalkulator neraca panas.'
+                                : language === 'pt-br'
+                                ? 'Quantifique a economia potencial de combustível e redução de emissões CBAM com nossa calculadora térmica.'
+                                : 'Quantify your potential fuel savings and CBAM emission reductions with our online heat balance audit calculator.'}
+                        </p>
                     </div>
-                    <div className="shrink-0 text-center md:text-right">
-                        <div className="bg-furnace-600 text-xs font-bold px-4 py-2 rounded-sm border border-furnace-500 mb-2">{t('benefits.footer.badge')}</div>
-                        <div className="text-gray-400 text-xs">{t('benefits.footer.standards')}</div>
+                    <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4">
+                        <Link
+                            to={l('/calculators/reheating-furnace-heat-balance')}
+                            className="bg-furnace-600 hover:bg-furnace-500 text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-lg shadow-furnace-600/30 transition-all flex items-center gap-2 group/btn whitespace-nowrap"
+                        >
+                            <span>
+                                {language === 'vi' ? 'Tính toán cân bằng nhiệt' :
+                                 language === 'id' ? 'Hitung Neraca Panas' :
+                                 language === 'pt-br' ? 'Calcular Balanço Térmico' :
+                                 'Calculate Heat Balance'}
+                            </span>
+                            <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                        </Link>
+                        <div className="text-center sm:text-right">
+                            <div className="bg-industrial-800 text-xs font-bold px-3 py-1 rounded border border-industrial-700 mb-1">{t('benefits.footer.badge')}</div>
+                            <div className="text-gray-400 text-[11px]">{t('benefits.footer.standards')}</div>
+                        </div>
                     </div>
                 </div>
             </div>

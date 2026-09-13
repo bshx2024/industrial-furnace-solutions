@@ -71,8 +71,28 @@ const Hero: React.FC = () => {
               {t('hero.subtitle')}
             </p>
 
-            <p className="text-sm md:text-base text-gray-300 mb-8 font-bold flex items-center gap-2">
-              {t('hero.optimized')}
+            <p className="text-sm md:text-base text-gray-300 mb-8 font-bold flex items-center gap-2 flex-wrap">
+              <span>
+                {language === 'vi' ? 'Tối ưu hóa cho' : 
+                 language === 'id' ? 'Dioptimalkan untuk' : 
+                 language === 'pt-br' ? 'Otimizado para' : 
+                 'Optimized for'}
+              </span>
+              <Link
+                to={l('/furnaces/walking-beam-reheating-furnace')}
+                className="text-furnace-400 hover:text-furnace-300 underline underline-offset-4 decoration-furnace-500/50 hover:decoration-furnace-400 transition-colors inline-flex items-center gap-1"
+              >
+                {language === 'vi' ? 'Lò dầm bước (Walking Beam Furnaces)' : 
+                 language === 'id' ? 'Walking Beam Furnaces' : 
+                 language === 'pt-br' ? 'Fornos Walking Beam' : 
+                 'Walking Beam Furnaces'}
+              </Link>
+              <span>
+                {language === 'vi' ? '& Lò đáy sàn trong các nhà máy cán thép dài/phẳng.' : 
+                 language === 'id' ? '& Tungku Walking Hearth di Pabrik Baja Panjang/Datar.' : 
+                 language === 'pt-br' ? '& Fornos Walking Hearth em Laminações de Aço Longo/Plano.' : 
+                 '& Walking Hearth Furnaces in Long/Flat Steel Mills.'}
+              </span>
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-12 max-w-4xl">

@@ -35,17 +35,59 @@ const Footer: React.FC = () => {
               <li><Link to={l('/')} className="hover:text-furnace-500 transition-colors">{t('nav.home')}</Link></li>
               <li><Link to={l('/solutions')} className="hover:text-furnace-500 transition-colors">{t('nav.solutions')}</Link></li>
               <li><Link to={l('/hero-cases')} className="hover:text-furnace-500 transition-colors">{t('nav.caseStudies')}</Link></li>
+              <li><Link to={l('/blog')} className="hover:text-furnace-500 transition-colors">{t('nav.blog')}</Link></li>
               <li><Link to={l('/about')} className="hover:text-furnace-500 transition-colors">{t('nav.about')}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">{t('tech.badge')}</h4>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">
+              {language === 'vi' ? 'Kỹ thuật & Công cụ' : 
+               language === 'id' ? 'Rekayasa & Alat' : 
+               language === 'pt-br' ? 'Engenharia & Ferramentas' : 
+               'Engineering & Tools'}
+            </h4>
             <ul className="space-y-4 text-sm">
-              <li><Link to={l('/#tech-roof')} className="hover:text-furnace-500 transition-colors">{t('tech.roof.title')}</Link></li>
-              <li><Link to={l('/#tech-ai')} className="hover:text-furnace-500 transition-colors">{t('tech.ai.title')}</Link></li>
-              <li><Link to={l('/#tech-coating')} className="hover:text-furnace-500 transition-colors">{t('tech.coating.title')}</Link></li>
-              <li><Link to={l('/#energy-steward')} className="hover:text-furnace-500 transition-colors">{t('footer.energySteward')}</Link></li>
+              <li>
+                <Link to={l('/furnaces/walking-beam-reheating-furnace')} className="hover:text-furnace-500 transition-colors">
+                  {language === 'vi' ? 'Lò nung dầm bước' : 
+                   language === 'id' ? 'Walking Beam Furnace' : 
+                   language === 'pt-br' ? 'Guia Forno Walking Beam' : 
+                   'Walking Beam Furnace Guide'}
+                </Link>
+              </li>
+              <li>
+                <Link to={l('/calculators/reheating-furnace-heat-balance')} className="hover:text-furnace-500 transition-colors">
+                  {language === 'vi' ? 'Công cụ cân bằng nhiệt' : 
+                   language === 'id' ? 'Kalkulator Neraca Panas' : 
+                   language === 'pt-br' ? 'Calculadora de Balanço Térmico' : 
+                   'Heat Balance Calculator'}
+                </Link>
+              </li>
+              <li>
+                <Link to={l('/optimization/furnace-efficiency-upgrades')} className="hover:text-furnace-500 transition-colors">
+                  {language === 'vi' ? 'Nâng cấp hiệu suất lò' : 
+                   language === 'id' ? 'Peningkatan Efisiensi' : 
+                   language === 'pt-br' ? 'Upgrades de Eficiência' : 
+                   'Furnace Efficiency Upgrades'}
+                </Link>
+              </li>
+              <li>
+                <Link to={l('/resources/reheating-furnace-shutdown-maintenance-checklist')} className="hover:text-furnace-500 transition-colors">
+                  {language === 'vi' ? 'Checklist bảo trì dừng lò' : 
+                   language === 'id' ? 'Checklist Shutdown Lò' : 
+                   language === 'pt-br' ? 'Checklist Parada Manutenção' : 
+                   'Shutdown Maintenance Checklist'}
+                </Link>
+              </li>
+              <li>
+                <Link to={l('/calculators')} className="hover:text-furnace-500 transition-colors">
+                  {language === 'vi' ? 'Trung tâm công cụ kỹ thuật' : 
+                   language === 'id' ? 'Semua Kalkulator Rekayasa' : 
+                   language === 'pt-br' ? 'Todas as Calculadoras' : 
+                   'All Engineering Calculators'}
+                </Link>
+              </li>
             </ul>
           </div>
 

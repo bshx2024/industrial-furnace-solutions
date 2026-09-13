@@ -68,6 +68,27 @@ const Header: React.FC = () => {
       name: t('nav.solutions'),
       href: l('/solutions'),
       dropdown: [
+        { 
+          name: language === 'vi' ? 'Lò nung dầm bước' : 
+                language === 'pt-br' ? 'Forno Walking Beam' : 
+                language === 'id' ? 'Walking Beam Furnace' : 
+                'Walking Beam Furnace', 
+          href: l('/furnaces/walking-beam-reheating-furnace') 
+        },
+        { 
+          name: language === 'vi' ? 'Công cụ cân bằng nhiệt' : 
+                language === 'pt-br' ? 'Calculadora de Balanço Térmico' : 
+                language === 'id' ? 'Kalkulator Neraca Panas' : 
+                'Heat Balance Calculator', 
+          href: l('/calculators/reheating-furnace-heat-balance') 
+        },
+        { 
+          name: language === 'vi' ? 'Nâng cấp hiệu suất lò nung' : 
+                language === 'pt-br' ? 'Upgrades de Eficiência de Forno' : 
+                language === 'id' ? 'Peningkatan Efisiensi Tungku' : 
+                'Furnace Efficiency Upgrades', 
+          href: l('/optimization/furnace-efficiency-upgrades') 
+        },
         ...(language === 'vi' ? [{ name: t('nav.vietnamSteel'), href: '/vi/lp/cbam-steel-vietnam' }] : []),
         { name: t('nav.summerCrisis'), href: l('/blog/vietnam-steel-industry-outlook-2026-cbam-roadmap') }
       ]
