@@ -6,7 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero: React.FC = () => {
   const [production, setProduction] = useState<number>(2.5);
-  const { t, l } = useLanguage();
+  const { t, l, language } = useLanguage();
 
   // Constants for calculation (example based on T80 targets)
   const fuelSavingRate = 0.11; // 11% average target
