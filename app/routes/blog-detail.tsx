@@ -8,6 +8,7 @@ import type { Language } from "../contexts/LanguageContext";
 import { Share2, Check } from "lucide-react";
 import SmartLanguageBanner from "../components/SmartLanguageBanner";
 import InlineRoiCalculator from "../components/InlineRoiCalculator";
+import IndonesiaAuditCTA from "../components/IndonesiaAuditCTA";
 
 // Import all MDX components
 const mdxComponents = import.meta.glob("../../content/blog/**/*.mdx", { eager: true });
@@ -287,7 +288,7 @@ export default function BlogDetail() {
           prose-td:border prose-td:border-white/10 prose-td:px-4 prose-td:py-3 prose-td:text-gray-300 prose-td:text-sm
           "
                 >
-                    <MDXProvider>
+                    <MDXProvider components={{ IndonesiaAuditCTA }}>
                         <MDXContent />
                     </MDXProvider>
                 </div>
