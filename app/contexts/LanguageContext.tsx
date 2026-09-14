@@ -504,8 +504,8 @@ export const translations: Record<Language, any> = {
   },
   vi: {
     // SEO
-    'seo.home.title': 'Tiết Kiệm Năng Lượng Lò Nung Phôi: Zero CAPEX',
-    'seo.home.desc': 'Giảm 7-15% tiêu thụ khí đốt lò nung dầm bước không cần vốn đầu tư. Giải pháp cải tạo kỹ thuật chìa khóa trao tay và kiểm toán CBAM cho nhà máy cán thép.',
+    'seo.home.title': 'Tiết Kiệm Nhiên Liệu Lò Nung Phôi: Zero CAPEX',
+    'seo.home.desc': 'Tiết kiệm 7-15% nhiên liệu lò nung phôi dầm bước với mô hình Zero CAPEX. Dịch vụ cải tạo chìa khóa trao tay và kiểm toán CBAM cho nhà máy thép.',
 
     // Navigation
     'nav.home': 'TRANG CHỦ',
@@ -526,9 +526,9 @@ export const translations: Record<Language, any> = {
 
     // Hero section
     'hero.badge': 'Hệ thống Thông minh v4.2',
-    'hero.title': 'Chấm dứt lãng phí nhiên liệu lò nung lại.',
+    'hero.title': 'Chấm dứt lãng phí nhiên liệu lò nung phôi.',
     'hero.titleAccent': 'Nâng cấp Zero CAPEX.',
-    'hero.subtitle': 'Chúng tôi đầu tư, bạn tiết kiệm. Đạt được mức giảm tiêu thụ nhiên liệu điển hình 7-15% trong các lò nung lại của bạn với công nghệ hiệu suất cực cao được kiểm chứng thực tế bởi T80, chi trả hoàn toàn bằng khoản tiết kiệm năng lượng đã được xác minh.',
+    'hero.subtitle': 'Chúng tôi đầu tư, bạn tiết kiệm. Đạt được mức giảm tiêu thụ nhiên liệu điển hình 7-15% trong các lò nung phôi dầm bước của bạn với công nghệ hiệu suất cực cao được kiểm chứng thực tế bởi T80, chi trả hoàn toàn bằng khoản tiết kiệm năng lượng đã được xác minh.',
     'hero.optimized': 'Tối ưu hóa cho Lò dầm bước & Lò đáy sàn trong các nhà máy cán thép dài/phẳng.',
     'hero.bullet1': "Mô hình 'Quản gia năng lượng' dựa trên hiệu suất. Zero CAPEX, trả bằng khoản tiết kiệm.",
     'hero.bullet2': "Nâng cao năng suất và chất lượng bề mặt thông qua kiểm soát lớp vảy oxit T80.",
@@ -612,7 +612,7 @@ export const translations: Record<Language, any> = {
     'cases.desheng.intro': 'Tập đoàn Tứ Xuyên Desheng là doanh nghiệp thép tư nhân lớn nhất Tứ Xuyên và nằm trong Top 500 Doanh nghiệp Tư nhân Trung Quốc. Dự án đại tu lớn này đã thiết lập một chuẩn mực mới cho việc phục hồi hiệu quả toàn diện trong các hệ thống lò nung cũ.',
     'cases.desheng.reportDate': '6 tháng 6, 2022',
     'cases.desheng.trans1': 'Xưởng cán Công ty TNHH Vanadium-Titanium Tập đoàn Tứ Xuyên Desheng',
-    'cases.desheng.trans2': 'Báo cáo Hiệu quả Năng lượng: Kỷ lục Đại tu Lò nung lại Lớn',
+    'cases.desheng.trans2': 'Báo cáo Hiệu quả Năng lượng: Kỷ lục Đại tu Lò nung phôi Lớn',
     'cases.desheng.trans3': 'South Energy Saving Tech đã thực hiện EPC cho việc đại tu lò nung toàn diện và hiện đại hóa kỹ thuật từ tháng 11 năm 2021 đến tháng 1 năm 2022.',
     'cases.desheng.trans4': 'Kết quả Hiệu suất Đỉnh cao: Bằng cách thay thế hoàn toàn mái lò chịu lửa và tích hợp điều khiển AI, chúng tôi đã tối đa hóa tổng hiệu suất nhiệt vượt xa các mức cải tạo tiêu chuẩn, đạt được mức tăng năng lượng toàn diện đáng kể ≥30%.',
 
@@ -624,9 +624,9 @@ export const translations: Record<Language, any> = {
     'cases.binxin.intro': 'Thép Binxin là một cơ sở sản xuất thép chiến lược ven biển ở miền Đông Trung Quốc. Dự án này đã chứng minh độ chính xác cực cao của việc kiểm soát khí quyển AI của chúng tôi trong các dây chuyền sản xuất thép thanh tốc độ cao.',
     'cases.binxin.reportDate': '12 tháng 10, 2023',
     'cases.binxin.trans1': 'Công ty TNHH Tập đoàn Thép Giang Tô Binxin',
-    'cases.binxin.trans2': 'Tóm tắt Dự án: Lò nung lại Thép thanh Tốc độ Cao Đôi 260t/h',
+    'cases.binxin.trans2': 'Tóm tắt Dự án: Lò nung Thép thanh Tốc độ Cao Đôi 260t/h',
     'cases.binxin.trans3': 'Nằm trong khu công nghiệp ven biển Liên Vân Cảng với lợi thế logistic chiến lược, Thép Binxin là một trong 500 Doanh nghiệp Tư nhân hàng đầu Trung Quốc.',
-    'cases.binxin.trans4': 'Dự án lò nung lại thép thanh tốc độ cao đôi 260 t/h (nạp nguội) sử dụng điều khiển gia nhiệt thông minh và tối ưu hóa cấu trúc sợi. Các chỉ số tiêu thụ gas và hao hụt lớp vảy oxit sau khi vận hành đều nằm trong nhóm hàng đầu ngành.',
+    'cases.binxin.trans4': 'Dự án lò nung thép thanh tốc độ cao đôi 260 t/h (nạp nguội) sử dụng điều khiển gia nhiệt thông minh và tối ưu hóa cấu trúc sợi. Các chỉ số tiêu thụ gas và hao hụt lớp vảy oxit sau khi vận hành đều nằm trong nhóm hàng đầu ngành.',
 
     // HeroCase 3: Fangda
     'cases.fangda.title': 'Hiện đại hóa Hiệu suất',
@@ -636,7 +636,7 @@ export const translations: Record<Language, any> = {
     'cases.fangda.intro': 'Thép đặc biệt Fangda là công ty dẫn đầu toàn cầu về thép lò xò ô tô. Sự tối ưu hóa của chúng tôi đã giúp duy trì lợi thế cạnh tranh của họ bằng cách giảm đáng kể cường độ nhiên liệu trong quy trình gia nhiệt cốt lõi của họ.',
     'cases.fangda.reportDate': '20 tháng 3, 2023',
     'cases.fangda.trans1': 'Công ty TNHH Tập đoàn Sắt thép Fangda Giang Tây',
-    'cases.fangda.trans2': 'Sơ lược về Cải tạo Hiệu suất Lò nung lại Thép đặc biệt Fangda',
+    'cases.fangda.trans2': 'Sơ lược về Cải tạo Hiệu suất Lò nung Thép đặc biệt Fangda',
     'cases.fangda.trans3': 'Một tập đoàn thép quy mô lớn với các hoạt động đa dạng trong lĩnh vực phụ tùng ô tô và khai thác mỏ, sở hữu công suất hàng năm 20 triệu tấn.',
     'cases.fangda.trans4': 'Chúng tôi đã hoàn thành cải tạo tiết kiệm năng lượng có hệ thống cho hai lò nung tại Thép đặc biệt Fangda. Thông qua tối ưu hóa chế độ nhiệt và công nghệ lớp lót tiên tiến, mức tiết kiệm năng lượng đã xác thực vượt quá 20%.',
 
@@ -648,9 +648,9 @@ export const translations: Record<Language, any> = {
     'cases.jincheng.intro': 'Các dây chuyền cán đa sản phẩm của Jincheng Metal yêu cầu độ linh hoạt nhiệt cao. Giải pháp toàn sợi của chúng tôi cung cấp phản ứng nhanh và hiệu quả cần thiết cho lịch trình sản xuất đa dạng của họ.',
     'cases.jincheng.reportDate': '15 tháng 8, 2022',
     'cases.jincheng.trans1': 'Công ty TNHH Sản phẩm Kim loại Fogang Jincheng',
-    'cases.jincheng.trans2': 'Báo cáo Dự án: Lò nung lại Thép dải Mái lò kết cấu sợi gốm toàn phần',
+    'cases.jincheng.trans2': 'Báo cáo Dự án: Lò nung Thép dải Mái lò kết cấu sợi gốm toàn phần',
     'cases.jincheng.trans3': 'Chuyên sản xuất và gia công sâu các loại thép đặc biệt, bao gồm thép không gỉ, thép thanh ren và các sản phẩm thép dải.',
-    'cases.jincheng.trans4': 'Dự án cải tạo mái lò toàn sợi cho lò nung lại thép dải đạt được mức tiết kiệm năng lượng hơn 15% trong các điều kiện vận hành tương đương bằng cách giảm thiểu tổn thất nhiệt bức xạ và quán tính nhiệt.',
+    'cases.jincheng.trans4': 'Dự án cải tạo mái lò toàn sợi cho lò nung thép dải đạt được mức tiết kiệm năng lượng hơn 15% trong các điều kiện vận hành tương đương bằng cách giảm thiểu tổn thất nhiệt bức xạ và quán tính nhiệt.',
 
     'perf.title': 'Sự Xuất sắc Công nghiệp Đã được Chứng minh',
     'perf.subtitle': 'Triển khai rộng rãi trên hơn 100 dây chuyền sản xuất, mang lại hiệu quả năng lượng cực cao cho các nhà sản xuất thép hàng đầu.',
@@ -668,7 +668,7 @@ export const translations: Record<Language, any> = {
     'case.title': 'Dự án Quản gia Năng lượng tại TẬP ĐOÀN THÉP JINNAN',
     'case.subtitle': 'Triển khai mô hình quản gia năng lượng tiên phong trong nước như một mô hình trình diễn xanh, ít carbon và chuẩn mực sử dụng tài nguyên.',
     'case.plantTitle': 'Nhà máy & Quy trình',
-    'case.plantDesc': 'TẬP ĐOÀN THÉP JINNAN (Sơn Tây, Trung Quốc) là nhà sản xuất thép tích hợp với quy trình cán thép hoàn chỉnh. Dự án tập trung vào lò nung lại và lò ngâm máy đúc thứ 5.',
+    'case.plantDesc': 'TẬP ĐOÀN THÉP JINNAN (Sơn Tây, Trung Quốc) là nhà sản xuất thép tích hợp với quy trình cán thép hoàn chỉnh. Dự án tập trung vào lò nung phôi và lò ngâm máy đúc thứ 5.',
     'case.quote': 'Được phối hợp triển khai bởi SOUTH TECHNOLOGY, DONGMING GREEN ENERGY và TẬP ĐOÀN THÉP JINNAN nhằm xây dựng một dự án trình diễn xanh, ít carbon.',
     'case.feature1Title': 'Tích hợp AI',
     'case.feature1Desc': 'Quản lý nhiệt toàn quy trình được thúc đẩy bởi các thuật toán AI độc quyền.',
