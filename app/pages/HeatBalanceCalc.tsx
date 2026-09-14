@@ -180,8 +180,16 @@ const HeatBalanceCalc: React.FC = () => {
 
     const currentT = t[lang as keyof typeof t] || t.en;
 
+    const homeLink = lang === 'en' ? '/' : `/${lang}`;
+    const calculatorsHubLink = lang === 'en' ? '/calculators' : `/${lang}/calculators`;
     const auditLink = lang === 'en' ? '/about#assessment' : `/${lang}/about#assessment`;
     const guideLink = lang === 'en' ? '/furnaces/walking-beam-reheating-furnace' : `/${lang}/furnaces/walking-beam-reheating-furnace`;
+    const walkingBeamCalcLink = lang === 'en' ? '/calculators/walking-beam-furnace-efficiency-calculator' : `/${lang}/calculators/walking-beam-furnace-efficiency-calculator`;
+    const upgradesLink = lang === 'en' ? '/optimization/furnace-efficiency-upgrades' : `/${lang}/optimization/furnace-efficiency-upgrades`;
+    const checklistLink = lang === 'en' ? '/resources/reheating-furnace-shutdown-maintenance-checklist' : `/${lang}/resources/reheating-furnace-shutdown-maintenance-checklist`;
+    const caseStudiesLink = lang === 'en' ? '/case-studies' : `/${lang}/case-studies`;
+    const vietnamBlogLink = lang === 'en' ? '/blog/small-medium-vietnam-steel-mills-combat-hoa-phat-power' : `/${lang}/blog/small-medium-vietnam-steel-mills-combat-hoa-phat-power`;
+    const fuelSavingsBlogLink = lang === 'en' ? '/blog/reheating-furnace-fuel-saving-guide' : `/${lang}/blog/reheating-furnace-fuel-saving-guide`;
 
     const webAppSchema = {
         "@context": "https://schema.org",
@@ -195,6 +203,31 @@ const HeatBalanceCalc: React.FC = () => {
             "priceCurrency": "USD"
         },
         "description": "Free online furnace heat balance calculator for steel reheating furnaces. Calculate thermal efficiency, stack loss, and fuel savings."
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.ecoreheating.com" + (lang === 'en' ? '' : `/${lang}`)
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Calculators",
+                "item": "https://www.ecoreheating.com" + (lang === 'en' ? '/calculators' : `/${lang}/calculators`)
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Furnace Heat Balance Calculator",
+                "item": "https://www.ecoreheating.com/calculators/reheating-furnace-heat-balance"
+            }
+        ]
     };
 
     const faqSchema = {
@@ -260,14 +293,25 @@ const HeatBalanceCalc: React.FC = () => {
             />
             <script
                 type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            <script
+                type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.12),transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 carbon-pattern pointer-events-none" />
 
             <div className="max-w-5xl mx-auto relative z-10">
-                <div className="mb-8">
-                    <Link to={lang === 'en' ? '/calculators' : `/${lang}/calculators`} className="text-furnace-500 hover:text-furnace-600 transition-colors font-medium">
+                <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+                    <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-400">
+                        <Link to={homeLink} className="hover:text-orange-400 transition-colors">Home</Link>
+                        <span className="text-slate-600">/</span>
+                        <Link to={calculatorsHubLink} className="hover:text-orange-400 transition-colors">Calculators</Link>
+                        <span className="text-slate-600">/</span>
+                        <span className="text-slate-200 font-medium truncate">Furnace Heat Balance Calculator</span>
+                    </nav>
+                    <Link to={calculatorsHubLink} className="text-furnace-500 hover:text-furnace-600 transition-colors text-xs font-medium">
                         {currentT.back}
                     </Link>
                 </div>
@@ -575,7 +619,7 @@ const HeatBalanceCalc: React.FC = () => {
                             </h3>
                         </div>
                         <p className="text-slate-300 text-sm leading-relaxed">
-                            Plant thermal engineers and mill metallurgists frequently search for a <strong>furnace heat balance calculator Excel</strong> spreadsheet template to analyze energy consumption. While an offline Excel sheet offers static formula tracking, this dynamic web-based <strong>furnace heat balance calculator</strong> offers decisive operational advantages for real-time steel mill optimization:
+                            Plant thermal engineers and mill metallurgists frequently search for a <strong>furnace heat balance calculator Excel</strong> spreadsheet template to analyze energy consumption. While an offline Excel sheet offers static formula tracking, this dynamic web-based <strong>furnace heat balance calculator</strong> offers decisive operational advantages for real-time steel mill optimization. To calculate active hearth dimensions, billet cycle times, and heating zone capacities alongside energy flows, engineers also utilize our dedicated <Link to={walkingBeamCalcLink} className="text-orange-400 hover:text-orange-300 underline font-medium">walking beam furnace capacity calculator</Link>:
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
@@ -616,7 +660,7 @@ const HeatBalanceCalc: React.FC = () => {
                             </h3>
                         </div>
                         <p className="text-slate-300 text-sm leading-relaxed">
-                            Understanding where your energy is being lost compared to industry best practices is the first step toward reducing specific fuel consumption (SFC). Below is an engineering benchmark comparing legacy furnaces against modern T80-optimized installations:
+                            Understanding where your energy is being lost compared to industry best practices is the first step toward reducing specific fuel consumption (SFC). For full architectural blueprints on skid piping, water cooling loops, and refractory zones, consult our comprehensive guide to <Link to={guideLink} className="text-orange-400 hover:text-orange-300 underline font-medium">walking beam reheating furnace engineering architecture</Link>. To inspect physical refractory wear and skid insulation during planned outages, use our standardized <Link to={checklistLink} className="text-orange-400 hover:text-orange-300 underline font-medium">reheating furnace shutdown maintenance checklist</Link>. Below is an engineering benchmark comparing legacy furnaces against modern T80-optimized installations:
                         </p>
 
                         <div className="overflow-x-auto">
@@ -692,7 +736,7 @@ const HeatBalanceCalc: React.FC = () => {
                                 </div>
                                 <h4 className="text-white font-bold text-sm">Furnace Heat Balance Calculator Vietnam</h4>
                                 <p className="text-xs text-slate-400 leading-relaxed">
-                                    Steel rolling mills across Vietnam (including key industrial clusters in Ba Ria-Vung Tau, Dong Nai, and Hai Phong) navigate severe EVN peak electricity rate surcharges and variable Fuel Oil (FO), LPG, and imported LNG prices. Conducting a rigorous reheat furnace heat balance enables Vietnamese mill operators to benchmark specific fuel consumption against CISA T80 standards, size waste heat recuperators, and capture 7% to 15% fuel reductions under zero CAPEX performance contracts.
+                                    Steel rolling mills across Vietnam (including key industrial clusters in Ba Ria-Vung Tau, Dong Nai, and Hai Phong) navigate severe EVN peak electricity rate surcharges and variable Fuel Oil (FO), LPG, and imported LNG prices. Conducting a rigorous reheat furnace heat balance enables Vietnamese mill operators to benchmark specific fuel consumption against CISA T80 standards, size waste heat recuperators, and capture 7% to 15% fuel reductions under zero CAPEX performance contracts. For local implementation strategies, see our <Link to={vietnamBlogLink} className="text-orange-400 hover:text-orange-300 underline font-medium">operational guide for Vietnamese SME rolling mills</Link> and our in-depth <Link to={fuelSavingsBlogLink} className="text-orange-400 hover:text-orange-300 underline font-medium">reheating furnace fuel saving guide</Link>.
                                 </p>
                             </div>
 
@@ -718,6 +762,9 @@ const HeatBalanceCalc: React.FC = () => {
                                 5. Four Proven Retrofits to Rebalance Furnace Heat and Cut Fuel Costs by 7–15%
                             </h3>
                         </div>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            Each of these capital-efficient upgrades directly addresses major thermal sinks identified in the heat balance equation. Mill operators can implement these engineering solutions through our turnkey <Link to={upgradesLink} className="text-orange-400 hover:text-orange-300 underline font-medium">furnace efficiency upgrades</Link> program or review measured production data across our <Link to={caseStudiesLink} className="text-orange-400 hover:text-orange-300 underline font-medium">verified industrial case studies</Link>:
+                        </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
@@ -830,9 +877,62 @@ const HeatBalanceCalc: React.FC = () => {
                                     Can EcoReheating implement heat balance retrofits with Zero CAPEX?
                                 </h4>
                                 <p className="text-xs text-slate-300 leading-relaxed pl-5">
-                                    Yes. Under our turnkey Energy Steward Model (powered by South Technology), we fund 100% of the engineering, hardware, and installation costs for ceramic fiber roofs, AI combustion controls, and recuperators. The steel mill invests $0 upfront, and compensation is paid strictly from a negotiated percentage of measured, IPMVP-verified fuel cost savings over a 24 to 36 month term.
+                                    Yes. Under our turnkey Energy Steward Model (powered by South Technology), we fund 100% of the engineering, hardware, and installation costs for ceramic fiber roofs, AI combustion controls, and recuperators. The steel mill invests $0 upfront, and compensation is paid strictly from a negotiated percentage of measured, <a href="https://evo-world.org/en/products-services-mainmenu-en/protocols/ipmvp" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-300 underline font-medium">IPMVP-verified</a> fuel cost savings over a 24 to 36 month term.
                                 </p>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Related Engineering Tools & Technical Resources */}
+                    <div className="space-y-4 pt-4 border-t border-slate-800/80">
+                        <div className="flex items-center justify-between">
+                            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-orange-500" />
+                                Related Reheating Furnace Engineering Tools & Resources
+                            </h3>
+                            <Link to={calculatorsHubLink} className="text-xs text-orange-400 hover:text-orange-300 font-medium">
+                                View All Tools →
+                            </Link>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <Link
+                                to={walkingBeamCalcLink}
+                                className="p-4 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-orange-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-[10px] text-orange-400 font-bold uppercase tracking-wider block mb-1">Interactive Tool</span>
+                                <h4 className="text-white font-bold text-sm group-hover:text-orange-400 transition-colors">
+                                    Walking Beam Capacity Calculator →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                                    Calculate heating zone sizing, active hearth utilization, and billet dwell times.
+                                </p>
+                            </Link>
+
+                            <Link
+                                to={upgradesLink}
+                                className="p-4 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-orange-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-[10px] text-orange-400 font-bold uppercase tracking-wider block mb-1">Engineering Guide</span>
+                                <h4 className="text-white font-bold text-sm group-hover:text-orange-400 transition-colors">
+                                    Furnace Efficiency Upgrades →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                                    Full-fiber roofs, AI closed-loop combustion, and double-pass recuperator retrofits.
+                                </p>
+                            </Link>
+
+                            <Link
+                                to={checklistLink}
+                                className="p-4 bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-orange-500/50 rounded-xl transition-all group block"
+                            >
+                                <span className="text-[10px] text-orange-400 font-bold uppercase tracking-wider block mb-1">Maintenance SOP</span>
+                                <h4 className="text-white font-bold text-sm group-hover:text-orange-400 transition-colors">
+                                    Shutdown Inspection Checklist →
+                                </h4>
+                                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                                    50-point protocol covering refractories, recuperator tube bundles, and skid pipes.
+                                </p>
+                            </Link>
                         </div>
                     </div>
 
