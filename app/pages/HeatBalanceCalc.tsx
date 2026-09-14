@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
-import { ShieldAlert, RefreshCw, Flame, FileSpreadsheet, Layers, HelpCircle, CheckCircle2, ArrowRight, BookOpen, Activity } from 'lucide-react';
+import { ShieldAlert, RefreshCw, Flame, FileSpreadsheet, Layers, HelpCircle, CheckCircle2, ArrowRight, BookOpen, Activity, Globe, Info } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
     const title = "Furnace Heat Balance Calculator: Free Tool | EcoReheating";
@@ -59,64 +59,100 @@ const HeatBalanceCalc: React.FC = () => {
     const flueGasVolume = fuelConsumption * 11.5; // m3 flue gas/ton steel
     const stackHeatLoss = flueGasVolume * 1.4 * (stackTemp - 20); // kJ/ton
 
-    // 4. Cooling water heat loss (skid cooling in walking beam furnaces)
-    const waterCoolingLoss = 0.08 * totalHeatInput; // 8% baseline cooling loss
+    // 4. Water cooling losses (skid pipes in walking beam)
+    // Typically 8-12% of heat input in standard walking beam, reducible with insulation
+    const coolingWaterHeatLoss = totalHeatInput * 0.085; // kJ/ton
+    const waterCoolingLoss = coolingWaterHeatLoss;
 
-    // 5. Wall Radiation & Opening loss
-    // Full fiber roof drops this from 12% to 6%. Let's assume standard baseline.
-    const wallRadiationLoss = 0.09 * totalHeatInput;
+    // 5. Radiation and wall losses through refractory + openings
+    // In legacy brick/castable ~10-15%, full fiber ~3-5%
+    const wallRadiationLoss = totalHeatInput * 0.075; // kJ/ton
 
-    // 6. Unaccounted & residue heat
-    const unaccountedLoss = Math.max(0, totalHeatInput - (heatSteelAbsorbed + stackHeatLoss + waterCoolingLoss + wallRadiationLoss));
+    // 6. Other unaccounted losses (scale formation enthalpy, air infiltration, door openings)
+    const otherLosses = Math.max(0, totalHeatInput - (heatSteelAbsorbed + stackHeatLoss + coolingWaterHeatLoss + wallRadiationLoss));
+    const unaccountedLoss = otherLosses;
 
-    // Percentages
-    const pctSteel = (heatSteelAbsorbed / totalHeatInput) * 100;
-    const pctStack = (stackHeatLoss / totalHeatInput) * 100;
-    const pctCooling = (waterCoolingLoss / totalHeatInput) * 100;
-    const pctWall = (wallRadiationLoss / totalHeatInput) * 100;
-    const pctUnaccounted = (unaccountedLoss / totalHeatInput) * 100;
+    // Efficiency Calculations
+    const thermalEfficiency = totalHeatInput > 0 ? (heatSteelAbsorbed / totalHeatInput) * 100 : 0;
+    const stackLossPercent = totalHeatInput > 0 ? (stackHeatLoss / totalHeatInput) * 100 : 0;
+    const coolingLossPercent = totalHeatInput > 0 ? (coolingWaterHeatLoss / totalHeatInput) * 100 : 0;
+    const wallLossPercent = totalHeatInput > 0 ? (wallRadiationLoss / totalHeatInput) * 100 : 0;
+    const otherLossPercent = totalHeatInput > 0 ? (otherLosses / totalHeatInput) * 100 : 0;
 
-    // Total MW thermal capacity
-    const totalMW = (totalHeatInput * productionRate) / (3600 * 1000);
-    const steelMW = (heatSteelAbsorbed * productionRate) / (3600 * 1000);
-    const stackMW = (stackHeatLoss * productionRate) / (3600 * 1000);
+    // Percentages aliases
+    const pctSteel = thermalEfficiency;
+    const pctStack = stackLossPercent;
+    const pctCooling = coolingLossPercent;
+    const pctWall = wallLossPercent;
+    const pctUnaccounted = otherLossPercent;
+
+    // Total MW Power Equivalent
+    const totalThermalPowerMW = (totalHeatInput * productionRate) / 3600000; // kJ/h to MW
+    const usefulPowerMW = (heatSteelAbsorbed * productionRate) / 3600000;
+    const totalMW = totalThermalPowerMW;
+    const steelMW = usefulPowerMW;
+    const stackMW = (stackHeatLoss * productionRate) / 3600000;
+
+    // Potential fuel savings if air preheat is increased to 450°C and wall insulation upgraded
+    const optimizedAirHeat = combustionAirVolume * 1.3 * (450 - 20);
+    const potentialSavingPercent = Math.min(22, Math.max(5, ((optimizedAirHeat - airHeatInput) / totalHeatInput) * 100 + 4.5));
+    const annualFuelSavedM3 = (productionRate * fuelConsumption * (potentialSavingPercent / 100) * 7500); // 7500 operating hours/yr
 
     // Translations
     const t = {
         en: {
-            title: "Reheating Furnace Heat Balance Calculator",
-            subtitle: "Model the distribution of heat energy inside your furnace. Balance useful steel heating against thermal losses.",
+            title: "Furnace Heat Balance Calculator",
+            subtitle: "Model thermodynamic energy distribution across your reheat furnace. Balance steel heat absorption against stack, cooling, and radiation losses.",
             inputProd: "Production Throughput",
             inputFuel: "Specific Gas Consumption",
             inputDischarge: "Billet Discharge Temp",
-            inputPreheat: "Air Preheat Temp",
-            thermoSummary: "Thermodynamic Analysis Summary",
+            inputPreheat: "Combustion Air Preheat",
+            thermoSummary: "Thermodynamic Heat Balance Breakdown",
             heatInputTotal: "Total Heat Input Rate",
-            steelAbsorption: "Steel Heat Absorption (Efficiency)",
-            stackLoss: "Flue Gas (Stack) Loss",
-            coolingLoss: "Cooling Water Loss",
-            wallLoss: "Wall Radiation & Openings Loss",
-            otherLoss: "Other Unaccounted Loss",
-            modelDisclaimer: "Disclaimer: This model is for technical planning and baseline estimation. Exact heat balance parameters require dynamic gas chromatography and pressure profiling during physical site audits.",
-            requestAudit: "Get Customized Heat Loss Audit & ROI Feasibility Study →",
+            steelAbsorption: "Useful Steel Heat Absorption (Efficiency)",
+            stackLoss: "Flue Gas Stack Loss",
+            coolingLoss: "Cooling Water Loss (Skid Pipes)",
+            wallLoss: "Wall & Opening Radiation Loss",
+            otherLoss: "Other Unaccounted Losses",
+            modelDisclaimer: "Note: Simplified thermodynamic model calibrated for standard pipeline natural gas (LHV 35.8 MJ/Nm³). Detailed on-site thermal balance requires flue gas O₂ / CO chromatography and surface thermography.",
+            requestAudit: "Request Complete On-Site Thermal Audit & ROI Report →",
             back: "← Back to Calculators",
-            guideLinkText: "Explore Walking Beam Furnace Revamping Solutions →",
+            guideLinkText: "Explore Walking Beam Furnace Modernization Solutions →",
+        },
+        zh: {
+            title: "加热炉热平衡在线计算器",
+            subtitle: "模拟轧钢加热炉内部热力学能量流向。精确评估钢坯有效吸热与排烟、水冷及炉体散热损失。",
+            inputProd: "轧钢生产线产能",
+            inputFuel: "单位天然气单耗",
+            inputDischarge: "钢坯出炉目标温度",
+            inputPreheat: "助燃空气预热温度",
+            thermoSummary: "热平衡能量收支分析",
+            heatInputTotal: "炉体总供入热量",
+            steelAbsorption: "钢坯有效吸热 (热效率)",
+            stackLoss: "烟气排烟热损失",
+            coolingLoss: "水冷构件带走热量 (步进梁/滑道)",
+            wallLoss: "炉墙与孔道辐射散热损失",
+            otherLoss: "化学不完全燃烧与其他损失",
+            modelDisclaimer: "注：本模型基于标准天然气低位发热量计算。工厂实际热平衡需结合现场烟气氧含量色谱分析与外壁红外成像实测。",
+            requestAudit: "申请专业级现场热平衡测试与节能诊断报告 →",
+            back: "← 返回计算工具集",
+            guideLinkText: "查看步进式加热炉全纤维与智能燃烧改造方案 →",
         },
         vi: {
-            title: "Tính Toán Cân Bằng Nhiệt Lò Nung",
-            subtitle: "Mô hình hóa phân phối năng lượng nhiệt bên trong lò nung. Cân bằng nhiệt có ích với các tổn thất nhiệt.",
-            inputProd: "Sản lượng làm việc",
-            inputFuel: "Tiêu thụ gas riêng",
-            inputDischarge: "Nhiệt độ phôi ra lò",
-            inputPreheat: "Nhiệt độ gió sấy",
-            thermoSummary: "Tóm Tắt Phân Tích Nhiệt Động Lực Học",
-            heatInputTotal: "Tổng công suất nhiệt cấp",
-            steelAbsorption: "Nhiệt hấp thụ của thép (Hiệu suất)",
-            stackLoss: "Tổn thất khói thải (Ống khói)",
-            coolingLoss: "Tổn thất nước làm mát",
-            wallLoss: "Tổn thất bức xạ vỏ & khe hở",
-            otherLoss: "Tổn thất không tính được khác",
-            modelDisclaimer: "Lưu ý: Mô hình này phục vụ lập kế hoạch kỹ thuật. Việc tính toán cân bằng nhiệt chính xác cần thực hiện đo đạc khí thải và áp suất trực tiếp tại nhà máy.",
+            title: "Công Cụ Tính Cân Bằng Nhiệt Lò Nung Phôi Thép",
+            subtitle: "Mô phỏng phân phối nhiệt lượng trong lò nung cán thép. Định lượng nhiệt hữu ích nung thép so với tổn thất khói thải, nước làm mát và bức xạ.",
+            inputProd: "Sản Lượng Cán Thép",
+            inputFuel: "Tiêu Hao Khí Đốt / Tấn Phôi",
+            inputDischarge: "Nhiệt Độ Ra Lò Phôi Thép",
+            inputPreheat: "Nhiệt Độ Gió Sấy Đốt Lò",
+            thermoSummary: "Phân Tích Cân Bằng Nhiệt Động Học",
+            heatInputTotal: "Tổng Nhiệt Lượng Cấp Vào",
+            steelAbsorption: "Nhiệt Hữu Ích Nung Thép (Hiệu Suất)",
+            stackLoss: "Tổn Thất Nhiệt Khói Thải (Ống Khói)",
+            coolingLoss: "Tổn Thất Nước Làm Mát Cột Dầm",
+            wallLoss: "Tổn Thất Bức X xạ Vỏ Lò & Cửa Mở",
+            otherLoss: "Tổn Thất Chưa Tính Khác",
+            modelDisclaimer: "Lưu ý: Mô hình nhiệt động lực học chuẩn hóa cho khí tự nhiên / LPG. Khảo sát thực tế yêu cầu đo sắc ký khí O₂ và chụp ảnh nhiệt hồng ngoại.",
             requestAudit: "Đăng Ký Khảo Sát Tổn Thất Nhiệt & Báo Cáo ROI Cho Nhà Máy →",
             back: "← Quay lại danh sách công cụ",
             guideLinkText: "Xem Giải Pháp Cải Tạo Lò Nung Dầm Bước →",
@@ -139,25 +175,6 @@ const HeatBalanceCalc: React.FC = () => {
             requestAudit: "Dapatkan Audit Kehilangan Panas & Studi Kelayakan ROI Pabrik →",
             back: "← Kembali ke Kalkulator",
             guideLinkText: "Jelajahi Solusi Retrofit Tungku Walking Beam →",
-        },
-        "pt-br": {
-            title: "Calculadora de Balanço Térmico de Fornos",
-            subtitle: "Simule a distribuição da energia térmica no interior do seu forno. Compare o aquecimento útil do aço com as perdas térmicas.",
-            inputProd: "Produção Efetiva",
-            inputFuel: "Consumo de Gás Específico",
-            inputDischarge: "Temperatura de Saída do Tarugo",
-            inputPreheat: "Temp. do Ar de Combustão",
-            thermoSummary: "Resumo da Análise Termodinâmica",
-            heatInputTotal: "Taxa Total de Entrada de Calor",
-            steelAbsorption: "Absorção de Calor pelo Aço (Eficiência)",
-            stackLoss: "Perda pelos Gases de Exaustão (Chaminé)",
-            coolingLoss: "Perda pela Água de Resfriamento",
-            wallLoss: "Perda por Radiação das Paredes e Aberturas",
-            otherLoss: "Outras Perdas Não Contabilizadas",
-            modelDisclaimer: "Nota: Este modelo serve para fins de planejamento técnico. O balanço térmico exato requer medições dinâmicas de cromatografia e pressão em campo.",
-            requestAudit: "Solicitar Auditoria de Perdas Térmicas e Estudo de ROI →",
-            back: "← Voltar para Calculadoras",
-            guideLinkText: "Conheça Soluções de Reforma para Fornos de Vigas Caminhantes →",
         }
     };
 
@@ -169,7 +186,7 @@ const HeatBalanceCalc: React.FC = () => {
     const webAppSchema = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Furnace Heat Balance Calculator",
+        "name": "Furnace Heat Balance Calculator Free",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
         "offers": {
@@ -186,6 +203,14 @@ const HeatBalanceCalc: React.FC = () => {
         "mainEntity": [
             {
                 "@type": "Question",
+                "name": "What is the furnace heat balance calculation formula?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The furnace heat balance calculation formula follows the First Law of Thermodynamics: Q_total = Q_fuel + Q_air = Q_steel + Q_stack + Q_cooling + Q_wall + Q_openings. Thermal efficiency (η) is calculated as: η = (Q_steel / Q_total) × 100%, where useful heat Q_steel = Steel Throughput (kg/h) × Specific Heat (0.68 kJ/kg·°C) × Temperature Rise."
+                }
+            },
+            {
+                "@type": "Question",
                 "name": "What is a furnace heat balance calculator and why is it used?",
                 "acceptedAnswer": {
                     "@type": "Answer",
@@ -194,10 +219,18 @@ const HeatBalanceCalc: React.FC = () => {
             },
             {
                 "@type": "Question",
-                "name": "How is thermal efficiency calculated in a reheating furnace?",
+                "name": "How does an online furnace heat balance calculator compare to an Excel spreadsheet?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Reheating furnace thermal efficiency (η) is calculated as the ratio of useful heat absorbed by the steel billets to the total heat input: η = (Q_steel / Q_total) × 100%. Useful heat is determined by billet mass, steel specific heat capacity (typically 0.68 kJ/kg·°C), and the temperature rise from charging to rolling discharge (typically 20°C to 1,150°C–1,250°C)."
+                    "text": "While a furnace heat balance calculator Excel spreadsheet is useful for static record-keeping, an online engineering calculator provides real-time iterative modeling. Plant managers can dynamically drag throughput, combustion air preheat, and gas consumption parameters to instantly visualize how recuperator upgrades or ceramic fiber roofs impact MW thermal capacity and fuel costs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can this furnace heat balance calculator be applied to rolling mills in Vietnam or California?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. For rolling mills in Vietnam (evaluating FO oil, LPG, and LNG under EVN peak electricity rate hikes in Ba Ria-Vung Tau or Hai Phong) and industrial facilities in California (complying with SCAQMD Rule 1147 NOx limits and Title 24 industrial thermal efficiency mandates), this calculator provides the thermodynamic baseline required to size waste heat recuperators and verify fuel savings."
                 }
             },
             {
@@ -206,14 +239,6 @@ const HeatBalanceCalc: React.FC = () => {
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Flue gas stack losses represent 25% to 45% of total heat input in unoptimized furnaces because combustion exhaust gases exit at high temperatures (often 750°C to 950°C before recuperation). Installing high-efficiency double-pass metallic or ceramic recuperators preheats combustion air up to 450°C–550°C, capturing waste sensible heat and directly reducing natural gas consumption by 10% to 18%."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How does an online furnace heat balance calculator compare to an Excel spreadsheet?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "While a furnace heat balance calculator Excel spreadsheet is useful for static record-keeping, an online engineering calculator provides real-time iterative modeling. Plant managers can dynamically drag throughput, combustion air preheat, and gas consumption parameters to instantly visualize how recuperator upgrades or ceramic fiber roofs impact MW thermal capacity and fuel costs."
                 }
             },
             {
@@ -473,6 +498,14 @@ const HeatBalanceCalc: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Search Intent Disambiguation Callout */}
+                <div className="mt-8 p-4 bg-slate-900/40 border border-slate-800 rounded-xl flex items-start gap-3 text-xs text-slate-400">
+                    <Info className="text-orange-400 shrink-0 mt-0.5" size={16} />
+                    <p className="leading-relaxed">
+                        <strong className="text-slate-300">Industrial Metallurgy Scope:</strong> This engineering tool is a specialized <strong className="text-white">furnace heat balance calculator free</strong> for heavy industrial reheating furnaces (steel billets, walking beam, and pusher rolling mills rated in megawatts and metric tons per hour). It is not intended for residential HVAC load sizing (such as room square feet, heating sizing for a house, garage, or shop, contractor lookup by zip code, or Minecraft gaming furnace mechanics).
+                    </p>
+                </div>
+
                 {/* Comprehensive Engineering Guide & Documentation */}
                 <section className="mt-20 pt-12 border-t border-slate-800/80 space-y-12">
                     {/* Section Header */}
@@ -494,11 +527,11 @@ const HeatBalanceCalc: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <Flame className="text-orange-500 shrink-0" size={22} />
                             <h3 className="text-xl font-bold text-white">
-                                1. Governing Thermodynamic Heat Balance Equation
+                                1. Furnace Heat Balance Calculation Formula & Thermodynamic Governing Equations
                             </h3>
                         </div>
                         <p className="text-slate-300 text-sm leading-relaxed">
-                            Under steady-state continuous rolling conditions, the conservation of energy dictates that the total heat introduced into the reheating furnace chamber must equal the total heat absorbed by the steel billets plus all cumulative thermal losses:
+                            The standard <strong className="text-white">furnace heat balance calculation formula</strong> is formulated under steady-state continuous rolling conditions. Conservation of energy dictates that the total heat introduced into the reheating furnace chamber must equal the total useful heat absorbed by the steel billets plus all cumulative thermal losses:
                         </p>
 
                         <div className="bg-slate-950 border border-slate-800 rounded-lg p-4 font-mono text-xs sm:text-sm text-orange-400 overflow-x-auto">
@@ -638,12 +671,51 @@ const HeatBalanceCalc: React.FC = () => {
                         </div>
                     </div>
 
+                    {/* Regional Applications: Vietnam & California */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <Globe className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                4. Regional Applications: Vietnam Steel Mills vs. California Industrial Standards
+                            </h3>
+                        </div>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            Furnace heat balance baselines must reflect regional fuel economics and environmental compliance mandates. Our thermal engineering audits routinely apply this model across two prominent high-demand regions:
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Southeast Asia</span>
+                                    <span className="text-xs text-slate-500">·</span>
+                                    <span className="text-xs text-slate-400 font-medium">Billet Reheating</span>
+                                </div>
+                                <h4 className="text-white font-bold text-sm">Furnace Heat Balance Calculator Vietnam</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    Steel rolling mills across Vietnam (including key industrial clusters in Ba Ria-Vung Tau, Dong Nai, and Hai Phong) navigate severe EVN peak electricity rate surcharges and variable Fuel Oil (FO), LPG, and imported LNG prices. Conducting a rigorous reheat furnace heat balance enables Vietnamese mill operators to benchmark specific fuel consumption against CISA T80 standards, size waste heat recuperators, and capture 7% to 15% fuel reductions under zero CAPEX performance contracts.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">North America</span>
+                                    <span className="text-xs text-slate-500">·</span>
+                                    <span className="text-xs text-slate-400 font-medium">Emissions & Efficiency</span>
+                                </div>
+                                <h4 className="text-white font-bold text-sm">Furnace Heat Balance Calculator California</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    In California, industrial heat processing facilities and metal forges operate under the nation’s strictest environmental mandates, including SCAQMD Rule 1147 (NOx emission limits for industrial furnaces) and California Title 24 industrial efficiency codes. Modeling furnace thermal balance and recuperator air preheat allows California plant engineers to minimize natural gas firing rates, reduce peak flue gas volumes, and comply with strict ultra-low-NOx mandates without sacrificing furnace throughput.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* 4 Retrofit Strategies */}
                     <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
                         <div className="flex items-center gap-3">
                             <Activity className="text-orange-500 shrink-0" size={22} />
                             <h3 className="text-xl font-bold text-white">
-                                4. Four Proven Retrofits to Rebalance Furnace Heat and Cut Fuel Costs by 7–15%
+                                5. Four Proven Retrofits to Rebalance Furnace Heat and Cut Fuel Costs by 7–15%
                             </h3>
                         </div>
 
@@ -687,11 +759,31 @@ const HeatBalanceCalc: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <HelpCircle className="text-orange-500 shrink-0" size={22} />
                             <h3 className="text-xl font-bold text-white">
-                                5. Frequently Asked Questions (Furnace Heat Balance FAQ)
+                                6. Frequently Asked Questions (Furnace Heat Balance FAQ)
                             </h3>
                         </div>
 
                         <div className="space-y-4">
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    What is the furnace heat balance calculation formula?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    The furnace heat balance calculation formula follows the First Law of Thermodynamics: Q_total = Q_fuel + Q_air = Q_steel + Q_stack + Q_cooling + Q_wall + Q_openings. Thermal efficiency (η) is calculated as: η = (Q_steel / Q_total) × 100%, where useful heat Q_steel equals steel throughput (kg/h) × steel specific heat (0.68 kJ/kg·°C) × temperature rise from charging to rolling discharge.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    Can this furnace heat balance calculator be applied to rolling mills in Vietnam or California?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    Yes. For rolling mills in Vietnam (evaluating FO oil, LPG, and LNG under EVN peak electricity rate hikes in Ba Ria-Vung Tau or Hai Phong) and industrial facilities in California (complying with SCAQMD Rule 1147 NOx limits and Title 24 industrial thermal efficiency mandates), this calculator provides the thermodynamic baseline required to size waste heat recuperators and verify fuel savings.
+                                </p>
+                            </div>
+
                             <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
                                 <h4 className="text-sm font-bold text-white flex items-center gap-2">
                                     <span className="text-orange-500 font-mono">Q.</span>
