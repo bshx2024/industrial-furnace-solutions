@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { MetaFunction } from 'react-router';
-import { ShieldAlert, RefreshCw } from 'lucide-react';
+import { ShieldAlert, RefreshCw, Flame, FileSpreadsheet, Layers, HelpCircle, CheckCircle2, ArrowRight, BookOpen, Activity } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
-    const title = "Reheating Furnace Heat Balance Calculator (Free Tool) | EcoReheating";
-    const description = "Calculate combustion efficiency, stack thermal losses, and fuel savings for steel reheating furnaces in minutes. Free industrial engineering tool by EcoReheating.";
+    const title = "Furnace Heat Balance Calculator: Free Tool | EcoReheating";
+    const description = "Free furnace heat balance calculator for steel reheating furnaces. Calculate thermal efficiency, stack losses, skid cooling drag, and fuel savings in minutes.";
     const image = "https://www.ecoreheating.com/hero-bg.png";
+    const pageUrl = "https://www.ecoreheating.com/calculators/reheating-furnace-heat-balance";
 
     return [
         { title },
         { name: "description", content: description },
         { property: "og:type", content: "website" },
+        { property: "og:url", content: pageUrl },
+        { property: "og:site_name", content: "EcoReheating" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:image", content: image },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
@@ -157,7 +162,6 @@ const HeatBalanceCalc: React.FC = () => {
     };
 
     const currentT = t[lang as keyof typeof t] || t.en;
-    const locale = lang === 'vi' ? 'vi-VN' : lang === 'id' ? 'id-ID' : lang === 'pt-br' ? 'pt-BR' : 'en-US';
 
     const auditLink = lang === 'en' ? '/about#assessment' : `/${lang}/about#assessment`;
     const guideLink = lang === 'en' ? '/furnaces/walking-beam-reheating-furnace' : `/${lang}/furnaces/walking-beam-reheating-furnace`;
@@ -165,7 +169,7 @@ const HeatBalanceCalc: React.FC = () => {
     const webAppSchema = {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Reheating Furnace Heat Balance Calculator",
+        "name": "Furnace Heat Balance Calculator",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
         "offers": {
@@ -173,7 +177,54 @@ const HeatBalanceCalc: React.FC = () => {
             "price": "0",
             "priceCurrency": "USD"
         },
-        "description": "Interactive thermodynamic balance tool for calculating steel reheat furnace combustion efficiency, stack loss, and fuel savings."
+        "description": "Free online furnace heat balance calculator for steel reheating furnaces. Calculate thermal efficiency, stack loss, and fuel savings."
+    };
+
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is a furnace heat balance calculator and why is it used?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A furnace heat balance calculator is an industrial thermodynamic tool that quantifies the energy distribution within a steel reheating furnace based on the First Law of Thermodynamics. It accounts for all heat inputs (fuel combustion chemical energy and preheated combustion air sensible heat) and balances them against useful heat absorbed by steel billets, flue gas stack losses, skid pipe water cooling losses, and shell radiation."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is thermal efficiency calculated in a reheating furnace?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Reheating furnace thermal efficiency (η) is calculated as the ratio of useful heat absorbed by the steel billets to the total heat input: η = (Q_steel / Q_total) × 100%. Useful heat is determined by billet mass, steel specific heat capacity (typically 0.68 kJ/kg·°C), and the temperature rise from charging to rolling discharge (typically 20°C to 1,150°C–1,250°C)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why are stack losses typically the largest heat loss in a reheating furnace?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Flue gas stack losses represent 25% to 45% of total heat input in unoptimized furnaces because combustion exhaust gases exit at high temperatures (often 750°C to 950°C before recuperation). Installing high-efficiency double-pass metallic or ceramic recuperators preheats combustion air up to 450°C–550°C, capturing waste sensible heat and directly reducing natural gas consumption by 10% to 18%."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does an online furnace heat balance calculator compare to an Excel spreadsheet?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "While a furnace heat balance calculator Excel spreadsheet is useful for static record-keeping, an online engineering calculator provides real-time iterative modeling. Plant managers can dynamically drag throughput, combustion air preheat, and gas consumption parameters to instantly visualize how recuperator upgrades or ceramic fiber roofs impact MW thermal capacity and fuel costs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the typical heat loss through water-cooled skid pipes in walking beam furnaces?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "In walking beam reheating furnaces, water-cooled fixed and moving skid pipes extract 6% to 12% of total thermal energy. Applying interlocking ceramic fiber skid insulation covers and optimizing pipe hydraulic diameters reduces cooling water extraction by 40% to 60%, recovering valuable sensible heat for billet plastic deformation."
+                }
+            }
+        ]
     };
 
     return (
@@ -181,6 +232,10 @@ const HeatBalanceCalc: React.FC = () => {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
             />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.12),transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 carbon-pattern pointer-events-none" />
@@ -218,28 +273,38 @@ const HeatBalanceCalc: React.FC = () => {
                                 max="300"
                                 step="5"
                                 value={productionRate}
-                                onChange={(e) => setProductionRate(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-slate-800 rounded-full appearance-none cursor-pointer accent-furnace-500 focus:outline-none"
+                                onChange={(e) => setProductionRate(Number(e.target.value))}
+                                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-furnace-500"
                             />
+                            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>30 t/h (Small Mill)</span>
+                                <span>150 t/h (Medium)</span>
+                                <span>300 t/h (Mega Plant)</span>
+                            </div>
                         </div>
 
-                        {/* Specific Gas Consumption */}
+                        {/* Specific Fuel Consumption */}
                         <div>
                             <div className="flex justify-between items-center mb-2">
                                 <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{currentT.inputFuel}</label>
                                 <span className="text-base font-mono font-bold text-furnace-500">
-                                    {fuelConsumption} <span className="text-xs text-slate-500">m³/t</span>
+                                    {fuelConsumption} <span className="text-xs text-slate-500">Nm³/t</span>
                                 </span>
                             </div>
                             <input
                                 type="range"
-                                min="35"
-                                max="95"
+                                min="30"
+                                max="85"
                                 step="1"
                                 value={fuelConsumption}
-                                onChange={(e) => setFuelConsumption(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-slate-800 rounded-full appearance-none cursor-pointer accent-furnace-500 focus:outline-none"
+                                onChange={(e) => setFuelConsumption(Number(e.target.value))}
+                                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-furnace-500"
                             />
+                            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>30 Nm³/t (T80 Target)</span>
+                                <span>55 Nm³/t (Avg Industry)</span>
+                                <span>85 Nm³/t (Unoptimized)</span>
+                            </div>
                         </div>
 
                         {/* Billet Discharge Temp */}
@@ -252,13 +317,18 @@ const HeatBalanceCalc: React.FC = () => {
                             </div>
                             <input
                                 type="range"
-                                min="950"
+                                min="1000"
                                 max="1280"
                                 step="10"
                                 value={dischargeTemp}
-                                onChange={(e) => setDischargeTemp(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-slate-800 rounded-full appearance-none cursor-pointer accent-furnace-500 focus:outline-none"
+                                onChange={(e) => setDischargeTemp(Number(e.target.value))}
+                                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-furnace-500"
                             />
+                            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>1000°C</span>
+                                <span>1150°C (Standard Rebar)</span>
+                                <span>1280°C (Special Alloy)</span>
+                            </div>
                         </div>
 
                         {/* Combustion Air Preheat */}
@@ -275,24 +345,47 @@ const HeatBalanceCalc: React.FC = () => {
                                 max="600"
                                 step="10"
                                 value={airPreheatTemp}
-                                onChange={(e) => setAirPreheatTemp(parseInt(e.target.value))}
-                                className="w-full h-1.5 bg-slate-800 rounded-full appearance-none cursor-pointer accent-furnace-500 focus:outline-none"
+                                onChange={(e) => setAirPreheatTemp(Number(e.target.value))}
+                                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-furnace-500"
                             />
+                            <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>20°C (Cold Air)</span>
+                                <span>150°C (Basic Recuperator)</span>
+                                <span>600°C (Regenerative / Double Pass)</span>
+                            </div>
+                        </div>
+
+                        {/* Quick Reset */}
+                        <div className="pt-2">
+                            <button
+                                onClick={() => {
+                                    setProductionRate(150);
+                                    setFuelConsumption(55);
+                                    setDischargeTemp(1150);
+                                    setAirPreheatTemp(150);
+                                }}
+                                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+                            >
+                                <RefreshCw size={13} />
+                                Reset to Default Benchmark
+                            </button>
                         </div>
                     </div>
 
-                    {/* Output Analysis */}
+                    {/* Output Visualization */}
                     <div className="lg:col-span-6 space-y-6">
-                        <div className="glass-panel border-furnace-500/20 rounded-2xl p-6 sm:p-8">
-                            <h2 className="text-lg font-bold text-white mb-6 border-b border-slate-800 pb-3 flex items-center gap-2">
-                                <RefreshCw className="text-furnace-500 animate-spin" style={{ animationDuration: '6s' }} size={18} />
+                        <div className="glass-panel rounded-2xl p-6 sm:p-8 space-y-6">
+                            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-3">
                                 {currentT.thermoSummary}
                             </h2>
 
-                            {/* Dynamic Stacked Bar Visualization */}
-                            <div className="mb-8">
-                                <span className="text-xs font-bold text-slate-400 uppercase block mb-2">Heat Balance Distribution</span>
-                                <div className="h-6 w-full rounded-md overflow-hidden flex font-mono text-[9px] font-bold text-white text-center">
+                            {/* Stacked Percentage Bar */}
+                            <div>
+                                <div className="flex justify-between text-xs text-slate-400 mb-2">
+                                    <span>Thermal Energy Distribution</span>
+                                    <span className="font-mono">{pctSteel.toFixed(0)}% Useful Heat</span>
+                                </div>
+                                <div className="h-6 w-full bg-slate-900 rounded-md overflow-hidden flex font-mono text-[10px] text-white font-bold">
                                     <div className="bg-green-600 flex items-center justify-center transition-all duration-300" style={{ width: `${pctSteel}%` }}>
                                         {pctSteel > 12 && `${pctSteel.toFixed(0)}%`}
                                     </div>
@@ -379,6 +472,299 @@ const HeatBalanceCalc: React.FC = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Comprehensive Engineering Guide & Documentation */}
+                <section className="mt-20 pt-12 border-t border-slate-800/80 space-y-12">
+                    {/* Section Header */}
+                    <div className="space-y-4">
+                        <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 text-orange-400 px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider">
+                            <BookOpen size={14} />
+                            Engineering Reference Guide
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading tracking-tight">
+                            Furnace Heat Balance Calculator: Principles, Formulas & Loss Benchmarks
+                        </h2>
+                        <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
+                            In continuous steel hot rolling operations, conducting a comprehensive thermal heat balance is the fundamental prerequisite for identifying energy waste, sizing heat recovery equipment, and lowering natural gas consumption. This free online <strong>furnace heat balance calculator</strong> models the thermodynamic distribution of energy across your walking beam or pusher-type reheating furnace based on the First Law of Thermodynamics.
+                        </p>
+                    </div>
+
+                    {/* Thermodynamic Governing Equations */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <Flame className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                1. Governing Thermodynamic Heat Balance Equation
+                            </h3>
+                        </div>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            Under steady-state continuous rolling conditions, the conservation of energy dictates that the total heat introduced into the reheating furnace chamber must equal the total heat absorbed by the steel billets plus all cumulative thermal losses:
+                        </p>
+
+                        <div className="bg-slate-950 border border-slate-800 rounded-lg p-4 font-mono text-xs sm:text-sm text-orange-400 overflow-x-auto">
+                            Q_total = Q_fuel + Q_preheated_air = Q_useful_steel + Q_flue_stack + Q_cooling_water + Q_radiation_wall + Q_openings
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 pt-2">
+                            <div className="space-y-3 bg-slate-950/40 p-4 rounded-lg border border-slate-800/50">
+                                <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-orange-500" />
+                                    Thermal Heat Inputs (Q_in)
+                                </h4>
+                                <ul className="space-y-2 text-xs text-slate-400">
+                                    <li><strong className="text-slate-200">Chemical Heat of Fuel (Q_fuel):</strong> Volume of fuel gas (Nm³/t) multiplied by its Lower Heating Value (LHV, e.g., 35,800 kJ/Nm³ for pipeline natural gas).</li>
+                                    <li><strong className="text-slate-200">Sensible Heat of Combustion Air (Q_air):</strong> Preheated air enthalpy delivered from the recuperator: V_air × C_p,air × (T_preheat - T_ambient).</li>
+                                    <li><strong className="text-slate-200">Hot Charging Enthalpy (Q_charge):</strong> Sensible heat retained in billets directly charged from the continuous casting machine (typically 500°C–700°C).</li>
+                                </ul>
+                            </div>
+
+                            <div className="space-y-3 bg-slate-950/40 p-4 rounded-lg border border-slate-800/50">
+                                <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-red-500" />
+                                    Thermal Heat Discharges (Q_out)
+                                </h4>
+                                <ul className="space-y-2 text-xs text-slate-400">
+                                    <li><strong className="text-slate-200">Useful Heat Absorbed by Steel (Q_steel):</strong> M_steel × C_p,steel × (T_discharge - T_charge), where steel specific heat averages 0.68 kJ/kg·°C.</li>
+                                    <li><strong className="text-slate-200">Flue Gas Stack Loss (Q_stack):</strong> Sensible heat carried away by high-temperature exhaust gases: V_flue × C_p,flue × (T_stack - T_ambient).</li>
+                                    <li><strong className="text-slate-200">Skid Pipe Cooling Loss (Q_cooling):</strong> Sensible heat extracted by treated cooling water flowing through walking beam skid supports.</li>
+                                    <li><strong className="text-slate-200">Wall Radiation & Openings (Q_wall):</strong> Conduction and radiation through refractory walls, roof casing, charging doors, and peep holes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Online Calculator vs Excel */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <FileSpreadsheet className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                2. Furnace Heat Balance Calculator in Excel vs. Interactive Online Model
+                            </h3>
+                        </div>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            Plant thermal engineers and mill metallurgists frequently search for a <strong>furnace heat balance calculator Excel</strong> spreadsheet template to analyze energy consumption. While an offline Excel sheet offers static formula tracking, this dynamic web-based <strong>furnace heat balance calculator</strong> offers decisive operational advantages for real-time steel mill optimization:
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-slate-200 font-bold text-sm flex items-center gap-2">
+                                    <span className="text-amber-500 font-mono">⚠️</span>
+                                    Traditional Excel Spreadsheet Models
+                                </h4>
+                                <ul className="space-y-1.5 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Static calculation: Requires manual cell re-entry for every production variance.</li>
+                                    <li>No dynamic coupling between air preheat temperature and stack exhaust enthalpy.</li>
+                                    <li>Difficult to model transient mill delays, idle holding modes, or air-fuel ratio drift.</li>
+                                    <li>Prone to broken macro links and inconsistent gas caloric value baselines across teams.</li>
+                                </ul>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-slate-200 font-bold text-sm flex items-center gap-2">
+                                    <span className="text-green-400 font-mono">✓</span>
+                                    EcoReheating Online Heat Balance Calculator
+                                </h4>
+                                <ul className="space-y-1.5 text-xs text-slate-400 list-disc list-inside">
+                                    <li>Instant visual sensitivity analysis: Drag sliders to see real-time MW thermal load shifts.</li>
+                                    <li>Coupled recuperator thermodynamics: Higher air preheat automatically lowers exit stack temperature.</li>
+                                    <li>Calibrated against CISA T80 extreme efficiency benchmarks across 300+ operating reheat lines.</li>
+                                    <li>Direct integration with Zero CAPEX retrofit ROI projections and CBAM carbon intensity estimates.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Benchmark Table */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <Layers className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                3. Thermal Loss Benchmarking: Pusher Furnaces vs. Walking Beam Furnaces
+                            </h3>
+                        </div>
+                        <p className="text-slate-300 text-sm leading-relaxed">
+                            Understanding where your energy is being lost compared to industry best practices is the first step toward reducing specific fuel consumption (SFC). Below is an engineering benchmark comparing legacy furnaces against modern T80-optimized installations:
+                        </p>
+
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left text-xs border-collapse">
+                                <thead>
+                                    <tr className="border-b border-slate-800 bg-slate-950/80 text-orange-400 font-bold uppercase tracking-wider">
+                                        <th className="p-3">Heat Balance Component</th>
+                                        <th className="p-3">Legacy Pusher Furnace</th>
+                                        <th className="p-3">Standard Walking Beam</th>
+                                        <th className="p-3">CISA T80 Optimized Benchmark</th>
+                                        <th className="p-3">Primary Countermeasure</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                                    <tr className="hover:bg-slate-800/30">
+                                        <td className="p-3 font-semibold text-white">Useful Steel Absorption (η)</td>
+                                        <td className="p-3 text-red-400 font-mono">35% – 48%</td>
+                                        <td className="p-3 text-amber-400 font-mono">52% – 62%</td>
+                                        <td className="p-3 text-green-400 font-bold font-mono">68% – 76%</td>
+                                        <td className="p-3">Stoichiometric AI air-fuel tuning & high-E coating</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-800/30">
+                                        <td className="p-3 font-semibold text-white">Flue Gas Stack Loss</td>
+                                        <td className="p-3 text-red-400 font-mono">35% – 45%</td>
+                                        <td className="p-3 text-amber-400 font-mono">25% – 32%</td>
+                                        <td className="p-3 text-green-400 font-bold font-mono">15% – 20%</td>
+                                        <td className="p-3">Double-pass metallic recuperator (air preheat &gt; 450°C)</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-800/30">
+                                        <td className="p-3 font-semibold text-white">Cooling Water Loss</td>
+                                        <td className="p-3 font-mono">8% – 14% (Wet skids)</td>
+                                        <td className="p-3 font-mono">6% – 10% (Insulated skids)</td>
+                                        <td className="p-3 text-green-400 font-bold font-mono">4% – 6%</td>
+                                        <td className="p-3">Fiber-reinforced modular skid pipe insulation covers</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-800/30">
+                                        <td className="p-3 font-semibold text-white">Wall & Roof Radiation Loss</td>
+                                        <td className="p-3 text-red-400 font-mono">10% – 16% (Castable/Brick)</td>
+                                        <td className="p-3 text-amber-400 font-mono">7% – 10%</td>
+                                        <td className="p-3 text-green-400 font-bold font-mono">3% – 5%</td>
+                                        <td className="p-3">Pre-assembled ceramic full-fiber roof modules</td>
+                                    </tr>
+                                    <tr className="hover:bg-slate-800/30">
+                                        <td className="p-3 font-semibold text-white">Billet Scale Oxidation Loss</td>
+                                        <td className="p-3 text-red-400 font-mono">1.2% – 1.8% of yield</td>
+                                        <td className="p-3 font-mono">0.8% – 1.2%</td>
+                                        <td className="p-3 text-green-400 font-bold font-mono">0.3% – 0.5%</td>
+                                        <td className="p-3">AI furnace atmosphere management (O₂ &lt; 1.5%)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* 4 Retrofit Strategies */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <Activity className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                4. Four Proven Retrofits to Rebalance Furnace Heat and Cut Fuel Costs by 7–15%
+                            </h3>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Strategy 01</span>
+                                <h4 className="text-white font-bold text-sm">Pre-Assembled Ceramic Full-Fiber Roof Modernization</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    Replacing dense refractory castables with modular ceramic fiber modules cuts roof heat storage capacity by 60%. Cold startup heat-up time drops from 16 hours to under 4 hours, and wall skin temperature decreases from 120°C to below 75°C, recovering 3% to 6% of total fuel input.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Strategy 02</span>
+                                <h4 className="text-white font-bold text-sm">High-Efficiency Recuperator Exhaust Energy Recovery</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    Stack loss is the largest heat sink in any reheating furnace. Sizing a double-pass metallic recuperator or air-gas crossflow heat exchanger preheats combustion air to 450°C–550°C. For every 100°C rise in combustion air temperature, net natural gas consumption falls by approximately 4.5%.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Strategy 03</span>
+                                <h4 className="text-white font-bold text-sm">AI Stoichiometric Closed-Loop Air-Fuel Tuning</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    Standard pneumatic ratio regulators allow air-fuel ratios to drift to 1.3 or higher during production pacing slowdowns. AI combustion automation tracks continuous flue gas oxygen meters and trims air blowers within 3 seconds, keeping oxygen below 1.5% and eliminating sensible heat flue waste.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">Strategy 04</span>
+                                <h4 className="text-white font-bold text-sm">High-Emissivity (High-E) Refractory Coatings</h4>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    Spraying a transition-metal-oxide coating (emissivity ε ≥ 0.92 at 1,300°C) onto furnace refractory linings increases radiant heat flux back to the steel stock by 10% to 15%. This accelerates heating rates, narrows core-to-surface temperature gradients, and delivers a typical payback within 6 months.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* FAQ Section */}
+                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 sm:p-8 space-y-6">
+                        <div className="flex items-center gap-3">
+                            <HelpCircle className="text-orange-500 shrink-0" size={22} />
+                            <h3 className="text-xl font-bold text-white">
+                                5. Frequently Asked Questions (Furnace Heat Balance FAQ)
+                            </h3>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    What is a furnace heat balance calculator and why is it essential for steel mills?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    A furnace heat balance calculator is an industrial thermodynamic tool that quantifies the energy distribution within a steel reheating furnace based on the First Law of Thermodynamics. It calculates how much of the chemical fuel energy is successfully transferred to the steel billets versus how much is wasted through the stack, cooling water, and wall radiation, enabling engineers to prioritize revamping investments.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    How is reheating furnace thermal efficiency calculated?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    Thermal efficiency (η) is calculated as: η = (Useful Heat in Steel / Total Heat Input) × 100%. Useful heat equals billet throughput (kg/h) × steel specific heat (0.68 kJ/kg·°C) × temperature delta (Discharge Temp - Ambient). In high-performance CISA T80 reheating furnaces, thermal efficiency exceeds 68%, compared to only 35%–45% in uninsulated legacy pusher furnaces.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    Why is stack loss the single largest heat loss in a reheat furnace?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    Because flue gases leave the heating chamber at temperatures between 750°C and 950°C, sensible heat carried away in combustion products (CO₂, H₂O, N₂, and excess O₂) can easily consume 25% to 45% of total input energy. Upgrading to a modern double-pass recuperator that preheats combustion air to 450°C+ directly captures this waste heat and returns it into the combustion zones.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    How do water-cooled skids impact walking beam furnace heat balance?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    In walking beam furnaces, water-cooled fixed and moving skid pipes extract 6% to 12% of total heat input. Furthermore, cold skid pipes cause "skid mark" temperature drops in billets, requiring furnace operators to overheat the entire chamber to ensure plastic rolling compliance. Applying interlocking ceramic fiber skid insulation shields and optimizing pipe diameters reduces skid cooling water heat extraction by 40% to 60%.
+                                </p>
+                            </div>
+
+                            <div className="p-4 bg-slate-950/60 border border-slate-800 rounded-lg space-y-2">
+                                <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                                    <span className="text-orange-500 font-mono">Q.</span>
+                                    Can EcoReheating implement heat balance retrofits with Zero CAPEX?
+                                </h4>
+                                <p className="text-xs text-slate-300 leading-relaxed pl-5">
+                                    Yes. Under our turnkey Energy Steward Model (powered by South Technology), we fund 100% of the engineering, hardware, and installation costs for ceramic fiber roofs, AI combustion controls, and recuperators. The steel mill invests $0 upfront, and compensation is paid strictly from a negotiated percentage of measured, IPMVP-verified fuel cost savings over a 24 to 36 month term.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom CTA Banner */}
+                    <div className="bg-gradient-to-r from-orange-500/10 via-slate-900 to-orange-500/10 border border-orange-500/30 rounded-2xl p-8 text-center space-y-4">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white font-heading">
+                            Ready to Balance Your Furnace and Cut Fuel Bills by 7–15%?
+                        </h3>
+                        <p className="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed">
+                            Stop guessing your thermal losses. Request an on-site thermal audit by South Technology’s senior thermal engineers. We will analyze your fuel intensity, profile flue gas oxygen, and deliver a guaranteed T80 heat balance improvement plan at zero upfront cost.
+                        </p>
+                        <div className="pt-2">
+                            <Link
+                                to={auditLink}
+                                className="inline-flex items-center gap-2 py-3 px-8 bg-furnace-500 hover:bg-furnace-600 text-white rounded-lg transition-colors font-bold text-sm uppercase tracking-wider shadow-lg shadow-furnace-500/20"
+                            >
+                                Schedule On-Site Thermal Audit →
+                            </Link>
+                        </div>
+                        <p className="text-[11px] text-slate-500">
+                            Zero financial commitment · Backed by CISA T80 industrial standards across 300+ production lines
+                        </p>
+                    </div>
+                </section>
             </div>
         </div>
     );
