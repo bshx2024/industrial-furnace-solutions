@@ -289,8 +289,8 @@ export default function BlogDetail() {
           prose-td:border prose-td:border-white/10 prose-td:px-4 prose-td:py-3 prose-td:text-gray-300 prose-td:text-sm
           "
                 >
-                    <MDXProvider components={{ IndonesiaAuditCTA }}>
-                        <MDXContent components={{ IndonesiaAuditCTA }} />
+                    <MDXProvider components={{ IndonesiaAuditCTA, InlineRoiCalculator }}>
+                        <MDXContent components={{ IndonesiaAuditCTA, InlineRoiCalculator }} />
                     </MDXProvider>
                 </div>
 
