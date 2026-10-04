@@ -5,8 +5,8 @@ import type { MetaFunction } from 'react-router';
 import { Flame, Calculator, ShieldCheck, ArrowRight, CheckCircle2, Wrench, Layers, HelpCircle, Activity, BarChart3, Settings, ShieldAlert, BookOpen } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
-    const title = "Walking Beam Reheating Furnace: Revamping Solutions & Design";
-    const description = "Technical guide to walking beam reheating furnace design, mechanism, and turnkey furnace revamping solutions. Trusted walking beam furnace manufacturers with zero CAPEX.";
+    const title = "Walking Beam Furnace Revamping & Reheating Design Solutions";
+    const description = "Engineering guide to walking beam furnace design, mechanism, and turnkey revamping solutions. Trusted reheat furnace manufacturers with zero CAPEX.";
     const image = "https://www.ecoreheating.com/hero-bg.png";
     const pageUrl = "https://www.ecoreheating.com/furnaces/walking-beam-reheating-furnace";
 
@@ -110,7 +110,7 @@ const WalkingBeamGuide: React.FC = () => {
                         Engineering Pillar & Solutions
                     </span>
                     <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-heading tracking-tight leading-tight">
-                        Walking Beam Reheating Furnace: Design, Mechanism & Revamping Solutions
+                        Walking Beam Furnace: Reheating Design & Revamping Solutions
                     </h1>
                     <p className="mt-4 text-lg text-slate-400 leading-relaxed font-sans">
                         Comprehensive engineering breakdown of walking beam furnace design, hydraulic lift mechanisms, reheat furnace temperature control, and turnkey pusher-to-walking-beam revamping solutions under the Zero CAPEX model.
