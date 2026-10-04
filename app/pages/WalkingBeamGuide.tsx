@@ -5,8 +5,8 @@ import type { MetaFunction } from 'react-router';
 import { Flame, Calculator, ShieldCheck, ArrowRight, CheckCircle2, Wrench, Layers, HelpCircle, Activity, BarChart3, Settings, ShieldAlert, BookOpen } from 'lucide-react';
 
 export const meta: MetaFunction = () => {
-    const title = "Walking Beam Furnace Revamping & Retrofit | EcoReheating";
-    const description = "Engineering guide to walking beam furnace design, mechanism, and turnkey furnace revamping solutions. Cut reheat furnace fuel usage by 15-25% with zero CAPEX.";
+    const title = "Walking Beam Reheating Furnace: Revamping Solutions & Design";
+    const description = "Technical guide to walking beam reheating furnace design, mechanism, and turnkey furnace revamping solutions. Trusted walking beam furnace manufacturers with zero CAPEX.";
     const image = "https://www.ecoreheating.com/hero-bg.png";
     const pageUrl = "https://www.ecoreheating.com/furnaces/walking-beam-reheating-furnace";
 
@@ -35,6 +35,14 @@ const WalkingBeamGuide: React.FC = () => {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What are the four primary types of reheating furnaces used in steel mills?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The four primary types of industrial reheating furnaces in steel rolling mills are: 1. Walking Beam Furnaces (premier choice for superior thermal uniformity and zero skid marks), 2. Pusher-Type Furnaces (legacy sliding hearth design), 3. Walking Hearth Furnaces (solid stepped hearth for heavy blooms/slabs), and 4. Rotary Hearth Furnaces (annular rotating hearth optimized for tube rounds and round billets)."
+                }
+            },
             {
                 "@type": "Question",
                 "name": "What is a reheating furnace and its primary working principle?",
@@ -102,7 +110,7 @@ const WalkingBeamGuide: React.FC = () => {
                         Engineering Pillar & Solutions
                     </span>
                     <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-heading tracking-tight leading-tight">
-                        Walking Beam Furnace: Design, Mechanism & Revamping Solutions
+                        Walking Beam Reheating Furnace: Design, Mechanism & Revamping Solutions
                     </h1>
                     <p className="mt-4 text-lg text-slate-400 leading-relaxed font-sans">
                         Comprehensive engineering breakdown of walking beam furnace design, hydraulic lift mechanisms, reheat furnace temperature control, and turnkey pusher-to-walking-beam revamping solutions under the Zero CAPEX model.
@@ -168,7 +176,7 @@ const WalkingBeamGuide: React.FC = () => {
                     <section className="space-y-5">
                         <h2 className="text-2xl font-bold text-white flex items-center gap-2 font-heading">
                             <Layers className="text-furnace-500" size={22} />
-                            2. Walking Beam Furnace Mechanism & Design Architecture
+                            2. Walking Beam Furnace Mechanism, Diagram & Design Architecture
                         </h2>
                         <p>
                             The core advantage of the modern walking beam furnace mechanism lies in its complete separation of charge transportation from physical sliding friction. As visualized in any standard walking beam furnace diagram, the hearth floor consists of alternating sets of stationary refractory piers and longitudinal moving beams.
@@ -264,7 +272,7 @@ const WalkingBeamGuide: React.FC = () => {
                             5. Turnkey Furnace Revamping Solutions: Pusher to Walking Beam
                         </h2>
                         <p>
-                            Unlike traditional walking beam furnace manufacturers that demand greenfield capital expenditures exceeding $3M to $6M and months of plant downtime, our specialized furnace revamping solutions focus on brownfield revitalization:
+                            Unlike traditional walking beam furnace manufacturers that demand greenfield capital expenditures exceeding $3M to $6M and months of plant downtime, our specialized furnace revamping solutions focus on brownfield revitalization. Matching the thermal precision and mechanical reliability of tier-1 European systems (such as Danieli and Fives walking beam furnaces), our engineering team executes turnkey revamps that fit existing mill layouts seamlessly:
                         </p>
                         <ul className="space-y-2 text-sm text-slate-300">
                             <li className="flex items-start gap-2">
@@ -340,6 +348,10 @@ const WalkingBeamGuide: React.FC = () => {
                             Frequently Asked Reheating Furnace Questions
                         </h3>
                         <div className="space-y-5">
+                            <div className="bg-slate-900/50 p-5 rounded-xl border border-slate-800/80">
+                                <h4 className="font-semibold text-white mb-2">Q: What are the four primary types of reheating furnaces used in steel mills?</h4>
+                                <p className="text-sm text-slate-400">A: The four primary types of industrial reheating furnaces in steel rolling mills are: 1. Walking Beam Furnaces (premier choice for superior thermal uniformity and zero skid marks), 2. Pusher-Type Furnaces (legacy sliding hearth design), 3. Walking Hearth Furnaces (solid stepped hearth for heavy blooms/slabs), and 4. Rotary Hearth Furnaces (annular rotating hearth optimized for tube rounds and round billets).</p>
+                            </div>
                             <div className="bg-slate-900/50 p-5 rounded-xl border border-slate-800/80">
                                 <h4 className="font-semibold text-white mb-2">Q: What is a reheating furnace and its primary working principle?</h4>
                                 <p className="text-sm text-slate-400">A: A reheating furnace of a rolling mill is an industrial thermal reactor that heats solid steel stock (billets, blooms, or slabs) to plastically deformable temperatures (typically 1,150°C to 1,250°C). Its working principle involves transferring thermal energy generated by air-gas burners to steel charges via radiation and forced convection while maintaining tight reheat furnace temperature control.</p>
