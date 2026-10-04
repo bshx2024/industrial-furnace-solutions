@@ -5,6 +5,7 @@ import {
     Scripts,
     ScrollRestoration,
     useLoaderData,
+    redirect,
     type LoaderFunctionArgs,
 } from "react-router";
 
@@ -15,9 +16,12 @@ import { postExists } from "./utils/blog.server";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     const url = new URL(request.url);
-    let pathname = url.pathname;
+    const { pathname, search, hash } = url;
+    
+    // Global 301 Permanent Redirect for Trailing Slashes (Prevents duplicate URLs in Google Search Console)
     if (pathname.endsWith("/") && pathname !== "/") {
-        pathname = pathname.slice(0, -1);
+        const cleanPath = pathname.slice(0, -1);
+        return redirect(`${cleanPath}${search}${hash}`, 301);
     }
     
     let lang = "en";
